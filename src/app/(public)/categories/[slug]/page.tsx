@@ -1,0 +1,79 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { ProductGrid } from "@/components/features/products/ProductGrid";
+import { CategoryHero } from "@/components/features/categories/CategoryHero";
+import { PageContainer } from "@/components/layout/PageContainer";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+import { stripHtml } from "@/lib/utils/format";
+import {
+  getCategories,
+  getCategoryBySlug,
+  getProducts,
+} from "@/lib/products/queries";
+import type { Category, Product } from "@/types/product";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const category = await getCategoryBySlug(slug);
+    if (!category) return {};
+    return buildPageMetadata({
+      title: category.name,
+      description:
+        stripHtml(category.description ?? "") ||
+        `Shop ${category.name} from Healargo.`,
+      path: `/categories/${slug}`,
+    });
+  } catch {
+    return {};
+  }
+}
+
+export default async function CategoryPage({ params }: Props) {
+  const { slug } = await params;
+  let category: Category | null = null;
+  let allCategories: Category[] = [];
+  let products: Product[] = [];
+
+  try {
+    const [fetchedCategory, fetchedCategories] = await Promise.all([
+      getCategoryBySlug(slug),
+      getCategories(),
+    ]);
+
+    category = fetchedCategory;
+    allCategories = fetchedCategories;
+
+    if (category) {
+      products = await getProducts({ categorySlug: slug });
+    }
+  } catch {
+    category = null;
+  }
+
+  if (!category) notFound();
+
+  return (
+    <PageContainer className="space-y-10 py-8">
+      <CategoryHero category={category} allCategories={allCategories} />
+
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b border-border pb-4">
+          <h2 className="font-display text-2xl font-bold text-dark">
+            Products in {category.name}
+          </h2>
+          <span className="text-xs font-semibold text-muted bg-cream-dark px-3 py-1 rounded-full">
+            {products.length} product{products.length !== 1 ? "s" : ""}
+          </span>
+        </div>
+
+        <ProductGrid products={products} />
+      </div>
+    </PageContainer>
+  );
+}
