@@ -45,6 +45,52 @@ export function forcedTestEnv(fakeUrl = FAKE_SERVICES_URL): Record<string, strin
   };
 }
 
+/**
+ * A test setting from the real environment, else .env.test.local / .env.test.
+ * Used for timeouts and pool sizes, which are read before loadTestEnv runs.
+ */
+export function testSetting(name: string): string | undefined {
+  if (process.env[name] !== undefined && process.env[name] !== "") return process.env[name];
+  const fileEnv = { ...readEnvFile(".env.test"), ...readEnvFile(".env.test.local") };
+  return fileEnv[name] || undefined;
+}
+
+export function testSettingNumber(name: string, fallback: number): number {
+  const value = Number(testSetting(name));
+  return Number.isFinite(value) && value > 0 ? value : fallback;
+}
+
+/** Per-test / per-hook timeouts. Generous by default: a remote DB costs ~0.2-0.5 s per query. */
+export const TEST_TIMEOUT_MS = testSettingNumber("TEST_TIMEOUT_MS", 120_000);
+export const TEST_HOOK_TIMEOUT_MS = testSettingNumber("TEST_HOOK_TIMEOUT_MS", 300_000);
+
+/**
+ * Keeps the tests gentle on a remote database: a small Prisma pool (so a burst
+ * of parallel queries queues instead of opening many connections at once) and
+ * long connect / pool waits. Only adds parameters the URL does not set itself.
+ */
+export function tuneDatabaseUrl(raw: string): string {
+  let url: URL;
+  try {
+    url = new URL(raw);
+  } catch {
+    return raw;
+  }
+  const defaults: Record<string, string> = {
+    connection_limit: String(testSettingNumber("TEST_DB_CONNECTION_LIMIT", 3)),
+    pool_timeout: String(testSettingNumber("TEST_DB_POOL_TIMEOUT_S", 120)),
+    connect_timeout: String(testSettingNumber("TEST_DB_CONNECT_TIMEOUT_S", 60)),
+  };
+  let changed = false;
+  for (const [key, value] of Object.entries(defaults)) {
+    if (!url.searchParams.has(key)) {
+      url.searchParams.set(key, value);
+      changed = true;
+    }
+  }
+  return changed ? url.toString() : raw;
+}
+
 export function loadTestEnv(fakeUrl = FAKE_SERVICES_URL) {
   const fileEnv = { ...readEnvFile(".env.test"), ...readEnvFile(".env.test.local") };
   for (const [key, value] of Object.entries(fileEnv)) {
@@ -58,6 +104,9 @@ export function loadTestEnv(fakeUrl = FAKE_SERVICES_URL) {
   }
   if (!process.env.DIRECT_URL && process.env.DATABASE_URL) {
     process.env.DIRECT_URL = process.env.DATABASE_URL;
+  }
+  if (process.env.DATABASE_URL) {
+    process.env.DATABASE_URL = tuneDatabaseUrl(process.env.DATABASE_URL);
   }
 
   Object.assign(process.env, forcedTestEnv(fakeUrl));

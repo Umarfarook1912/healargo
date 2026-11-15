@@ -10,9 +10,13 @@
  * See tests/README.md.
  */
 import { defineConfig, devices } from "@playwright/test";
-import { FAKE_SERVICES_URL, forcedTestEnv, loadTestEnv } from "./tests/helpers/env";
+import { installRetryingPrisma } from "./tests/helpers/db";
+import { FAKE_SERVICES_URL, forcedTestEnv, loadTestEnv, testSettingNumber } from "./tests/helpers/env";
 
 loadTestEnv(FAKE_SERVICES_URL);
+// The config is loaded in every Playwright process (runner and workers), so
+// this makes the fixtures' Prisma client retry unreachable-DB errors.
+installRetryingPrisma();
 process.env.TEST_RUN_ID ||= `hgtest${Date.now().toString(36)}e2e`;
 
 const PORT = Number(process.env.E2E_PORT || 3100);
@@ -32,8 +36,9 @@ const appEnv: Record<string, string> = {
 
 export default defineConfig({
   testDir: "tests/e2e",
-  timeout: 120_000,
-  expect: { timeout: 20_000 },
+  // Generous for a remote DB (each page does several queries); configurable.
+  timeout: testSettingNumber("E2E_TEST_TIMEOUT_MS", 240_000),
+  expect: { timeout: testSettingNumber("E2E_EXPECT_TIMEOUT_MS", 45_000) },
   fullyParallel: false,
   workers: 1,
   retries: 0,
@@ -44,7 +49,8 @@ export default defineConfig({
     baseURL,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
-    navigationTimeout: 90_000,
+    navigationTimeout: testSettingNumber("E2E_NAVIGATION_TIMEOUT_MS", 120_000),
+    actionTimeout: testSettingNumber("E2E_ACTION_TIMEOUT_MS", 60_000),
   },
   projects: [
     {
@@ -68,7 +74,7 @@ export default defineConfig({
       command: `npx next dev -p ${PORT}`,
       url: `${baseURL}/api/catalog/highlights`,
       reuseExistingServer: !process.env.CI,
-      timeout: 240_000,
+      timeout: testSettingNumber("E2E_SERVER_TIMEOUT_MS", 300_000),
       env: appEnv,
     },
   ],

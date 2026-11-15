@@ -1,5 +1,6 @@
 import { defineConfig } from "vitest/config";
 import path from "path";
+import { TEST_HOOK_TIMEOUT_MS, TEST_TIMEOUT_MS } from "./tests/helpers/env";
 
 export default defineConfig({
   resolve: {
@@ -33,8 +34,11 @@ export default defineConfig({
           fileParallelism: false,
           poolOptions: { forks: { singleFork: true } },
           pool: "forks",
-          testTimeout: 30_000,
-          hookTimeout: 60_000,
+          // Remote DB: ~0.2-0.5 s per query. Override with TEST_TIMEOUT_MS /
+          // TEST_HOOK_TIMEOUT_MS in .env.test.local.
+          testTimeout: TEST_TIMEOUT_MS,
+          hookTimeout: TEST_HOOK_TIMEOUT_MS,
+          teardownTimeout: TEST_HOOK_TIMEOUT_MS,
         },
       },
     ],

@@ -9,13 +9,14 @@ export default async function globalSetup() {
   assertDatabaseWritesAllowed();
   console.warn(`\n[e2e] WRITES test rows (marked "hgtest") to ${describeDatabase()} and deletes them afterwards.\n`);
 
+  const { waitForDatabase } = await import("../helpers/db");
+  const { prisma: db } = await import("@/lib/db/prisma");
+  await waitForDatabase(db);
   const { createUser, createCategory, createProduct, createCoupon } = await import("../fixtures/factory");
   const { RUN_ID } = await import("../fixtures/run");
-  const [customerA, customerB, admin] = await Promise.all([
-    createUser({ name: "E2E Customer A" }),
-    createUser({ name: "E2E Customer B" }),
-    createUser({ name: "E2E Admin", role: "admin" }),
-  ]);
+  const customerA = await createUser({ name: "E2E Customer A" });
+  const customerB = await createUser({ name: "E2E Customer B" });
+  const admin = await createUser({ name: "E2E Admin", role: "admin" });
   const category = await createCategory({ name: `E2E Oils ${RUN_ID}` });
   const product = await createProduct({
     categoryId: category.id,

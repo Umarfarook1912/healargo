@@ -1021,6 +1021,8 @@ Ordered by business impact. File references are to `src/`.
 
 **Shared DB.** API and E2E write marked rows to the database in `DATABASE_URL` and delete only those (3.4). They need `TESTS_MAY_WRITE_TO_DATABASE=yes`.
 
+**Remote database (first laptop run, Nov 2026).** Against the live Supabase DB every query costs about 0.4 s, so the suites now use 120 s test / 300 s hook timeouts (E2E 240 s), a 3-connection Prisma pool, waiting and retry-with-backoff for "Can't reach database server", fixtures created one by one, and bulk seeding instead of call loops (ANL-006/007). The first run also found one **app bug**: category lookup by slug picked the first category whose slug was *contained* in the requested one, so on the live DB `/categories/wood-pressed-oils`-style slugs could resolve to a shorter category such as `oils` (CAT-006/007; fixed: exact, then case/separator-insensitive, then the closest partial match). CON-004 was a test flaw (a timestamp computed when the file was collected). `npm run test:all` now runs every suite and reports all of them; `npm run test:cleanup` removes leftover `hgtest` rows.
+
 **Not automated by design:** the Google OAuth round trip (manual check before releases), live ST Courier HTML (the parser is tested against fixtures), and ADM-USR-003(c) (it needs a database where demoting every admin is safe).
 
 **Open:** Q2 (`authorize()` was not moved; login is covered by E2E), Q7 (guests may still post moderated reviews; no verified-buyer rule), Q9 (no CI workflow yet; 5.6 is ready to use with a throwaway Postgres service).

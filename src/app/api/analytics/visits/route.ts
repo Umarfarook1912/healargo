@@ -37,7 +37,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ data: { ok: true } });
     }
 
-    await prisma.marketingVisit.create({
+    // A repeat of the same visit is expected (reloads, back button); skip it
+    // in the database instead of raising (and logging) a unique-constraint error.
+    await prisma.marketingVisit.createMany({
+      skipDuplicates: true,
       data: {
         source: attribution.source ?? ATTRIBUTION_SOURCE.direct,
         medium: attribution.medium ?? "",

@@ -53,7 +53,9 @@ export async function cleanupTestData(prisma: PrismaClient, marker: string) {
       where: {
         OR: [
           { userId: { in: userIds } },
-          { id: { in: orderItemsOrders.map((o) => o.orderId) } },
+          // Orders for test products, but never a real customer's order: on the
+          // shared DB a real shopper could have bought a test product.
+          { id: { in: orderItemsOrders.map((o) => o.orderId) }, userId: null },
           { shippingAddress: { path: ["fullName"], string_contains: marker } },
           { notes: { contains: marker } },
         ],

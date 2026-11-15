@@ -11,11 +11,11 @@ import {
 } from "./factory";
 
 export async function createStdWorld() {
-  const [customerA, customerB, admin] = await Promise.all([
-    createUser({ name: "Customer A" }),
-    createUser({ name: "Customer B" }),
-    createUser({ role: "admin", name: "Admin" }),
-  ]);
+  // Sequential on purpose: parallel creates open several connections at once,
+  // which a remote database may refuse.
+  const customerA = await createUser({ name: "Customer A" });
+  const customerB = await createUser({ name: "Customer B" });
+  const admin = await createUser({ role: "admin", name: "Admin" });
   const catOils = await createCategory({ name: "Oils", sortOrder: 901 });
   const catHidden = await createCategory({ isActive: false, sortOrder: 902 });
 

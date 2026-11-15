@@ -5,9 +5,10 @@ Three suites, all driven from `package.json`:
 | Command | Suite | Needs a DB? | Time |
 |---|---|---|---|
 | `npm test` / `npm run test:unit` | Vitest unit tests (`tests/unit`, `src/**/*.test.ts`) | no | seconds |
-| `npm run test:api` | Vitest API tests (`tests/api`): route handlers called in-process | **yes, writes to it** | ~10 s |
-| `npm run test:e2e` | Playwright (`tests/e2e`): `next dev` on port 3100 + a real browser | **yes, writes to it** | 1-3 min |
-| `npm run test:all` | all three in a row | yes | |
+| `npm run test:api` | Vitest API tests (`tests/api`): route handlers called in-process | **yes, writes to it** | ~10 s local, ~10-25 min on remote Supabase |
+| `npm run test:e2e` | Playwright (`tests/e2e`): `next dev` on port 3100 + a real browser | **yes, writes to it** | 1-3 min local, longer on remote Supabase |
+| `npm run test:all` | runs unit, api and e2e **even if one fails**, then prints a PASS/FAIL summary (exit 1 if any failed) | yes | |
+| `npm run test:cleanup` | deletes leftover `hgtest` rows (after an interrupted run) and prints the counts; `-- --dry-run` only counts | yes | seconds |
 
 Cases come from `TEST_PLAN.md`; every test name starts with its case ID (for example
 `CHK-011`). Cases that are not automated yet are listed as `test.todo` in
@@ -37,6 +38,39 @@ project can come later). So the suites were written to be safe on a live databas
   ADM-USR-003(c) "cannot demote the last admin" (it would need every real admin demoted).
 
 The suites refuse to start unless you confirm with `TESTS_MAY_WRITE_TO_DATABASE=yes`.
+
+After an interrupted run (Ctrl+C, laptop asleep) check for leftovers:
+
+```powershell
+npm run test:cleanup -- --dry-run   # count only
+npm run test:cleanup                # delete them (only hgtest-marked rows)
+```
+
+## Running against the remote Supabase database
+
+Every query is a network round trip (about 0.2-0.5 s from India to Supabase), so the
+suites are tuned for that:
+
+* **Timeouts:** 120 s per API test and 300 s per hook (`TEST_TIMEOUT_MS`,
+  `TEST_HOOK_TIMEOUT_MS`); E2E 240 s per test, 45 s per assertion, 120 s per
+  navigation (`E2E_TEST_TIMEOUT_MS`, `E2E_EXPECT_TIMEOUT_MS`, `E2E_NAVIGATION_TIMEOUT_MS`,
+  `E2E_ACTION_TIMEOUT_MS`, `E2E_SERVER_TIMEOUT_MS`). Set any of them in `.env.test.local`.
+* **Small connection pool:** the tests add `connection_limit=3`, `pool_timeout=120` and
+  `connect_timeout=60` to `DATABASE_URL` (only if your URL doesn't set them;
+  `TEST_DB_CONNECTION_LIMIT`, `TEST_DB_POOL_TIMEOUT_S`, `TEST_DB_CONNECT_TIMEOUT_S`).
+  The app itself is not affected.
+* **Retry with backoff:** before a suite starts it waits for the database, and any query
+  that fails with "Can't reach database server" (or a pool timeout) is retried up to
+  5 times (1, 2, 4, 8, 16 s; `TEST_DB_RETRIES`). You'll see `[tests] … retry n/5` lines.
+* API files run one at a time; fixtures are created one by one, not in parallel.
+* If "Can't reach database server" keeps happening on the direct host
+  (`db.<project>.supabase.co:5432`), try Supabase's **session pooler** connection string
+  (Project Settings → Database → Connection string → Session pooler) as `DATABASE_URL`
+  in `.env.test.local`.
+
+Some `prisma:error` lines in the API output are expected: they come from tests that
+check an error path on purpose, for example "No record was found for an update"
+(ADM-ORD-019, deleting tracking for an unknown order returns 404).
 
 ## External services are faked
 
@@ -81,7 +115,9 @@ and `playwright-report/`.
 npm test               # unit, no DB
 npm run test:api       # writes hgtest rows to DATABASE_URL, deletes them afterwards
 npm run test:e2e       # starts the fake server + next dev on :3100 automatically
-npm run test:all
+npm run test:all       # every suite, then a summary; exit code 1 if any failed
+node scripts/run-all-tests.mjs api e2e   # only some suites, same summary
+npm run test:cleanup    # remove leftovers of interrupted runs
 npx playwright show-report
 npx playwright test tests/e2e/checkout.spec.ts --headed   # one file, visible browser
 npx vitest run --project api tests/api/payment.test.ts    # one API file
@@ -101,6 +137,10 @@ reuses it, so stop stray servers first.
 | `E2E_PORT` | optional | port for `next dev` in E2E (default 3100) |
 | `TEST_RUN_ID` | optional | fixed run marker (must start with `hgtest`); default is random per run |
 | `PW_CHANNEL` | optional | e.g. `chrome` or `msedge` to use an installed browser instead of Playwright's Chromium |
+| `TEST_TIMEOUT_MS`, `TEST_HOOK_TIMEOUT_MS` | optional | API test / hook timeout (default 120000 / 300000) |
+| `E2E_TEST_TIMEOUT_MS`, `E2E_EXPECT_TIMEOUT_MS`, `E2E_NAVIGATION_TIMEOUT_MS`, `E2E_ACTION_TIMEOUT_MS`, `E2E_SERVER_TIMEOUT_MS` | optional | E2E timeouts (defaults 240000, 45000, 120000, 60000, 300000) |
+| `TEST_DB_CONNECTION_LIMIT`, `TEST_DB_POOL_TIMEOUT_S`, `TEST_DB_CONNECT_TIMEOUT_S` | optional | Prisma pool settings added to `DATABASE_URL` in tests (defaults 3, 120, 60) |
+| `TEST_DB_RETRIES` | optional | attempts for unreachable-DB errors (default 6 = 1 try + 5 retries) |
 | `CASHFREE_BASE_URL`, `ST_COURIER_BASE_URL`, `BREVO_API_URL` | forced by the tests | see above; leave unset in production |
 
 Seeding (not used by tests): `npm run seed` now refuses to run in production, needs
@@ -117,8 +157,11 @@ tests/
   e2e/        Playwright specs, fake-server.ts, global-setup.ts (creates the hgtest world),
               global-teardown.ts (cleanup), support.ts (login, fake SDK, helpers)
   fixtures/   factory.ts (marked rows), cleanup.ts (marker-only delete), run.ts (run id)
-  helpers/    env.ts (test env + DB write guard), fake-services.ts, http.ts (call a handler,
-              sign a webhook), session.ts (mock auth())
+  helpers/    env.ts (test env, timeouts, pool settings, DB write guard), db.ts (wait/retry
+              for a remote DB), fake-services.ts, http.ts (call a handler, sign a webhook),
+              session.ts (mock auth())
+  cleanup-cli.ts   `npm run test:cleanup`
+scripts/run-all-tests.mjs   `npm run test:all`
   setup/      Vitest setup files
 ```
 
@@ -127,5 +170,8 @@ tests/
 1. Add the case to `TEST_PLAN.md` (next free ID), then name the test `"<ID> …"`.
 2. Create data only with `tests/fixtures/factory.ts` (or include `RUN_ID` / `uid()` in
    every email, slug, name and code) so cleanup can find it.
-3. Never assert on global totals; assert on your own rows.
-4. A bug fix comes with a test that fails before the fix.
+3. Never assume the database is empty or assert on global totals: the live shop has
+   real products, categories, orders and coupons. Filter results to your own ids.
+4. Create fixtures one by one (no `Promise.all` of writes) and avoid loops of hundreds
+   of API calls; seed bulk rows with `createMany` in one round trip.
+5. A bug fix comes with a test that fails before the fix.

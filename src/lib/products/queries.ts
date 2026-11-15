@@ -2,6 +2,32 @@ import { prisma } from "@/lib/db/prisma";
 import { mapCategories, mapCategory, mapProduct, mapProducts } from "@/lib/db/catalog";
 import type { Product, Category } from "@/types/product";
 
+/**
+ * Resolves a category URL slug. An exact slug wins, then a slug that differs
+ * only in case or separators ("WOOD_PRESSED_OILS"). Only then a partial match
+ * ("woodpressed"), choosing the closest one: a short slug such as "oils" must
+ * not capture "/categories/wood-pressed-oils" just because it sorts first.
+ */
+function findCategoryBySlug<T extends { slug: string }>(categories: T[], cleanSlug: string): T | undefined {
+  const norm = (value: string) => value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+  const normTarget = norm(cleanSlug);
+  const exact = categories.find((c) => c.slug.trim().toLowerCase() === cleanSlug);
+  if (exact) return exact;
+  if (!normTarget) return undefined;
+  const sameNorm = categories.find((c) => norm(c.slug) === normTarget);
+  if (sameNorm) return sameNorm;
+  if (normTarget.length <= 3) return undefined;
+  const partial = categories.filter((c) => {
+    const cNorm = norm(c.slug);
+    return cNorm.length > 3 && (cNorm.includes(normTarget) || normTarget.includes(cNorm));
+  });
+  // Stable sort keeps sortOrder for ties.
+  partial.sort(
+    (a, b) => Math.abs(norm(a.slug).length - normTarget.length) - Math.abs(norm(b.slug).length - normTarget.length),
+  );
+  return partial[0];
+}
+
 export async function getProducts(filters?: {
   bestSeller?: boolean;
   newArrival?: boolean;
@@ -19,14 +45,7 @@ export async function getProducts(filters?: {
       where: { isActive: true },
       orderBy: { sortOrder: "asc" },
     });
-    const normTarget = cleanSlug.replace(/[^a-z0-9]/g, "");
-
-    const category = categories.find((c) => {
-      const cClean = c.slug.trim().toLowerCase();
-      if (cClean === cleanSlug) return true;
-      const cNorm = cClean.replace(/[^a-z0-9]/g, "");
-      return cNorm === normTarget || (cNorm.length > 3 && normTarget.length > 3 && (cNorm.includes(normTarget) || normTarget.includes(cNorm)));
-    });
+    const category = findCategoryBySlug(categories, cleanSlug);
 
     if (!category) return [];
     query.categoryId = category.id;
@@ -81,14 +100,7 @@ export async function getCategoryBySlug(
     where: { isActive: true },
     orderBy: { sortOrder: "asc" },
   });
-  const normTarget = cleanSlug.replace(/[^a-z0-9]/g, "");
-
-  const category = categories.find((c) => {
-    const cClean = c.slug.trim().toLowerCase();
-    if (cClean === cleanSlug) return true;
-    const cNorm = cClean.replace(/[^a-z0-9]/g, "");
-    return cNorm === normTarget || (cNorm.length > 3 && normTarget.length > 3 && (cNorm.includes(normTarget) || normTarget.includes(cNorm)));
-  });
+  const category = findCategoryBySlug(categories, cleanSlug);
 
   if (!category) return null;
   return mapCategory(category);

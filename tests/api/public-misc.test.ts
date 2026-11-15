@@ -60,13 +60,16 @@ describe("contact form (POST /api/contact)", () => {
   it.each([
     ["honeypot (CON-003)", { website: "http://spam" }],
     ["no startedAt (CON-004)", { startedAt: undefined }],
-    ["filled in 1 s (CON-004)", { startedAt: Date.now() - 1000 }],
+    // A function, so "1 s ago" is computed when the test runs, not when the
+    // file is collected (on a slow DB the world setup takes longer than 3 s).
+    ["filled in 1 s (CON-004)", () => ({ startedAt: Date.now() - 1000 })],
     ["random-token name (CON-005)", { name: "gKzyAVwNDARbWPeSpHZl" }],
     ["digits-only message (CON-005)", { message: "98765 43210 123" }],
     ["no letters (CON-005)", { message: "!!!!!!!!!!!!" }],
     ["dotted gmail (CON-005)", { email: "a.b.c.d@gmail.com" }],
   ])("spam is answered with a fake ok and no email: %s", async (_l, patch) => {
-    const res = await call(contact.POST, { body: message(patch), headers: { "x-forwarded-for": ip() } });
+    const body = message(typeof patch === "function" ? patch() : patch);
+    const res = await call(contact.POST, { body, headers: { "x-forwarded-for": ip() } });
     expect(res.status).toBe(200);
     expect(res.json.data.ok).toBe(true);
     await settle();
@@ -111,8 +114,14 @@ describe("analytics endpoints", () => {
     expect((await call(visits.POST, { body: { sessionKey } })).status).toBe(400);
     expect((await call(visits.POST, { body: visit })).status).toBe(200);
     expect(await prisma.marketingVisit.count({ where: { sessionKey } })).toBe(1);
-    for (let i = 0; i < 31; i += 1) {
-      await call(visits.POST, { body: { ...visit, content: `c${i}` } });
+    // Fill the session up to one below the limit in one round trip, then the
+    // endpoint takes the 30th visit and ignores the 31st.
+    await prisma.marketingVisit.createMany({
+      data: Array.from({ length: 28 }, (_, i) => ({ sessionKey, source: "instagram", campaign: RUN_ID, content: `seed${i}` })),
+    });
+    expect(await prisma.marketingVisit.count({ where: { sessionKey } })).toBe(29);
+    for (const content of ["c30", "c31"]) {
+      expect((await call(visits.POST, { body: { ...visit, content } })).status).toBe(200);
     }
     expect(await prisma.marketingVisit.count({ where: { sessionKey } })).toBe(30);
   });
@@ -137,7 +146,20 @@ describe("analytics endpoints", () => {
     expect((await call(clicks.POST, { body: click({ context: "home" }) })).status).toBe(400);
     expect((await call(clicks.POST, { body: click({ items: [] }) })).status).toBe(400);
     expect((await call(clicks.POST, { body: click({ items: [{ name: "x", quantity: 1000, price: 1 }] }) })).status).toBe(400);
-    for (let i = 0; i < 40; i += 1) await call(clicks.POST, { body: click() });
+    // Two clicks exist; seed 37 more in one round trip, then the endpoint
+    // takes the 40th and silently ignores the 41st.
+    await prisma.whatsAppClick.createMany({
+      data: Array.from({ length: 37 }, () => ({
+        context: "product" as const,
+        pagePath: `/products/${RUN_ID}`,
+        items: [],
+        estimatedTotal: 0,
+        sessionKey,
+      })),
+    });
+    for (let i = 0; i < 2; i += 1) {
+      expect((await call(clicks.POST, { body: click() })).status).toBe(200);
+    }
     expect(await prisma.whatsAppClick.count({ where: { sessionKey } })).toBe(40);
   });
 
@@ -162,6 +184,9 @@ describe("catalog queries", () => {
     const slug = `${RUN_ID}-wood-pressed-oils`;
     const cat = await prisma.category.create({ data: { name: `Wood ${RUN_ID}`, slug, sortOrder: 990 } });
     const hidden = await prisma.category.create({ data: { name: `Hidden ${RUN_ID}`, slug: `${RUN_ID}-hidden-cat`, isActive: false } });
+    // A shorter slug contained in ours, sorted first: it used to capture the
+    // lookup (live data has e.g. "oils" next to "wood-pressed-oils").
+    await prisma.category.create({ data: { name: `Short ${RUN_ID}`, slug: `${RUN_ID}-wood`, sortOrder: -100 } });
     const p = await createProduct({ categoryId: cat.id });
     for (const s of [slug, slug.toUpperCase().replace(/-/g, "_"), `${RUN_ID}woodpressed`]) {
       expect((await getProducts({ categorySlug: s })).map((x) => x._id)).toEqual([p.id]);
