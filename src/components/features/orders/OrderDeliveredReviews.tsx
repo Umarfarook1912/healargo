@@ -72,7 +72,8 @@ function ItemReview({
       }),
     });
     if (!res.ok) {
-      toast.error(CATALOG_COPY.reviewFailed);
+      const json = (await res.json().catch(() => ({}))) as { error?: unknown };
+      toast.error(typeof json.error === "string" ? json.error : CATALOG_COPY.reviewFailed);
       return;
     }
     toast.success(CATALOG_COPY.reviewThanks);

@@ -10,6 +10,8 @@ export const PAYMENT_ERRORS = {
   STATUS_UNAUTHORIZED: "Unauthorized",
   STATUS_FORBIDDEN: "Forbidden",
   INIT_FAILED: "Payment initiation failed",
+  ALREADY_PAID: "This order is already paid",
+  ORDER_CANCELLED: "This order was cancelled and can't be paid",
 } as const;
 
 export const CASHFREE_API = {
@@ -30,4 +32,9 @@ export const CASHFREE_WEBHOOK_TYPES = {
   PAYMENT_SUCCESS: "PAYMENT_SUCCESS_WEBHOOK",
   PAYMENT_FAILED: "PAYMENT_FAILED_WEBHOOK",
   PAYMENT_USER_DROPPED: "PAYMENT_USER_DROPPED_WEBHOOK",
+} as const;
+
+/** Refunds are done by hand in the Cashfree dashboard; the app only records them. */
+export const REFUND_ERRORS = {
+  notPaid: "Only paid orders can be marked as refunded",
 } as const;

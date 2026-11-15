@@ -3,7 +3,8 @@ import { requireAdmin } from "@/lib/auth/require-admin";
 import { mapOrder } from "@/lib/db/orders";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
-import { restoreStockForItems } from "@/lib/orders/inventory";
+import { REFUND_ERRORS } from "@/constants/payment";
+import { restoreStockForOrder } from "@/lib/orders/inventory";
 import { OrderStatus, PaymentStatus } from "@/types/order";
 
 type Params = { params: Promise<{ id: string }> };
@@ -30,23 +31,26 @@ export async function POST(_request: Request, { params }: Params) {
       return NextResponse.json({ data: mapOrder(order) });
     }
 
-    if (order.stockDecremented) {
-      await restoreStockForItems(
-        order.items.map((item) => ({
-          productId: item.productId,
-          variantId: item.variantId,
-          quantity: item.quantity,
-        })),
-      );
+    // Refunds are manual (money is returned in the Cashfree dashboard); this
+    // only records it, and only for an order that was actually paid.
+    if (order.paymentStatus !== PaymentStatus.PAID) {
+      return NextResponse.json({ error: REFUND_ERRORS.notPaid }, { status: 400 });
     }
 
-    const updated = await prisma.order.update({
-      where: { id },
+    const claimed = await prisma.order.updateMany({
+      where: { id, paymentStatus: PaymentStatus.PAID },
       data: {
         paymentStatus: PaymentStatus.REFUNDED,
         status: OrderStatus.CANCELLED,
-        stockDecremented: false,
       },
+    });
+    if (claimed.count > 0) {
+      // Products and combos; the stockDecremented flag makes it run once.
+      await restoreStockForOrder(id);
+    }
+
+    const updated = await prisma.order.findUniqueOrThrow({
+      where: { id },
       include: { items: true, user: true },
     });
 

@@ -78,11 +78,13 @@ export function comboIsLive(
   now = Date.now(),
 ): boolean {
   if (combo.isActive === false) return false;
-  if (combo.startsAt && combo.endsAt) {
+  if (combo.startsAt) {
     const start = new Date(combo.startsAt).getTime();
+    if (Number.isNaN(start) || now < start) return false;
+  }
+  if (combo.endsAt) {
     const end = new Date(combo.endsAt).getTime();
-    if (Number.isNaN(start) || Number.isNaN(end)) return false;
-    return now >= start && now <= end;
+    if (Number.isNaN(end) || now > end) return false;
   }
   return true;
 }

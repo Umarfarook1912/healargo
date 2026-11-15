@@ -30,7 +30,8 @@ export async function POST(request: Request) {
     const paidOrders = await prisma.order.findMany({
       where: {
         userId: { in: userIds },
-        paymentStatus: { in: [PaymentStatus.PAID, PaymentStatus.REFUNDED] },
+        // Refunded orders are not spend.
+        paymentStatus: PaymentStatus.PAID,
       },
       select: { userId: true, pricing: true },
     });

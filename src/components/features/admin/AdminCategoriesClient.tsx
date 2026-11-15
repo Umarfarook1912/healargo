@@ -51,7 +51,8 @@ export function AdminCategoriesClient({
     if (!confirm(ADMIN_ACTIONS.confirmDelete)) return;
     const res = await fetch(API_ENDPOINTS.CATEGORY(id), { method: "DELETE" });
     if (!res.ok) {
-      toast.error(ADMIN_ACTIONS.deleteFailed);
+      const json = (await res.json().catch(() => ({}))) as { error?: string };
+      toast.error(json.error || ADMIN_ACTIONS.deleteFailed);
       return;
     }
     toast.success(ADMIN_CATEGORY_COPY.deleted);

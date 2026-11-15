@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { connectDb, prisma } from "../src/lib/db/prisma";
 import { slugify } from "../src/lib/utils/format";
 import { AUTH, USER_ROLES } from "../src/constants/auth";
+import { checkSeedAllowed } from "./seed-guard";
 
 const categories = [
   {
@@ -444,6 +445,13 @@ const products: SeedProduct[] = [
 ];
 
 async function seed() {
+  const allowed = checkSeedAllowed(process.env, process.argv.slice(2));
+  if (!allowed.ok) {
+    console.error(allowed.error);
+    process.exit(1);
+  }
+  const { adminEmail, adminPassword } = allowed.config;
+
   await connectDb();
 
   await prisma.$transaction([
@@ -456,13 +464,13 @@ async function seed() {
     prisma.user.deleteMany({}),
   ]);
 
-  // Seed creates a starter admin; change email/password in DB or Admin → Users after.
-  const passwordHash = await bcrypt.hash("Admin@12345", AUTH.bcryptRounds);
+  // Seed creates a starter admin from SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD.
+  const passwordHash = await bcrypt.hash(adminPassword, AUTH.bcryptRounds);
 
   await prisma.user.create({
     data: {
       name: "Healargo Admin",
-      email: "healargo@gmail.com",
+      email: adminEmail,
       passwordHash,
       role: USER_ROLES.ADMIN,
       phone: "",
@@ -564,7 +572,7 @@ async function seed() {
   }
 
   console.log(`Seed complete: ${products.length} products created.`);
-  console.log("Admin: healargo@gmail.com / Admin@12345");
+  console.log(`Admin: ${adminEmail} (password from SEED_ADMIN_PASSWORD)`);
   await prisma.$disconnect();
 }
 

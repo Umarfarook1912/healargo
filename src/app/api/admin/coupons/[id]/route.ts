@@ -1,26 +1,11 @@
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import {
+  couponRuleError,
+  couponUpdateSchema,
+} from "@/lib/orders/coupon-validation";
 import { mapCoupon } from "@/lib/db/orders";
 import { prisma } from "@/lib/db/prisma";
-
-const updateSchema = z.object({
-  code: z
-    .string()
-    .min(2, "Code must be at least 2 characters")
-    .transform((val) => val.trim().toUpperCase())
-    .optional(),
-  name: z.string().min(2, "Name must be at least 2 characters").optional(),
-  description: z.string().optional(),
-  discountType: z.enum(["PERCENTAGE", "FIXED"]).optional(),
-  discountValue: z.number().min(0, "Discount value must be 0 or higher").optional(),
-  validFrom: z.string().min(1, "Valid from date is required").optional(),
-  validTo: z.string().min(1, "Valid to date is required").optional(),
-  usageLimit: z.number().int().min(0).optional(),
-  applicableProducts: z.array(z.string()).optional(),
-  applicableVariants: z.array(z.string()).optional(),
-  status: z.enum(["ACTIVE", "INACTIVE"]).optional(),
-});
 
 export async function PUT(
   request: Request,
@@ -32,7 +17,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const parsed = updateSchema.safeParse(body);
+    const parsed = couponUpdateSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
         { error: parsed.error.issues[0]?.message || "Invalid update data" },
@@ -66,6 +51,15 @@ export async function PUT(
     const existing = await prisma.coupon.findUnique({ where: { id } });
     if (!existing) {
       return NextResponse.json({ error: "Coupon not found" }, { status: 404 });
+    }
+    const ruleError = couponRuleError({
+      discountType: parsed.data.discountType ?? existing.discountType,
+      discountValue: parsed.data.discountValue ?? existing.discountValue,
+      validFrom: parsed.data.validFrom ?? existing.validFrom,
+      validTo: parsed.data.validTo ?? existing.validTo,
+    });
+    if (ruleError) {
+      return NextResponse.json({ error: ruleError }, { status: 400 });
     }
     const updated = await prisma.coupon.update({
       where: { id },

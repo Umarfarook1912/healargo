@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
-import { USER_ROLES } from "@/constants/auth";
 import { PAYMENT_ERRORS } from "@/constants/payment";
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/db/prisma";
-import { markOrderPaid } from "@/lib/orders/mark-paid";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { assertCashfreeCredentialsConfigured } from "@/lib/payment/cashfree-auth";
-import { getCashfreeOrderStatus } from "@/lib/payment/cashfree";
-import { PaymentStatus } from "@/types/order";
+import {
+  findOrderByCashfreeOrderId,
+  syncOrderWithCashfree,
+} from "@/lib/payment/order-sync";
 
 export async function POST(request: Request) {
   try {
@@ -32,17 +33,17 @@ export async function POST(request: Request) {
       );
     }
 
-    const order = await prisma.order.findFirst({
-      where: { cashfreeOrderId },
-      select: { id: true, userId: true, paymentStatus: true },
+    const order = await findOrderByCashfreeOrderId(cashfreeOrderId, {
+      id: true,
+      userId: true,
+      paymentStatus: true,
     });
     if (!order) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
     const isOwner =
-      order.userId === session.user.id ||
-      session.user.role === USER_ROLES.ADMIN;
+      order.userId === session.user.id || (await isAdminSession(session));
     if (!isOwner) {
       return NextResponse.json(
         { error: PAYMENT_ERRORS.STATUS_FORBIDDEN },
@@ -50,22 +51,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const status = await getCashfreeOrderStatus(cashfreeOrderId);
-    if (status.success) {
-      await markOrderPaid({
-        orderId: order.id,
-        transactionId: status.paymentId,
-      });
-    } else if (
-      status.state === "EXPIRED" ||
-      status.state === "TERMINATED" ||
-      status.state === "FAILED"
-    ) {
-      await prisma.order.update({
-        where: { id: order.id },
-        data: { paymentStatus: PaymentStatus.FAILED },
-      });
-    }
+    const status = await syncOrderWithCashfree(order.id, cashfreeOrderId);
 
     const refreshed = await prisma.order.findUnique({
       where: { id: order.id },

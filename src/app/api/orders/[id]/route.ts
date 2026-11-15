@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { mapOrder } from "@/lib/db/orders";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
-import { USER_ROLES } from "@/constants/auth";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -26,7 +26,7 @@ export async function GET(_request: Request, { params }: Params) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    if (order.userId !== session.user.id && session.user.role !== USER_ROLES.ADMIN) {
+    if (order.userId !== session.user.id && !(await isAdminSession(session))) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { USER_ROLES } from "@/constants/auth";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { mapReview } from "@/lib/db/orders";
 import { prisma } from "@/lib/db/prisma";
 import { recalculateProductReviewStats } from "@/lib/reviews/stats";
@@ -17,7 +17,7 @@ const deleteSchema = z.object({
 
 export async function PATCH(request: Request) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -50,7 +50,7 @@ export async function PATCH(request: Request) {
 
 export async function DELETE(request: Request) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

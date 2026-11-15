@@ -1,6 +1,18 @@
 export const ST_COURIER_NAME = "ST Courier";
 export const ST_COURIER_TRACK_PAGE = "https://stcourier.com/track/shipment";
-const ST_COURIER_TRACK_POST = "https://stcourier.com/track/doCheck";
+const ST_COURIER_DEFAULT_BASE_URL = "https://stcourier.com";
+
+/**
+ * Where the server scrapes tracking from. `ST_COURIER_BASE_URL` is a
+ * test-only override (a local fake); unset in production.
+ */
+function stCourierUrls() {
+  const base = (process.env.ST_COURIER_BASE_URL?.trim() || ST_COURIER_DEFAULT_BASE_URL).replace(
+    /\/+$/,
+    "",
+  );
+  return { page: `${base}/track/shipment`, post: `${base}/track/doCheck` };
+}
 const FETCH_TIMEOUT_MS = 15_000;
 
 /** ST Courier consignment (AWB) numbers are exactly 11 digits, e.g. 58240292331. */
@@ -166,16 +178,17 @@ export async function fetchStCourierTracking(
   const awb = normalizeConsignment(trackingNumber);
   if (!awb) return null;
 
+  const urls = stCourierUrls();
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   const baseHeaders = {
     "User-Agent":
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
-    Referer: ST_COURIER_TRACK_PAGE,
+    Referer: urls.page,
   };
 
   try {
-    const first = await fetch(ST_COURIER_TRACK_PAGE, {
+    const first = await fetch(urls.page, {
       headers: baseHeaders,
       signal: controller.signal,
       cache: "no-store",
@@ -184,7 +197,7 @@ export async function fetchStCourierTracking(
     if (!cookie) return null;
 
     const form = new URLSearchParams({ awb_no: awb });
-    const post = await fetch(ST_COURIER_TRACK_POST, {
+    const post = await fetch(urls.post, {
       method: "POST",
       headers: {
         ...baseHeaders,
@@ -206,7 +219,7 @@ export async function fetchStCourierTracking(
       return null;
     }
 
-    const result = await fetch(ST_COURIER_TRACK_PAGE, {
+    const result = await fetch(urls.page, {
       headers: { ...baseHeaders, Cookie: cookie },
       signal: controller.signal,
       cache: "no-store",

@@ -29,7 +29,19 @@ export type OrderEmailLike = {
     quantity?: number;
     price?: number;
   }>;
+  /** Mapped orders carry the account here; used when checkout had no email. */
+  userId?: unknown;
 };
+
+/** Shipping email if given at checkout, otherwise the customer's account email. */
+export function customerEmailFor(order: OrderEmailLike): string | undefined {
+  const shipping = order.shippingAddress?.email?.trim();
+  if (shipping) return shipping;
+  const user = order.userId as { email?: unknown } | undefined;
+  return user && typeof user === "object" && typeof user.email === "string" && user.email
+    ? user.email
+    : undefined;
+}
 
 function orderIdShort(order: OrderEmailLike): string {
   return order._id.toString().slice(-8).toUpperCase();
@@ -57,7 +69,7 @@ function itemRows(order: OrderEmailLike): EmailDetailRow[] {
 
 /** Customer: payment succeeded. */
 export async function sendOrderConfirmationEmail(order: OrderEmailLike) {
-  const to = order.shippingAddress?.email;
+  const to = customerEmailFor(order);
   const id = orderIdShort(order);
   const name = order.shippingAddress?.fullName ?? "there";
   const details: EmailDetailRow[] = [
@@ -151,7 +163,7 @@ export async function sendOrderStatusEmail(
   order: OrderEmailLike,
   status: string,
 ) {
-  const to = order.shippingAddress?.email;
+  const to = customerEmailFor(order);
   const id = orderIdShort(order);
   const name = order.shippingAddress?.fullName ?? "there";
   const details: EmailDetailRow[] = [

@@ -18,20 +18,12 @@ export async function getComboBySlug(slug: string): Promise<{
     where: { slug: { equals: cleanSlug, mode: "insensitive" } },
   });
   if (!found) {
-    const allCombos = await prisma.combo.findMany({ where: { isActive: true } });
-    const target = cleanSlug.toLowerCase();
-    const tokens = target.split(/[-_\s]+/).filter((t) => t.length > 2);
-    found =
-      allCombos.find((c) => {
-        const cSlug = (c.slug || "").toLowerCase();
-        return cSlug && (target.includes(cSlug) || cSlug.includes(target));
-      }) ||
-      allCombos.find((c) => {
-        const cSlug = (c.slug || "").toLowerCase();
-        const cName = (c.name || "").toLowerCase();
-        return tokens.some((t) => cSlug.includes(t) || cName.includes(t));
-      }) ||
-      null;
+    // Legacy links that differ only in separators or case; never a "similar" combo.
+    const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const target = normalize(cleanSlug);
+    const allCombos = target ? await prisma.combo.findMany({ where: { isActive: true } }) : [];
+    const matches = allCombos.filter((c) => normalize(c.slug || "") === target);
+    found = matches.length === 1 ? matches[0] : null;
   }
   if (!found) return null;
   const combo = mapCombo(found);

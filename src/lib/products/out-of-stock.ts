@@ -15,7 +15,6 @@ export async function getOutOfStockProducts(limit = 5) {
     await prisma.product.findMany({
       where: { isActive: true },
       orderBy: { createdAt: "desc" },
-      take: 12,
     }),
   );
 

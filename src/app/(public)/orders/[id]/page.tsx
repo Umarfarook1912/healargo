@@ -8,8 +8,8 @@ import { EstimatedDeliveryBadge } from "@/components/features/shipping/Estimated
 import { Button } from "@/components/ui/button";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { ROUTES } from "@/constants/routes";
-import { USER_ROLES } from "@/constants/auth";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { mapOrder } from "@/lib/db/orders";
 import { prisma } from "@/lib/db/prisma";
 import { getDeliveredReviewTargets } from "@/lib/reviews/order-reviews";
@@ -34,7 +34,7 @@ export default async function OrderDetailPage({ params }: Props) {
   const data = mapOrder(order);
   const isOwner =
     (typeof data.userId === "string" ? data.userId : data.userId?._id) === session.user.id ||
-    session.user.role === USER_ROLES.ADMIN;
+    (await isAdminSession(session));
   if (!isOwner) notFound();
 
   const shortId = `VSO-${data._id.slice(-6).toUpperCase()}`;

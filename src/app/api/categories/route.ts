@@ -1,25 +1,22 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { z } from "zod";
-import { USER_ROLES } from "@/constants/auth";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { mapCategories, mapCategory } from "@/lib/db/catalog";
 import { prisma } from "@/lib/db/prisma";
 import { slugify } from "@/lib/utils/format";
-
-const schema = z.object({
-  name: z.string().min(2),
-  slug: z.string().optional(),
-  description: z.string().optional(),
-  image: z.string().optional(),
-  badge: z.string().optional(),
-  sortOrder: z.number().default(0),
-  isActive: z.boolean().default(true),
-});
+import {
+  categorySchema,
+  uniqueSlug,
+  zodErrorMessage,
+} from "@/lib/catalog/validation";
 
 export async function GET() {
   try {
+    // Inactive categories are only listed for admins.
+    const isAdmin = await isAdminSession(await auth());
     const categories = await prisma.category.findMany({
+      where: isAdmin ? undefined : { isActive: true },
       orderBy: { sortOrder: "asc" },
     });
     return NextResponse.json({ data: mapCategories(categories) });
@@ -33,20 +30,33 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
     const body = await request.json();
-    const parsed = schema.safeParse(body);
+    const parsed = categorySchema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+      return NextResponse.json(
+        { error: zodErrorMessage(parsed.error, "Invalid category data") },
+        { status: 400 },
+      );
     }
+    const slug = await uniqueSlug(
+      slugify(parsed.data.slug || parsed.data.name),
+      async (candidate) =>
+        Boolean(
+          await prisma.category.findUnique({
+            where: { slug: candidate },
+            select: { id: true },
+          }),
+        ),
+    );
     const category = await prisma.category.create({
       data: {
         ...parsed.data,
-        slug: parsed.data.slug || slugify(parsed.data.name),
+        slug,
       },
     });
 

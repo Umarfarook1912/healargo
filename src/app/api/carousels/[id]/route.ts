@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { USER_ROLES } from "@/constants/auth";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { mapCarousel } from "@/lib/db/catalog";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
@@ -11,7 +11,7 @@ type Params = { params: Promise<{ id: string }> };
 
 export async function GET(_request: Request, { params }: Params) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -37,7 +37,7 @@ export async function GET(_request: Request, { params }: Params) {
 
 export async function PUT(request: Request, { params }: Params) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -79,7 +79,7 @@ export async function PUT(request: Request, { params }: Params) {
 
 export async function DELETE(_request: Request, { params }: Params) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -1,19 +1,20 @@
 import { NextResponse } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { z } from "zod";
+import { phoneSchema, pincodeSchema } from "@/lib/validation/address";
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/db/prisma";
 import { readUserAddresses } from "@/lib/db/users";
 
 const addressSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
-  phone: z.string().min(10, "Valid phone number is required"),
+  phone: phoneSchema("Valid phone number is required"),
   email: z.string().email().optional().or(z.literal("")),
   line1: z.string().min(3, "Address line 1 is required"),
   line2: z.string().optional().or(z.literal("")),
   city: z.string().min(2, "City is required"),
   state: z.string().min(2, "State is required"),
-  pincode: z.string().min(6, "Valid pincode is required"),
+  pincode: pincodeSchema("Valid pincode is required"),
   country: z.string().default("India"),
   isDefault: z.boolean().optional(),
 });

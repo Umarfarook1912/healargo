@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { USER_ROLES } from "@/constants/auth";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { mapCarousel } from "@/lib/db/catalog";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
@@ -15,7 +15,7 @@ const statusSchema = z.object({
 
 export async function PATCH(request: Request, { params }: Params) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -32,6 +32,14 @@ export async function PATCH(request: Request, { params }: Params) {
         { error: "isActive must be a boolean" },
         { status: 400 },
       );
+    }
+
+    const existing = await prisma.carousel.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!existing) {
+      return NextResponse.json({ error: "Slide not found" }, { status: 404 });
     }
 
     const slide = await prisma.carousel.update({

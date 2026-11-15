@@ -1,25 +1,11 @@
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import {
+  couponCreateSchema,
+  couponRuleError,
+} from "@/lib/orders/coupon-validation";
 import { mapCoupon, mapCoupons } from "@/lib/db/orders";
 import { prisma } from "@/lib/db/prisma";
-
-const couponSchema = z.object({
-  code: z
-    .string()
-    .min(2, "Code must be at least 2 characters")
-    .transform((val) => val.trim().toUpperCase()),
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  description: z.string().optional().default(""),
-  discountType: z.enum(["PERCENTAGE", "FIXED"]).default("PERCENTAGE"),
-  discountValue: z.number().min(0, "Discount value must be 0 or higher"),
-  validFrom: z.string().min(1, "Valid from date is required"),
-  validTo: z.string().min(1, "Valid to date is required"),
-  usageLimit: z.number().int().min(0).default(0),
-  applicableProducts: z.array(z.string()).default([]),
-  applicableVariants: z.array(z.string()).default([]),
-  status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
-});
 
 export async function GET() {
   const admin = await requireAdmin();
@@ -64,12 +50,17 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const parsed = couponSchema.safeParse(body);
+    const parsed = couponCreateSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
         { error: parsed.error.issues[0]?.message || "Invalid coupon data" },
         { status: 400 },
       );
+    }
+
+    const ruleError = couponRuleError(parsed.data);
+    if (ruleError) {
+      return NextResponse.json({ error: ruleError }, { status: 400 });
     }
 
     const existing = await prisma.coupon.findUnique({ where: { code: parsed.data.code } });

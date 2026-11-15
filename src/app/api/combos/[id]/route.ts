@@ -3,7 +3,11 @@ import { requireAdmin } from "@/lib/auth/require-admin";
 import { mapCombo } from "@/lib/db/catalog";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
-import { slugify, stripHtml } from "@/lib/utils/format";
+import {
+  comboUpdateSchema,
+  parseOptionalDate,
+  zodErrorMessage,
+} from "@/lib/catalog/validation";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -11,25 +15,28 @@ export async function PUT(request: Request, { params }: Params) {
   const admin = await requireAdmin();
   if (!admin.ok) return admin.response;
   const { id } = await params;
-  const body = await request.json();
-  if (body.name) {
-    const rawSlug = slugify(stripHtml(body.name));
-    if (rawSlug) body.slug = rawSlug;
-  }
-  if (body.startsAt !== undefined) {
-    const d = body.startsAt ? new Date(body.startsAt) : null;
-    body.startsAt = d && !Number.isNaN(d.getTime()) ? d : null;
-  }
-  if (body.endsAt !== undefined) {
-    const d = body.endsAt ? new Date(body.endsAt) : null;
-    body.endsAt = d && !Number.isNaN(d.getTime()) ? d : null;
-  }
   if (!isDbId(id)) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
+  const parsed = comboUpdateSchema.safeParse(await request.json());
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: zodErrorMessage(parsed.error, "Invalid combo data") },
+      { status: 400 },
+    );
+  }
   const existing = await prisma.combo.findUnique({ where: { id } });
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  const combo = await prisma.combo.update({ where: { id }, data: body });
+  const { startsAt, endsAt, ...rest } = parsed.data;
+  // Renaming keeps the slug so shared combo links keep working.
+  const combo = await prisma.combo.update({
+    where: { id },
+    data: {
+      ...rest,
+      startsAt: startsAt === undefined ? undefined : parseOptionalDate(startsAt),
+      endsAt: endsAt === undefined ? undefined : parseOptionalDate(endsAt),
+    },
+  });
   return NextResponse.json({ data: mapCombo(combo) });
 }
 

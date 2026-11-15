@@ -1,6 +1,7 @@
 import type { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { phoneSchema, pincodeSchema } from "@/lib/validation/address";
 import { AUTH_ERRORS } from "@/constants/auth";
 import { DEFAULT_SHIPPING_COUNTRY } from "@/constants/checkout";
 import { requireAdmin } from "@/lib/auth/require-admin";
@@ -11,7 +12,12 @@ import {
   calculatePricing,
   pricingFlagsFromLines,
 } from "@/lib/orders/pricing";
-import { resolveOrderItemsFromCatalog } from "@/lib/orders/inventory";
+import {
+  resolveOrderItemsFromCatalog,
+  restoreStockForOrder,
+} from "@/lib/orders/inventory";
+import { markOrderPaid } from "@/lib/orders/mark-paid";
+import { REFUND_ERRORS } from "@/constants/payment";
 import { OrderStatus, PaymentStatus } from "@/types/order";
 
 const statusEnum = z.nativeEnum(OrderStatus);
@@ -22,20 +28,20 @@ const patchSchema = z.object({
   status: statusEnum.optional(),
   paymentStatus: paymentEnum.optional(),
   notes: z.string().optional(),
-  trackingNumber: z.string().optional(),
-  courier: z.string().optional(),
+  // Tracking is set only through /api/admin/orders/[id]/tracking (AWB format,
+  // paid-only and duplicate checks); unknown keys are stripped here.
 });
 
 const createSchema = z.object({
   shippingAddress: z.object({
     fullName: z.string().min(2),
-    phone: z.string().min(10),
+    phone: phoneSchema(),
     email: z.string().email().optional().or(z.literal("")),
     line1: z.string().min(3),
     line2: z.string().optional(),
     city: z.string().min(2),
     state: z.string().min(2),
-    pincode: z.string().min(6),
+    pincode: pincodeSchema(),
     country: z.string().default(DEFAULT_SHIPPING_COUNTRY),
   }),
   items: z
@@ -101,11 +107,21 @@ export async function POST(request: Request) {
         } as unknown as Prisma.InputJsonValue,
         pricing: calculatePricing(subtotal, 0, flags) as unknown as Prisma.InputJsonValue,
         status: parsed.data.status ?? OrderStatus.PENDING,
-        paymentStatus: parsed.data.paymentStatus ?? PaymentStatus.PENDING,
+        // A PAID order is recorded through markOrderPaid below so its stock
+        // is decremented like any other paid order.
+        paymentStatus:
+          parsed.data.paymentStatus === PaymentStatus.PAID
+            ? PaymentStatus.PENDING
+            : (parsed.data.paymentStatus ?? PaymentStatus.PENDING),
         notes: parsed.data.notes,
       },
       include: { items: true, user: true },
     });
+
+    if (parsed.data.paymentStatus === PaymentStatus.PAID) {
+      const paid = await markOrderPaid({ orderId: order.id, notify: false });
+      return NextResponse.json({ data: paid ?? mapOrder(order) });
+    }
 
     return NextResponse.json({ data: mapOrder(order) });
   } catch (error) {
@@ -137,8 +153,13 @@ export async function PATCH(request: Request) {
     }
 
     if (updates.paymentStatus === PaymentStatus.PAID) {
-      const { markOrderPaid } = await import("@/lib/orders/mark-paid");
-      await markOrderPaid({ orderId: id });
+      const paid = await markOrderPaid({ orderId: id });
+      if (!paid) {
+        return NextResponse.json(
+          { error: AUTH_ERRORS.notFound },
+          { status: 404 },
+        );
+      }
       const { paymentStatus, ...rest } = updates;
       void paymentStatus;
       if (Object.keys(rest).length) {
@@ -160,6 +181,26 @@ export async function PATCH(request: Request) {
         { error: AUTH_ERRORS.notFound },
         { status: 404 },
       );
+    }
+
+    // Refunds are manual (no Cashfree call) and only allowed for paid orders.
+    if (
+      updates.paymentStatus === PaymentStatus.REFUNDED &&
+      previous.paymentStatus !== PaymentStatus.REFUNDED &&
+      previous.paymentStatus !== PaymentStatus.PAID
+    ) {
+      return NextResponse.json(
+        { error: REFUND_ERRORS.notPaid },
+        { status: 400 },
+      );
+    }
+
+    // Cancelling or refunding puts the reserved stock back (once).
+    if (
+      updates.status === OrderStatus.CANCELLED ||
+      updates.paymentStatus === PaymentStatus.REFUNDED
+    ) {
+      await restoreStockForOrder(id);
     }
 
     const order = await prisma.order.update({

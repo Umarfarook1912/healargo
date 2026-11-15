@@ -51,35 +51,18 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   });
   if (product) return mapProduct(product);
 
-  // Smart fallback: If exact slug is not found, find matching active product by slug keywords or substring
+  // Fallback for legacy links that differ only in separators or case
+  // (e.g. "Groundnut_Oil" -> "groundnut-oil"). Never serve a different product
+  // just because one word matches.
+  const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const target = normalize(cleanSlug);
+  if (!target) return null;
   const activeProducts = await prisma.product.findMany({
     where: { isActive: true },
     include: { category: true },
   });
-
-  const targetLower = cleanSlug.toLowerCase();
-  const targetTokens = targetLower.split(/[-_\s]+/).filter((t) => t.length > 2);
-
-  // 1. Direct contains check: target contains product slug or vice versa
-  let matched = activeProducts.find((p) => {
-    const pSlug = (p.slug || "").toLowerCase();
-    return pSlug && (targetLower.includes(pSlug) || pSlug.includes(targetLower));
-  });
-
-  // 2. Token match: matching key word tokens (e.g. "groundnut", "sesame", "coconut", "ghee", "castor", "neem", "mahua", "pongam", "sugar", "honey")
-  if (!matched && targetTokens.length > 0) {
-    matched = activeProducts.find((p) => {
-      const pSlug = (p.slug || "").toLowerCase();
-      const pName = (p.name || "").toLowerCase();
-      return targetTokens.some((token) => pSlug.includes(token) || pName.includes(token));
-    });
-  }
-
-  if (matched) {
-    return mapProduct(matched);
-  }
-
-  return null;
+  const matches = activeProducts.filter((p) => normalize(p.slug || "") === target);
+  return matches.length === 1 ? mapProduct(matches[0]) : null;
 }
 
 export async function getCategories(activeOnly = true): Promise<Category[]> {

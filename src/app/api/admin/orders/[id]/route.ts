@@ -3,6 +3,7 @@ import { AUTH_ERRORS } from "@/constants/auth";
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
+import { restoreStockForOrder } from "@/lib/orders/inventory";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -18,6 +19,8 @@ export async function DELETE(_request: Request, { params }: Params) {
         { status: 404 },
       );
     }
+    // Put reserved stock back before the order (and its items) disappear.
+    await restoreStockForOrder(id);
     const deleted = await prisma.order.deleteMany({ where: { id } });
     if (!deleted.count) {
       return NextResponse.json(

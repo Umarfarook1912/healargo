@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { API_ENDPOINTS } from "@/constants/api";
 import { ROUTES } from "@/constants/routes";
+import { useCartStore } from "@/hooks/useCartStore";
 import { trackPurchase } from "@/lib/analytics/purchase";
 import type { PurchaseTracking } from "@/types/analytics";
 
@@ -13,15 +14,23 @@ export function CashfreeStatusSync({
   cashfreeOrderId,
   paymentStatus,
   purchase,
+  clearCartWhenPaid = false,
 }: {
   cashfreeOrderId?: string;
   paymentStatus: string;
   purchase?: PurchaseTracking;
+  /** The cart is kept through the Cashfree redirect and only emptied once paid. */
+  clearCartWhenPaid?: boolean;
 }) {
   const router = useRouter();
+  const clearCart = useCartStore((s) => s.clearCart);
   const ran = useRef(false);
   const [message, setMessage] = useState(
-    paymentStatus === "PAID" ? "" : "Confirming your payment…",
+    paymentStatus === "PAID"
+      ? ""
+      : paymentStatus === "FAILED"
+        ? "Payment failed. You can retry from checkout."
+        : "Confirming your payment…",
   );
 
   useEffect(() => {
@@ -29,6 +38,7 @@ export function CashfreeStatusSync({
     if (!cashfreeOrderId) return;
     if (paymentStatus === "PAID") {
       ran.current = true;
+      if (clearCartWhenPaid) clearCart();
       if (purchase) trackPurchase(purchase);
       router.replace(ROUTES.PROFILE_ORDERS);
       return;
@@ -53,6 +63,7 @@ export function CashfreeStatusSync({
           const nextStatus = json?.data?.paymentStatus as string | undefined;
 
           if (nextStatus === "PAID") {
+            if (clearCartWhenPaid) clearCart();
             if (purchase) trackPurchase(purchase);
             setMessage("Payment confirmed. Redirecting to your orders…");
             router.replace(ROUTES.PROFILE_ORDERS);
@@ -81,7 +92,7 @@ export function CashfreeStatusSync({
     return () => {
       cancelled = true;
     };
-  }, [cashfreeOrderId, paymentStatus, purchase, router]);
+  }, [cashfreeOrderId, paymentStatus, purchase, router, clearCartWhenPaid, clearCart]);
 
   if (!message) return null;
 

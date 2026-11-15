@@ -51,7 +51,9 @@ export function LoginForm({ googleEnabled = false }: LoginFormProps) {
       }
 
       toast.success(AUTH_COPY.welcomeBack);
-      router.push(getPostLoginRoute());
+      router.push(
+        getPostLoginRoute(searchParams.get("callbackUrl"), window.location.origin),
+      );
       router.refresh();
     } finally {
       setLoading(false);
@@ -64,7 +66,10 @@ export function LoginForm({ googleEnabled = false }: LoginFormProps) {
         title={AUTH_COPY.loginTitle}
         subtitle={AUTH_COPY.loginSubtitle}
       />
-      <GoogleSignInButton enabled={googleEnabled} />
+      <GoogleSignInButton
+        enabled={googleEnabled}
+        callbackUrl={searchParams.get("callbackUrl")}
+      />
       {googleEnabled ? <AuthDivider /> : null}
       <form onSubmit={onSubmit} className="space-y-2.5">
         <div>

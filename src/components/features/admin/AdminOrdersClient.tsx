@@ -53,7 +53,7 @@ export function AdminOrdersClient({
         id: "payment",
         label: ADMIN_LIST.payment,
         allLabel: ADMIN_LIST.all,
-        options: [PaymentStatus.PAID, PaymentStatus.REFUNDED].map((value) => ({
+        options: Object.values(PaymentStatus).map((value) => ({
           value,
           label: value,
         })),

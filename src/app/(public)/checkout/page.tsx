@@ -34,6 +34,7 @@ import { useRequireLogin } from "@/hooks/useRequireLogin";
 import { readStoredAttribution } from "@/lib/attribution/storage";
 import { calculatePricing } from "@/lib/orders/pricing";
 import { formatInr } from "@/lib/utils/format";
+import { isValidPhone, isValidPincode } from "@/lib/validation/address";
 import { cn } from "@/lib/utils/cn";
 import { trackAndOpenWhatsApp } from "@/components/shared/TrackedWhatsAppLink";
 import {
@@ -58,7 +59,6 @@ const EMPTY_ADDRESS: ShippingAddress = {
 export default function CheckoutPage() {
   const router = useRouter();
   const items = useCartStore((s) => s.items);
-  const clearCart = useCartStore((s) => s.clearCart);
   const subtotal = useCartStore((s) => s.getSubtotal());
 
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
@@ -189,7 +189,7 @@ export default function CheckoutPage() {
     }
     if (
       !address.phone?.trim() ||
-      address.phone.trim().replace(/\D/g, "").length < 10
+      !isValidPhone(address.phone)
     ) {
       toast.error("Please enter a valid 10-digit Mobile Number");
       return false;
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
       toast.error("Please enter your State");
       return false;
     }
-    if (!address.pincode?.trim() || address.pincode.trim().length < 6) {
+    if (!address.pincode?.trim() || !isValidPincode(address.pincode)) {
       toast.error("Please enter a valid 6-digit PIN Code");
       return false;
     }
@@ -259,7 +259,8 @@ export default function CheckoutPage() {
         const { openCashfreeCheckout } = await import(
           "@/lib/payment/cashfree-checkout"
         );
-        clearCart();
+        // The cart is cleared on the confirmation page once the payment is
+        // PAID, so a failed or cancelled payment can be retried from here.
         await openCashfreeCheckout(
           payJson.data.paymentSessionId as string,
           payJson.data.mode as "sandbox" | "production",

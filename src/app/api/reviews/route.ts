@@ -9,7 +9,7 @@ import { PaymentStatus } from "@/types/order";
 const schema = z.object({
   productId: z.string(),
   authorName: z.string().trim().min(2),
-  rating: z.number().min(1).max(5),
+  rating: z.number().int().min(1).max(5),
   body: z.string().trim().min(2),
 });
 
@@ -40,7 +40,30 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
     }
 
+    const product = await prisma.product.findUnique({
+      where: { id: parsed.data.productId },
+      select: { id: true },
+    });
+    if (!product) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
     const session = await auth();
+
+    // Guests may still leave (moderated) reviews; a signed-in customer gets
+    // one review per product.
+    if (session?.user?.id) {
+      const existing = await prisma.review.findFirst({
+        where: { userId: session.user.id, productId: parsed.data.productId },
+        select: { id: true },
+      });
+      if (existing) {
+        return NextResponse.json(
+          { error: "You have already reviewed this product" },
+          { status: 409 },
+        );
+      }
+    }
 
     let isVerified = false;
     if (session?.user?.id) {

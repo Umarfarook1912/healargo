@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import {
   mapProduct,
   normalizeProductSeo,
@@ -10,7 +11,12 @@ import {
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
 import { slugify } from "@/lib/utils/format";
-import { USER_ROLES } from "@/constants/auth";
+import {
+  parseOptionalDate,
+  productUpdateSchema,
+  uniqueSlug,
+  zodErrorMessage,
+} from "@/lib/catalog/validation";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -24,7 +30,7 @@ export async function GET(_request: Request, { params }: Params) {
       where: { id },
       include: { category: true },
     });
-    if (!product) {
+    if (!product || (!product.isActive && !(await isAdminSession(await auth())))) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
     return NextResponse.json({ data: mapProduct(product) });
@@ -38,29 +44,60 @@ export async function GET(_request: Request, { params }: Params) {
 
 export async function PUT(request: Request, { params }: Params) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
     const { id } = await params;
-    const body = await request.json();
     if (!isDbId(id)) {
       return NextResponse.json({ error: "Invalid id" }, { status: 400 });
     }
-
-    if (body.name && !body.slug) {
-      body.slug = slugify(body.name);
+    const parsed = productUpdateSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: zodErrorMessage(parsed.error, "Invalid product data") },
+        { status: 400 },
+      );
     }
+    const body = parsed.data;
 
     const existing = await prisma.product.findUnique({ where: { id } });
     if (!existing) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
+    if (body.categoryId && body.categoryId !== existing.categoryId) {
+      const category = await prisma.category.findUnique({
+        where: { id: body.categoryId },
+        select: { id: true },
+      });
+      if (!category) {
+        return NextResponse.json({ error: "Category not found" }, { status: 400 });
+      }
+    }
+
+    // Renaming keeps the slug (shared links and SEO). Only an explicit slug changes it.
+    let slug: string | undefined;
+    if (body.slug !== undefined) {
+      const wanted = slugify(body.slug || body.name || existing.name);
+      slug =
+        wanted === existing.slug
+          ? wanted
+          : await uniqueSlug(wanted, async (candidate) =>
+              Boolean(
+                await prisma.product.findFirst({
+                  where: { slug: candidate, NOT: { id } },
+                  select: { id: true },
+                }),
+              ),
+            );
+    }
+
     const product = await prisma.product.update({
       where: { id },
       data: {
         ...body,
+        slug,
         shortDescription:
           body.shortDescription === undefined
             ? undefined
@@ -76,15 +113,11 @@ export async function PUT(request: Request, { params }: Params) {
         offerStartsAt:
           body.offerStartsAt === undefined
             ? undefined
-            : body.offerStartsAt
-              ? new Date(body.offerStartsAt)
-              : null,
+            : parseOptionalDate(body.offerStartsAt),
         offerEndsAt:
           body.offerEndsAt === undefined
             ? undefined
-            : body.offerEndsAt
-              ? new Date(body.offerEndsAt)
-              : null,
+            : parseOptionalDate(body.offerEndsAt),
       },
     });
 
@@ -109,7 +142,7 @@ export async function PUT(request: Request, { params }: Params) {
 
 export async function DELETE(_request: Request, { params }: Params) {
   const session = await auth();
-  if (!session?.user || session.user.role !== USER_ROLES.ADMIN) {
+  if (!session?.user || !(await isAdminSession(session))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -122,16 +155,37 @@ export async function DELETE(_request: Request, { params }: Params) {
       where: { id },
       select: { slug: true },
     });
-    await prisma.product.deleteMany({ where: { id } });
+    if (!deletedProduct) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    // Products that appear in orders are archived (hidden from the shop) instead
+    // of deleted, so order history, exports and refunds keep working.
+    const orderedCount = await prisma.orderItem.count({ where: { productId: id } });
+    let archived = false;
+    if (orderedCount > 0) {
+      await prisma.product.update({ where: { id }, data: { isActive: false } });
+      archived = true;
+    } else {
+      await prisma.product.deleteMany({ where: { id } });
+    }
 
     revalidatePath("/", "layout");
     revalidatePath("/shop");
     revalidatePath("/bestsellers");
-    if (deletedProduct?.slug) {
+    if (deletedProduct.slug) {
       revalidatePath(`/products/${deletedProduct.slug}`);
     }
 
-    return NextResponse.json({ data: { ok: true } });
+    return NextResponse.json({
+      data: {
+        ok: true,
+        archived,
+        ...(archived
+          ? { message: "Product has orders, so it was deactivated instead of deleted" }
+          : {}),
+      },
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Delete failed" },

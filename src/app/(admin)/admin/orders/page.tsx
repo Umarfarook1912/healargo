@@ -2,16 +2,14 @@ import { AdminOrdersClient } from "@/components/features/admin/AdminOrdersClient
 import { mapOrders } from "@/lib/db/orders";
 import { normalizeProductVariants } from "@/lib/db/catalog";
 import { prisma } from "@/lib/db/prisma";
-import { PaymentStatus } from "@/types/order";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminOrdersPage() {
   const [orders, products] = await Promise.all([
+    // All payment states are listed (PENDING/FAILED included, e.g. orders an
+    // admin just created); the Payment filter narrows the list.
     prisma.order.findMany({
-      where: {
-        paymentStatus: { in: [PaymentStatus.PAID, PaymentStatus.REFUNDED] },
-      },
       include: { items: true, user: true },
       orderBy: { createdAt: "desc" },
     }),

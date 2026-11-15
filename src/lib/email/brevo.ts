@@ -44,7 +44,8 @@ export async function sendBrevoEmail(
   }
 
   const sender = parseSender(from);
-  const response = await fetch(BREVO_SMTP_URL, {
+  // BREVO_API_URL is a test-only override (a local fake); unset in production.
+  const response = await fetch(process.env.BREVO_API_URL?.trim() || BREVO_SMTP_URL, {
     method: "POST",
     headers: {
       accept: "application/json",

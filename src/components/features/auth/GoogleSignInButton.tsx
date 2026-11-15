@@ -28,9 +28,9 @@ function GoogleMark() {
   );
 }
 
-type Props = { enabled?: boolean };
+type Props = { enabled?: boolean; callbackUrl?: string | null };
 
-export function GoogleSignInButton({ enabled = true }: Props) {
+export function GoogleSignInButton({ enabled = true, callbackUrl }: Props) {
   if (!enabled) return null;
 
   return (
@@ -41,7 +41,7 @@ export function GoogleSignInButton({ enabled = true }: Props) {
       className="w-full bg-card"
       onClick={() =>
         signIn(AUTH_PROVIDERS.GOOGLE, {
-          callbackUrl: getPostLoginRoute(),
+          callbackUrl: getPostLoginRoute(callbackUrl, window.location.origin),
         })
       }
     >

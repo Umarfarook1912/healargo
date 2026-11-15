@@ -5,9 +5,9 @@ import { ShipmentTrackingView } from "@/components/features/shipping/ShipmentTra
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Button } from "@/components/ui/button";
 import { API_ENDPOINTS } from "@/constants/api";
-import { USER_ROLES } from "@/constants/auth";
 import { ROUTES } from "@/constants/routes";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
 
@@ -31,7 +31,7 @@ export default async function OrderTrackingPage({ params }: Props) {
 
   const isOwner =
     String(order.userId ?? "") === session.user.id ||
-    session.user.role === USER_ROLES.ADMIN;
+    (await isAdminSession(session));
   if (!isOwner) notFound();
 
   const orderId = order.id;

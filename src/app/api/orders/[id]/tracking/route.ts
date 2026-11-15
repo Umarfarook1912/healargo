@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { USER_ROLES } from "@/constants/auth";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { prisma } from "@/lib/db/prisma";
 import { isDbId } from "@/lib/db/serialize";
 import { ST_COURIER_NAME } from "@/lib/shipping/st-courier";
@@ -36,7 +36,7 @@ export async function GET(_request: Request, { params }: Params) {
     if (!order) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
-    const isAdmin = session.user.role === USER_ROLES.ADMIN;
+    const isAdmin = (await isAdminSession(session));
     if (!isAdmin && String(order.userId ?? "") !== session.user.id) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }

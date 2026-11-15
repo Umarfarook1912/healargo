@@ -4,13 +4,12 @@ import { CashfreeStatusSync } from "@/components/features/orders/CashfreeStatusS
 import { EstimatedDeliveryBadge } from "@/components/features/shipping/EstimatedDeliveryBadge";
 import { Button } from "@/components/ui/button";
 import { PageContainer } from "@/components/layout/PageContainer";
-import { USER_ROLES } from "@/constants/auth";
 import { ROUTES } from "@/constants/routes";
 import { auth } from "@/lib/auth/auth";
+import { isAdminSession } from "@/lib/auth/require-admin";
 import { mapOrder } from "@/lib/db/orders";
 import { prisma } from "@/lib/db/prisma";
-import { markOrderPaid } from "@/lib/orders/mark-paid";
-import { getCashfreeOrderStatus } from "@/lib/payment/cashfree";
+import { syncOrderWithCashfree } from "@/lib/payment/order-sync";
 import { formatInr } from "@/lib/utils/format";
 import type { AnalyticsPurchaseItem } from "@/types/analytics";
 import { PaymentStatus, type OrderItem } from "@/types/order";
@@ -35,7 +34,7 @@ export default async function OrderConfirmationPage({ params }: Props) {
 
   const isOwner =
     String(order.userId) === session.user.id ||
-    session.user.role === USER_ROLES.ADMIN;
+    (await isAdminSession(session));
   if (!isOwner) notFound();
 
   // Sync from Cashfree immediately on return (webhook may lag)
@@ -44,27 +43,11 @@ export default async function OrderConfirmationPage({ params }: Props) {
     order.paymentStatus === PaymentStatus.PENDING
   ) {
     try {
-      const status = await getCashfreeOrderStatus(order.cashfreeOrderId);
-      if (status.success) {
-        await markOrderPaid({
-          orderId: order.id,
-          transactionId: status.paymentId,
-        });
-        order = await prisma.order.findUnique({
-          where: { id },
-          include: { items: true, user: true },
-        });
-      } else if (
-        status.state === "EXPIRED" ||
-        status.state === "TERMINATED" ||
-        status.state === "FAILED"
-      ) {
-        order = await prisma.order.update({
-          where: { id },
-          data: { paymentStatus: PaymentStatus.FAILED },
-          include: { items: true, user: true },
-        });
-      }
+      await syncOrderWithCashfree(order.id, order.cashfreeOrderId);
+      order = await prisma.order.findUnique({
+        where: { id },
+        include: { items: true, user: true },
+      });
     } catch {
       // client sync will retry
     }
@@ -92,6 +75,7 @@ export default async function OrderConfirmationPage({ params }: Props) {
       <CashfreeStatusSync
         cashfreeOrderId={data.cashfreeOrderId}
         paymentStatus={data.paymentStatus}
+        clearCartWhenPaid={isCustomer}
         purchase={
           isCustomer
             ? {

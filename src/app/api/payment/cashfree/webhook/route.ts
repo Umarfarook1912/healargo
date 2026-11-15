@@ -6,8 +6,11 @@ import {
 } from "@/constants/payment";
 import { prisma } from "@/lib/db/prisma";
 import { markOrderPaid } from "@/lib/orders/mark-paid";
+import {
+  findOrderByCashfreeOrderId,
+  markPaymentFailed,
+} from "@/lib/payment/order-sync";
 import { verifyCashfreeWebhookSignature } from "@/lib/payment/webhook-auth";
-import { PaymentStatus } from "@/types/order";
 
 type WebhookBody = {
   type?: string;
@@ -41,9 +44,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid webhook" }, { status: 400 });
     }
 
-    const order = await prisma.order.findFirst({
-      where: { cashfreeOrderId },
-      select: { id: true },
+    const order = await findOrderByCashfreeOrderId(cashfreeOrderId, {
+      id: true,
+      pricing: true,
     });
     if (!order) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
@@ -70,11 +73,31 @@ export async function POST(request: Request) {
         orderId: order.id,
         transactionId,
       });
+      // Flag (don't reject: the money is already captured) a paid amount that
+      // differs from the order total, so the admin can check it in Cashfree.
+      const paidAmount = Number(body.data?.payment?.payment_amount);
+      const total = Number((order.pricing as { total?: number } | null)?.total);
+      if (
+        Number.isFinite(paidAmount) &&
+        paidAmount > 0 &&
+        Number.isFinite(total) &&
+        Math.abs(paidAmount - total) > 0.01
+      ) {
+        const note = `Cashfree reported ₹${paidAmount} paid for ${cashfreeOrderId}, but the order total is ₹${total}. Please verify.`;
+        const current = await prisma.order.findUnique({
+          where: { id: order.id },
+          select: { notes: true },
+        });
+        if (!current?.notes?.includes(note)) {
+          await prisma.order.update({
+            where: { id: order.id },
+            data: { notes: [current?.notes, note].filter(Boolean).join("\n") },
+          });
+        }
+      }
     } else if (isFailed) {
-      await prisma.order.update({
-        where: { id: order.id },
-        data: { paymentStatus: PaymentStatus.FAILED },
-      });
+      // Never downgrades a PAID order (attempts can arrive out of order).
+      await markPaymentFailed(order.id, cashfreeOrderId);
     }
 
     return NextResponse.json({ data: { ok: true } });

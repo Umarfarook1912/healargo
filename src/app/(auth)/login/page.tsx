@@ -8,6 +8,8 @@ import { getPostLoginRoute } from "@/lib/auth/post-login";
 export default async function LoginPage() {
   const session = await auth();
   if (session?.user) {
+    // Already signed in: go home, not to callbackUrl. A customer bounced here
+    // from /admin would otherwise loop between /admin and /login.
     redirect(getPostLoginRoute());
   }
 

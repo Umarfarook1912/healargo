@@ -23,6 +23,8 @@ type StatusResult = {
   success: boolean;
   state?: string;
   paymentId?: string;
+  /** Present while the Cashfree order is ACTIVE, so checkout can be resumed. */
+  paymentSessionId?: string;
   raw: unknown;
 };
 
@@ -114,8 +116,13 @@ export async function getCashfreeOrderStatus(
       order_status?: string;
       order_id?: string;
       cf_order_id?: string | number;
+      payment_session_id?: string;
       message?: string;
     };
+
+    if (!response.ok) {
+      return { success: false, state: "ERROR", raw };
+    }
 
     const state = raw.order_status;
     const success = state === CASHFREE_ORDER_STATUS.PAID;
@@ -124,6 +131,7 @@ export async function getCashfreeOrderStatus(
       state,
       paymentId:
         raw.cf_order_id != null ? String(raw.cf_order_id) : undefined,
+      paymentSessionId: raw.payment_session_id || undefined,
       raw,
     };
   } catch (error) {

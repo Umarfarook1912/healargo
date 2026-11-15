@@ -17,6 +17,12 @@ export function getCashfreeMode(): CashfreeMode {
 }
 
 export function getCashfreeHost(): string {
+  // CASHFREE_BASE_URL is a test-only override (a local fake). It is ignored
+  // when CASHFREE_ENV=PRODUCTION so live payments can never be redirected.
+  const override = process.env.CASHFREE_BASE_URL?.trim();
+  if (override && getCashfreeEnv() !== CASHFREE_ENVS.PRODUCTION) {
+    return override.replace(/\/+$/, "");
+  }
   return getCashfreeEnv() === CASHFREE_ENVS.PRODUCTION
     ? CASHFREE_API.PRODUCTION_HOST
     : CASHFREE_API.SANDBOX_HOST;

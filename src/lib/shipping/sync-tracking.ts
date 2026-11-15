@@ -103,20 +103,28 @@ export async function syncOrderTracking(orderId: string): Promise<TrackingSyncRe
   };
 }
 
-export async function syncShippedOrders(limit = BATCH_LIMIT) {
+export async function syncShippedOrders(
+  limit = BATCH_LIMIT,
+  { delayMs = DELAY_MS }: { delayMs?: number } = {},
+) {
   const orders = await prisma.order.findMany({
     where: {
       status: OrderStatus.SHIPPED,
       trackingNumber: { not: null },
     },
-    orderBy: { trackingLastCheckedAt: "asc" },
+    // Never-checked shipments first (Postgres sorts NULLs last by default),
+    // then the longest-unchecked ones.
+    orderBy: [
+      { trackingLastCheckedAt: { sort: "asc", nulls: "first" } },
+      { shippedAt: "asc" },
+    ],
     take: limit,
     select: { id: true, trackingNumber: true },
   });
 
   const results: TrackingSyncResult[] = [];
   for (const [index, order] of orders.entries()) {
-    if (index > 0) await sleep(DELAY_MS);
+    if (index > 0 && delayMs > 0) await sleep(delayMs);
     try {
       if (!order.trackingNumber) {
         results.push({ orderId: order.id, ok: false });

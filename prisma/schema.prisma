@@ -117,7 +117,6 @@ model Product {
   updatedAt        DateTime  @updatedAt
 
   reviews Review[]
-  orders  OrderItem[]
 
   @@index([categoryId])
   @@index([isActive, isBestSeller])
@@ -179,8 +178,9 @@ model OrderItem {
   id           String  @id @default(cuid())
   orderId      String
   order        Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  /// Product id, or a Combo id for combo lines. Not a foreign key: combo
+  /// lines must be storable and order history must survive catalog changes.
   productId    String
-  product      Product @relation(fields: [productId], references: [id])
   variantId    String
   name         String
   variantLabel String

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { z } from "zod";
+import { phoneSchema, pincodeSchema } from "@/lib/validation/address";
 import { ATTRIBUTION_LIMITS } from "@/constants/attribution";
 import { auth } from "@/lib/auth/auth";
 import { mapOrder, mapOrders } from "@/lib/db/orders";
@@ -23,13 +24,13 @@ const orderSchema = z.object({
     .min(1),
   shippingAddress: z.object({
     fullName: z.string().min(2),
-    phone: z.string().min(10),
+    phone: phoneSchema(),
     email: z.string().email().optional().or(z.literal("")),
     line1: z.string().min(3),
     line2: z.string().optional(),
     city: z.string().min(2),
     state: z.string().min(2),
-    pincode: z.string().min(6),
+    pincode: pincodeSchema(),
     country: z.string().default("India"),
   }),
   couponCode: z.string().optional(),
@@ -118,14 +119,8 @@ export async function POST(request: Request) {
       include: { items: true, user: true },
     });
 
-    if (coupon.couponDoc?._id) {
-      await prisma.coupon
-        .update({
-          where: { id: coupon.couponDoc._id },
-          data: { timesUsed: { increment: 1 } },
-        })
-        .catch(() => undefined);
-    }
+    // Coupon usage is counted only when the payment succeeds (markOrderPaid),
+    // so abandoned checkouts don't use up limited coupons.
 
     await saveCheckoutAddressForUser(session.user.id, shippingAddress).catch(
       () => undefined,
