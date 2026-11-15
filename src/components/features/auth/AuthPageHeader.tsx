@@ -4,8 +4,9 @@ import type { AuthPageHeaderProps, AuthSwitchPromptProps } from "@/types/auth";
 
 export function AuthPageHeader({ title, subtitle }: AuthPageHeaderProps) {
   return (
-    <div className="mb-4">
-      <h1 className="font-display text-2xl tracking-tight text-dark">
+    <div className="mb-5">
+      <span aria-hidden className="mb-3 block h-1 w-10 rounded-full bg-accent" />
+      <h1 className="font-display text-[1.75rem] leading-tight tracking-tight text-dark">
         {title}
       </h1>
       <p className="mt-1 text-sm text-muted">{subtitle}</p>
@@ -15,7 +16,7 @@ export function AuthPageHeader({ title, subtitle }: AuthPageHeaderProps) {
 
 export function AuthShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full max-w-md rounded-2xl border border-border/80 bg-card p-5 shadow-[0_1px_0_rgba(26,26,22,0.04),0_16px_40px_rgba(26,26,22,0.08)]">
+    <div className="w-full max-w-md rounded-3xl border border-border/80 bg-card p-6 shadow-[var(--shadow-lifted)] sm:p-7">
       {children}
     </div>
   );
@@ -44,7 +45,7 @@ export function AuthSwitchPrompt({
       {prompt}{" "}
       <Link
         href={href}
-        className="font-medium text-primary underline-offset-4 hover:underline"
+        className="font-semibold text-primary underline-offset-4 hover:underline"
       >
         {linkLabel}
       </Link>

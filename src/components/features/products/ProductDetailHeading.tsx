@@ -9,10 +9,18 @@ export function ProductDetailHeading({
   return (
     <div>
       {discount > 0 ? (
-        <Badge className="mb-3 bg-primary text-primary-foreground">-{discount}% OFF</Badge>
+        <Badge className="mb-2.5 border-transparent bg-primary px-2.5 text-[11px] text-primary-foreground lg:hidden">
+          -{discount}% OFF
+        </Badge>
       ) : null}
-      <h1 className="font-display text-2xl leading-tight text-dark lg:text-4xl">{name}</h1>
-      {shortDescription ? <p className="mt-2 text-muted">{shortDescription}</p> : null}
+      <h1 className="font-display text-2xl leading-tight text-dark sm:text-[1.75rem] lg:text-[1.9rem] xl:text-[2.15rem]">
+        {name}
+      </h1>
+      {shortDescription ? (
+        <p className="mt-2 text-sm leading-relaxed text-muted lg:text-[15px]">
+          {shortDescription}
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -85,7 +85,7 @@ export function FaqsClient() {
                 "rounded-full px-4 py-1.5 text-xs font-medium transition-all",
                 isActive
                   ? "bg-primary text-white shadow-xs"
-                  : "bg-stone-100 text-stone-600 hover:bg-stone-200/80 hover:text-dark"
+                  : "bg-cream text-muted hover:bg-cream-dark/80 hover:text-dark"
               )}
             >
               {cat.label}
@@ -127,14 +127,14 @@ export function FaqsClient() {
                   "rounded-2xl border transition-all overflow-hidden bg-card",
                   hasVideos
                     ? "border-primary/30 shadow-xs hover:border-primary/50"
-                    : "border-border hover:border-stone-300"
+                    : "border-border hover:border-input"
                 )}
               >
                 {/* Header / Question Toggle Button */}
                 <button
                   type="button"
                   onClick={() => toggleItem(faq.id)}
-                  className="flex w-full items-start justify-between gap-4 p-5 sm:p-6 text-left transition-colors hover:bg-stone-50/50"
+                  className="flex w-full items-start justify-between gap-4 p-5 sm:p-6 text-left transition-colors hover:bg-cream/50"
                   aria-expanded={isOpen}
                 >
                   <div className="space-y-1.5 pr-2">
@@ -146,14 +146,14 @@ export function FaqsClient() {
                       </span>
                     ) : null}
 
-                    <h2 className="font-display text-lg sm:text-xl font-bold text-dark leading-snug">
+                    <h2 className="font-display text-lg sm:text-xl text-dark leading-snug">
                       {faq.q}
                     </h2>
                   </div>
 
                   <div
                     className={cn(
-                      "mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-stone-100 text-dark transition-transform duration-200",
+                      "mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream text-dark transition-transform duration-200",
                       isOpen && "rotate-180 bg-primary/10 text-primary"
                     )}
                   >
@@ -165,13 +165,13 @@ export function FaqsClient() {
                 {isOpen && (
                   <div className="px-5 pb-6 sm:px-6 sm:pb-7 pt-0 border-t border-border/40 mt-1">
                     {/* Text Answer */}
-                    <div className="mt-4 text-sm sm:text-base leading-relaxed text-dark/80 bg-stone-50/60 rounded-xl p-4 border border-stone-100">
+                    <div className="mt-4 text-sm sm:text-base leading-relaxed text-dark/80 bg-cream/60 rounded-xl p-4 border border-border">
                       <p>{faq.a}</p>
                     </div>
 
                     {/* Video Player Section */}
                     {hasVideos && faq.videos && (
-                      <div className="mt-6 rounded-2xl border border-primary/20 bg-stone-900/5 p-4 sm:p-5">
+                      <div className="mt-6 rounded-2xl border border-primary/20 bg-primary-strong/5 p-4 sm:p-5">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                           <div className="flex items-center gap-2">
                             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white">
@@ -184,7 +184,7 @@ export function FaqsClient() {
 
                           {/* Multi-video switcher if 2+ videos */}
                           {faq.videos.length > 1 && (
-                            <div className="flex items-center gap-1.5 bg-stone-200/80 p-1 rounded-xl self-start sm:self-auto">
+                            <div className="flex items-center gap-1.5 bg-cream-dark/80 p-1 rounded-xl self-start sm:self-auto">
                               {faq.videos.map((vid, idx) => (
                                 <button
                                   key={vid.url}
@@ -199,7 +199,7 @@ export function FaqsClient() {
                                     "px-3 py-1 text-xs font-semibold rounded-lg transition-all",
                                     currentVidIdx === idx
                                       ? "bg-white text-primary shadow-xs"
-                                      : "text-stone-600 hover:text-dark"
+                                      : "text-muted hover:text-dark"
                                   )}
                                 >
                                   {vid.part ?? `Part ${idx + 1}`}
@@ -212,7 +212,7 @@ export function FaqsClient() {
                         {/* Current Video Display */}
                         {currentVideo && (
                           <div className="space-y-3">
-                            <div className="overflow-hidden rounded-xl bg-black shadow-md border border-stone-800">
+                            <div className="overflow-hidden rounded-xl bg-black shadow-md border border-white/10">
                               <video
                                 key={currentVideo.url}
                                 controls
@@ -250,13 +250,13 @@ export function FaqsClient() {
       {/* Bottom Assistance & Gallery Banner */}
       <div className="grid gap-4 sm:grid-cols-2 pt-6">
         {/* Gallery Card */}
-        <div className="rounded-2xl border border-border bg-gradient-to-br from-cream via-white to-amber-50/40 p-6 shadow-xs flex flex-col justify-between">
+        <div className="rounded-2xl border border-border bg-gradient-to-br from-cream via-white to-accent-soft/40 p-6 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider">
               <Film className="h-4 w-4" />
               <span>Visual Gallery</span>
             </div>
-            <h3 className="mt-2 font-display text-lg font-bold text-dark">
+            <h3 className="mt-2 font-display text-lg text-dark font-semibold">
               Explore Our Videos & Product Showcase
             </h3>
             <p className="mt-1 text-xs sm:text-sm text-muted leading-relaxed">
@@ -279,7 +279,7 @@ export function FaqsClient() {
               <MessageCircle className="h-4 w-4" />
               <span>Direct Help</span>
             </div>
-            <h3 className="mt-2 font-display text-lg font-bold text-dark">
+            <h3 className="mt-2 font-display text-lg text-dark font-semibold">
               Have a Custom Question or Bulk Order?
             </h3>
             <p className="mt-1 text-xs sm:text-sm text-muted leading-relaxed">

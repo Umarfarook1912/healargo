@@ -108,7 +108,7 @@ export function SocialLinks({
                   </span>
                 </div>
 
-                <h3 className="mt-4 font-display text-base font-bold text-dark group-hover:text-primary transition-colors">
+                <h3 className="mt-4 font-display text-base text-dark group-hover:text-primary transition-colors font-semibold">
                   {item.name}
                 </h3>
                 <p

@@ -44,7 +44,7 @@ export default async function ProductPage({ params }: Props) {
   const jsonLd = buildProductJsonLd(product, category?.name);
 
   return (
-    <PageContainer className="py-5 lg:py-12">
+    <PageContainer className="py-4 lg:py-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

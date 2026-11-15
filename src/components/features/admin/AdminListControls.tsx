@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils/cn";
 import type { AdminListControlsState } from "@/types/admin-list";
 
 const fieldClass =
-  "h-11 w-full rounded-md border border-border bg-cream/40 px-3 text-sm text-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+  "h-11 w-full rounded-xl border border-input bg-card px-3 text-sm text-dark transition-colors hover:border-primary/30 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/12";
 
-const labelClass = "text-xs font-semibold uppercase tracking-[0.14em] text-muted";
+const labelClass = "text-[11px] font-semibold uppercase tracking-[0.14em] text-muted";
 
 export function AdminListControls({ list }: { list: AdminListControlsState }) {
   const filtering = Boolean(list.query.trim()) || list.filters.some((filter) => filter.value);
@@ -23,7 +23,7 @@ export function AdminListControls({ list }: { list: AdminListControlsState }) {
   }
 
   return (
-    <div className="mb-4 rounded-xl border border-border bg-card p-4 shadow-sm">
+    <div className="mb-4 surface-card p-4">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
         <label className="flex min-w-0 flex-1 flex-col gap-1.5">
           <span className={labelClass}>{ADMIN_LIST.search}</span>
@@ -34,7 +34,7 @@ export function AdminListControls({ list }: { list: AdminListControlsState }) {
               onChange={(event) => list.setQuery(event.target.value)}
               placeholder={ADMIN_LIST.searchPlaceholder}
               aria-label={ADMIN_LIST.search}
-              className="bg-cream/40 pl-9"
+              className="pl-9"
             />
           </span>
         </label>
@@ -43,7 +43,7 @@ export function AdminListControls({ list }: { list: AdminListControlsState }) {
             <span className={labelClass}>{filter.label}</span>
             <select
               aria-label={filter.label}
-              className={cn(fieldClass, filter.value && "border-primary bg-primary/5")}
+              className={cn(fieldClass, filter.value && "border-primary bg-primary-soft")}
               value={filter.value}
               onChange={(event) => filter.setValue(event.target.value)}
             >
@@ -86,7 +86,7 @@ export function AdminListPagination({ list }: { list: AdminListControlsState }) 
   const pages = pageWindow(list.page, list.pageCount);
 
   return (
-    <div className="mt-4 flex flex-col gap-3 rounded-xl border border-border bg-card px-4 py-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-[var(--shadow-soft)] sm:flex-row sm:items-center sm:justify-between">
       <p className="text-sm text-muted">{ADMIN_LIST.range(list.from, list.to, list.total)}</p>
       <div className="flex items-center gap-1">
         <Button

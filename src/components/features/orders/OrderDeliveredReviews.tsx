@@ -128,7 +128,7 @@ export function OrderDeliveredReviews({
   if (!items.length) return null;
 
   return (
-    <section id={CATALOG_COPY.reviewAnchor} className="rounded-2xl border border-border bg-card p-6 shadow-xs">
+    <section id={CATALOG_COPY.reviewAnchor} className="surface-card p-6">
       <h2 className="font-display text-xl text-dark">{CATALOG_COPY.reviewTitle}</h2>
       <p className="mt-1 text-sm text-muted">{CATALOG_COPY.reviewDeliveredHint}</p>
       {items.map((item) => (

@@ -34,18 +34,18 @@ const PROCESS_STEPS = [
 
 export function CertificateTestingProcess() {
   return (
-    <section className="rounded-3xl border border-border bg-stone-900 text-stone-100 p-8 sm:p-10 lg:p-12 shadow-md">
+    <section className="forest-gradient rounded-3xl border border-black/10 p-8 text-cream shadow-[var(--shadow-lifted)] sm:p-10 lg:p-12">
       <div className="mx-auto max-w-3xl text-center">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/20 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
           <Sparkles className="h-3.5 w-3.5" />
           <span>Cold Pressing Quality Protocol</span>
         </div>
 
-        <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-cream sm:text-3xl md:text-4xl">
+        <h2 className="mt-4 font-display text-2xl tracking-tight text-cream sm:text-3xl md:text-4xl">
           Traditional Cold-Press Standard of Purity
         </h2>
 
-        <p className="mt-3 text-xs leading-relaxed text-stone-300 sm:text-base">
+        <p className="mt-3 text-xs leading-relaxed text-cream/80 sm:text-base">
           Unlike industrial refined oils processed with chemical hexane solvents and bleached at 200°C+,
           our traditional low-heat extraction relies entirely on mechanical cold pressing.
         </p>
@@ -57,14 +57,14 @@ export function CertificateTestingProcess() {
           return (
             <div
               key={step.step}
-              className="relative flex flex-col justify-between rounded-2xl border border-stone-800 bg-stone-800/60 p-5 transition-transform hover:-translate-y-1"
+              className="relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/10 p-5 transition-transform hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 text-accent">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="font-display text-2xl font-bold text-stone-700">
+                  <span className="font-display text-2xl text-dark/80">
                     {step.step}
                   </span>
                 </div>
@@ -73,12 +73,12 @@ export function CertificateTestingProcess() {
                   {step.title}
                 </h3>
 
-                <p className="mt-2 text-xs leading-relaxed text-stone-400">
+                <p className="mt-2 text-xs leading-relaxed text-cream/70">
                   {step.description}
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-stone-800/80 text-[11px] font-medium text-accent">
+              <div className="mt-4 pt-3 border-t border-white/10 text-[11px] font-medium text-accent">
                 ✓ 100% Unrefined & Chemical Free
               </div>
             </div>

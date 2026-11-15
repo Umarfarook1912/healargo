@@ -118,7 +118,7 @@ export function AdminComboItems({
                     Select Product *
                   </Label>
                   <select
-                    className="h-10 w-full rounded-md border border-border bg-card px-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    className="h-10 w-full rounded-xl border border-input bg-card px-3 text-sm focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/12"
                     value={line.productId}
                     onChange={(e) => {
                       const selectedId = e.target.value;
@@ -180,7 +180,7 @@ export function AdminComboItems({
                       <div className="grid gap-3 sm:grid-cols-3">
                         <div className="space-y-1 sm:col-span-2">
                           <select
-                            className="h-10 w-full rounded-md border border-border bg-card px-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                            className="h-10 w-full rounded-xl border border-input bg-card px-3 text-sm focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/12"
                             value={line.variantId}
                             onChange={(e) => {
                               if (e.target.value === "__add_new_variant__") {

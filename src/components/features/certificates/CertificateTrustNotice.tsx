@@ -3,7 +3,7 @@ import { CheckCircle, Scale, FileCheck } from "lucide-react";
 
 export function CertificateTrustNotice() {
   return (
-    <section className="rounded-2xl border border-emerald-300/80 bg-gradient-to-r from-emerald-50/80 via-emerald-100/30 to-stone-50 p-6 shadow-xs sm:p-8">
+    <section className="rounded-2xl border border-emerald-300/80 bg-gradient-to-r from-emerald-50/80 via-emerald-100/30 to-cream p-6 shadow-xs sm:p-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-6">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-200/80 text-emerald-900 shadow-2xs">
           <CheckCircle className="h-6 w-6 text-emerald-800" />
@@ -15,7 +15,7 @@ export function CertificateTrustNotice() {
             <span>100% Verified Credentials Notice</span>
           </div>
 
-          <h2 className="mt-2 font-display text-lg font-bold text-dark sm:text-xl">
+          <h2 className="mt-2 font-display text-lg text-dark sm:text-xl">
             Authenticity & Consumer Safety Commitment
           </h2>
 

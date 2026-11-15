@@ -420,7 +420,7 @@ export function AdminCouponsClient({
                                 Site-wide (All Products)
                               </span>
                             ) : (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-100 text-blue-800">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-info-soft text-info">
                                 {appProductsCount}{" "}
                                 {appProductsCount === 1 ? "Product" : "Products"}
                               </span>
@@ -555,7 +555,7 @@ export function AdminCouponsClient({
                               Expired
                             </span>
                           ) : isNotStarted ? (
-                            <span className="inline-block mt-0.5 text-[10px] text-amber-600 font-semibold uppercase">
+                            <span className="inline-block mt-0.5 text-[10px] text-warning font-semibold uppercase">
                               Starts soon
                             </span>
                           ) : (
@@ -584,7 +584,7 @@ export function AdminCouponsClient({
                               Site-wide (All)
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-blue-100 text-blue-800">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-info-soft text-info">
                               {appProductsCount}{" "}
                               {appProductsCount === 1 ? "Product" : "Products"}
                             </span>

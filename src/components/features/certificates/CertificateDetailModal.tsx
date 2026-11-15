@@ -54,7 +54,7 @@ export function CertificateDetailModal({
           }}
         >
           {/* Close Button */}
-          <DialogPrimitive.Close className="absolute right-4 top-4 rounded-full p-2 text-muted transition-colors hover:bg-stone-100 hover:text-dark">
+          <DialogPrimitive.Close className="absolute right-4 top-4 rounded-full p-2 text-muted transition-colors hover:bg-cream hover:text-dark">
             <X className="h-5 w-5" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
@@ -67,7 +67,7 @@ export function CertificateDetailModal({
               </div>
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-accent">
+                  <span className="text-xs font-bold uppercase tracking-wider text-accent-strong">
                     {document.categoryLabel}
                   </span>
                   <span className="text-xs text-muted">•</span>
@@ -79,7 +79,7 @@ export function CertificateDetailModal({
                     View-Only Protected
                   </span>
                 </div>
-                <DialogPrimitive.Title className="mt-1 font-display text-lg font-bold text-dark sm:text-2xl">
+                <DialogPrimitive.Title className="mt-1 font-display text-lg text-dark sm:text-2xl">
                   {document.title}
                 </DialogPrimitive.Title>
               </div>
@@ -106,13 +106,13 @@ export function CertificateDetailModal({
               </div>
             </div>
           ) : (
-            <div className="mt-4 flex items-start gap-3 rounded-xl border border-amber-300/80 bg-amber-50/90 p-3.5 text-xs text-amber-950 sm:text-sm">
-              <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" />
+            <div className="mt-4 flex items-start gap-3 rounded-xl border border-warning/30 bg-warning-soft p-3.5 text-xs text-warning sm:text-sm">
+              <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
               <div>
-                <p className="font-semibold text-amber-900">
+                <p className="font-semibold text-warning">
                   Document Preview Notice
                 </p>
-                <p className="mt-0.5 leading-relaxed text-amber-800 text-xs">
+                <p className="mt-0.5 leading-relaxed text-warning text-xs">
                   This record is available for consumer transparency and online verification.
                 </p>
               </div>
@@ -128,7 +128,7 @@ export function CertificateDetailModal({
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-colors ${
                   activeTab === "viewer"
                     ? "bg-primary text-primary-foreground shadow-xs"
-                    : "text-muted hover:bg-stone-100"
+                    : "text-muted hover:bg-cream"
                 }`}
               >
                 <Eye className="h-3.5 w-3.5" />
@@ -141,7 +141,7 @@ export function CertificateDetailModal({
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-colors ${
                   activeTab === "details"
                     ? "bg-primary text-primary-foreground shadow-xs"
-                    : "text-muted hover:bg-stone-100"
+                    : "text-muted hover:bg-cream"
                 }`}
               >
                 <FileText className="h-3.5 w-3.5" />
@@ -155,7 +155,7 @@ export function CertificateDetailModal({
                   className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-colors ${
                     activeTab === "parameters"
                       ? "bg-primary text-primary-foreground shadow-xs"
-                    : "text-muted hover:bg-stone-100"
+                    : "text-muted hover:bg-cream"
                   }`}
                 >
                   <FileSearch className="h-3.5 w-3.5" />
@@ -169,7 +169,7 @@ export function CertificateDetailModal({
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-colors ${
                   activeTab === "compliance"
                     ? "bg-primary text-primary-foreground shadow-xs"
-                    : "text-muted hover:bg-stone-100"
+                    : "text-muted hover:bg-cream"
                 }`}
               >
                 <ShieldCheck className="h-3.5 w-3.5" />
@@ -181,7 +181,7 @@ export function CertificateDetailModal({
             {activeTab === "viewer" && (
               <div className="mt-4 space-y-3">
                 <ProtectedDocumentViewer document={document} />
-                <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-stone-100/80 px-3.5 py-2 text-[11px] text-muted">
+                <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-cream/80 px-3.5 py-2 text-[11px] text-muted">
                   <span className="flex items-center gap-1.5">
                     <Lock className="h-3.5 w-3.5 text-primary" />
                     <span>Protected View Active: Copying, screenshots, and direct saving are restricted.</span>
@@ -226,7 +226,7 @@ export function CertificateDetailModal({
                         Official Verified Data
                       </p>
 
-                      <div className="mt-2 space-y-2.5 rounded-xl border border-border/80 bg-stone-50/70 p-3.5 text-xs sm:text-sm">
+                      <div className="mt-2 space-y-2.5 rounded-xl border border-border/80 bg-cream/70 p-3.5 text-xs sm:text-sm">
                         <div className="flex items-start justify-between gap-3 border-b border-border/50 pb-2">
                           <span className="flex items-center gap-1.5 font-medium text-muted">
                             <FileText className="h-4 w-4 text-primary" />
@@ -292,7 +292,7 @@ export function CertificateDetailModal({
                     {document.longDescription}
                   </p>
                   {document.notes && (
-                    <p className="mt-2 text-xs italic text-stone-500">
+                    <p className="mt-2 text-xs italic text-muted">
                       Official Note: {document.notes}
                     </p>
                   )}
@@ -305,7 +305,7 @@ export function CertificateDetailModal({
               <div className="mt-4 space-y-3">
                 <div className="overflow-hidden rounded-xl border border-border">
                   <table className="w-full text-left text-xs sm:text-sm">
-                    <thead className="bg-stone-100 text-dark">
+                    <thead className="bg-cream text-dark">
                       <tr>
                         <th className="p-3 font-semibold">Chemical / Physical Parameter</th>
                         <th className="p-3 font-semibold">Standard Limit (FSSAI)</th>
@@ -314,7 +314,7 @@ export function CertificateDetailModal({
                     </thead>
                     <tbody className="divide-y divide-border">
                       {document.testParameters.map((param, index) => (
-                        <tr key={index} className="hover:bg-stone-50">
+                        <tr key={index} className="hover:bg-cream">
                           <td className="p-3 font-medium text-dark">{param.parameter}</td>
                           <td className="p-3 text-muted">
                             {param.standardRequirement || "Compliant with FSSAI limits"}
@@ -328,7 +328,7 @@ export function CertificateDetailModal({
                   </table>
                 </div>
 
-                <div className="rounded-xl bg-stone-50 p-3 text-xs text-muted">
+                <div className="rounded-xl bg-cream p-3 text-xs text-muted">
                   <p>
                     Analytical testing conducted by ISO/IEC 17025 accredited laboratory (Micro Tech Diagnostic Centre).
                     All parameters comply with Food Safety and Standards (Food Products Standards and Food Additives) Regulations.
@@ -339,7 +339,7 @@ export function CertificateDetailModal({
 
             {/* TAB 4: Regulatory Authority & Entity */}
             {activeTab === "compliance" && (
-              <div className="mt-4 rounded-xl border border-border/80 bg-stone-50 p-4 text-xs text-dark sm:text-sm">
+              <div className="mt-4 rounded-xl border border-border/80 bg-cream p-4 text-xs text-dark sm:text-sm">
                 <div className="flex items-center gap-2 pb-2 text-primary border-b border-border">
                   <ShieldCheck className="h-4 w-4" />
                   <span className="font-semibold">

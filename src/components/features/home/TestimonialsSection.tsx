@@ -1,10 +1,12 @@
+import { Quote } from "lucide-react";
 import {
-  FadeIn,
   Stagger,
   StaggerItem,
 } from "@/components/shared/motion";
 import { PageContainer } from "@/components/layout/PageContainer";
+import { SectionHeading } from "@/components/features/home/SectionHeading";
 import { UI } from "@/constants/ui";
+import { cn } from "@/lib/utils/cn";
 
 const STORIES = [
   {
@@ -32,38 +34,88 @@ const STORIES = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-16">
+    <section className="py-16 md:py-24">
       <PageContainer>
-        <FadeIn>
-          <p className="text-sm font-medium uppercase tracking-wide text-primary">
-            Customer Stories
-          </p>
-          <h2 className="mt-2 font-display text-3xl text-dark md:text-4xl">
-            Loved by early {UI.brand} customers
-          </h2>
-        </FadeIn>
-        <Stagger className="mt-10 grid gap-6 md:grid-cols-3" delay={0.1}>
-          {STORIES.map((story) => (
-            <StaggerItem key={story.name}>
-              <blockquote className="h-full rounded-lg border border-border bg-card p-6 transition-shadow hover:shadow-md">
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                    {story.initials}
-                  </span>
-                  <div>
-                    <p className="font-medium text-dark">{story.name}</p>
-                    <p className="text-xs text-muted">{story.place}</p>
-                  </div>
-                </div>
-                <p className="text-sm leading-relaxed text-dark/80">
-                  “{story.body}”
-                </p>
-                <p className="mt-4 text-xs font-medium text-primary">
-                  {story.product}
-                </p>
-              </blockquote>
-            </StaggerItem>
-          ))}
+        <SectionHeading
+          eyebrow="Customer Stories"
+          title={<>Loved by early {UI.brand} customers</>}
+        />
+        <Stagger className="grid gap-5 lg:grid-cols-3" delay={0.1}>
+          {STORIES.map((story, index) => {
+            const featured = index === 0;
+            return (
+              <StaggerItem key={story.name}>
+                <figure
+                  className={cn(
+                    "relative flex h-full flex-col overflow-hidden rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 sm:p-8",
+                    featured
+                      ? "forest-gradient text-cream shadow-[var(--shadow-lifted)]"
+                      : "surface-card hover:shadow-[var(--shadow-lifted)]",
+                  )}
+                >
+                  <Quote
+                    aria-hidden
+                    className={cn(
+                      "h-9 w-9",
+                      featured ? "text-accent" : "text-accent-strong/40",
+                    )}
+                  />
+                  <p
+                    aria-hidden
+                    className={cn(
+                      "mt-5 text-sm tracking-[0.2em]",
+                      featured ? "text-accent" : "text-accent-strong",
+                    )}
+                  >
+                    ★★★★★
+                  </p>
+                  <blockquote
+                    className={cn(
+                      "mt-3 flex-1 font-display text-lg leading-relaxed sm:text-xl",
+                      featured ? "text-white" : "text-dark",
+                    )}
+                  >
+                    “{story.body}”
+                  </blockquote>
+                  <figcaption
+                    className={cn(
+                      "mt-8 flex items-center gap-3 border-t pt-5",
+                      featured ? "border-cream/15" : "border-border",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
+                        featured
+                          ? "bg-accent text-accent-foreground"
+                          : "bg-primary text-primary-foreground",
+                      )}
+                    >
+                      {story.initials}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className={cn("font-semibold", featured ? "text-white" : "text-dark")}>
+                        {story.name}
+                      </p>
+                      <p className={cn("text-xs", featured ? "text-cream/70" : "text-muted")}>
+                        {story.place}
+                      </p>
+                    </div>
+                    <span
+                      className={cn(
+                        "hidden rounded-full px-2.5 py-1 text-[11px] font-semibold sm:inline-flex",
+                        featured
+                          ? "bg-white/10 text-cream"
+                          : "bg-primary-soft text-primary",
+                      )}
+                    >
+                      {story.product}
+                    </span>
+                  </figcaption>
+                </figure>
+              </StaggerItem>
+            );
+          })}
         </Stagger>
       </PageContainer>
     </section>

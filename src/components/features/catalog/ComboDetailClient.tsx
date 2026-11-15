@@ -82,7 +82,7 @@ export function ComboDetailClient({
           type="button"
           variant="ghost"
           size="sm"
-          className="-ml-2 gap-1.5 text-muted hover:text-dark"
+          className="-ml-2 gap-1.5 text-muted"
           onClick={() => router.back()}
         >
           <ArrowLeft className="h-4 w-4" />
@@ -90,11 +90,11 @@ export function ComboDetailClient({
         </Button>
         <AdminEditLink href={ROUTES.ADMIN.COMBO_EDIT(combo._id)} />
       </div>
-      <div className="grid gap-10 lg:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
         <ProductMediaGallery image={image} images={combo.images} videos={combo.videos ?? []} alt={name} />
         <div>
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <Badge className="bg-primary text-primary-foreground">
+            <Badge className="border-transparent bg-primary text-primary-foreground">
               {CATALOG_COPY.comboChip}
             </Badge>
             {combo.videos && combo.videos.length > 0 ? (
@@ -104,15 +104,15 @@ export function ComboDetailClient({
               </span>
             ) : null}
           </div>
-          <h1 className="font-display text-3xl text-dark md:text-4xl">{name}</h1>
+          <h1 className="font-display text-3xl leading-tight text-dark md:text-5xl">{name}</h1>
           {combo.endsAt ? <OfferCountdown endsAt={combo.endsAt} /> : null}
-          <div className="mt-6 flex flex-wrap items-baseline gap-3">
-            <span className="text-3xl font-semibold text-dark">{formatInr(combo.price)}</span>
+          <div className="mt-6 flex flex-wrap items-baseline gap-3 rounded-2xl border border-border bg-cream/50 p-4 lg:p-5">
+            <span className="font-display text-3xl font-semibold text-primary lg:text-4xl">{formatInr(combo.price)}</span>
             {worth > combo.price ? (
               <span className="text-lg text-muted line-through">{formatInr(worth)}</span>
             ) : null}
             {save > 0 ? (
-              <Badge className="bg-primary/10 text-primary">
+              <Badge tone="success">
                 {CATALOG_COPY.comboSave} {formatInr(save)}
               </Badge>
             ) : null}
@@ -125,8 +125,8 @@ export function ComboDetailClient({
             <h2 className="font-display text-xl text-dark">{CATALOG_COPY.comboIncludes}</h2>
             <ul className="mt-3 space-y-3">
               {lines.map((line) => (
-                <li key={line.key} className="flex items-center gap-3 rounded-xl border border-border bg-card p-3">
-                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-cream-dark">
+                <li key={line.key} className="surface-card flex items-center gap-3 p-3">
+                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-cream">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={line.image || ASSETS.PLACEHOLDER_PRODUCT}

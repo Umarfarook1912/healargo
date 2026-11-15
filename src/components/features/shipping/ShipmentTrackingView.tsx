@@ -86,7 +86,7 @@ export function ShipmentTrackingView({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-border bg-card p-6 shadow-xs">
+      <div className="surface-card p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex items-start gap-3">
             <div
@@ -151,7 +151,7 @@ export function ShipmentTrackingView({
       </div>
 
       {error ? (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-warning/25 bg-warning-soft px-5 py-4 text-sm text-warning">
           <span className="flex items-center gap-2">
             <AlertCircle className="h-4 w-4" /> {error}
           </span>
@@ -169,8 +169,8 @@ export function ShipmentTrackingView({
 
       {data ? (
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="h-fit rounded-2xl border border-border bg-card p-6 shadow-xs">
-            <h2 className="border-b border-border pb-3 font-display text-lg text-dark">
+          <div className="h-fit surface-card p-6">
+            <h2 className="border-b border-border pb-3 font-display text-lg text-dark font-semibold">
               Shipment details
             </h2>
             <dl className="mt-3 space-y-2.5 text-sm">
@@ -183,8 +183,8 @@ export function ShipmentTrackingView({
             </dl>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-xs md:col-span-2">
-            <h2 className="border-b border-border pb-3 font-display text-lg text-dark">
+          <div className="surface-card p-6 md:col-span-2">
+            <h2 className="border-b border-border pb-3 font-display text-lg text-dark font-semibold">
               Tracking history
             </h2>
             {data.events.length === 0 ? (

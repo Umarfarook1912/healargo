@@ -151,13 +151,13 @@ function ProductTable({ products }: { products: AdminProductRow[] }) {
     <AdminCard className="overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] text-left text-sm">
-          <thead className="border-b border-border bg-cream/70">
-            <tr className="text-xs uppercase tracking-[0.12em] text-muted">
-              <th className="px-5 py-4 font-semibold">Product</th>
-              <th className="px-5 py-4 font-semibold">Price from</th>
-              <th className="px-5 py-4 font-semibold">Status</th>
-              <th className="px-5 py-4 font-semibold">{ADMIN_ACTIONS.openPage}</th>
-              <th className="px-5 py-4 font-semibold">Actions</th>
+          <thead className="border-b border-border bg-cream/60">
+            <tr className="text-[11px] uppercase tracking-[0.14em] text-muted">
+              <th className="px-5 py-3.5 font-semibold">Product</th>
+              <th className="px-5 py-3.5 font-semibold">Price from</th>
+              <th className="px-5 py-3.5 font-semibold">Status</th>
+              <th className="px-5 py-3.5 font-semibold">{ADMIN_ACTIONS.openPage}</th>
+              <th className="px-5 py-3.5 font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>

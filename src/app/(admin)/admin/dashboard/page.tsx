@@ -112,13 +112,13 @@ export default async function AdminDashboardPage() {
             </Button>
           </div>
           {recentOrders.length === 0 ? (
-            <p className="rounded-xl bg-cream px-4 py-8 text-center text-sm text-muted">
+            <p className="rounded-2xl border border-dashed border-border bg-cream/50 px-4 py-10 text-center text-sm text-muted">
               No orders yet.
             </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-border text-xs uppercase tracking-[0.12em] text-muted">
+                <thead className="border-b border-border text-[11px] uppercase tracking-[0.14em] text-muted">
                   <tr>
                     <th className="py-3 font-semibold">{ADMIN_ORDERS_COPY.tableCustomer}</th>
                     <th className="py-3 font-semibold">{ADMIN_ORDERS_COPY.tableStatus}</th>
@@ -129,15 +129,24 @@ export default async function AdminDashboardPage() {
                   {recentOrders.map((order) => {
                     const shipping = order.shippingAddress as ShippingAddress;
                     return (
-                      <tr key={order._id} className="border-b border-border/70 last:border-0">
+                      <tr key={order._id} className="border-b border-border/70 transition-colors last:border-0 hover:bg-cream/40">
                         <td className="py-3">
                           <Link href={ROUTES.ADMIN.ORDER_DETAIL(order._id)} className="flex items-center gap-3">
                             <UserAvatar name={shipping.fullName} />
                             <span className="font-medium text-dark">{shipping.fullName}</span>
                           </Link>
                         </td>
-                        <td className="py-3 text-muted">
-                          {order.status} · {order.paymentStatus}
+                        <td className="py-3">
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-cream px-2.5 py-1 text-xs font-medium text-dark/80 ring-1 ring-border">
+                            <span
+                              className={
+                                order.paymentStatus === PaymentStatus.PAID
+                                  ? "h-1.5 w-1.5 rounded-full bg-success"
+                                  : "h-1.5 w-1.5 rounded-full bg-warning"
+                              }
+                            />
+                            {order.status} · {order.paymentStatus}
+                          </span>
                         </td>
                         <td className="py-3 text-right font-semibold text-dark">
                           {formatInr(order.pricing.total)}
@@ -153,7 +162,7 @@ export default async function AdminDashboardPage() {
 
         <AdminCard className="p-6">
           <div className="mb-5 flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/20 text-accent-foreground">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-warning-soft text-warning ring-1 ring-warning/15">
               <AlertTriangle className="h-5 w-5" />
             </span>
             <div>
@@ -164,13 +173,13 @@ export default async function AdminDashboardPage() {
             </div>
           </div>
           {outOfStock.length === 0 ? (
-            <p className="rounded-xl bg-primary/5 px-4 py-8 text-center text-sm text-primary">
+            <p className="rounded-2xl border border-dashed border-success/30 bg-success-soft/60 px-4 py-10 text-center text-sm font-medium text-success">
               {ADMIN_DASHBOARD_COPY.outOfStockEmpty}
             </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-border text-xs uppercase tracking-[0.12em] text-muted">
+                <thead className="border-b border-border text-[11px] uppercase tracking-[0.14em] text-muted">
                   <tr>
                     <th className="py-3 font-semibold">{ADMIN_DASHBOARD_COPY.tableProduct}</th>
                     <th className="py-3 text-right font-semibold">{ADMIN_DASHBOARD_COPY.editProduct}</th>

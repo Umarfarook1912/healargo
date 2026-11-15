@@ -1,7 +1,27 @@
+export const CONTACT_PHONES = [
+  {
+    digits: "7010389100",
+    display: "+91 70103 89100",
+    tel: "+917010389100",
+  },
+  {
+    digits: "7871694931",
+    display: "+91 78716 94931",
+    tel: "+917871694931",
+  },
+  {
+    digits: "9342165255",
+    display: "+91 93421 65255",
+    tel: "+919342165255",
+  },
+] as const;
+
 export const UI = {
   brand: "Healargo",
   brandTagline: "Natural Wellness",
+  /** Primary WhatsApp number (with country code, no +). */
   whatsappNumber: "917871694931",
+  phones: CONTACT_PHONES,
   address: "Healargo, Your Store Address Here",
   email: "healargo@gmail.com",
   mapUrl: "",

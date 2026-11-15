@@ -18,12 +18,12 @@ export function AdminUsersTable({
     <AdminCard className="overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] text-left text-sm">
-          <thead className="border-b border-border bg-cream/70">
-            <tr className="text-xs uppercase tracking-[0.12em] text-muted">
-              <th className="px-5 py-4 font-semibold">{ADMIN_USERS_COPY.tableUser}</th>
-              <th className="px-5 py-4 font-semibold">{ADMIN_USERS_COPY.tableEmail}</th>
-              <th className="px-5 py-4 font-semibold">{ADMIN_USERS_COPY.tableRole}</th>
-              <th className="px-5 py-4 font-semibold">{ADMIN_USERS_COPY.tableActions}</th>
+          <thead className="border-b border-border bg-cream/60">
+            <tr className="text-[11px] uppercase tracking-[0.14em] text-muted">
+              <th className="px-5 py-3.5 font-semibold">{ADMIN_USERS_COPY.tableUser}</th>
+              <th className="px-5 py-3.5 font-semibold">{ADMIN_USERS_COPY.tableEmail}</th>
+              <th className="px-5 py-3.5 font-semibold">{ADMIN_USERS_COPY.tableRole}</th>
+              <th className="px-5 py-3.5 font-semibold">{ADMIN_USERS_COPY.tableActions}</th>
             </tr>
           </thead>
           <tbody>

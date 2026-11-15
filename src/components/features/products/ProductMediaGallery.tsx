@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import { ASSETS } from "@/constants/assets";
 import { cn } from "@/lib/utils/cn";
@@ -34,10 +34,33 @@ export function ProductMediaGallery({
   const current = active || image;
   const kind = videos.includes(current) ? detectMediaKind(current) : "file";
   const isVideo = videos.includes(current);
+  const activeIndex = Math.max(0, thumbs.indexOf(current));
+  const touchStartX = useRef<number | null>(null);
+
+  function select(src: string) {
+    setFailed(false);
+    setActive(src);
+  }
+
+  function step(delta: number) {
+    if (thumbs.length < 2) return;
+    select(thumbs[(activeIndex + delta + thumbs.length) % thumbs.length]);
+  }
 
   return (
-    <div className="space-y-3">
-      <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-card lg:rounded-xl lg:border-0 lg:bg-cream-dark">
+    <div className="flex flex-col gap-3 lg:flex-row-reverse lg:gap-3">
+      <div
+        className="group/media relative aspect-square w-full overflow-hidden rounded-2xl border border-border bg-white lg:rounded-3xl"
+        onTouchStart={(e) => {
+          touchStartX.current = e.touches[0].clientX;
+        }}
+        onTouchEnd={(e) => {
+          if (touchStartX.current === null || isVideo) return;
+          const diff = touchStartX.current - e.changedTouches[0].clientX;
+          touchStartX.current = null;
+          if (Math.abs(diff) > 40) step(diff > 0 ? 1 : -1);
+        }}
+      >
         {isVideo ? (
           <VideoFrame url={current} kind={kind} title={alt} />
         ) : (
@@ -49,16 +72,13 @@ export function ProductMediaGallery({
               unoptimized
               priority
               onError={() => setFailed(true)}
-              className="object-contain p-3 lg:object-cover lg:p-0"
+              className="object-contain p-5 transition-transform duration-500 ease-out sm:p-7 lg:p-9 lg:group-hover/media:scale-[1.04]"
             />
             {videos.length > 0 ? (
               <button
                 type="button"
-                onClick={() => {
-                  setFailed(false);
-                  setActive(videos[0]);
-                }}
-                className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-dark/85 px-3.5 py-2 text-xs font-bold text-white shadow-lg backdrop-blur-sm transition-all hover:bg-primary hover:scale-105 active:scale-95"
+                onClick={() => select(videos[0])}
+                className="absolute bottom-4 right-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-dark/85 px-3.5 py-2 text-xs font-bold text-white shadow-lg backdrop-blur-sm transition-all hover:scale-105 hover:bg-primary active:scale-95"
               >
                 <Play className="h-3.5 w-3.5 fill-white text-white" />
                 Watch Video
@@ -66,20 +86,40 @@ export function ProductMediaGallery({
             ) : null}
           </>
         )}
+
+        {thumbs.length > 1 ? (
+          <>
+            <span className="absolute left-4 top-4 z-10 rounded-full bg-card/90 px-2.5 py-1 font-mono text-[11px] font-semibold text-dark shadow-sm backdrop-blur lg:hidden">
+              {activeIndex + 1}/{thumbs.length}
+            </span>
+            <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center gap-1.5 lg:hidden" aria-hidden>
+              {thumbs.map((src) => (
+                <span
+                  key={src}
+                  className={cn(
+                    "h-1.5 rounded-full transition-all",
+                    src === current ? "w-5 bg-primary" : "w-1.5 bg-dark/25",
+                  )}
+                />
+              ))}
+            </div>
+          </>
+        ) : null}
       </div>
       {thumbs.length > 1 ? (
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {thumbs.map((src) => (
+        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] lg:max-h-[min(32rem,65vh)] lg:w-16 lg:shrink-0 lg:flex-col lg:overflow-y-auto lg:overflow-x-visible lg:pb-0">
+          {thumbs.map((src, index) => (
             <button
               key={src}
               type="button"
-              onClick={() => {
-                setFailed(false);
-                setActive(src);
-              }}
+              aria-label={`Show media ${index + 1}`}
+              aria-current={src === current ? "true" : undefined}
+              onClick={() => select(src)}
               className={cn(
-                "relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border lg:h-16 lg:w-16 lg:rounded-md",
-                src === current ? "border-primary ring-2 ring-primary/30" : "border-border",
+                "relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition lg:h-16 lg:w-16",
+                src === current
+                  ? "border-primary ring-2 ring-primary/15"
+                  : "border-border/60 opacity-75 hover:border-primary/40 hover:opacity-100",
               )}
             >
               {videos.includes(src) ? (

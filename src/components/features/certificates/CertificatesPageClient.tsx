@@ -62,12 +62,12 @@ export function CertificatesPageClient() {
     <div className="space-y-12 sm:space-y-16">
       {/* 1. Hero Section */}
       <section className="mx-auto max-w-4xl text-center">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/15 bg-card/80 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-primary shadow-[var(--shadow-soft)]">
           <Shield className="h-3.5 w-3.5" />
           <span>Quality Assurance & Statutory Compliance</span>
         </div>
 
-        <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-dark sm:text-4xl md:text-5xl">
+        <h1 className="mt-4 font-display text-4xl leading-[1.08] tracking-tight text-dark md:text-6xl">
           Certificates & Quality Standards
         </h1>
 
@@ -126,7 +126,7 @@ export function CertificatesPageClient() {
                     className={`rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
                       isSelected
                         ? "bg-primary-foreground/20 text-primary-foreground"
-                        : "bg-stone-100 text-stone-600"
+                        : "bg-cream text-muted"
                     }`}
                   >
                     {count}
@@ -192,7 +192,7 @@ export function CertificatesPageClient() {
                   <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <Shield className="h-4 w-4" />
                   </span>
-                  <h2 className="font-display text-xl font-bold text-dark sm:text-2xl">
+                  <h2 className="font-display text-xl text-dark sm:text-2xl">
                     1. Important Licenses & Registrations
                   </h2>
                 </div>
@@ -219,7 +219,7 @@ export function CertificatesPageClient() {
                   <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <FlaskConical className="h-4 w-4" />
                   </span>
-                  <h2 className="font-display text-xl font-bold text-dark sm:text-2xl">
+                  <h2 className="font-display text-xl text-dark sm:text-2xl">
                     2. Food Safety & Laboratory Testing Documentation
                   </h2>
                 </div>

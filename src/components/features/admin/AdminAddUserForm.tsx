@@ -146,7 +146,7 @@ export function AdminAddUserForm({
         <Label htmlFor="user-role">{ADMIN_USERS_COPY.roleLabel}</Label>
         <select
           id="user-role"
-          className="mt-1.5 flex h-11 w-full rounded-md border border-border bg-card px-3 text-sm text-dark"
+          className="mt-1.5 flex h-11 w-full rounded-xl border border-input bg-card px-3.5 text-sm focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/12 text-dark"
           value={form.role}
           onChange={(e) =>
             setForm((f) => ({ ...f, role: e.target.value as UserRole }))

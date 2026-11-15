@@ -8,10 +8,10 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-background lg:h-screen lg:overflow-hidden lg:grid lg:grid-cols-2">
+    <div className="herbal-gradient flex min-h-screen flex-col lg:grid lg:h-screen lg:grid-cols-2 lg:overflow-hidden">
       <AuthMobileBar />
       <AuthBrandPanel />
-      <main className={cn(LAYOUT.container, "flex flex-1 items-center justify-center py-4 lg:overflow-hidden lg:py-6")}>
+      <main className={cn(LAYOUT.container, "flex flex-1 items-center justify-center py-6 lg:overflow-y-auto lg:py-8")}>
         {children}
       </main>
     </div>

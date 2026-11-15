@@ -82,13 +82,13 @@ export function AdminReviewsClient({ reviews }: { reviews: Review[] }) {
         <AdminCard className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="border-b border-border bg-cream/70">
-                <tr className="text-xs uppercase tracking-[0.12em] text-muted">
-                  <th className="px-5 py-4 font-semibold">{ADMIN_REVIEWS_COPY.tableReviewer}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_REVIEWS_COPY.tableRating}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_REVIEWS_COPY.tableReview}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_REVIEWS_COPY.tableStatus}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_REVIEWS_COPY.tableActions}</th>
+              <thead className="border-b border-border bg-cream/60">
+                <tr className="text-[11px] uppercase tracking-[0.14em] text-muted">
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_REVIEWS_COPY.tableReviewer}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_REVIEWS_COPY.tableRating}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_REVIEWS_COPY.tableReview}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_REVIEWS_COPY.tableStatus}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_REVIEWS_COPY.tableActions}</th>
                 </tr>
               </thead>
               <tbody>

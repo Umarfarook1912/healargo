@@ -5,7 +5,8 @@ import Link from "next/link";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import { ProductGrid } from "@/components/features/products/ProductGrid";
 import { ShowcaseFilterBar } from "@/components/features/home/ShowcaseFilterBar";
-import { FadeIn, ScaleOnHover } from "@/components/shared/motion";
+import { ScaleOnHover } from "@/components/shared/motion";
+import { SectionHeading } from "@/components/features/home/SectionHeading";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { FILTER_ALL, HOME_COPY } from "@/constants/home";
 import { LAYOUT } from "@/constants/layout";
@@ -55,17 +56,16 @@ export function HomeProductShowcase({
   }
 
   return (
-    <section className={cn(LAYOUT.sectionY, "bg-cream/20")}>
+    <section className={cn(LAYOUT.sectionY, "relative bg-cream/50 md:py-24")}>
+      <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <PageContainer>
-        <FadeIn className="mx-auto mb-8 max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary">
-            {HOME_COPY.eyebrow}
-          </p>
-          <h2 className="mt-2 font-display text-3xl font-extrabold text-dark md:text-4xl">
-            {HOME_COPY.collectionTitle}
-          </h2>
-          <p className="mt-2 text-sm text-muted">{HOME_COPY.collectionSubtitle}</p>
-        </FadeIn>
+        <SectionHeading
+          align="center"
+          eyebrow={HOME_COPY.eyebrow}
+          title={HOME_COPY.collectionTitle}
+          description={HOME_COPY.collectionSubtitle}
+          className="md:mb-10"
+        />
 
         <ShowcaseFilterBar
           products={products}
@@ -82,30 +82,32 @@ export function HomeProductShowcase({
             resetKey={`${activeTab}-${selectedCategorySlug}`}
           />
         ) : (
-          <div className="mx-auto my-8 max-w-md rounded-2xl border border-dashed border-border/80 bg-card p-12 text-center">
-            <ShoppingBag className="mx-auto mb-3 h-10 w-10 text-muted opacity-50" />
-            <h3 className="font-display text-lg font-bold text-dark">
+          <div className="surface-card mx-auto my-8 max-w-md p-10 text-center sm:p-12">
+            <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+              <ShoppingBag className="h-6 w-6" />
+            </span>
+            <h3 className="font-display text-xl font-semibold text-dark">
               {HOME_COPY.noProductsTitle}
             </h3>
-            <p className="mt-1 text-xs text-muted">{HOME_COPY.noProductsBody}</p>
+            <p className="mt-1.5 text-sm text-muted">{HOME_COPY.noProductsBody}</p>
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-4 rounded-lg border border-primary/30 px-4 py-2 text-xs font-bold text-primary transition hover:bg-primary/5"
+              className="mt-5 rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
             >
               {HOME_COPY.resetFilters}
             </button>
           </div>
         )}
 
-        <div className="mt-10 text-center">
+        <div className="mt-12 flex justify-center">
           <ScaleOnHover className="inline-block">
             <Link
               href={ROUTES.SHOP}
-              className="inline-flex items-center gap-2 rounded-full bg-dark px-6 py-3 text-sm font-semibold text-cream shadow-md transition-all hover:bg-primary hover:text-white"
+              className="group inline-flex items-center gap-2 rounded-full bg-dark px-8 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-lifted)] transition-colors hover:bg-primary"
             >
               <span>{HOME_COPY.viewCatalog}</span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </ScaleOnHover>
         </div>

@@ -7,7 +7,7 @@ export function Label({
 }: React.ComponentProps<"label">) {
   return (
     <label
-      className={cn("text-sm font-medium text-dark", className)}
+      className={cn("text-sm font-semibold text-dark", className)}
       {...props}
     />
   );

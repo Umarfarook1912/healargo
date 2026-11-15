@@ -4,6 +4,7 @@ import { AttributionCapture } from "@/components/features/attribution/Attributio
 import { NotFoundLandingView } from "@/components/features/not-found/NotFoundLandingView";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
+import { NotFoundSessionBoundary } from "@/components/providers/NotFoundSessionBoundary";
 import { getCategories } from "@/lib/products/queries";
 import type { Category } from "@/types/product";
 
@@ -21,7 +22,7 @@ export default async function RootNotFound() {
   }
 
   return (
-    <>
+    <NotFoundSessionBoundary>
       <Suspense fallback={null}>
         <AttributionCapture />
       </Suspense>
@@ -30,6 +31,6 @@ export default async function RootNotFound() {
         <NotFoundLandingView />
       </main>
       <Footer />
-    </>
+    </NotFoundSessionBoundary>
   );
 }

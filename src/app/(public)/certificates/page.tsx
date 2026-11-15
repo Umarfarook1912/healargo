@@ -43,7 +43,7 @@ export default function CertificatesPage() {
   };
 
   return (
-    <div className="py-8 sm:py-12 md:py-16">
+    <div className="page-wash py-8 sm:py-12 md:py-16">
       {/* Breadcrumb JSON-LD for Search Engines */}
       <script
         type="application/ld+json"
@@ -63,7 +63,7 @@ export default function CertificatesPage() {
             <Home className="h-3.5 w-3.5" />
             <span>Home</span>
           </Link>
-          <ChevronRight className="h-3.5 w-3.5 text-stone-400" />
+          <ChevronRight className="h-3.5 w-3.5 text-muted" />
           <span className="font-medium text-dark" aria-current="page">
             Certificates & Quality Standards
           </span>

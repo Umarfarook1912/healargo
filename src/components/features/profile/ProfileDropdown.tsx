@@ -30,7 +30,7 @@ export function ProfileDropdown() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label="Account menu">
+          <Button variant="ghost" size="icon" className="border border-border bg-card" aria-label="Account menu">
             <User className="h-5 w-5 text-dark" />
           </Button>
         </DropdownMenuTrigger>
@@ -72,26 +72,26 @@ export function ProfileDropdown() {
         <Button
           variant="ghost"
           size="icon"
-          className="relative rounded-full hover:bg-cream-dark"
+          className="relative rounded-full border border-border bg-card hover:border-primary/30"
           aria-label="User menu"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground shadow-sm">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground ring-2 ring-accent/40">
             {userInitials}
           </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60">
         {/* User Info Header */}
-        <div className="px-3 py-2.5">
+        <div className="mb-1 rounded-xl bg-cream px-3 py-3">
           <p className="font-semibold text-dark truncate">{session.user.name}</p>
           <p className="text-xs text-muted truncate">{session.user.email}</p>
           <div className="mt-2 flex items-center gap-1.5">
             {isAdmin ? (
-              <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800 border border-amber-300">
-                <Shield className="h-3 w-3 text-amber-700" /> ADMIN ACCOUNT
+              <span className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent-soft px-2 py-0.5 text-[10px] font-bold tracking-wide text-accent-strong">
+                <Shield className="h-3 w-3" /> ADMIN ACCOUNT
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 rounded-full bg-cream px-2 py-0.5 text-[10px] font-semibold text-primary border border-primary/20">
+              <span className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary-soft px-2 py-0.5 text-[10px] font-semibold tracking-wide text-primary">
                 <User className="h-3 w-3" /> CUSTOMER
               </span>
             )}
@@ -104,8 +104,8 @@ export function ProfileDropdown() {
         {isAdmin && (
           <>
             <DropdownMenuItem asChild>
-              <Link href={ROUTES.ADMIN.DASHBOARD} className="flex items-center gap-2.5 font-bold text-amber-900 bg-amber-50/70 focus:bg-amber-100">
-                <LayoutDashboard className="h-4 w-4 text-amber-700" />
+              <Link href={ROUTES.ADMIN.DASHBOARD} className="flex items-center gap-2.5 bg-accent-soft font-bold text-dark focus:bg-accent/25">
+                <LayoutDashboard className="h-4 w-4 text-accent-strong" />
                 Admin Dashboard
               </Link>
             </DropdownMenuItem>

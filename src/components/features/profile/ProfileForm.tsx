@@ -80,7 +80,7 @@ export function ProfileForm() {
   }
 
   return (
-    <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
+    <div className="surface-card p-6">
       <div className="flex items-center justify-between border-b border-border pb-4">
         <div>
           <h2 className="font-display text-2xl text-dark">Personal Information</h2>

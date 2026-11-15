@@ -27,7 +27,7 @@ export function ProductWhatsAppFloat({
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-4 z-40 lg:bottom-6 lg:right-6">
       <TrackedWhatsAppLink
         href={buildWhatsAppUrl(
           buildProductWhatsAppMessage(
@@ -48,7 +48,7 @@ export function ProductWhatsAppFloat({
           },
         ]}
         estimatedTotal={unitPrice * quantity}
-        className="group flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 text-white shadow-xl hover:bg-[#1ebe57] hover:shadow-2xl transition-all hover:scale-105"
+        className="group flex items-center gap-2.5 rounded-full bg-[#25D366] p-3 sm:px-4 text-white shadow-xl hover:bg-[#1ebe57] hover:shadow-2xl transition-all hover:scale-105"
         aria-label={`Chat with ${UI.brand} on WhatsApp`}
       >
         <span className="flex h-6 w-6 items-center justify-center">

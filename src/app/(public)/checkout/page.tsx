@@ -279,8 +279,8 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <PageContainer className="py-20 text-center">
-        <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-8 shadow-xs">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-cream text-muted">
+        <div className="surface-card mx-auto max-w-md p-10">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-primary ring-1 ring-primary/10">
             <ShoppingBag className="h-7 w-7" />
           </div>
           <h1 className="mt-4 font-display text-2xl font-semibold text-dark">
@@ -298,7 +298,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="py-8 sm:py-12">
+    <div className="page-wash py-8 sm:py-12">
       <PageContainer className="max-w-6xl">
         {/* Header: Back button + Title */}
         <div className="flex items-center gap-3">
@@ -309,7 +309,7 @@ export default function CheckoutPage() {
               else router.push(ROUTES.CART);
             }}
             aria-label="Go back"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-dark shadow-2xs transition-colors hover:bg-cream"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-dark shadow-2xs transition-colors hover:border-primary/30 hover:bg-primary-soft hover:text-primary"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
@@ -386,11 +386,11 @@ export default function CheckoutPage() {
         {/* Main Content Grid: Left Step Form + Right Order Summary */}
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
           {/* Left Column: Form Steps */}
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8 lg:col-span-7">
+          <div className="surface-card p-6 sm:p-8 lg:col-span-7">
             {/* STEP 1: Shipping Address */}
             {currentStep === 1 && (
               <div>
-                <h2 className="font-display text-2xl font-semibold text-dark">
+                <h2 className="font-display text-2xl text-dark md:text-3xl">
                   Shipping Address
                 </h2>
 
@@ -427,7 +427,7 @@ export default function CheckoutPage() {
                     </Label>
                     <Input
                       id="firstName"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="Rajesh"
                       value={firstName}
                       onChange={(e) => handleFirstNameChange(e.target.value)}
@@ -445,7 +445,7 @@ export default function CheckoutPage() {
                     </Label>
                     <Input
                       id="lastName"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="Annamalai"
                       value={lastName}
                       onChange={(e) => handleLastNameChange(e.target.value)}
@@ -463,7 +463,7 @@ export default function CheckoutPage() {
                     <Input
                       id="phone"
                       type="tel"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="+91 98765 43210"
                       value={address.phone ?? ""}
                       onChange={(e) => updateField("phone", e.target.value)}
@@ -482,7 +482,7 @@ export default function CheckoutPage() {
                     <Input
                       id="email"
                       type="email"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="rajesh@example.com"
                       value={address.email ?? ""}
                       onChange={(e) => updateField("email", e.target.value)}
@@ -499,7 +499,7 @@ export default function CheckoutPage() {
                     </Label>
                     <Input
                       id="line1"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="House/Flat No., Street Name"
                       value={address.line1 ?? ""}
                       onChange={(e) => updateField("line1", e.target.value)}
@@ -517,7 +517,7 @@ export default function CheckoutPage() {
                     </Label>
                     <Input
                       id="line2"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="Landmark, Area"
                       value={address.line2 ?? ""}
                       onChange={(e) => updateField("line2", e.target.value)}
@@ -534,7 +534,7 @@ export default function CheckoutPage() {
                     </Label>
                     <Input
                       id="city"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="Chennai"
                       value={address.city ?? ""}
                       onChange={(e) => updateField("city", e.target.value)}
@@ -552,7 +552,7 @@ export default function CheckoutPage() {
                     </Label>
                     <Input
                       id="state"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="Tamil Nadu"
                       value={address.state ?? ""}
                       onChange={(e) => updateField("state", e.target.value)}
@@ -570,7 +570,7 @@ export default function CheckoutPage() {
                     </Label>
                     <Input
                       id="pincode"
-                      className="mt-1.5 h-11 bg-background/40 focus:bg-card"
+                      className="mt-1.5 h-11"
                       placeholder="600001"
                       maxLength={6}
                       value={address.pincode ?? ""}
@@ -587,7 +587,7 @@ export default function CheckoutPage() {
                     onClick={() => {
                       if (validateStep1()) setCurrentStep(2);
                     }}
-                    className="h-12 w-full rounded-xl bg-primary text-base font-medium text-white shadow-xs hover:bg-primary/90"
+                    className="h-12 w-full text-base"
                   >
                     Continue to Payment →
                   </Button>
@@ -598,7 +598,7 @@ export default function CheckoutPage() {
             {/* STEP 2: Payment */}
             {currentStep === 2 && (
               <div>
-                <h2 className="font-display text-2xl font-semibold text-dark">
+                <h2 className="font-display text-2xl text-dark md:text-3xl">
                   Payment Method
                 </h2>
                 <p className="mt-1 text-sm text-muted">
@@ -631,7 +631,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Cashfree Payment Option */}
-                <div className="mt-6 rounded-xl border border-primary bg-primary/5 p-5 ring-2 ring-primary/20">
+                <div className="mt-6 rounded-2xl border border-primary/40 bg-primary-soft p-5 ring-4 ring-primary/10">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
@@ -665,7 +665,7 @@ export default function CheckoutPage() {
                     type="button"
                     disabled={loading}
                     onClick={handlePay}
-                    className="h-12 w-full rounded-xl bg-primary text-base font-medium text-white shadow-xs hover:bg-primary/90"
+                    className="h-12 w-full text-base"
                   >
                     {loading ? (
                       <span className="inline-flex items-center gap-2">
@@ -680,7 +680,7 @@ export default function CheckoutPage() {
                   <Button
                     variant="whatsapp"
                     type="button"
-                    className="h-11 w-full gap-2 rounded-xl text-sm font-medium"
+                    className="h-11 w-full gap-2 text-sm"
                     onClick={() => {
                       trackAndOpenWhatsApp({
                         href: buildWhatsAppUrl(
@@ -716,8 +716,8 @@ export default function CheckoutPage() {
           </div>
 
           {/* Right Column: Order Summary (Product Details One-by-One, No Coupon Input) */}
-          <aside className="rounded-2xl border border-border bg-card p-6 shadow-xs lg:col-span-5">
-            <h2 className="font-display text-2xl font-semibold text-dark">
+          <aside className="surface-card p-6 sm:p-7 lg:sticky lg:top-28 lg:col-span-5">
+            <h2 className="font-display text-2xl text-dark md:text-3xl">
               Order Summary
             </h2>
 
@@ -729,7 +729,7 @@ export default function CheckoutPage() {
                   className="flex items-center justify-between gap-3 pt-3.5 first:pt-0"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-border/60 bg-cream-dark">
+                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-border/60 bg-cream">
                       <Image
                         src={item.image || ASSETS.PLACEHOLDER_PRODUCT}
                         alt={item.name}
@@ -798,7 +798,7 @@ export default function CheckoutPage() {
                         }
                       }}
                       placeholder="Enter coupon code"
-                      className="w-full rounded-xl border border-border bg-white px-3.5 py-2 text-xs uppercase font-mono tracking-wider placeholder:normal-case placeholder:font-sans placeholder:text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                      className="w-full rounded-xl border border-input bg-card px-3.5 py-2 text-xs uppercase font-mono tracking-wider placeholder:normal-case placeholder:font-sans placeholder:text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                   </div>
                   <Button
@@ -806,7 +806,7 @@ export default function CheckoutPage() {
                     onClick={handleApplyCoupon}
                     disabled={applyingCoupon || !couponInput.trim()}
                     size="sm"
-                    className="rounded-xl px-4 text-xs font-semibold shrink-0"
+                    className="shrink-0 px-5 text-xs font-semibold"
                   >
                     {applyingCoupon ? (
                       <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -864,7 +864,7 @@ export default function CheckoutPage() {
                 <span>FSSAI certified pure products</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Lock className="h-4 w-4 shrink-0 text-accent" />
+                <Lock className="h-4 w-4 shrink-0 text-accent-strong" />
                 <span>Secure payment processing</span>
               </div>
               <div className="flex items-center gap-2.5">

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -45,8 +45,11 @@ export function CartDrawer({
         </DialogHeader>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-            <p className="text-muted">{CHECKOUT_COPY.EMPTY_CART}</p>
+          <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
+            <span className="mb-2 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-soft text-primary ring-1 ring-primary/10">
+              <ShoppingBag className="h-7 w-7" />
+            </span>
+            <p className="font-display text-xl text-dark">{CHECKOUT_COPY.EMPTY_CART}</p>
             <p className="text-sm text-muted">
               Add pure oils & ghee to get started
             </p>
@@ -56,13 +59,13 @@ export function CartDrawer({
           </div>
         ) : (
           <>
-            <div className="flex-1 space-y-4 overflow-y-auto">
+            <div className="-mx-1 flex-1 space-y-3 overflow-y-auto px-1">
               {items.map((item) => (
                 <div
                   key={`${item.productId}-${item.variantId}`}
-                  className="flex gap-3 border-b border-border pb-4"
+                  className="flex gap-3 rounded-2xl border border-border bg-card p-3 shadow-[var(--shadow-soft)]"
                 >
-                  <div className="relative h-16 w-16 overflow-hidden rounded-md bg-cream-dark">
+                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-cream">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -71,16 +74,17 @@ export function CartDrawer({
                       className="object-cover"
                     />
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-dark">{item.name}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold leading-snug text-dark">{item.name}</p>
                     <p className="text-xs text-muted">{item.variantLabel}</p>
-                    <p className="mt-1 text-sm font-semibold">
+                    <p className="mt-1 text-sm font-bold text-primary">
                       {formatInr(item.price)}
                     </p>
-                    <div className="mt-2 flex items-center gap-2">
+                    <div className="mt-2 flex items-center gap-1">
                       <button
                         type="button"
                         aria-label="Decrease quantity"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card transition hover:border-primary/40 hover:text-primary"
                         onClick={() =>
                           updateQuantity(
                             item.productId,
@@ -91,12 +95,13 @@ export function CartDrawer({
                       >
                         <Minus className="h-4 w-4" />
                       </button>
-                      <span className="w-6 text-center text-sm">
+                      <span className="w-7 text-center text-sm font-semibold">
                         {item.quantity}
                       </span>
                       <button
                         type="button"
                         aria-label="Increase quantity"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card transition hover:border-primary/40 hover:text-primary"
                         onClick={() =>
                           updateQuantity(
                             item.productId,
@@ -109,7 +114,7 @@ export function CartDrawer({
                       </button>
                       <button
                         type="button"
-                        className="ml-auto text-destructive"
+                        className="ml-auto flex h-8 w-8 items-center justify-center rounded-full text-destructive transition hover:bg-destructive-soft"
                         aria-label="Remove item"
                         onClick={() =>
                           removeItem(item.productId, item.variantId)
@@ -123,11 +128,11 @@ export function CartDrawer({
               ))}
             </div>
 
-            <div className="mt-auto space-y-3 border-t border-border pt-4">
+            <div className="mt-auto space-y-3 border-t border-border pt-5">
               <EstimatedDeliveryBadge variant="cart" />
-              <div className="flex justify-between text-sm font-semibold">
+              <div className="flex items-baseline justify-between text-base font-semibold text-dark">
                 <span>Subtotal</span>
-                <span>{formatInr(subtotal)}</span>
+                <span className="font-display text-xl text-primary">{formatInr(subtotal)}</span>
               </div>
               <CheckoutButton
                 className="w-full"

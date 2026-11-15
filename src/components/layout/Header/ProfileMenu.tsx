@@ -26,7 +26,7 @@ function ProfileAvatar({ image, name }: ProfileAvatarProps) {
   }
 
   return (
-    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cream-dark text-dark">
+    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-soft text-primary">
       <User className="h-4 w-4" />
     </span>
   );
@@ -43,7 +43,7 @@ export function ProfileMenu() {
     <div className="group relative">
       <button
         type="button"
-        className="flex h-10 items-center gap-1 rounded-full border border-border bg-card pl-0.5 pr-1.5 text-dark transition hover:bg-cream-dark"
+        className="flex h-10 items-center gap-1 rounded-full border border-border bg-card pl-0.5 pr-1.5 text-dark transition hover:border-primary/30 hover:bg-primary-soft"
         aria-label={ACCOUNT_MENU.account}
         aria-haspopup="menu"
       >
@@ -58,7 +58,7 @@ export function ProfileMenu() {
           "group-focus-within:visible group-focus-within:opacity-100",
         )}
       >
-        <div className="rounded-xl border border-border bg-card py-2 shadow-[0_8px_24px_rgba(26,26,22,0.08)]">
+        <div className="rounded-2xl border border-border bg-card py-2 shadow-[var(--shadow-lifted)]">
           {user ? (
             <div className="border-b border-border px-3 py-2">
               <p className="truncate text-sm font-medium text-dark">
@@ -74,7 +74,7 @@ export function ProfileMenu() {
                 key={link.href}
                 href={link.href}
                 role="menuitem"
-                className="block px-3 py-2 text-sm text-dark transition-colors hover:bg-cream-dark hover:text-primary"
+                className="block px-3 py-2 text-sm text-dark transition-colors hover:bg-primary-soft hover:text-primary"
               >
                 {link.label}
               </Link>
@@ -85,7 +85,7 @@ export function ProfileMenu() {
             <button
               type="button"
               role="menuitem"
-              className="flex w-full items-center gap-2 border-t border-border px-3 py-2 text-left text-sm text-destructive hover:bg-cream-dark"
+              className="flex w-full items-center gap-2 border-t border-border px-3 py-2 text-left text-sm text-destructive hover:bg-destructive-soft"
               onClick={() => signOut({ callbackUrl: getPostLogoutRoute() })}
             >
               <LogOut className="h-4 w-4" />

@@ -32,11 +32,11 @@ export function CertificateStatusBadge({
       return (
         <span
           className={cn(
-            "inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-2.5 py-0.5 text-xs font-semibold text-amber-800",
+            "inline-flex items-center gap-1.5 rounded-full border border-warning/30 bg-warning-soft px-2.5 py-0.5 text-xs font-semibold text-warning",
             className,
           )}
         >
-          {showIcon && <Clock className="h-3 w-3 text-amber-600" />}
+          {showIcon && <Clock className="h-3 w-3 text-warning" />}
           <span>Verification Pending</span>
         </span>
       );
@@ -45,11 +45,11 @@ export function CertificateStatusBadge({
       return (
         <span
           className={cn(
-            "inline-flex items-center gap-1.5 rounded-full border border-stone-300 bg-stone-100 px-2.5 py-0.5 text-xs font-medium text-stone-600",
+            "inline-flex items-center gap-1.5 rounded-full border border-input bg-cream px-2.5 py-0.5 text-xs font-medium text-muted",
             className,
           )}
         >
-          {showIcon && <MinusCircle className="h-3 w-3 text-stone-500" />}
+          {showIcon && <MinusCircle className="h-3 w-3 text-muted" />}
           <span>Not Applicable</span>
         </span>
       );
@@ -59,11 +59,11 @@ export function CertificateStatusBadge({
       return (
         <span
           className={cn(
-            "inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50/90 px-2.5 py-0.5 text-xs font-semibold text-amber-900",
+            "inline-flex items-center gap-1.5 rounded-full border border-warning/25 bg-warning-soft px-2.5 py-0.5 text-xs font-semibold text-warning",
             className,
           )}
         >
-          {showIcon && <AlertCircle className="h-3 w-3 text-amber-700" />}
+          {showIcon && <AlertCircle className="h-3 w-3 text-warning" />}
           <span>Sample Placeholder</span>
         </span>
       );

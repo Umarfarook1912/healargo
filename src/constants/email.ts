@@ -3,14 +3,14 @@ import { UI } from "@/constants/ui";
 
 /** Matches Healargo theme from globals.css (inline for email clients). */
 export const EMAIL_THEME = {
-  primary: "#2c1a12",
-  primaryForeground: "#f4e6c8",
-  accent: "#d4a44a",
-  cream: "#f4e6c8",
-  creamDark: "#e8d4b0",
-  dark: "#2c1a12",
-  muted: "#7a6555",
-  border: "#d4c4a8",
+  primary: "#1f5138",
+  primaryForeground: "#ffffff",
+  accent: "#c9a246",
+  cream: "#eef4ef",
+  creamDark: "#dde8e0",
+  dark: "#10261b",
+  muted: "#56645c",
+  border: "#dbe3dd",
   card: "#ffffff",
   fontSans: "Georgia, 'Times New Roman', serif",
   fontBody: "Arial, Helvetica, sans-serif",

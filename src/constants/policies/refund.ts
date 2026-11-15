@@ -1,3 +1,7 @@
+import { UI } from "@/constants/ui";
+
+const phoneList = UI.phones.map((phone) => phone.display).join(" / ");
+
 export const REFUND_POLICY = {
   title: "Return and Refund Policy",
   intro:
@@ -17,7 +21,7 @@ export const REFUND_POLICY = {
     },
     {
       title: "How to Request",
-      body: "Email healargo@gmail.com or message us on WhatsApp with your order ID and photos of the product or packaging.",
+      body: `Email ${UI.email}, call ${phoneList}, or message us on WhatsApp with your order ID and photos of the product or packaging.`,
     },
   ],
 };

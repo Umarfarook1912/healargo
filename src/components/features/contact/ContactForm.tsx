@@ -7,6 +7,7 @@ import {
   Loader2,
   MapPin,
   Mail,
+  Phone,
   Navigation,
   ExternalLink,
   MessageSquare,
@@ -60,9 +61,9 @@ export function ContactForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
+    <div className="surface-card p-6 sm:p-8">
       <div className="mb-6 border-b border-border/60 pb-6">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent-strong">
           <MessageSquare className="h-4 w-4" />
           <span>Send Us a Message</span>
         </div>
@@ -113,6 +114,16 @@ export function ContactForm() {
               <Mail className="h-3 w-3" />
               {UI.email}
             </a>
+            {UI.phones.map((phone) => (
+              <a
+                key={phone.digits}
+                href={`tel:${phone.tel}`}
+                className="inline-flex items-center gap-1 text-muted hover:text-dark hover:underline"
+              >
+                <Phone className="h-3 w-3" />
+                {phone.display}
+              </a>
+            ))}
             {hasWhatsapp ? (
               <a
                 href={buildWhatsAppUrl(`Hi ${UI.brand}! I have a question.`)}
@@ -124,7 +135,7 @@ export function ContactForm() {
                 WhatsApp
               </a>
             ) : null}
-            {!hasMaps && !hasWhatsapp && !UI.address ? (
+            {!hasMaps && !hasWhatsapp && !UI.address && UI.phones.length === 0 ? (
               <span className="text-muted">
                 We&apos;ll reply by email as soon as possible.
               </span>

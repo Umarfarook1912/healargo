@@ -99,7 +99,7 @@ export function AdminCouponDetailsModal({
 
       {/* Slide-over Drawer on Right Side */}
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
-        <div className="w-screen max-w-lg bg-white shadow-2xl flex flex-col overflow-hidden text-[#1e293b]">
+        <div className="w-screen max-w-lg bg-white shadow-2xl flex flex-col overflow-hidden text-dark">
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-border/80 bg-white sticky top-0 z-10">
             <div className="flex items-center gap-2.5">
@@ -107,7 +107,7 @@ export function AdminCouponDetailsModal({
                 <Ticket className="h-5 w-5" />
               </span>
               <div>
-                <h2 className="font-display text-xl font-bold text-[#0f2a4a]">
+                <h2 className="font-display text-xl text-dark">
                   Coupon Details
                 </h2>
                 <p className="text-xs text-muted">Complete promotion summary & rules</p>
@@ -167,10 +167,10 @@ export function AdminCouponDetailsModal({
                       isExpired
                         ? "bg-red-100 text-red-700"
                         : isUpcoming
-                        ? "bg-amber-100 text-amber-800"
+                        ? "bg-warning-soft text-warning"
                         : coupon.status === "ACTIVE"
                         ? "bg-emerald-100 text-emerald-800"
-                        : "bg-slate-100 text-slate-700",
+                        : "bg-cream text-muted",
                     )}
                   >
                     <span
@@ -179,10 +179,10 @@ export function AdminCouponDetailsModal({
                         isExpired
                           ? "bg-red-500"
                           : isUpcoming
-                          ? "bg-amber-500"
+                          ? "bg-warning"
                           : coupon.status === "ACTIVE"
                           ? "bg-emerald-500"
-                          : "bg-slate-500",
+                          : "bg-muted",
                       )}
                     />
                     {isExpired
@@ -296,7 +296,7 @@ export function AdminCouponDetailsModal({
                           usagePercent >= 100
                             ? "bg-red-500"
                             : usagePercent > 75
-                            ? "bg-amber-500"
+                            ? "bg-warning"
                             : "bg-primary",
                         )}
                         style={{ width: `${usagePercent}%` }}

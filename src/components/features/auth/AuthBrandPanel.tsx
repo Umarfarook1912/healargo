@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils/cn";
 
 export function AuthMobileBar() {
   return (
-    <div className={cn(LAYOUT.container, "flex items-center justify-between border-b border-border py-2.5 lg:hidden")}>
+    <div className={cn(LAYOUT.container, "flex items-center justify-between border-b border-border bg-card/80 py-2.5 backdrop-blur lg:hidden")}>
       <Link
         href={ROUTES.HOME}
         className="flex items-center transition-transform hover:scale-105"
@@ -26,7 +26,7 @@ export function AuthMobileBar() {
       </Link>
       <Link
         href={ROUTES.HOME}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-dark"
+        className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-medium text-muted transition hover:border-primary/30 hover:text-primary"
       >
         <ArrowLeft className="h-4 w-4" />
         {AUTH_COPY.backToStore}
@@ -37,55 +37,55 @@ export function AuthMobileBar() {
 
 export function AuthBrandPanel() {
   return (
-    <aside className="relative hidden overflow-hidden bg-dark text-cream lg:flex lg:flex-col lg:px-10 lg:py-8 xl:px-14">
+    <aside className="forest-gradient relative hidden overflow-hidden text-cream lg:flex lg:flex-col lg:justify-between lg:px-10 lg:py-8 xl:px-14">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/20 blur-3xl"
+        className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full border border-accent/25"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-20 -left-16 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
+        className="pointer-events-none absolute -bottom-24 -left-16 h-96 w-96 rounded-full border border-cream/10"
       />
 
       <div className="relative">
-        <Link
-          href={ROUTES.HOME}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-cream/70 transition-colors hover:text-cream"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {AUTH_COPY.backToStore}
-        </Link>
-        <Link
-          href={ROUTES.HOME}
-          className="mt-6 inline-block group"
-          aria-label="Home"
-        >
-          <div className="overflow-hidden rounded-2xl bg-white p-2.5 shadow-lg border border-white/15 transition-transform group-hover:scale-105">
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href={ROUTES.HOME}
+            className="group inline-flex shrink-0 items-center"
+            aria-label="Home"
+          >
             <Image
-              src={ASSETS.LOGO}
+              src={ASSETS.LOGO_LIGHT}
               alt={AUTH_COPY.panelHeadline}
-              width={140}
-              height={128}
+              width={160}
+              height={90}
               unoptimized
-              className="h-20 w-auto object-contain"
+              className="h-16 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:scale-105 xl:h-20"
             />
-          </div>
-        </Link>
-        <p className="mt-6 text-xs font-medium uppercase tracking-[0.2em] text-accent">
+          </Link>
+          <Link
+            href={ROUTES.HOME}
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-1.5 text-sm font-medium text-cream/80 transition-colors hover:border-white/30 hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {AUTH_COPY.backToStore}
+          </Link>
+        </div>
+        <p className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
           {AUTH_COPY.panelEyebrow}
         </p>
-        <h2 className="mt-3 max-w-md font-display text-3xl leading-tight text-cream xl:text-4xl">
+        <h2 className="mt-3 max-w-md font-display text-4xl leading-tight text-white xl:text-5xl">
           {AUTH_COPY.panelHeadline}
         </h2>
-        <p className="mt-3 max-w-sm text-sm leading-relaxed text-cream/70">
+        <p className="mt-4 max-w-sm text-base leading-relaxed text-cream/80">
           {AUTH_COPY.panelBody}
         </p>
       </div>
 
-      <dl className="relative mt-10 grid grid-cols-3 gap-4 border-t border-cream/15 pt-6">
+      <dl className="relative mt-10 grid grid-cols-3 gap-3">
         {AUTH_HIGHLIGHTS.map((item) => (
-          <div key={item.label}>
-            <dt className="text-[11px] uppercase tracking-[0.14em] text-cream/50">
+          <div key={item.label} className="rounded-2xl border border-cream/10 bg-white/[0.04] p-4 backdrop-blur-sm">
+            <dt className="text-[11px] uppercase tracking-[0.14em] text-cream/65">
               {item.label}
             </dt>
             <dd className="mt-1.5 font-display text-xl text-accent">

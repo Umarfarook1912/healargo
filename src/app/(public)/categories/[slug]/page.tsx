@@ -59,15 +59,15 @@ export default async function CategoryPage({ params }: Props) {
   if (!category) notFound();
 
   return (
-    <PageContainer className="space-y-10 py-8">
+    <PageContainer className="space-y-10 py-8 md:py-12">
       <CategoryHero category={category} allCategories={allCategories} />
 
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b border-border pb-4">
-          <h2 className="font-display text-2xl font-bold text-dark">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-5">
+          <h2 className="font-display text-2xl text-dark md:text-3xl">
             Products in {category.name}
           </h2>
-          <span className="text-xs font-semibold text-muted bg-cream-dark px-3 py-1 rounded-full">
+          <span className="rounded-full border border-primary/15 bg-primary-soft px-3 py-1 text-xs font-semibold text-primary">
             {products.length} product{products.length !== 1 ? "s" : ""}
           </span>
         </div>

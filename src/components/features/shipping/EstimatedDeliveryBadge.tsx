@@ -137,7 +137,7 @@ export function EstimatedDeliveryBadge({
           )}
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="font-display text-base font-bold text-dark sm:text-lg">
+              <h3 className="font-display text-base text-dark sm:text-lg font-semibold">
                 Estimated Delivery: 3 to 5 Days
               </h3>
               <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800 border border-emerald-300">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   MapPin,
   Mail,
+  Phone,
   Clock,
   Navigation,
   ExternalLink,
@@ -22,12 +23,13 @@ import { buildWhatsAppUrl } from "@/lib/utils/whatsapp";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Contact Us",
-  description: `Contact ${UI.brand} by email${UI.whatsappNumber ? " or WhatsApp" : ""} for product questions, wellness support, and delivery help.`,
+  description: `Contact ${UI.brand} by phone, email, or WhatsApp for product questions, wellness support, and delivery help.`,
   path: "/contact",
 });
 
 export default function ContactPage() {
   const hasWhatsapp = Boolean(UI.whatsappNumber.trim());
+  const hasPhones = UI.phones.length > 0;
   const hasMapLinks = Boolean(UI.mapUrl || UI.mapDirectionsUrl || UI.mapEmbedUrl);
   const hasDirections = Boolean(UI.mapDirectionsUrl);
   const hasMapUrl = Boolean(UI.mapUrl);
@@ -35,25 +37,25 @@ export default function ContactPage() {
   const hasAddress = Boolean(UI.address.trim());
 
   return (
-    <div className="py-8 sm:py-12 md:py-16">
+    <div className="page-wash py-8 sm:py-12 md:py-16">
       <PageContainer>
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/15 bg-card/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary shadow-[var(--shadow-soft)]">
             <Sparkles className="h-3.5 w-3.5" />
             <span>Connect & Visit</span>
           </div>
-          <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-dark sm:text-4xl md:text-5xl">
+          <h1 className="mt-4 font-display text-4xl leading-[1.08] tracking-tight text-dark md:text-6xl">
             Contact {UI.brand}
           </h1>
           <p className="mt-3 text-base text-muted sm:text-lg">
             We&apos;re here to help with product questions, wellness routines, bulk
-            enquiries, and order support. Reach out by email or WhatsApp, and visit
-            us if location details are available.
+            enquiries, and order support. Call, email, or WhatsApp us anytime during
+            working hours.
           </p>
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
-          <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-xs transition-shadow hover:shadow-md">
+          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
             <div>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <MapPin className="h-5 w-5" />
@@ -95,21 +97,30 @@ export default function ContactPage() {
             ) : null}
           </div>
 
-          <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-xs transition-shadow hover:shadow-md">
+          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
             <div>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/20 text-accent-foreground">
-                <MessageCircle className="h-5 w-5" />
+                <Phone className="h-5 w-5" />
               </div>
               <h3 className="mt-3 font-display text-lg font-semibold text-dark">
-                WhatsApp Support
+                Call Us
               </h3>
-              <p className="mt-1.5 text-sm font-semibold text-dark sm:text-base">
-                {hasWhatsapp
-                  ? "Chat with us for product help and order support."
-                  : "WhatsApp support will appear here when configured."}
-              </p>
-              <p className="mt-1 text-xs text-muted">
-                Reach us quickly for product questions, bulk enquiries, and updates.
+              {hasPhones ? (
+                <ul className="mt-2 space-y-1.5">
+                  {UI.phones.map((phone) => (
+                    <li key={phone.digits}>
+                      <a
+                        href={`tel:${phone.tel}`}
+                        className="text-sm font-semibold text-dark hover:text-primary hover:underline sm:text-base"
+                      >
+                        {phone.display}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              <p className="mt-2 text-xs text-muted">
+                Available during working hours for orders and product support.
               </p>
             </div>
             {hasWhatsapp ? (
@@ -130,7 +141,7 @@ export default function ContactPage() {
             ) : null}
           </div>
 
-          <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-xs transition-shadow hover:shadow-md">
+          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
             <div>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <Mail className="h-5 w-5" />
@@ -159,7 +170,7 @@ export default function ContactPage() {
           </div>
 
           {/* Card 4: Working Hours */}
-          <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-xs transition-shadow hover:shadow-md">
+          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
             <div>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cream-dark text-dark">
                 <Clock className="h-5 w-5" />
@@ -189,7 +200,7 @@ export default function ContactPage() {
               <div className="rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent">
+                    <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent-strong">
                       <Compass className="h-4 w-4" />
                       <span>Navigation & Store Visit</span>
                     </div>
@@ -275,11 +286,11 @@ export default function ContactPage() {
 
         <div className="mt-16 border-t border-border pt-12">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/15 bg-card/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary shadow-[var(--shadow-soft)]">
               <Share2 className="h-3.5 w-3.5" />
               <span>Follow Our Community</span>
             </div>
-            <h2 className="mt-3 font-display text-2xl font-bold text-dark sm:text-3xl">
+            <h2 className="mt-3 font-display text-2xl text-dark sm:text-3xl">
               Connect with {UI.brand} on Social Media
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-muted sm:text-sm">

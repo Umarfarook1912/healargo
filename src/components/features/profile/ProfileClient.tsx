@@ -35,10 +35,11 @@ export function ProfileClient() {
   };
 
   return (
-    <PageContainer className="py-10">
+    <PageContainer className="py-10 md:py-14">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-border pb-6">
         <div>
-          <h1 className="font-display text-4xl text-dark">My Account</h1>
+          <p className="eyebrow">Your account</p>
+          <h1 className="mt-2 font-display text-4xl text-dark md:text-5xl">My Account</h1>
           <p className="mt-1 text-sm text-muted">
             Manage your personal profile details, delivery addresses, and order history.
           </p>
@@ -47,7 +48,7 @@ export function ProfileClient() {
         {session?.user?.role === USER_ROLES.ADMIN && (
           <Link
             href={ROUTES.ADMIN.DASHBOARD}
-            className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-transform hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-sm transition hover:bg-accent/90"
           >
             <Shield className="h-4 w-4" />
             Go to Admin Dashboard
@@ -57,7 +58,7 @@ export function ProfileClient() {
 
       <div className="mt-8 grid gap-8 lg:grid-cols-4">
         {/* Navigation Sidebar */}
-        <aside className="h-fit space-y-1 rounded-xl border border-border bg-card p-3 shadow-sm">
+        <aside className="surface-card h-fit space-y-1 p-3 lg:sticky lg:top-28">
           {(
             [
               { id: "account" as const, label: "Profile Maintain", icon: User },
@@ -70,10 +71,10 @@ export function ProfileClient() {
               type="button"
               onClick={() => handleTabChange(id)}
               className={cn(
-                "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors",
+                "flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left text-sm font-medium transition-colors",
                 tab === id
-                  ? "bg-primary text-primary-foreground font-semibold"
-                  : "text-dark hover:bg-cream-dark",
+                  ? "bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20"
+                  : "text-dark hover:bg-primary-soft hover:text-primary",
               )}
             >
               <Icon className="h-4 w-4" />
@@ -83,7 +84,7 @@ export function ProfileClient() {
           {session?.user?.role === USER_ROLES.ADMIN ? (
             <Link
               href={ROUTES.ADMIN.DASHBOARD}
-              className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-primary hover:bg-cream-dark"
+              className="flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-medium text-accent-strong hover:bg-accent-soft"
             >
               <Shield className="h-4 w-4" />
               Admin Portal
@@ -92,7 +93,7 @@ export function ProfileClient() {
           <button
             type="button"
             onClick={() => signOut({ callbackUrl: getPostLogoutRoute() })}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-destructive hover:bg-cream-dark"
+            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-medium text-destructive hover:bg-destructive-soft"
           >
             <LogOut className="h-4 w-4" />
             Sign out

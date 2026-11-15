@@ -12,16 +12,16 @@ export function BestSellersSection({ products }: { products: Product[] }) {
       <PageContainer>
       <FadeIn className="mb-8 flex items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="eyebrow">
             Best Sellers
           </p>
-          <h2 className="mt-2 font-display text-3xl font-extrabold text-dark md:text-4xl">
+          <h2 className="mt-3 font-display text-3xl text-dark md:text-5xl md:leading-tight">
             Our Most Loved Products
           </h2>
         </div>
         <Link
           href={ROUTES.SHOP}
-          className="text-sm font-semibold text-primary transition-colors hover:underline"
+          className="inline-flex shrink-0 items-center rounded-full border border-primary/25 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
         >
           View All Products →
         </Link>

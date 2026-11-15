@@ -2,29 +2,60 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-/* Healargo — Sesame Gold palette from brand logo */
+/*
+ * Healargo — Herbal Green + Gold palette
+ * Deep forest green primary, refined sesame-gold accent, ivory surfaces.
+ * Token names are kept stable (primary, accent, dark, cream, muted…) so every
+ * component picks up the new theme. "cream" is now a soft sage tint and "dark"
+ * is a deep green-ink, so no brown remains anywhere in the UI.
+ * All text/background pairs below meet WCAG AA (4.5:1) or better.
+ */
 @theme inline {
-  --color-primary: #2c1a12;
-  --color-primary-foreground: #f4e6c8;
-  --color-accent: #d4a44a;
-  --color-accent-foreground: #2c1a12;
-  --color-cream: #f4e6c8;
-  --color-cream-dark: #e8d4b0;
-  --color-dark: #2c1a12;
-  --color-muted: #7a6555;
-  --color-muted-foreground: #7a6555;
-  --color-border: #d4c4a8;
-  --color-background: #faf6ee;
-  --color-foreground: #2c1a12;
+  /* Brand */
+  --color-primary: #1f5138; /* forest green — 9.2:1 on white */
+  --color-primary-foreground: #ffffff;
+  --color-primary-strong: #163d2a;
+  --color-primary-soft: #e7f1ea;
+  --color-accent: #c9a246; /* sesame gold */
+  --color-accent-foreground: #10261b; /* 6.6:1 on gold */
+  --color-accent-strong: #8a6a1c; /* gold for text on light — 4.9:1 on white */
+  --color-accent-soft: #f8f1dc;
+
+  /* Surfaces */
+  --color-background: #fbfaf6; /* ivory */
+  --color-foreground: #14231b;
   --color-card: #ffffff;
-  --color-card-foreground: #2c1a12;
+  --color-card-foreground: #14231b;
+  --color-cream: #eef4ef; /* soft sage tint (replaces cream) */
+  --color-cream-dark: #dde8e0;
+  --color-dark: #10261b; /* deep green-ink (replaces brown) — 15:1 on ivory */
+
+  /* Neutrals */
+  --color-muted: #56645c; /* 5.9:1 on ivory */
+  --color-muted-foreground: #56645c;
+  --color-border: #dbe3dd;
+  --color-input: #cfd9d2;
+  --color-ring: #2f7a53;
+
+  /* Status */
+  --color-success: #177245;
+  --color-success-soft: #e3f4ea;
+  --color-warning: #a35a07;
+  --color-warning-soft: #fdf1dc;
   --color-destructive: #b42318;
-  --color-ring: #d4a44a;
+  --color-destructive-soft: #fdecea;
+  --color-info: #1d5f8a;
+  --color-info-soft: #e6f0f7;
+
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+
+  --shadow-soft: 0 1px 2px rgba(16, 38, 27, 0.04), 0 4px 16px rgba(16, 38, 27, 0.05);
+  --shadow-lifted: 0 2px 4px rgba(16, 38, 27, 0.05), 0 16px 40px rgba(16, 38, 27, 0.1);
 }
 
 @layer base {
@@ -32,8 +63,13 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
   }
 
   h1,
@@ -41,6 +77,12 @@
   h3,
   h4 {
     @apply font-display text-dark;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    color: var(--color-dark);
   }
 }
 
@@ -48,25 +90,68 @@
   font-family: var(--font-display);
 }
 
+/* Section eyebrow label — small uppercase gold label above headings */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-strong);
+}
+
+/* Elevated white surface used by cards across the store and admin */
+@utility surface-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Subtle herbal backdrop for hero and page-header bands */
+@utility herbal-gradient {
+  background-image:
+    radial-gradient(60rem 30rem at 85% -10%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%),
+    radial-gradient(50rem 30rem at -10% 110%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--color-cream) 0%, var(--color-background) 100%);
+}
+
+/* Soft top wash for long content pages (fades into the ivory background) */
+@utility page-wash {
+  background-image:
+    radial-gradient(48rem 22rem at 90% -6rem, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--color-cream) 0, var(--color-background) 30rem);
+}
+
+/* Deep green band used for footers, admin sidebar and dark CTAs */
+@utility forest-gradient {
+  background-image:
+    radial-gradient(40rem 24rem at 100% 0%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 60%),
+    linear-gradient(160deg, #163d2a 0%, #10261b 100%);
+}
+
 @utility page-container {
   margin-inline: auto;
   width: 100%;
-  padding-inline: 1.5rem;
+  max-width: 1440px;
+  padding-inline: 1.25rem;
 
   @media (min-width: 640px) {
     padding-inline: 2rem;
   }
 
   @media (min-width: 768px) {
-    padding-inline: 3rem;
+    padding-inline: 2.5rem;
   }
 
   @media (min-width: 1024px) {
-    padding-inline: 4rem;
+    padding-inline: 3.5rem;
   }
 
   @media (min-width: 1280px) {
-    padding-inline: 5rem;
+    padding-inline: 4.5rem;
   }
 }
 
@@ -80,10 +165,10 @@
   }
 }
 
-/* Sleek Admin Dark Scrollbar */
+/* Sleek admin sidebar scrollbar (on deep green) */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(244, 230, 200, 0.25) transparent;
+  scrollbar-color: rgba(238, 244, 239, 0.22) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -95,10 +180,10 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(244, 230, 200, 0.2);
+  background: rgba(238, 244, 239, 0.18);
   border-radius: 9999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(244, 230, 200, 0.4);
+  background: rgba(238, 244, 239, 0.36);
 }

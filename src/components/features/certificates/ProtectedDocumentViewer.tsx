@@ -145,12 +145,12 @@ export function ProtectedDocumentViewer({
     <div
       onContextMenu={handleContextMenu}
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-2xl border border-border/90 bg-stone-900 select-none",
+        "relative flex flex-col overflow-hidden rounded-2xl border border-border/90 bg-primary-strong select-none",
         className,
       )}
     >
       {/* Top Protective Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-800 bg-stone-950/90 px-4 py-2.5 text-xs text-white">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-dark/90 px-4 py-2.5 text-xs text-white">
         {/* Security Status Badge */}
         <div className="flex items-center gap-2">
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
@@ -159,8 +159,8 @@ export function ProtectedDocumentViewer({
           <span className="font-semibold text-emerald-400">
             Protected Document Viewer
           </span>
-          <span className="hidden text-stone-500 sm:inline">•</span>
-          <span className="hidden text-stone-400 sm:inline">
+          <span className="hidden text-cream/60 sm:inline">•</span>
+          <span className="hidden text-cream/60 sm:inline">
             View-Only Mode Active (Screenshots & Downloads Disabled)
           </span>
         </div>
@@ -173,14 +173,14 @@ export function ProtectedDocumentViewer({
             size="sm"
             onClick={handleZoomOut}
             disabled={zoom <= CERTIFICATE_VIEWER.minZoom}
-            className="h-7 w-7 rounded-lg p-0 text-stone-300 hover:bg-stone-800 hover:text-white disabled:opacity-30"
+            className="h-7 w-7 rounded-lg p-0 text-cream/80 hover:bg-white/10 hover:text-white disabled:opacity-30"
             title="Zoom Out"
           >
             <ZoomOut className="h-3.5 w-3.5" />
             <span className="sr-only">Zoom Out</span>
           </Button>
 
-          <span className="min-w-12 text-center font-mono text-[11px] font-semibold text-stone-300">
+          <span className="min-w-12 text-center font-mono text-[11px] font-semibold text-cream/80">
             {Math.round(zoom * 100)}%
           </span>
 
@@ -190,7 +190,7 @@ export function ProtectedDocumentViewer({
             size="sm"
             onClick={handleZoomIn}
             disabled={zoom >= CERTIFICATE_VIEWER.maxZoom}
-            className="h-7 w-7 rounded-lg p-0 text-stone-300 hover:bg-stone-800 hover:text-white disabled:opacity-30"
+            className="h-7 w-7 rounded-lg p-0 text-cream/80 hover:bg-white/10 hover:text-white disabled:opacity-30"
             title="Zoom In"
           >
             <ZoomIn className="h-3.5 w-3.5" />
@@ -202,7 +202,7 @@ export function ProtectedDocumentViewer({
             variant="ghost"
             size="sm"
             onClick={handleResetZoom}
-            className="h-7 px-2 text-[11px] font-medium text-stone-300 hover:bg-stone-800 hover:text-white"
+            className="h-7 px-2 text-[11px] font-medium text-cream/80 hover:bg-white/10 hover:text-white"
             title="Reset to 100%"
           >
             <RotateCcw className="mr-1 h-3 w-3" />
@@ -213,30 +213,30 @@ export function ProtectedDocumentViewer({
 
       {/* Floating Security Warning Banner */}
       {securityMessage && (
-        <div className="absolute top-12 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-xl border border-amber-500/40 bg-stone-900/95 px-4 py-2 text-xs font-semibold text-amber-300 shadow-xl backdrop-blur-md transition-all animate-in fade-in slide-in-from-top-2">
-          <ShieldAlert className="h-4 w-4 text-amber-400 shrink-0" />
+        <div className="absolute top-12 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-xl border border-accent/40 bg-primary-strong/95 px-4 py-2 text-xs font-semibold text-accent shadow-xl backdrop-blur-md transition-all animate-in fade-in slide-in-from-top-2">
+          <ShieldAlert className="h-4 w-4 text-accent shrink-0" />
           <span>{securityMessage}</span>
         </div>
       )}
 
       {/* Main Document Inspection Canvas */}
       <div
-        className="relative max-h-[65vh] min-h-[380px] w-full overflow-auto bg-stone-950 p-4 sm:p-6"
+        className="relative max-h-[65vh] min-h-[380px] w-full overflow-auto bg-dark p-4 sm:p-6"
         style={{
-          scrollbarColor: "#444 #1a1a16",
+          scrollbarColor: "#2f5a45 #10261b",
           scrollbarWidth: "thin",
         }}
       >
         {/* Anti-Screen-Capture Window Inactive Shield Overlay */}
         {isWindowInactive && (
-          <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-stone-950/96 p-6 text-center text-white backdrop-blur-md">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-dark/96 p-6 text-center text-white backdrop-blur-md">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400">
               <Lock className="h-6 w-6" />
             </div>
-            <h4 className="mt-3 font-display text-base font-bold text-white sm:text-lg">
+            <h4 className="mt-3 font-display text-base text-white sm:text-lg font-semibold">
               Document Display Shielded
             </h4>
-            <p className="mt-1.5 max-w-md text-xs leading-relaxed text-stone-400">
+            <p className="mt-1.5 max-w-md text-xs leading-relaxed text-cream/70">
               To protect the official integrity of statutory documents against
               unauthorized capture or recording tools, the view is shielded while the window
               is inactive.
@@ -295,12 +295,12 @@ export function ProtectedDocumentViewer({
                 />
               </div>
             ) : (
-              <div className="flex h-64 w-96 flex-col items-center justify-center rounded-xl bg-stone-900 p-6 text-center text-stone-400">
-                <AlertTriangle className="h-8 w-8 text-amber-400" />
+              <div className="flex h-64 w-96 flex-col items-center justify-center rounded-xl bg-primary-strong p-6 text-center text-cream/70">
+                <AlertTriangle className="h-8 w-8 text-accent" />
                 <p className="mt-2 text-sm font-semibold text-white">
                   Document Preview Unavailable
                 </p>
-                <p className="mt-1 text-xs text-stone-400">
+                <p className="mt-1 text-xs text-cream/60">
                   Document record: {doc.certificateNumber}
                 </p>
               </div>
@@ -310,7 +310,7 @@ export function ProtectedDocumentViewer({
       </div>
 
       {/* Bottom Protected Notice Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-stone-800 bg-stone-950/95 px-4 py-2.5 text-[11px] text-stone-400">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-dark/95 px-4 py-2.5 text-[11px] text-cream/65">
         <div className="flex items-center gap-2">
           <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
           <span>
@@ -318,7 +318,7 @@ export function ProtectedDocumentViewer({
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5 text-stone-500">
+        <div className="flex items-center gap-1.5 text-cream/65">
           <span>Anti-tamper & Anti-screenshot enabled</span>
         </div>
       </div>

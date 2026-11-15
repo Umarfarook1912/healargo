@@ -57,7 +57,7 @@ export function CarouselSlidesTable({
         <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cream-dark text-muted mb-3">
           <ImageIcon className="h-7 w-7" />
         </div>
-        <p className="font-display text-lg text-dark">No carousel slides found</p>
+        <p className="font-display text-lg text-dark font-semibold">No carousel slides found</p>
         <p className="mt-1 max-w-sm text-xs text-muted leading-relaxed">
           {ADMIN_CAROUSEL_COPY.empty}
         </p>

@@ -13,20 +13,20 @@ const TAB_STYLES: Record<
 > = {
   all: {
     active: "border-primary bg-primary text-white shadow-md shadow-primary/20",
-    idle: "border-border/80 bg-card text-dark hover:border-primary/50 hover:bg-cream/50",
+    idle: "border-border/80 bg-card text-dark hover:border-primary/50 hover:bg-primary-soft",
     badgeActive: "bg-white/20 text-white",
     badgeIdle: "bg-primary/10 text-primary",
   },
   bestsellers: {
-    active: "border-amber-600 bg-amber-600 text-white shadow-md shadow-amber-600/20",
-    idle: "border-border/80 bg-card text-dark hover:border-amber-500 hover:bg-cream/50",
+    active: "border-accent-strong bg-accent-strong text-white shadow-md shadow-accent/20",
+    idle: "border-border/80 bg-card text-dark hover:border-accent hover:bg-primary-soft",
     badgeActive: "bg-white/20 text-white",
-    badgeIdle: "bg-amber-600/10 text-amber-700",
+    badgeIdle: "bg-accent-strong/10 text-warning",
   },
   newarrivals: {
     active:
       "border-emerald-600 bg-emerald-600 text-white shadow-md shadow-emerald-600/20",
-    idle: "border-border/80 bg-card text-dark hover:border-emerald-500 hover:bg-cream/50",
+    idle: "border-border/80 bg-card text-dark hover:border-emerald-500 hover:bg-primary-soft",
     badgeActive: "bg-white/20 text-white",
     badgeIdle: "bg-emerald-600/10 text-emerald-700",
   },
@@ -85,14 +85,14 @@ export function ShowcaseFilterBar({
       </div>
 
       {categories.length > 0 ? (
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+        <div className="-mx-5 mb-8 flex items-center gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0">
           <button
             type="button"
             onClick={() => onCategorySelect(FILTER_ALL)}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-xs font-semibold transition-all",
+              "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all",
               selectedCategorySlug === FILTER_ALL
-                ? "border-primary bg-primary/10 font-bold text-primary shadow-xs"
+                ? "border-primary bg-primary-soft font-bold text-primary shadow-xs"
                 : "border-border/60 bg-card/80 text-muted hover:border-border hover:text-dark",
             )}
           >
@@ -111,9 +111,9 @@ export function ShowcaseFilterBar({
                 type="button"
                 onClick={() => onCategorySelect(cat.slug)}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-xs font-semibold transition-all",
+                  "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all",
                   isSelected
-                    ? "border-primary bg-primary/10 font-bold text-primary shadow-xs"
+                    ? "border-primary bg-primary-soft font-bold text-primary shadow-xs"
                     : "border-border/60 bg-card/80 text-muted hover:border-border hover:text-dark",
                 )}
               >

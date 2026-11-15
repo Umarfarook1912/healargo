@@ -173,10 +173,10 @@ export function AdminComboForm({ combo }: { combo?: ComboOffer }) {
 
   return (
     <form onSubmit={onSubmit} className="mx-auto max-w-3xl space-y-6">
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <div className="flex items-center gap-2 border-b border-border pb-3">
           <Tag className="h-5 w-5 text-primary" />
-          <h2 className="font-display text-lg font-bold text-dark">Basic Information</h2>
+          <h2 className="font-display text-lg text-dark font-semibold">Basic Information</h2>
         </div>
         <div>
           <Label className="text-sm font-semibold">{CATALOG_COPY.comboName} *</Label>
@@ -201,11 +201,11 @@ export function AdminComboForm({ combo }: { combo?: ComboOffer }) {
       <AdminImageUploader images={images} onChange={setImages} />
 
       {/* Video section matching Product admin management */}
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <div className="border-b border-border pb-3">
           <div className="flex items-center gap-2">
             <Video className="h-5 w-5 text-primary" />
-            <h2 className="font-display text-lg font-bold text-dark">
+            <h2 className="font-display text-lg text-dark font-semibold">
               {CATALOG_COPY.videosTitle}
             </h2>
           </div>
@@ -263,7 +263,7 @@ export function AdminComboForm({ combo }: { combo?: ComboOffer }) {
         )}
       </div>
 
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <div className="grid gap-3 sm:grid-cols-2">
           <div>
             <Label className="text-sm font-semibold">{CATALOG_COPY.comboPrice}</Label>
@@ -317,8 +317,8 @@ export function AdminComboForm({ combo }: { combo?: ComboOffer }) {
         </label>
       </div>
 
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
-        <h2 className="font-display text-lg font-bold text-dark">Products in this combo</h2>
+      <div className="space-y-4 surface-card p-5">
+        <h2 className="font-display text-lg text-dark font-semibold">Products in this combo</h2>
         <AdminComboItems lines={lines} products={products} onChange={setLines} />
       </div>
 

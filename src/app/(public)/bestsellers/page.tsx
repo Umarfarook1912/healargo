@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ProductGrid } from "@/components/features/products/ProductGrid";
 import { PageContainer } from "@/components/layout/PageContainer";
+import { PageHero } from "@/components/shared/PageHero";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getProducts } from "@/lib/products/queries";
 import type { Product } from "@/types/product";
@@ -24,12 +25,15 @@ export default async function BestsellersPage() {
   }
 
   return (
-    <PageContainer className="py-12">
-      <h1 className="font-display text-4xl text-dark">Bestsellers</h1>
-      <p className="mt-2 text-muted">Our most loved products.</p>
-      <div className="mt-10">
+    <>
+      <PageHero
+        eyebrow="Customer favourites"
+        title="Bestsellers"
+        description="Our most loved products."
+      />
+      <PageContainer className="py-10 md:py-14">
         <ProductGrid products={products} />
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </>
   );
 }

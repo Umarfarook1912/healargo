@@ -77,7 +77,15 @@ export function renderEmailHtml(input: {
   const addressHtml = UI.address
     ? `<p style="margin:0 0 8px;font-family:${T.fontBody};font-size:13px;color:${T.cream};">${escapeHtml(UI.address)}</p>`
     : "";
-  const emailHtml = `<p style="margin:0 0 12px;font-family:${T.fontBody};font-size:13px;color:${T.accent};"><a href="mailto:${escapeHtml(UI.email)}" style="color:${T.accent};text-decoration:none;">${escapeHtml(UI.email)}</a></p>`;
+  const emailHtml = `<p style="margin:0 0 8px;font-family:${T.fontBody};font-size:13px;color:${T.accent};"><a href="mailto:${escapeHtml(UI.email)}" style="color:${T.accent};text-decoration:none;">${escapeHtml(UI.email)}</a></p>`;
+  const phonesHtml = UI.phones.length
+    ? `<p style="margin:0 0 12px;font-family:${T.fontBody};font-size:13px;color:${T.accent};">${UI.phones
+        .map(
+          (phone, index) =>
+            `${index > 0 ? " · " : ""}<a href="tel:${escapeHtml(phone.tel)}" style="color:${T.accent};text-decoration:none;">${escapeHtml(phone.display)}</a>`,
+        )
+        .join("")}</p>`
+    : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -120,6 +128,7 @@ export function renderEmailHtml(input: {
             <td style="background:${T.dark};padding:22px 28px;border-radius:0 0 12px 12px;text-align:center;">
               ${addressHtml}
               ${emailHtml}
+              ${phonesHtml}
               ${socialHtml ? `<p style="margin:0 0 14px;font-family:${T.fontBody};font-size:13px;">${socialHtml}</p>` : ""}
               <p style="margin:0;">
                 <a href="${escapeHtml(shopUrl)}" style="font-family:${T.fontBody};font-size:12px;color:${T.creamDark};text-decoration:underline;">${escapeHtml(EMAIL_COPY.shopCta)}</a>

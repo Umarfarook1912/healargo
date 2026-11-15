@@ -100,14 +100,14 @@ export function NotFoundLandingView() {
 
           {/* Badge */}
           <div className="flex items-center justify-center">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-3.5 py-1 text-xs font-bold text-amber-900 shadow-2xs">
-              <RotateCcw className="h-3.5 w-3.5 text-amber-700 animate-spin-reverse" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-warning/30 bg-warning-soft px-3.5 py-1 text-xs font-bold text-warning shadow-2xs">
+              <RotateCcw className="h-3.5 w-3.5 text-warning animate-spin-reverse" />
               404 • Page Not Found
             </span>
           </div>
 
           {/* Heading */}
-          <h1 className="mt-5 font-display text-3xl font-extrabold tracking-tight text-dark sm:text-5xl">
+          <h1 className="mt-5 font-display text-3xl tracking-tight text-dark sm:text-5xl">
             Looking for Healargo products?
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
@@ -208,7 +208,7 @@ export function NotFoundLandingView() {
         <div className="mt-10 sm:mt-12">
           <div className="flex items-center justify-between border-b border-border pb-3">
             <div>
-              <h2 className="font-display text-xl sm:text-2xl font-bold text-dark">
+              <h2 className="font-display text-xl sm:text-2xl text-dark">
                 Explore Popular Products
               </h2>
               <p className="text-xs sm:text-sm text-muted">
@@ -242,7 +242,7 @@ export function NotFoundLandingView() {
                 </div>
                 <div className="mt-3 flex flex-1 flex-col justify-between">
                   <div>
-                    <h3 className="font-display text-sm font-bold text-dark group-hover:text-primary transition-colors">
+                    <h3 className="font-display text-sm text-dark group-hover:text-primary transition-colors font-semibold">
                       {cat.name}
                     </h3>
                     <p className="mt-0.5 text-xs text-muted line-clamp-2">

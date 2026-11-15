@@ -12,14 +12,14 @@ export function AnnouncementBar() {
   const ctaLabel = hasWhatsapp ? "Chat on WhatsApp" : `Email ${UI.email}`;
 
   return (
-    <div className="bg-primary py-2 text-[11px] leading-snug text-primary-foreground sm:text-sm">
+    <div className="forest-gradient py-2 text-[11px] leading-snug text-primary-foreground sm:text-[13px]">
       <div className={`${LAYOUT.container} flex items-center justify-between gap-3`}>
         <p className="min-w-0 flex-1 text-center md:text-left">
           <span className="block sm:inline">{UI.announcement}</span>
           <span className="mx-2 hidden opacity-50 sm:inline">|</span>
           <Link
             href={ctaHref}
-            className="mt-0.5 block font-medium underline underline-offset-2 hover:text-accent sm:mt-0 sm:inline"
+            className="mt-0.5 block font-medium text-accent underline decoration-accent/50 underline-offset-4 transition hover:decoration-accent sm:mt-0 sm:inline"
             target={hasWhatsapp ? "_blank" : undefined}
             rel={hasWhatsapp ? "noopener noreferrer" : undefined}
           >

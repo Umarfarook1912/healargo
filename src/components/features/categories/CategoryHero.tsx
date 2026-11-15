@@ -12,7 +12,7 @@ interface CategoryHeroProps {
 
 export function CategoryHero({ category, allCategories }: CategoryHeroProps) {
   return (
-    <div className="space-y-4">
+    <div className="herbal-gradient -mx-1 space-y-5 rounded-3xl border border-border/70 p-6 sm:p-8">
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-1.5 text-xs font-medium text-muted">
         <Link href="/" className="hover:text-primary transition-colors">
@@ -26,6 +26,11 @@ export function CategoryHero({ category, allCategories }: CategoryHeroProps) {
         <span className="text-dark font-semibold">{category.name}</span>
       </nav>
 
+      <div>
+        <p className="eyebrow">Collection</p>
+        <h1 className="mt-2 font-display text-3xl leading-tight text-dark md:text-5xl">{category.name}</h1>
+      </div>
+
       {/* Category Navigation Menu Bar */}
       {allCategories.length > 0 && (
         <div className="flex items-center flex-wrap gap-2 py-1">
@@ -36,10 +41,10 @@ export function CategoryHero({ category, allCategories }: CategoryHeroProps) {
                 key={c.slug}
                 href={`/categories/${c.slug}`}
                 className={cn(
-                  "px-4 py-2 rounded-xl text-xs font-semibold transition-all border shadow-2xs",
+                  "rounded-full border px-4 py-2 text-xs font-semibold transition-all",
                   isActive
-                    ? "border-primary bg-primary text-white shadow-md shadow-primary/20 scale-102 font-bold"
-                    : "border-border/80 bg-card text-dark hover:border-primary/50 hover:bg-cream-dark/50",
+                    ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                    : "border-border bg-card text-dark hover:border-primary/40 hover:bg-primary-soft hover:text-primary",
                 )}
               >
                 {c.name}

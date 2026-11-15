@@ -52,21 +52,21 @@ export default async function OrderDetailPage({ params }: Props) {
   const reviewState = isDelivered ? await getDeliveredReviewTargets(session.user.id, data.items) : null;
 
   return (
-    <PageContainer className="py-10">
-      <div className="flex items-center justify-between border-b border-border pb-6">
+    <PageContainer className="py-10 md:py-14">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="font-display text-3xl text-dark">Order #{shortId}</h1>
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="font-display text-3xl text-dark md:text-4xl">Order #{shortId}</h1>
             <span
               className={`inline-flex items-center gap-1 rounded-full border px-3 py-0.5 text-xs font-bold ${isPaid
-                  ? "bg-emerald-100 text-emerald-800 border-emerald-300"
-                  : "bg-amber-100 text-amber-800 border-amber-300"
+                  ? "bg-success-soft text-success border-success/25"
+                  : "bg-warning-soft text-warning border-warning/30"
                 }`}
             >
               {isPaid ? "PAID" : "PAYMENT PENDING"}
             </span>
           </div>
-          <p className="mt-1 text-sm text-muted flex items-center gap-2">
+          <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-muted">
             <Calendar className="h-4 w-4" /> Placed on {formattedDate} · ID: <span className="font-mono text-xs">{data._id}</span>
           </p>
         </div>
@@ -85,7 +85,7 @@ export default async function OrderDetailPage({ params }: Props) {
           ) : null}
 
           {data.trackingNumber ? (
-            <div className="rounded-2xl border border-border bg-card px-6 py-4 shadow-xs">
+            <div className="surface-card px-6 py-4">
               <OrderTrackingInfo
                 orderId={data._id}
                 trackingNumber={data.trackingNumber}
@@ -94,7 +94,7 @@ export default async function OrderDetailPage({ params }: Props) {
             </div>
           ) : null}
 
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-xs">
+          <div className="surface-card p-6">
             <div className="flex items-center justify-between border-b border-border pb-4">
               <h2 className="font-display text-xl text-dark flex items-center gap-2">
                 <Package className="h-5 w-5 text-primary" /> Order Items ({data.items.length})
@@ -120,7 +120,7 @@ export default async function OrderDetailPage({ params }: Props) {
                   return (
                     <div key={idx} className="flex items-center justify-between gap-4 py-4">
                       <div className="flex items-center gap-4">
-                        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-border bg-cream-dark/50 p-1">
+                        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-border bg-cream p-1">
                           <Image
                             src={itemImg}
                             alt={item.name}
@@ -144,7 +144,7 @@ export default async function OrderDetailPage({ params }: Props) {
                         </div>
                       </div>
 
-                      <div className="text-right font-display text-base font-bold text-dark">
+                      <div className="text-right font-display text-base text-dark font-semibold">
                         {formatInr(item.price * item.quantity)}
                       </div>
                     </div>
@@ -162,7 +162,7 @@ export default async function OrderDetailPage({ params }: Props) {
             />
           ) : null}
 
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-xs">
+          <div className="surface-card p-6">
             <h2 className="font-display text-xl text-dark flex items-center gap-2 border-b border-border pb-4">
               <MapPin className="h-5 w-5 text-primary" /> Delivery Address
             </h2>
@@ -176,7 +176,7 @@ export default async function OrderDetailPage({ params }: Props) {
         </div>
 
         <div className="h-fit space-y-6">
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-xs space-y-4">
+          <div className="surface-card p-6 space-y-4">
             <h2 className="font-display text-xl text-dark flex items-center gap-2 border-b border-border pb-3">
               <CreditCard className="h-5 w-5 text-primary" /> Payment Summary
             </h2>
@@ -203,7 +203,7 @@ export default async function OrderDetailPage({ params }: Props) {
                 <span className="font-medium text-dark">Included</span>
               </div>
               {data.pricing.discount > 0 && (
-                <div className="flex justify-between text-green-700 font-medium">
+                <div className="flex justify-between font-medium text-success">
                   <span>Discount</span>
                   <span>-{formatInr(data.pricing.discount)}</span>
                 </div>
@@ -211,7 +211,7 @@ export default async function OrderDetailPage({ params }: Props) {
 
               <div className="border-t border-border pt-3 flex justify-between text-base font-bold text-dark">
                 <span>Total Amount</span>
-                <span className="text-primary font-display text-lg">{formatInr(data.pricing.total)}</span>
+                <span className="text-primary font-display text-lg font-semibold">{formatInr(data.pricing.total)}</span>
               </div>
             </div>
           </div>

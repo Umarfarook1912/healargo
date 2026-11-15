@@ -71,7 +71,7 @@ export default async function OrderConfirmationPage({ params }: Props) {
   );
 
   return (
-    <PageContainer className="py-16 text-center">
+    <PageContainer className="py-14 text-center md:py-20">
       <CashfreeStatusSync
         cashfreeOrderId={data.cashfreeOrderId}
         paymentStatus={data.paymentStatus}
@@ -86,8 +86,12 @@ export default async function OrderConfirmationPage({ params }: Props) {
             : undefined
         }
       />
-      <h1 className="font-display text-4xl text-dark">Thank you!</h1>
-      <p className="mt-3 text-muted">
+      <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-success-soft text-success ring-8 ring-success-soft/50">
+        <svg aria-hidden viewBox="0 0 24 24" className="h-10 w-10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </div>
+      <p className="eyebrow">Order placed</p>
+      <h1 className="mt-2 font-display text-4xl text-dark md:text-5xl">Thank you!</h1>
+      <p className="mx-auto mt-3 max-w-xl text-muted">
         Order <span className="font-medium text-dark">{data._id}</span> is{" "}
         {data.paymentStatus === "PAID"
           ? "confirmed"
@@ -99,8 +103,8 @@ export default async function OrderConfirmationPage({ params }: Props) {
         <EstimatedDeliveryBadge variant="order" baseDate={data.createdAt} />
       </div>
 
-      <div className="mx-auto mt-6 max-w-xl rounded-xl border border-border bg-card p-6 text-left text-sm">
-        <p className="font-semibold">Ship to</p>
+      <div className="mx-auto mt-6 max-w-xl surface-card p-6 text-left text-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Ship to</p>
         <p className="mt-1 text-muted">
           {data.shippingAddress.fullName}, {data.shippingAddress.line1},{" "}
           {data.shippingAddress.city}, {data.shippingAddress.state}{" "}

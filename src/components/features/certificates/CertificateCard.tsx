@@ -16,7 +16,7 @@ export function CertificateCard({ document, onSelect }: CertificateCardProps) {
   const Icon = getDocumentIcon(document.id, document.category);
 
   return (
-    <article className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <article className="group flex flex-col justify-between overflow-hidden surface-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       {/* Top Details & Header */}
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
@@ -26,7 +26,7 @@ export function CertificateCard({ document, onSelect }: CertificateCardProps) {
               <Icon className="h-5 w-5" />
             </div>
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-accent">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-accent-strong">
                 {document.categoryLabel}
               </span>
               <p className="text-[11px] text-muted line-clamp-1">
@@ -42,7 +42,7 @@ export function CertificateCard({ document, onSelect }: CertificateCardProps) {
         </div>
 
         {/* Title & Short Description */}
-        <h3 className="mt-4 font-display text-lg font-bold text-dark group-hover:text-primary transition-colors">
+        <h3 className="mt-4 font-display text-lg text-dark group-hover:text-primary transition-colors font-semibold">
           {document.title}
         </h3>
         <p className="mt-1.5 text-xs leading-relaxed text-muted line-clamp-2">
@@ -58,12 +58,12 @@ export function CertificateCard({ document, onSelect }: CertificateCardProps) {
         </div>
 
         {/* Key Metadata Summary Fields */}
-        <div className="mt-4 space-y-2 rounded-xl bg-stone-50/80 p-3 text-[11px] sm:text-xs">
+        <div className="mt-4 space-y-2 rounded-xl bg-cream/80 p-3 text-[11px] sm:text-xs">
           <div className="flex items-center justify-between text-muted">
             <span className="font-medium">Identifier / Reg:</span>
             <span className="font-semibold text-dark truncate max-w-[55%] text-right">
               {document.certificateNumber || (
-                <span className="text-stone-500 italic font-normal">
+                <span className="text-muted italic font-normal">
                   [Pending Upload]
                 </span>
               )}
@@ -74,7 +74,7 @@ export function CertificateCard({ document, onSelect }: CertificateCardProps) {
             <span className="font-medium">Authority:</span>
             <span className="font-semibold text-dark truncate max-w-[55%] text-right">
               {document.issuedBy || (
-                <span className="text-stone-500 italic font-normal">
+                <span className="text-muted italic font-normal">
                   {document.verificationAuthority || "[Pending]"}
                 </span>
               )}

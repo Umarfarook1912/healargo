@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   MessageCircle,
   Mail,
+  Phone,
   MapPin,
   FileCheck,
   Building2,
@@ -20,16 +21,16 @@ export function CertificateContactSection() {
   const hasWhatsapp = Boolean(UI.whatsappNumber.trim());
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-6 sm:p-10 shadow-sm">
+    <section className="surface-card rounded-3xl p-6 sm:p-10">
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
         {/* Left Column: Context & Business Scope */}
         <div className="lg:col-span-7">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/15 bg-card/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary shadow-[var(--shadow-soft)]">
             <FileCheck className="h-3.5 w-3.5" />
             <span>Document Verification & B2B Orders</span>
           </div>
 
-          <h2 className="mt-4 font-display text-2xl font-bold text-dark sm:text-3xl">
+          <h2 className="mt-4 font-display text-2xl text-dark sm:text-3xl">
             Need Batch Test Verification or Institutional Quotations?
           </h2>
 
@@ -40,7 +41,7 @@ export function CertificateContactSection() {
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-border/80 bg-stone-50/70 p-4">
+            <div className="rounded-xl border border-border/80 bg-cream/70 p-4">
               <Building2 className="h-5 w-5 text-primary" />
               <h4 className="mt-2 font-display text-sm font-semibold text-dark">
                 Wholesale Supply
@@ -50,8 +51,8 @@ export function CertificateContactSection() {
               </p>
             </div>
 
-            <div className="rounded-xl border border-border/80 bg-stone-50/70 p-4">
-              <FileCheck className="h-5 w-5 text-accent" />
+            <div className="rounded-xl border border-border/80 bg-cream/70 p-4">
+              <FileCheck className="h-5 w-5 text-accent-strong" />
               <h4 className="mt-2 font-display text-sm font-semibold text-dark">
                 Batch COA Requests
               </h4>
@@ -63,8 +64,8 @@ export function CertificateContactSection() {
         </div>
 
         {/* Right Column: Contact Cards & Instant Buttons */}
-        <div className="rounded-2xl border border-border bg-stone-50/90 p-5 sm:p-6 lg:col-span-5">
-          <h3 className="font-display text-base font-bold text-dark sm:text-lg">
+        <div className="rounded-2xl border border-border bg-cream/90 p-5 sm:p-6 lg:col-span-5">
+          <h3 className="font-display text-base text-dark sm:text-lg font-semibold">
             Quality & Documentation Desk
           </h3>
           <p className="mt-1 text-xs text-muted">
@@ -84,6 +85,27 @@ export function CertificateContactSection() {
                 >
                   {UI.email}
                 </a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Phone className="h-4 w-4" />
+              </div>
+              <div>
+                <p className="text-[11px] text-muted">Contact numbers:</p>
+                <ul className="space-y-0.5">
+                  {UI.phones.map((phone) => (
+                    <li key={phone.digits}>
+                      <a
+                        href={`tel:${phone.tel}`}
+                        className="font-semibold text-dark hover:text-primary"
+                      >
+                        {phone.display}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 

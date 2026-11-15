@@ -306,16 +306,16 @@ export function AdminCouponModal({
 
       {/* Slide-over Drawer on Right Side */}
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col overflow-hidden text-[#1e293b]">
+        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col overflow-hidden text-dark">
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-border/80 bg-white sticky top-0 z-10">
-            <h2 className="font-display text-xl font-bold text-[#0f2a4a]">
+            <h2 className="font-display text-xl text-dark">
               {editingCoupon ? "Edit Coupon" : "Create New Coupon"}
             </h2>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg bg-[#0284c7] p-1.5 text-white hover:bg-[#0369a1] transition-colors shadow-xs"
+              className="rounded-lg bg-primary p-1.5 text-white hover:bg-primary-strong transition-colors shadow-xs"
               aria-label="Close dialog"
             >
               <X className="h-5 w-5" />
@@ -329,7 +329,7 @@ export function AdminCouponModal({
           >
             {/* Coupon Code * with Generate Button */}
             <div>
-              <label className="block font-semibold text-[#1e293b] mb-1.5">
+              <label className="block font-semibold text-dark mb-1.5">
                 Coupon Code <span className="text-red-500">*</span>
               </label>
               <div className="flex gap-2">
@@ -339,12 +339,12 @@ export function AdminCouponModal({
                   value={code}
                   onChange={(e) => setCode(e.target.value.toUpperCase())}
                   placeholder="e.g., SAVE2024"
-                  className="flex-1 rounded-lg border border-[#cbd5e1] px-3.5 py-2.5 text-sm uppercase font-mono tracking-wider focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all placeholder:normal-case placeholder:font-sans placeholder:text-[#94a3b8]"
+                  className="flex-1 rounded-lg border border-input px-3.5 py-2.5 text-sm uppercase font-mono tracking-wider focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:normal-case placeholder:font-sans placeholder:text-muted/70"
                 />
                 <button
                   type="button"
                   onClick={handleGenerateCode}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#0284c7] to-[#0369a1] text-white font-medium text-xs sm:text-sm shadow-xs hover:from-[#0369a1] hover:to-[#075985] active:scale-95 transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary-strong text-white font-medium text-xs sm:text-sm shadow-xs hover:from-primary-strong hover:to-primary-strong active:scale-95 transition-all"
                 >
                   <RefreshCw className="h-3.5 w-3.5 animate-spin-hover" />
                   Generate
@@ -354,7 +354,7 @@ export function AdminCouponModal({
 
             {/* Coupon Name * */}
             <div>
-              <label className="block font-semibold text-[#1e293b] mb-1.5">
+              <label className="block font-semibold text-dark mb-1.5">
                 Coupon Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -363,13 +363,13 @@ export function AdminCouponModal({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g., Summer Sale 2025"
-                className="w-full rounded-lg border border-[#cbd5e1] px-3.5 py-2.5 text-sm focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all placeholder:text-[#94a3b8]"
+                className="w-full rounded-lg border border-input px-3.5 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted/70"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block font-semibold text-[#1e293b] mb-1.5">
+              <label className="block font-semibold text-dark mb-1.5">
                 Description
               </label>
               <textarea
@@ -377,27 +377,27 @@ export function AdminCouponModal({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Enter coupon description..."
-                className="w-full rounded-lg border border-[#cbd5e1] p-3 text-sm focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all placeholder:text-[#94a3b8] resize-none"
+                className="w-full rounded-lg border border-input p-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted/70 resize-none"
               />
             </div>
 
             {/* Discount Type & Value Row */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block font-semibold text-[#1e293b] mb-1.5">
+                <label className="block font-semibold text-dark mb-1.5">
                   Discount Type <span className="text-red-500">*</span>
                 </label>
                 <select
                   value={discountType}
                   onChange={(e) => setDiscountType(e.target.value as DiscountType)}
-                  className="w-full rounded-lg border border-[#cbd5e1] px-3 py-2.5 text-sm bg-white focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all"
+                  className="w-full rounded-lg border border-input px-3 py-2.5 text-sm bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 >
                   <option value="PERCENTAGE">Percentage</option>
                   <option value="FIXED">Fixed Amount</option>
                 </select>
               </div>
               <div>
-                <label className="block font-semibold text-[#1e293b] mb-1.5">
+                <label className="block font-semibold text-dark mb-1.5">
                   Discount Value <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -408,9 +408,9 @@ export function AdminCouponModal({
                     required
                     value={discountValue}
                     onChange={(e) => setDiscountValue(Number(e.target.value))}
-                    className="w-full rounded-lg border border-[#cbd5e1] px-3 py-2.5 text-sm focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all pr-8"
+                    className="w-full rounded-lg border border-input px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all pr-8"
                   />
-                  <span className="absolute right-3 top-2.5 text-xs font-semibold text-[#64748b]">
+                  <span className="absolute right-3 top-2.5 text-xs font-semibold text-muted">
                     {discountType === "PERCENTAGE" ? "%" : "₹"}
                   </span>
                 </div>
@@ -420,7 +420,7 @@ export function AdminCouponModal({
             {/* Valid From & Valid To Row */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block font-semibold text-[#1e293b] mb-1.5">
+                <label className="block font-semibold text-dark mb-1.5">
                   Valid From <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -428,11 +428,11 @@ export function AdminCouponModal({
                   required
                   value={validFrom}
                   onChange={(e) => setValidFrom(e.target.value)}
-                  className="w-full rounded-lg border border-[#cbd5e1] px-3 py-2.5 text-sm bg-white focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all"
+                  className="w-full rounded-lg border border-input px-3 py-2.5 text-sm bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 />
               </div>
               <div>
-                <label className="block font-semibold text-[#1e293b] mb-1.5">
+                <label className="block font-semibold text-dark mb-1.5">
                   Valid To <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -440,14 +440,14 @@ export function AdminCouponModal({
                   required
                   value={validTo}
                   onChange={(e) => setValidTo(e.target.value)}
-                  className="w-full rounded-lg border border-[#cbd5e1] px-3 py-2.5 text-sm bg-white focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all"
+                  className="w-full rounded-lg border border-input px-3 py-2.5 text-sm bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 />
               </div>
             </div>
 
             {/* Usage Limit */}
             <div>
-              <label className="block font-semibold text-[#1e293b] mb-1.5">
+              <label className="block font-semibold text-dark mb-1.5">
                 Usage Limit <span className="text-red-500">*</span>
               </label>
               <input
@@ -456,9 +456,9 @@ export function AdminCouponModal({
                 required
                 value={usageLimit}
                 onChange={(e) => setUsageLimit(Number(e.target.value))}
-                className="w-full rounded-lg border border-[#cbd5e1] px-3.5 py-2.5 text-sm focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all"
+                className="w-full rounded-lg border border-input px-3.5 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
               />
-              <p className="mt-1 text-xs text-[#64748b] leading-relaxed">
+              <p className="mt-1 text-xs text-muted leading-relaxed">
                 Maximum number of times this coupon can be used. Coupon will
                 automatically deactivate when limit is reached. (Enter 0 for
                 unlimited).
@@ -469,7 +469,7 @@ export function AdminCouponModal({
             <div className="space-y-3 pt-1">
               <div>
                 <div className="flex items-center justify-between">
-                  <label className="block font-semibold text-[#1e293b]">
+                  <label className="block font-semibold text-dark">
                     Applicable products & sizes
                   </label>
                   <div className="flex gap-2">
@@ -480,7 +480,7 @@ export function AdminCouponModal({
                         "text-xs px-2.5 py-1 rounded-md font-medium transition-colors",
                         selectedProductIds.length === 0
                           ? "bg-emerald-100 text-emerald-800 font-semibold"
-                          : "text-[#0284c7] hover:underline",
+                          : "text-primary hover:underline",
                       )}
                     >
                       Site-wide (All)
@@ -488,7 +488,7 @@ export function AdminCouponModal({
                     <button
                       type="button"
                       onClick={handleSelectAllProducts}
-                      className="text-xs text-[#0284c7] hover:underline font-medium px-2 py-1"
+                      className="text-xs text-primary hover:underline font-medium px-2 py-1"
                     >
                       {selectedProductIds.length === products.length
                         ? "Clear all"
@@ -496,14 +496,14 @@ export function AdminCouponModal({
                     </button>
                   </div>
                 </div>
-                <p className="mt-1 text-xs text-[#64748b] leading-relaxed">
+                <p className="mt-1 text-xs text-muted leading-relaxed">
                   Leave empty for site-wide. Or select specific products and variants (e.g. 1 Litre, 500 ml).
                 </p>
               </div>
 
               {/* Selected Items Chips */}
               {selectedProductIds.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 p-2 bg-[#f8fafc] rounded-lg border border-[#e2e8f0] max-h-28 overflow-y-auto">
+                <div className="flex flex-wrap gap-1.5 p-2 bg-cream/50 rounded-lg border border-border max-h-28 overflow-y-auto">
                   {selectedProductIds.map((pId) => {
                     const prod = products.find((p) => p._id === pId);
                     if (!prod) return null;
@@ -521,7 +521,7 @@ export function AdminCouponModal({
                       return (
                         <span
                           key={`prod-${pId}`}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs bg-[#e0f2fe] text-[#0369a1] font-medium border border-[#bae6fd]"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs bg-primary-soft text-primary-strong font-medium border border-primary/20"
                         >
                           <Tag className="h-3 w-3 shrink-0" />
                           <span className="max-w-[160px] truncate">
@@ -543,9 +543,9 @@ export function AdminCouponModal({
                     return selectedVarsInProd.map((v) => (
                       <span
                         key={`var-${v._id}`}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs bg-amber-50 text-amber-900 font-medium border border-amber-200"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs bg-warning-soft text-warning font-medium border border-warning/25"
                       >
-                        <Layers className="h-3 w-3 shrink-0 text-amber-600" />
+                        <Layers className="h-3 w-3 shrink-0 text-warning" />
                         <span className="max-w-[180px] truncate">
                           {prod.name} • <strong>{v.label}</strong>
                         </span>
@@ -566,19 +566,19 @@ export function AdminCouponModal({
               {/* Search & Category Filter Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div className="relative">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-[#94a3b8]" />
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted/70" />
                   <input
                     type="text"
                     placeholder="Filter product or size (e.g. 1L)..."
                     value={productSearch}
                     onChange={(e) => setProductSearch(e.target.value)}
-                    className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-[#cbd5e1] bg-white focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all"
+                    className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-input bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   />
                   {productSearch && (
                     <button
                       type="button"
                       onClick={() => setProductSearch("")}
-                      className="absolute right-2.5 top-2.5 text-[#94a3b8] hover:text-[#334155]"
+                      className="absolute right-2.5 top-2.5 text-muted/70 hover:text-dark/80"
                     >
                       <X className="h-3.5 w-3.5" />
                     </button>
@@ -588,7 +588,7 @@ export function AdminCouponModal({
                 <select
                   value={selectedCategoryFilter}
                   onChange={(e) => setSelectedCategoryFilter(e.target.value)}
-                  className="w-full rounded-lg border border-[#cbd5e1] px-3 py-1.5 text-xs bg-white focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all"
+                  className="w-full rounded-lg border border-input px-3 py-1.5 text-xs bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 >
                   <option value="ALL">All categories</option>
                   {categories.map((c) => (
@@ -600,7 +600,7 @@ export function AdminCouponModal({
               </div>
 
               {/* Products & Variants List */}
-              <div className="border border-[#cbd5e1] rounded-lg max-h-64 overflow-y-auto divide-y divide-[#e2e8f0] bg-white shadow-2xs">
+              <div className="border border-input rounded-lg max-h-64 overflow-y-auto divide-y divide-border bg-white shadow-2xs">
                 {visibleCategories.map((cat) => {
                   const query = productSearch.toLowerCase().trim();
                   const catProducts = products.filter((p) => {
@@ -623,15 +623,15 @@ export function AdminCouponModal({
                       <button
                         type="button"
                         onClick={() => toggleCategoryCollapse(cat._id)}
-                        className="w-full flex items-center justify-between px-3 py-2 bg-[#f8fafc] text-left hover:bg-[#f1f5f9] transition-colors"
+                        className="w-full flex items-center justify-between px-3 py-2 bg-cream/50 text-left hover:bg-cream transition-colors"
                       >
-                        <span className="font-semibold text-xs tracking-wider uppercase text-[#334155]">
+                        <span className="font-semibold text-xs tracking-wider uppercase text-dark/80">
                           {cat.name} ({catProducts.length})
                         </span>
                         {isCatCollapsed ? (
-                          <ChevronDown className="h-4 w-4 text-[#64748b]" />
+                          <ChevronDown className="h-4 w-4 text-muted" />
                         ) : (
-                          <ChevronUp className="h-4 w-4 text-[#64748b]" />
+                          <ChevronUp className="h-4 w-4 text-muted" />
                         )}
                       </button>
 
@@ -660,13 +660,13 @@ export function AdminCouponModal({
                                 className={cn(
                                   "rounded-lg border transition-colors",
                                   isProdChecked
-                                    ? "border-[#0284c7]/40 bg-[#f0f9ff]/40"
-                                    : "border-[#e2e8f0] bg-white",
+                                    ? "border-primary/40 bg-primary-soft/40"
+                                    : "border-border bg-white",
                                 )}
                               >
                                 {/* Product Row */}
                                 <div className="flex items-center justify-between p-2">
-                                  <label className="flex items-center gap-2.5 cursor-pointer text-xs sm:text-sm text-[#1e293b] flex-1 min-w-0">
+                                  <label className="flex items-center gap-2.5 cursor-pointer text-xs sm:text-sm text-dark flex-1 min-w-0">
                                     <input
                                       type="checkbox"
                                       checked={isProdChecked && (allVariantsSelected || variants.length === 0)}
@@ -674,7 +674,7 @@ export function AdminCouponModal({
                                         if (el) el.indeterminate = isPartiallySelected;
                                       }}
                                       onChange={() => toggleProduct(prod._id)}
-                                      className="h-4 w-4 rounded border-[#cbd5e1] text-[#0284c7] focus:ring-[#0284c7]"
+                                      className="h-4 w-4 rounded border-input text-primary focus:ring-primary"
                                     />
                                     <span className="font-medium truncate">{prod.name}</span>
                                     {variants.length > 0 && (
@@ -682,10 +682,10 @@ export function AdminCouponModal({
                                         className={cn(
                                           "text-[10px] px-1.5 py-0.5 rounded-full font-medium shrink-0",
                                           isPartiallySelected
-                                            ? "bg-amber-100 text-amber-800"
+                                            ? "bg-warning-soft text-warning"
                                             : allVariantsSelected
                                             ? "bg-emerald-100 text-emerald-800"
-                                            : "bg-slate-100 text-slate-600",
+                                            : "bg-cream text-muted",
                                         )}
                                       >
                                         {selectedVarsInProd.length > 0
@@ -699,10 +699,10 @@ export function AdminCouponModal({
                                     <button
                                       type="button"
                                       onClick={() => toggleExpandProduct(prod._id)}
-                                      className="p-1 text-[#64748b] hover:text-[#0284c7] hover:bg-[#e0f2fe] rounded transition-colors text-xs flex items-center gap-1"
+                                      className="p-1 text-muted hover:text-primary hover:bg-primary-soft rounded transition-colors text-xs flex items-center gap-1"
                                       title={isExpanded ? "Collapse sizes" : "Expand sizes"}
                                     >
-                                      <span className="text-[11px] font-semibold text-[#0284c7]">
+                                      <span className="text-[11px] font-semibold text-primary">
                                         {isExpanded ? "Hide sizes" : "Choose sizes"}
                                       </span>
                                       {isExpanded ? (
@@ -716,13 +716,13 @@ export function AdminCouponModal({
 
                                 {/* Variants Sub-list */}
                                 {variants.length > 0 && isExpanded && (
-                                  <div className="border-t border-[#e2e8f0] bg-[#f8fafc] px-3 py-2 space-y-1.5 rounded-b-lg">
-                                    <p className="text-[11px] text-[#64748b] font-medium mb-1 flex items-center justify-between">
+                                  <div className="border-t border-border bg-cream/50 px-3 py-2 space-y-1.5 rounded-b-lg">
+                                    <p className="text-[11px] text-muted font-medium mb-1 flex items-center justify-between">
                                       <span>Select specific sizes:</span>
                                       <button
                                         type="button"
                                         onClick={() => toggleProduct(prod._id)}
-                                        className="text-[#0284c7] hover:underline text-[10px] font-semibold"
+                                        className="text-primary hover:underline text-[10px] font-semibold"
                                       >
                                         {allVariantsSelected ? "Deselect all sizes" : "Select all sizes"}
                                       </button>
@@ -736,8 +736,8 @@ export function AdminCouponModal({
                                             className={cn(
                                               "flex items-center justify-between p-1.5 rounded border text-xs cursor-pointer transition-colors",
                                               isVariantChecked
-                                                ? "border-[#0284c7] bg-white text-[#0369a1] font-semibold shadow-2xs"
-                                                : "border-[#e2e8f0] bg-white hover:bg-slate-50 text-[#334155]",
+                                                ? "border-primary bg-white text-primary-strong font-semibold shadow-2xs"
+                                                : "border-border bg-white hover:bg-cream text-dark/80",
                                             )}
                                           >
                                             <div className="flex items-center gap-2 min-w-0">
@@ -745,11 +745,11 @@ export function AdminCouponModal({
                                                 type="checkbox"
                                                 checked={isVariantChecked}
                                                 onChange={() => toggleVariant(prod._id, v._id)}
-                                                className="h-3.5 w-3.5 rounded border-[#cbd5e1] text-[#0284c7] focus:ring-[#0284c7]"
+                                                className="h-3.5 w-3.5 rounded border-input text-primary focus:ring-primary"
                                               />
                                               <span className="truncate">{v.label}</span>
                                             </div>
-                                            <span className="text-[11px] font-mono text-[#64748b] ml-1 shrink-0">
+                                            <span className="text-[11px] font-mono text-muted ml-1 shrink-0">
                                               {formatInr(v.price)}
                                             </span>
                                           </label>
@@ -771,13 +771,13 @@ export function AdminCouponModal({
 
             {/* Status * */}
             <div>
-              <label className="block font-semibold text-[#1e293b] mb-1.5">
+              <label className="block font-semibold text-dark mb-1.5">
                 Status <span className="text-red-500">*</span>
               </label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as CouponStatus)}
-                className="w-full rounded-lg border border-[#cbd5e1] px-3 py-2.5 text-sm bg-white focus:border-[#0284c7] focus:ring-2 focus:ring-[#0284c7]/20 outline-none transition-all"
+                className="w-full rounded-lg border border-input px-3 py-2.5 text-sm bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
               >
                 <option value="ACTIVE">Active</option>
                 <option value="INACTIVE">Inactive</option>
@@ -794,7 +794,7 @@ export function AdminCouponModal({
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-5 py-2.5 rounded-lg border border-[#0284c7] text-[#0284c7] bg-white font-medium text-sm hover:bg-[#e0f2fe] active:scale-95 transition-all"
+              className="px-5 py-2.5 rounded-lg border border-primary text-primary bg-white font-medium text-sm hover:bg-primary-soft active:scale-95 transition-all"
             >
               Cancel
             </button>
@@ -802,7 +802,7 @@ export function AdminCouponModal({
               type="button"
               onClick={handleSubmit}
               disabled={loading}
-              className="px-6 py-2.5 rounded-lg bg-[#004b87] text-white font-medium text-sm shadow-sm hover:bg-[#003866] active:scale-95 transition-all disabled:opacity-50"
+              className="px-6 py-2.5 rounded-lg bg-primary text-white font-medium text-sm shadow-sm hover:bg-primary-strong active:scale-95 transition-all disabled:opacity-50"
             >
               {loading
                 ? "Saving…"

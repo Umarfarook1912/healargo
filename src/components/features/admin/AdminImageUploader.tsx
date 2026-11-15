@@ -165,7 +165,7 @@ export function AdminImageUploader({
             </div>
             <div className="flex-1 truncate">
               {previewError ? (
-                <div className="flex items-center text-amber-600 gap-1 font-medium">
+                <div className="flex items-center text-warning gap-1 font-medium">
                   <AlertCircle className="h-3.5 w-3.5" />
                   <span>Image URL loading check... Ensure link is accessible.</span>
                 </div>

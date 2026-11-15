@@ -34,8 +34,8 @@ export function OrderHistoryList() {
 
   if (orders.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-card py-16 px-4 text-center shadow-xs">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-cream">
+      <div className="rounded-3xl border border-dashed border-border bg-card/70 px-4 py-16 text-center">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-soft ring-1 ring-primary/10">
           <Package className="h-8 w-8 text-primary" />
         </div>
         <h3 className="mt-4 font-display text-xl text-dark font-semibold">No orders yet</h3>
@@ -55,7 +55,7 @@ export function OrderHistoryList() {
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-border pb-4">
         <div>
-          <h2 className="font-display text-2xl text-dark">Order History</h2>
+          <h2 className="font-display text-3xl text-dark">Order History</h2>
           <p className="text-sm text-muted mt-0.5">
             Viewing {orders.length} order{orders.length > 1 ? "s" : ""}
           </p>

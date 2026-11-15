@@ -76,7 +76,7 @@ export function HeaderCategoriesDropdown({
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-1 text-sm font-medium text-dark/80 transition-colors hover:text-primary py-2"
+        className="flex items-center gap-1 rounded-full px-2.5 py-1.5 text-[13px] font-medium text-dark/80 transition-colors hover:bg-primary-soft hover:text-primary lg:px-3 lg:text-sm"
         aria-expanded={open}
       >
         <span>Categories</span>
@@ -88,8 +88,8 @@ export function HeaderCategoriesDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-1 max-h-[min(70vh,32rem)] w-[36rem] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-2xl border border-border/80 bg-card p-3 shadow-xl">
-          <div className="mb-2 px-3 pt-1 text-xs font-bold uppercase tracking-wider text-muted">
+        <div className="absolute left-0 top-full z-50 mt-3 max-h-[min(70vh,32rem)] w-[38rem] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-3xl border border-border bg-card p-4 shadow-[var(--shadow-lifted)] animate-in fade-in-0 slide-in-from-top-1">
+          <div className="eyebrow mb-3 px-2.5 pt-1">
             Shop By Category
           </div>
 
@@ -102,9 +102,9 @@ export function HeaderCategoriesDropdown({
                   key={cat._id}
                   href={ROUTES.CATEGORY(cat.slug)}
                   onClick={() => setOpen(false)}
-                  className="group flex items-center gap-2.5 rounded-xl p-2.5 transition-colors hover:bg-cream-dark/60"
+                  className="group flex items-center gap-2.5 rounded-xl p-2.5 transition-colors hover:bg-primary-soft"
                 >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary ring-1 ring-primary/10 transition group-hover:bg-primary group-hover:text-primary-foreground">
                     <Icon className="h-4 w-4" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -120,11 +120,11 @@ export function HeaderCategoriesDropdown({
             })}
           </div>
 
-          <div className="mt-2 border-t border-border pt-2 text-center">
+          <div className="mt-3 border-t border-border pt-3 text-center">
             <Link
               href={ROUTES.SHOP}
               onClick={() => setOpen(false)}
-              className="text-xs font-semibold text-primary hover:underline"
+              className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary-soft"
             >
               View All Products &rarr;
             </Link>

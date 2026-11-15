@@ -1,10 +1,13 @@
 import { CombosSection, OffersSection } from "@/components/features/home/CatalogHighlightSection";
 import { CategoryStrip } from "@/components/features/home/CategoryStrip";
+import { HomeFaqTeaser } from "@/components/features/home/HomeFaqTeaser";
 import { HomeHeroCarousel } from "@/components/features/home/HomeHeroCarousel";
 import { HomeProductShowcase } from "@/components/features/home/HomeProductShowcase";
+import { HomeProofSection } from "@/components/features/home/HomeProofSection";
 import { ProcessSection } from "@/components/features/home/ProcessSection";
 import { PromoBanner } from "@/components/features/home/PromoBanner";
 import { TestimonialsSection } from "@/components/features/home/TestimonialsSection";
+import { TrustStrip } from "@/components/features/home/TrustStrip";
 import { WhyUsSection } from "@/components/features/home/WhyUsSection";
 import { getLiveCombos, getLiveOffers } from "@/lib/catalog/highlights";
 import { getCategories, getProducts } from "@/lib/products/queries";
@@ -41,14 +44,26 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* 1. Hero (admin carousel, falls back to the static brand hero) */}
       <HomeHeroCarousel slides={carousels} />
-      <CombosSection combos={combos} />
+      {/* 2. Trust badges */}
+      <TrustStrip />
+      {/* 3. Category showcase */}
       <CategoryStrip categories={categories} />
+      {/* 4. Collection with bestseller / new arrival filters */}
       <HomeProductShowcase products={products} categories={categories} />
-      <OffersSection products={offers} />
-      <ProcessSection />
-      <TestimonialsSection />
+      {/* 5. Combos (only when live combos exist) */}
+      <CombosSection combos={combos} />
+      {/* 6. Brand story */}
       <WhyUsSection />
+      <ProcessSection />
+      {/* 7. Offers (only when live offers exist) */}
+      <OffersSection products={offers} />
+      {/* 8. Social proof, gallery & certificates, FAQs */}
+      <TestimonialsSection />
+      <HomeProofSection />
+      <HomeFaqTeaser />
+      {/* 9. Closing CTA */}
       <PromoBanner />
     </>
   );

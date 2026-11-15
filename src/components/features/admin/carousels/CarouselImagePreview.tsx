@@ -100,7 +100,7 @@ export function CarouselImagePreview({
         {/* Resolution Badge overlay */}
         <div className="absolute top-2.5 right-2.5 z-10 rounded-md bg-dark/80 px-2 py-1 text-[11px] font-semibold text-cream shadow-sm backdrop-blur-xs border border-white/10">
           {dimensions ? (
-            <span className={dimensions.width >= 1200 ? "text-cream" : "text-amber-300"}>
+            <span className={dimensions.width >= 1200 ? "text-cream" : "text-accent"}>
               {dimensions.width} × {dimensions.height} px
             </span>
           ) : (
@@ -138,7 +138,7 @@ export function CarouselImagePreview({
                   Image loaded: <strong>{dimensions.width} × {dimensions.height} px</strong> (Optimal for 1920 × 650 banner)
                 </span>
               ) : (
-                <span className="text-amber-700">
+                <span className="text-warning">
                   Image is <strong>{dimensions.width} × {dimensions.height} px</strong> (1920 × 650 px recommended for HD)
                 </span>
               )

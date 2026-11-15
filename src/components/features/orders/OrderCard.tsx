@@ -34,14 +34,14 @@ export function OrderCard({ order }: { order: Order }) {
         return {
           label: "Shipped",
           icon: Truck,
-          className: "bg-blue-50 text-blue-700 border-blue-200",
+          className: "bg-info-soft text-info border-info/20",
         };
       case "PROCESSING":
       case "CONFIRMED":
         return {
           label: "Processing",
           icon: Clock,
-          className: "bg-indigo-50 text-indigo-700 border-indigo-200",
+          className: "bg-primary-soft text-primary border-primary/20",
         };
       case "CANCELLED":
         return {
@@ -53,7 +53,7 @@ export function OrderCard({ order }: { order: Order }) {
         return {
           label: status || "Pending",
           icon: Clock,
-          className: "bg-amber-50 text-amber-700 border-amber-200",
+          className: "bg-warning-soft text-warning border-warning/25",
         };
     }
   };
@@ -67,11 +67,11 @@ export function OrderCard({ order }: { order: Order }) {
     order.status.toUpperCase() !== "CANCELLED";
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-xs transition-all hover:shadow-md hover:border-primary/40">
+    <div className="overflow-hidden surface-card transition-all hover:shadow-md hover:border-primary/40">
       {/* Order Card Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-cream/40 px-5 py-4">
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary ring-1 ring-primary/10">
             <Package className="h-5 w-5" />
           </div>
           <div>
@@ -102,7 +102,7 @@ export function OrderCard({ order }: { order: Order }) {
             className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${
               isPaid
                 ? "bg-emerald-100 text-emerald-800 border-emerald-300"
-                : "bg-amber-100 text-amber-800 border-amber-300"
+                : "bg-warning-soft text-warning border-warning/30"
             }`}
           >
             {isPaid ? "PAID" : "PAYMENT PENDING"}
@@ -118,7 +118,7 @@ export function OrderCard({ order }: { order: Order }) {
             <div key={idx} className="flex items-center justify-between gap-4 py-3">
               <div className="flex items-center gap-4">
                 {/* Product Thumbnail */}
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-border bg-cream-dark/50 p-1">
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-border bg-cream p-1">
                   <Image
                     src={itemImg}
                     alt={item.name}
@@ -181,7 +181,7 @@ export function OrderCard({ order }: { order: Order }) {
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-cream/20 px-5 py-4">
         <div>
           <span className="text-xs text-muted">Total Amount</span>
-          <p className="font-display text-lg font-bold text-dark">
+          <p className="font-display text-lg text-dark font-semibold">
             {formatInr(order.pricing?.total ?? 0)}
           </p>
         </div>

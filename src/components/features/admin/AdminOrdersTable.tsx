@@ -73,8 +73,8 @@ export function AdminOrdersTable({ orders }: { orders: Order[] }) {
     <AdminCard className="overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[1080px] text-left text-sm">
-          <thead className="border-b border-border bg-cream/70">
-            <tr className="text-xs uppercase tracking-[0.12em] text-muted">
+          <thead className="border-b border-border bg-cream/60">
+            <tr className="text-[11px] uppercase tracking-[0.14em] text-muted">
               {HEADERS.map((header) => (
                 <th key={header} className="px-5 py-4 font-semibold">
                   {header}
@@ -95,7 +95,7 @@ export function AdminOrdersTable({ orders }: { orders: Order[] }) {
               return (
                 <tr
                   key={order._id}
-                  className="border-b border-border/70 align-middle transition hover:bg-cream/40"
+                  className="border-b border-border/60 align-middle transition-colors last:border-0 hover:bg-primary-soft/40"
                 >
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">

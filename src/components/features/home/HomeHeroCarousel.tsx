@@ -111,7 +111,7 @@ export function HomeHeroCarousel({
   return (
     <section
       aria-label="Hero Carousel"
-      className="relative overflow-hidden bg-cream py-3 sm:py-5"
+      className="herbal-gradient relative overflow-hidden pb-6 pt-3 sm:pb-10 sm:pt-6"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
@@ -119,8 +119,7 @@ export function HomeHeroCarousel({
       onTouchEnd={handleTouchEnd}
     >
       <PageContainer className="px-3 sm:px-6">
-        <div className="relative min-h-[460px] sm:min-h-[520px] md:min-h-[580px] lg:min-h-[620px] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-border/70 shadow-lg shadow-dark/5 bg-dark">
-          {/* Slides with AnimatePresence */}
+        <div className="relative isolate min-h-[480px] w-full overflow-hidden rounded-[1.75rem] bg-dark shadow-[var(--shadow-lifted)] ring-1 ring-dark/10 sm:min-h-[540px] sm:rounded-[2.25rem] md:min-h-[600px] lg:min-h-[640px]">
           <AnimatePresence initial={false} custom={direction} mode="sync">
             <motion.div
               key={slide._id || current}
@@ -128,18 +127,17 @@ export function HomeHeroCarousel({
               initial={
                 reduce
                   ? { opacity: 0 }
-                  : { opacity: 0, x: direction > 0 ? "4%" : "-4%" }
+                  : { opacity: 0, scale: 1.04, x: direction > 0 ? "3%" : "-3%" }
               }
-              animate={{ opacity: 1, x: 0 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
               exit={
                 reduce
                   ? { opacity: 0 }
-                  : { opacity: 0, x: direction > 0 ? "-4%" : "4%" }
+                  : { opacity: 0, x: direction > 0 ? "-3%" : "3%" }
               }
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 z-0 h-full w-full"
             >
-              {/* Background image */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={slide.imageUrl}
@@ -150,115 +148,122 @@ export function HomeHeroCarousel({
                     "https://ik.imagekit.io/mnm0iz0ng2/banner/1.png";
                 }}
               />
-
-              {/* Dynamic Contrast Gradient Overlays */}
-              {/* Dark gradient for high contrast readability of text over any image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/55 to-dark/25 sm:bg-gradient-to-r sm:from-dark/90 sm:via-dark/60 sm:to-transparent" />
-              {/* Subtle top shade for navigation bar separation */}
-              <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-dark/40 to-transparent" />
+              {/* Contrast overlays keep text readable on any banner */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/50 to-dark/10 sm:bg-gradient-to-r sm:from-dark/90 sm:via-dark/55 sm:to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-dark/60 to-transparent" />
             </motion.div>
           </AnimatePresence>
 
-          {/* Slide Indicator Bar & Counter (near top right) */}
-          {count > 1 && (
-            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2 rounded-full bg-dark/60 backdrop-blur-md px-3 py-1.5 border border-white/10 text-white shadow-md">
-              <span className="font-mono text-xs font-semibold text-accent">
-                {String(current + 1).padStart(2, "0")}
-              </span>
-              <span className="text-white/40 text-[11px]">/</span>
-              <span className="font-mono text-xs text-white/70">
-                {String(count).padStart(2, "0")}
-              </span>
+          {/* Decorative gold arcs */}
+          <span aria-hidden className="pointer-events-none absolute -right-24 -top-24 z-[1] h-80 w-80 rounded-full border border-accent/25" />
+          <span aria-hidden className="pointer-events-none absolute -bottom-32 right-24 z-[1] hidden h-72 w-72 rounded-full border border-cream/10 md:block" />
 
-              {/* Mini dot indicators */}
-              <div className="ml-1.5 flex items-center gap-1.5">
-                {activeSlides.map((s, idx) => (
-                  <button
-                    key={s._id || idx}
-                    type="button"
-                    aria-label={`Go to slide ${idx + 1}`}
-                    onClick={() => goToSlide(idx)}
-                    className={cn(
-                      "h-1.5 rounded-full transition-all duration-300",
-                      idx === current
-                        ? "w-5 bg-accent"
-                        : "w-1.5 bg-white/40 hover:bg-white/75",
-                    )}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Content */}
+          <div className="relative z-10 flex h-full min-h-[480px] w-full max-w-3xl flex-col justify-end p-6 pb-24 text-white sm:min-h-[540px] sm:p-10 sm:pb-28 md:min-h-[600px] md:p-14 md:pb-28 lg:min-h-[640px] lg:p-16 lg:pb-32">
+            <motion.span
+              key={`eyebrow-${slide._id || current}`}
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-dark/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-md"
+            >
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
+              Healargo
+            </motion.span>
 
-          {/* Content Overlay */}
-          <div className="relative z-10 flex h-full min-h-[460px] sm:min-h-[520px] md:min-h-[580px] lg:min-h-[620px] w-full flex-col justify-end p-6 sm:p-10 md:p-14 lg:p-16 text-white max-w-3xl">
-            {/* Slide Headline */}
             {slide.headline ? (
               <motion.h2
                 key={`headline-${slide._id || current}`}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
+                initial={reduce ? false : { opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.12] tracking-tight text-white drop-shadow-md"
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="font-display text-[2rem] leading-[1.08] tracking-tight text-white drop-shadow-md sm:text-5xl md:text-6xl lg:text-7xl"
               >
                 {slide.headline}
               </motion.h2>
             ) : null}
 
-            {/* Slide Subheadline */}
             {slide.subheadline ? (
               <motion.p
                 key={`subheadline-${slide._id || current}`}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
+                initial={reduce ? false : { opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-cream/90 leading-relaxed max-w-xl drop-shadow-xs"
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mt-4 max-w-xl text-sm leading-relaxed text-cream/90 drop-shadow-xs sm:mt-5 sm:text-base md:text-lg"
               >
                 {slide.subheadline}
               </motion.p>
             ) : null}
 
-            {/* Slide CTA Button */}
             {slide.buttonText ? (
               <motion.div
                 key={`cta-${slide._id || current}`}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
+                initial={reduce ? false : { opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-6 sm:mt-8 flex items-center gap-3"
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-7 flex items-center gap-3 sm:mt-9"
               >
                 <Button
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-7 py-3 rounded-xl shadow-lg shadow-black/20 text-sm sm:text-base"
+                  variant="accent"
+                  className="group gap-2 px-8 text-sm font-semibold shadow-lg shadow-black/25 sm:text-base"
                   asChild
                 >
                   <Link href={slide.navigationLink || "/shop"}>
                     {slide.buttonText}
+                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </Button>
               </motion.div>
             ) : null}
           </div>
 
-          {/* Navigation Controls (Previous and Next Buttons) */}
+          {/* Bottom control bar: counter, progress dots, prev/next */}
           {count > 1 && (
-            <div className="absolute bottom-5 right-5 sm:bottom-8 sm:right-8 z-20 flex items-center gap-2">
-              <button
-                type="button"
-                aria-label="Previous slide"
-                onClick={prevSlide}
-                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-dark/60 text-white backdrop-blur-md border border-white/15 transition-all hover:bg-dark/90 hover:scale-105 active:scale-95 shadow-lg"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                type="button"
-                aria-label="Next slide"
-                onClick={nextSlide}
-                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-dark/60 text-white backdrop-blur-md border border-white/15 transition-all hover:bg-dark/90 hover:scale-105 active:scale-95 shadow-lg"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
+            <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-4 px-6 pb-6 sm:px-10 sm:pb-8 md:px-14 lg:px-16">
+              <div className="flex items-center gap-3 text-white">
+                <span className="font-mono text-sm font-semibold text-accent">
+                  {String(current + 1).padStart(2, "0")}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  {activeSlides.map((s, idx) => (
+                    <button
+                      key={s._id || idx}
+                      type="button"
+                      aria-label={`Go to slide ${idx + 1}`}
+                      onClick={() => goToSlide(idx)}
+                      className={cn(
+                        "h-1 rounded-full transition-all duration-500",
+                        idx === current
+                          ? "w-10 bg-accent"
+                          : "w-4 bg-white/35 hover:bg-white/70",
+                      )}
+                    />
+                  ))}
+                </div>
+                <span className="font-mono text-sm text-white/60">
+                  {String(count).padStart(2, "0")}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label="Previous slide"
+                  onClick={prevSlide}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md transition-all hover:border-accent hover:bg-accent hover:text-accent-foreground active:scale-95 sm:h-12 sm:w-12"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next slide"
+                  onClick={nextSlide}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md transition-all hover:border-accent hover:bg-accent hover:text-accent-foreground active:scale-95 sm:h-12 sm:w-12"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
             </div>
           )}
         </div>

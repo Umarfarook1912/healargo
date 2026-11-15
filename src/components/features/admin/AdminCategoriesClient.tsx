@@ -89,13 +89,13 @@ export function AdminCategoriesClient({
         <AdminCard className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="border-b border-border bg-cream/70">
-                <tr className="text-xs uppercase tracking-[0.12em] text-muted">
-                  <th className="px-5 py-4 font-semibold">{ADMIN_CATEGORY_COPY.tableCategory}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_CATEGORY_COPY.tableSlug}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_CATEGORY_COPY.badge}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_CATEGORY_COPY.tableStatus}</th>
-                  <th className="px-5 py-4 font-semibold">{ADMIN_CATEGORY_COPY.tableActions}</th>
+              <thead className="border-b border-border bg-cream/60">
+                <tr className="text-[11px] uppercase tracking-[0.14em] text-muted">
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_CATEGORY_COPY.tableCategory}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_CATEGORY_COPY.tableSlug}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_CATEGORY_COPY.badge}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_CATEGORY_COPY.tableStatus}</th>
+                  <th className="px-5 py-3.5 font-semibold">{ADMIN_CATEGORY_COPY.tableActions}</th>
                 </tr>
               </thead>
               <tbody>

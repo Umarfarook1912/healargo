@@ -112,7 +112,7 @@ export function AdminCreateOrderForm({
             <Label htmlFor="product">{ADMIN_ORDERS_COPY.productLabel}</Label>
             <select
               id="product"
-              className="mt-1.5 flex h-11 w-full rounded-md border border-border bg-card px-3 text-sm"
+              className="mt-1.5 flex h-11 w-full rounded-xl border border-input bg-card px-3.5 text-sm focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/12"
               value={productId}
               onChange={(e) => {
                 const next = products.find((product) => product._id === e.target.value);
@@ -142,7 +142,7 @@ export function AdminCreateOrderForm({
             <Label htmlFor="variant">{ADMIN_ORDERS_COPY.variantLabel}</Label>
             <select
               id="variant"
-              className="mt-1.5 flex h-11 w-full rounded-md border border-border bg-card px-3 text-sm"
+              className="mt-1.5 flex h-11 w-full rounded-xl border border-input bg-card px-3.5 text-sm focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/12"
               value={variantId}
               onChange={(e) => setVariantId(e.target.value)}
             >

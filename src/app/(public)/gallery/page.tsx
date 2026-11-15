@@ -107,7 +107,7 @@ export default async function GalleryPage() {
   };
 
   return (
-    <div className="py-8 sm:py-12 md:py-16">
+    <div className="page-wash py-8 sm:py-12 md:py-16">
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
@@ -127,7 +127,7 @@ export default async function GalleryPage() {
             <Home className="h-3.5 w-3.5" />
             <span>Home</span>
           </Link>
-          <ChevronRight className="h-3.5 w-3.5 text-stone-400" />
+          <ChevronRight className="h-3.5 w-3.5 text-muted" />
           <span className="font-medium text-dark" aria-current="page">
             Visual Gallery
           </span>
@@ -135,12 +135,12 @@ export default async function GalleryPage() {
 
         {/* Hero Section */}
         <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3.5 py-1 text-xs font-semibold text-primary mb-3">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-card/80 px-3.5 py-1 text-xs font-semibold text-primary shadow-[var(--shadow-soft)]">
             <Film className="h-3.5 w-3.5" />
             <span>Extraction Videos, Order Packing & Direct Selling Gallery</span>
           </div>
 
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-dark leading-tight">
+          <h1 className="font-display text-4xl leading-[1.08] tracking-tight text-dark md:text-6xl">
             Healargo Visual Gallery
           </h1>
 

@@ -11,19 +11,22 @@ Never hardcode hex values. Use Tailwind token classes or CSS variables:
 
 | Token | Value | Tailwind Class |
 |---|---|---|
-| Primary | `#2c1a12` | `text-primary`, `bg-primary`, `border-primary` |
-| Accent | `#d4a44a` | `text-accent`, `bg-accent`, `border-accent` |
-| Cream | `#f4e6c8` | `text-cream`, `bg-cream` |
-| Dark | `#2c1a12` | `text-dark`, `bg-dark` |
-| Muted | `#7a6555` | `text-muted`, `bg-muted` |
+| Primary (forest green) | `#1f5138` | `text-primary`, `bg-primary`, `border-primary` |
+| Accent (sesame gold) | `#c9a246` | `bg-accent`, `border-accent` (use `text-accent-strong` `#8a6a1c` for gold text on light backgrounds) |
+| Cream (soft sage tint) | `#eef4ef` | `text-cream`, `bg-cream` |
+| Dark (deep green-ink) | `#10261b` | `text-dark`, `bg-dark` |
+| Muted | `#56645c` | `text-muted`, `bg-muted` |
+| Background (ivory) | `#fbfaf6` | `bg-background` |
+| Border | `#dbe3dd` | `border-border` |
+| Status | success `#177245`, warning `#a35a07`, destructive `#b42318`, info `#1d5f8a` | `text-success`, `bg-success-soft`, `text-warning`, `bg-warning-soft`, ... |
 
 CSS variables available globally:
 ```css
-var(--color-primary)  /* #2c1a12 */
-var(--color-accent)   /* #d4a44a */
-var(--color-cream)    /* #f4e6c8 */
-var(--color-dark)     /* #2c1a12 */
-var(--color-muted)    /* #7a6555 */
+var(--color-primary)  /* #1f5138 */
+var(--color-accent)   /* #c9a246 */
+var(--color-cream)    /* #eef4ef */
+var(--color-dark)     /* #10261b */
+var(--color-muted)    /* #56645c */
 ```
 
 ## Typography
@@ -47,8 +50,8 @@ Use the extended Tailwind / theme scale — never raw px/rem values in className
 
 ```tsx
 // ❌ BAD — hardcoded color
-<button className="bg-[#2c1a12] text-[#f4e6c8]">
+<button className="bg-[#1f5138] text-[#ffffff]">
 
 // ✅ GOOD — design token
-<button className="bg-primary text-cream">
+<button className="bg-primary text-primary-foreground">
 ```

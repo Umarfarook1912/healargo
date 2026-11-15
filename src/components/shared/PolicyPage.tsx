@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageContainer } from "@/components/layout/PageContainer";
+import { PageHero } from "@/components/shared/PageHero";
 import { LAYOUT } from "@/constants/layout";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
@@ -15,21 +16,29 @@ export function PolicyPage({
   path: string;
 }) {
   return (
-    <PageContainer className="py-12">
-      <div className={LAYOUT.narrow}>
-      <h1 className="font-display text-4xl text-dark">{title}</h1>
-      <p className="mt-4 text-muted">{intro}</p>
-      <div className="mt-10 space-y-8">
-        {sections.map((section) => (
-          <section key={section.title}>
-            <h2 className="font-display text-2xl text-dark">{section.title}</h2>
-            <p className="mt-2 leading-relaxed text-dark/80">{section.body}</p>
-          </section>
-        ))}
-      </div>
-      <span className="sr-only">{path}</span>
-      </div>
-    </PageContainer>
+    <>
+      <PageHero eyebrow="Healargo policies" title={title} description={intro} />
+      <PageContainer className="py-12 md:py-16">
+        <div className={LAYOUT.narrow}>
+          <div className="space-y-5">
+            {sections.map((section, index) => (
+              <section key={section.title} className="surface-card p-6 sm:p-8">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-soft text-sm font-semibold text-primary">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <h2 className="font-display text-2xl text-dark">{section.title}</h2>
+                    <p className="mt-2 leading-relaxed text-dark/80">{section.body}</p>
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
+          <span className="sr-only">{path}</span>
+        </div>
+      </PageContainer>
+    </>
   );
 }
 

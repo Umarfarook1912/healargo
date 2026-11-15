@@ -155,7 +155,7 @@ export function AddressManager() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-border bg-card p-6 shadow-sm">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between surface-card p-6">
         <div>
           <h2 className="font-display text-2xl text-dark">Saved Addresses</h2>
           <p className="mt-1 text-sm text-muted">
@@ -186,7 +186,7 @@ export function AddressManager() {
       ) : addresses.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
           <MapPin className="mx-auto h-12 w-12 text-muted" />
-          <h3 className="mt-4 font-display text-lg text-dark">No saved addresses yet</h3>
+          <h3 className="mt-4 font-display text-lg text-dark font-semibold">No saved addresses yet</h3>
           <p className="mt-1 text-sm text-muted">
             Add a shipping address to speed up your future orders.
           </p>

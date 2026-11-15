@@ -38,10 +38,11 @@ export default async function OrderTrackingPage({ params }: Props) {
   const shortId = `VSO-${orderId.slice(-6).toUpperCase()}`;
 
   return (
-    <PageContainer className="py-10">
+    <PageContainer className="py-10 md:py-14">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-6">
         <div>
-          <h1 className="font-display text-3xl text-dark">Track order #{shortId}</h1>
+          <p className="eyebrow">Shipment tracking</p>
+          <h1 className="mt-2 font-display text-3xl text-dark md:text-4xl">Track order #{shortId}</h1>
           <p className="mt-1 text-sm text-muted">Live shipment status from ST Courier</p>
         </div>
         <Button variant="outline" size="sm" asChild className="gap-2">
@@ -58,7 +59,7 @@ export default async function OrderTrackingPage({ params }: Props) {
             trackingNumber={order.trackingNumber}
           />
         ) : (
-          <div className="rounded-2xl border border-border bg-cream/40 px-6 py-12 text-center text-sm text-muted">
+          <div className="rounded-3xl border border-dashed border-border bg-card/70 px-6 py-14 text-center text-sm text-muted">
             Your order hasn&apos;t been shipped yet. Tracking details will appear here once it is
             handed to the courier.
           </div>

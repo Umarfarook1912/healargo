@@ -13,13 +13,13 @@ export function AdminPageHeader({
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="mb-8 flex flex-col gap-4 border-b border-border/70 pb-6 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="font-display text-3xl tracking-tight text-dark md:text-4xl">
+        <h1 className="font-display text-3xl font-medium tracking-tight text-dark md:text-[2.5rem] md:leading-tight">
           {title}
         </h1>
         {description ? (
-          <p className="mt-2 max-w-xl text-sm text-muted">{description}</p>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{description}</p>
         ) : null}
       </div>
       {actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}
@@ -64,7 +64,7 @@ export function AdminCard({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border/80 bg-card shadow-[0_1px_0_rgba(26,26,22,0.04),0_8px_24px_rgba(26,26,22,0.04)]",
+        "rounded-2xl border border-border/80 bg-card shadow-[var(--shadow-soft)]",
         className,
       )}
     >
@@ -87,20 +87,20 @@ export function AdminStatCard({
   tone?: "primary" | "accent" | "dark" | "muted";
 }) {
   const tones = {
-    primary: "bg-primary/10 text-primary",
-    accent: "bg-accent/25 text-accent-foreground",
-    dark: "bg-dark/5 text-dark",
-    muted: "bg-cream-dark text-muted",
+    primary: "bg-primary-soft text-primary ring-1 ring-primary/10",
+    accent: "bg-accent-soft text-accent-strong ring-1 ring-accent/20",
+    dark: "bg-dark text-accent",
+    muted: "bg-cream text-muted ring-1 ring-border",
   } as const;
 
   return (
-    <AdminCard className="p-5 transition-transform duration-300 hover:-translate-y-0.5">
+    <AdminCard className="relative overflow-hidden p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lifted)]">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
             {label}
           </p>
-          <p className="mt-3 font-display text-3xl text-dark">{value}</p>
+          <p className="mt-3 font-display text-3xl font-medium tracking-tight text-dark">{value}</p>
           {hint ? <p className="mt-2 text-xs text-muted">{hint}</p> : null}
         </div>
         <div
@@ -128,14 +128,14 @@ export function AdminStatusPill({
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium",
         active
-          ? "bg-primary/10 text-primary"
-          : "bg-cream-dark text-muted",
+          ? "bg-success-soft text-success ring-1 ring-success/15"
+          : "bg-cream text-muted ring-1 ring-border",
       )}
     >
       <span
         className={cn(
           "h-1.5 w-1.5 rounded-full",
-          active ? "bg-primary" : "bg-muted",
+          active ? "bg-success" : "bg-muted/60",
         )}
       />
       {label ?? (active ? "Active" : "Inactive")}

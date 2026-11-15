@@ -245,10 +245,10 @@ export function AdminProductForm({
   return (
     <form onSubmit={onSubmit} className="mx-auto max-w-3xl space-y-6">
       {/* Basic Details Section */}
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <div className="flex items-center gap-2 border-b border-border pb-3">
           <Tag className="h-5 w-5 text-primary" />
-          <h2 className="font-display text-lg font-bold text-dark">
+          <h2 className="font-display text-lg text-dark font-semibold">
             Basic Information
           </h2>
         </div>
@@ -273,7 +273,7 @@ export function AdminProductForm({
           </Label>
           <select
             id="categoryId"
-            className="mt-1.5 flex h-11 w-full rounded-md border border-border bg-card px-3 text-sm font-medium"
+            className="mt-1.5 flex h-11 w-full rounded-xl border border-input bg-card px-3.5 text-sm focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/12 font-medium"
             value={form.categoryId}
             onChange={(e) =>
               setForm((f) => ({ ...f, categoryId: e.target.value }))
@@ -347,12 +347,12 @@ export function AdminProductForm({
       />
 
       {/* Dynamic Product Variants & Pricing */}
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <div className="flex items-center justify-between border-b border-border pb-3">
           <div className="flex items-center gap-2">
             <Layers className="h-5 w-5 text-primary" />
             <div>
-              <h2 className="font-display text-lg font-bold text-dark">
+              <h2 className="font-display text-lg text-dark font-semibold">
                 Product Variants & Pricing
               </h2>
               <p className="text-xs text-muted">
@@ -501,9 +501,9 @@ export function AdminProductForm({
         </div>
       </div>
 
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <div className="border-b border-border pb-3">
-          <h2 className="font-display text-lg font-bold text-dark">
+          <h2 className="font-display text-lg text-dark font-semibold">
             {CATALOG_COPY.videosTitle}
           </h2>
           <p className="text-xs text-muted">{CATALOG_COPY.videosHint}</p>
@@ -543,7 +543,7 @@ export function AdminProductForm({
         </ul>
       </div>
 
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <label className="flex items-center gap-3">
           <input
             type="checkbox"
@@ -591,10 +591,10 @@ export function AdminProductForm({
       </div>
 
       {/* Storefront Display Badges & Visibility */}
-      <div className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <div className="space-y-4 surface-card p-5">
         <div className="flex items-center gap-2 border-b border-border pb-3">
           <Eye className="h-5 w-5 text-primary" />
-          <h2 className="font-display text-lg font-bold text-dark">
+          <h2 className="font-display text-lg text-dark font-semibold">
             Storefront Badges & Menu Displays
           </h2>
         </div>
@@ -615,18 +615,18 @@ export function AdminProductForm({
             </div>
           </label>
 
-          <label className="flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 p-3 transition hover:bg-amber-500/10 cursor-pointer">
+          <label className="flex items-center gap-3 rounded-xl border border-accent/30 bg-warning/5 p-3 transition hover:bg-accent/10 cursor-pointer">
             <input
               type="checkbox"
-              className="h-4 w-4 accent-amber-600"
+              className="h-4 w-4 accent-primary"
               checked={form.isBestSeller}
               onChange={(e) =>
                 setForm((f) => ({ ...f, isBestSeller: e.target.checked }))
               }
             />
             <div>
-              <span className="text-xs font-bold text-amber-700 flex items-center gap-1">
-                <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
+              <span className="text-xs font-bold text-warning flex items-center gap-1">
+                <Star className="h-3 w-3 fill-accent text-accent" />
                 Best Seller Menu
               </span>
               <span className="text-[11px] text-muted">Show in Best Sellers tab</span>
@@ -673,7 +673,7 @@ export function AdminProductForm({
       </div>
 
       {/* SEO Metadata Settings */}
-      <fieldset className="space-y-4 rounded-xl border border-border bg-card p-5 shadow-2xs">
+      <fieldset className="space-y-4 surface-card p-5">
         <legend className="px-2 text-sm font-bold text-dark">SEO Metadata Settings</legend>
         <div>
           <Label htmlFor="metaTitle" className="text-xs font-semibold">Meta Title</Label>

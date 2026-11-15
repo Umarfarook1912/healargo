@@ -50,16 +50,17 @@ export function Header({ categories }: { categories: Category[] }) {
   const isAdmin = session?.user?.role === "admin";
 
   return (
-    <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-border/50">
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 shadow-[0_1px_0_rgba(16,38,27,0.02)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/75">
       <AnnouncementBar />
-      <PageContainer className="flex items-center justify-between gap-4 py-3">
+      <PageContainer className="flex items-center justify-between gap-4 py-2.5 md:py-3">
         <button
           type="button"
-          className="md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-dark transition hover:border-primary/30 hover:text-primary md:hidden"
           aria-label="Open menu"
+          aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
         >
-          <Menu className="h-6 w-6 text-dark" />
+          <Menu className="h-5 w-5" />
         </button>
 
         <Link
@@ -74,18 +75,18 @@ export function Header({ categories }: { categories: Category[] }) {
             height={110}
             priority
             unoptimized
-            className="h-12 w-auto sm:h-14 md:h-16 object-contain transition-transform group-hover:scale-105"
+            className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 md:h-14"
           />
         </Link>
 
         {/* Main Desktop Navigation */}
-        <nav className="hidden items-center gap-3.5 md:flex lg:gap-6">
+        <nav className="hidden items-center gap-1 rounded-full border border-border/70 bg-card/70 px-2 py-1 shadow-[var(--shadow-soft)] md:flex lg:gap-1.5">
           <HeaderCategoriesDropdown categories={categories} />
           {[...extraLinks, ...NAV_LINKS].map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-dark/80 transition-colors hover:text-primary"
+              className="rounded-full px-2.5 py-1.5 text-[13px] font-medium text-dark/80 transition-colors hover:bg-primary-soft hover:text-primary lg:px-3 lg:text-sm"
             >
               {link.label}
             </Link>
@@ -99,13 +100,13 @@ export function Header({ categories }: { categories: Category[] }) {
           <Button
             variant="ghost"
             size="icon"
-            className="relative"
+            className="relative border border-border bg-card"
             aria-label="Open cart"
             onClick={() => setCartOpen(true)}
           >
-            <ShoppingBag className="h-5 w-5 text-dark" />
+            <ShoppingBag className="h-5 w-5" />
             {itemCount > 0 ? (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-xs font-semibold text-accent-foreground">
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[11px] font-bold text-accent-foreground ring-2 ring-background">
                 {itemCount}
               </span>
             ) : null}
@@ -116,14 +117,14 @@ export function Header({ categories }: { categories: Category[] }) {
       {/* Mobile Drawer Menu */}
       <div
         className={cn(
-          "border-t border-border py-4 md:hidden bg-card max-h-[85vh] overflow-y-auto",
+          "max-h-[85vh] overflow-y-auto border-t border-border bg-background py-5 shadow-lg md:hidden",
           LAYOUT.container,
           mobileOpen ? "block" : "hidden",
         )}
       >
-        <nav className="flex flex-col gap-3">
+        <nav className="flex flex-col gap-4">
           <div className="space-y-1">
-            <p className="text-xs font-bold uppercase tracking-wider text-muted mb-2">
+            <p className="eyebrow mb-2">
               Categories
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -131,7 +132,7 @@ export function Header({ categories }: { categories: Category[] }) {
                 <Link
                   key={cat._id}
                   href={ROUTES.CATEGORY(cat.slug)}
-                  className="rounded-lg bg-cream-dark/40 px-3 py-2 text-xs font-medium text-dark hover:bg-cream-dark"
+                  className="rounded-xl border border-border bg-card px-3 py-2.5 text-xs font-medium text-dark transition hover:border-primary/30 hover:bg-primary-soft hover:text-primary"
                   onClick={() => setMobileOpen(false)}
                 >
                   {cat.name}
@@ -140,12 +141,12 @@ export function Header({ categories }: { categories: Category[] }) {
             </div>
           </div>
 
-          <div className="pt-2 border-t border-border">
+          <div className="grid grid-cols-2 gap-x-3 border-t border-border pt-3">
             {[...extraLinks, ...NAV_LINKS].map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-sm font-medium text-dark py-1.5"
+                className="block rounded-lg px-2 py-2 text-sm font-medium text-dark transition hover:bg-primary-soft hover:text-primary"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -155,37 +156,37 @@ export function Header({ categories }: { categories: Category[] }) {
 
           {session?.user ? (
             <div className="mt-2 pt-3 border-t border-border space-y-2.5">
-              <p className="text-xs font-bold uppercase tracking-wider text-muted">
+              <p className="eyebrow">
                 Account & Navigation ({isAdmin ? "Admin" : "User"})
               </p>
 
               {isAdmin && (
                 <Link
                   href={ROUTES.ADMIN.DASHBOARD}
-                  className="flex items-center gap-2 rounded-lg bg-amber-100 p-2.5 text-xs font-bold text-amber-900 border border-amber-300 hover:bg-amber-200"
+                  className="flex items-center gap-2 rounded-xl border border-accent/40 bg-accent-soft p-3 text-xs font-bold text-dark transition hover:bg-accent/25"
                   onClick={() => setMobileOpen(false)}
                 >
-                  <Shield className="h-4 w-4 text-amber-700" /> Go to Admin Dashboard
+                  <Shield className="h-4 w-4 text-accent-strong" /> Go to Admin Dashboard
                 </Link>
               )}
 
               <Link
                 href={`${ROUTES.PROFILE}?tab=account`}
-                className="block text-sm font-medium text-dark py-1"
+                className="block rounded-lg px-2 py-1.5 text-sm font-medium text-dark transition hover:bg-primary-soft hover:text-primary"
                 onClick={() => setMobileOpen(false)}
               >
                 Profile Maintain
               </Link>
               <Link
                 href={`${ROUTES.PROFILE}?tab=addresses`}
-                className="block text-sm font-medium text-dark py-1"
+                className="block rounded-lg px-2 py-1.5 text-sm font-medium text-dark transition hover:bg-primary-soft hover:text-primary"
                 onClick={() => setMobileOpen(false)}
               >
                 Saved Addresses
               </Link>
               <Link
                 href={`${ROUTES.PROFILE}?tab=orders`}
-                className="block text-sm font-medium text-dark py-1"
+                className="block rounded-lg px-2 py-1.5 text-sm font-medium text-dark transition hover:bg-primary-soft hover:text-primary"
                 onClick={() => setMobileOpen(false)}
               >
                 My Orders
@@ -205,14 +206,14 @@ export function Header({ categories }: { categories: Category[] }) {
             <div className="mt-2 pt-3 border-t border-border flex gap-3">
               <Link
                 href={ROUTES.LOGIN}
-                className="flex-1 rounded-lg bg-primary py-2 text-center text-sm font-semibold text-primary-foreground"
+                className="flex-1 rounded-full bg-primary py-2.5 text-center text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary-strong"
                 onClick={() => setMobileOpen(false)}
               >
                 Login
               </Link>
               <Link
                 href={ROUTES.REGISTER}
-                className="flex-1 rounded-lg border border-border py-2 text-center text-sm font-semibold text-dark hover:bg-cream-dark"
+                className="flex-1 rounded-full border border-input bg-card py-2.5 text-center text-sm font-semibold text-dark transition hover:bg-primary-soft"
                 onClick={() => setMobileOpen(false)}
               >
                 Register
@@ -222,7 +223,7 @@ export function Header({ categories }: { categories: Category[] }) {
 
           {/* Mobile Social Links Strip */}
           <div className="mt-3 pt-3 border-t border-border">
-            <p className="text-xs font-bold uppercase tracking-wider text-muted mb-2">
+            <p className="eyebrow mb-2">
               Connect on Social Media
             </p>
             <SocialLinks variant="pill" className="gap-2" />

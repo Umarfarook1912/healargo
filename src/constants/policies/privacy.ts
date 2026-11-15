@@ -1,3 +1,7 @@
+import { UI } from "@/constants/ui";
+
+const phoneList = UI.phones.map((phone) => phone.display).join(" / ");
+
 export const PRIVACY_POLICY = {
   title: "Privacy Policy",
   intro:
@@ -17,7 +21,7 @@ export const PRIVACY_POLICY = {
     },
     {
       title: "Contact",
-      body: "For privacy questions, contact us at healargo@gmail.com.",
+      body: `For privacy questions, contact us at ${UI.email} or call ${phoneList}.`,
     },
   ],
 };

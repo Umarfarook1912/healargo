@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScaleOnHover } from "@/components/shared/motion";
@@ -18,7 +19,6 @@ import { ROUTES } from "@/constants/routes";
 import { useCartStore } from "@/hooks/useCartStore";
 import { useRequireLogin } from "@/hooks/useRequireLogin";
 import { VARIANT_AVAILABLE_STOCK, comboIsLive } from "@/lib/products/commerce";
-import { cn } from "@/lib/utils/cn";
 import { formatInr, stripHtml, truncate } from "@/lib/utils/format";
 import type { ComboOffer } from "@/types/combo";
 
@@ -75,8 +75,11 @@ export function ComboCard({ combo }: { combo: ComboOffer }) {
 
   return (
     <ScaleOnHover className="h-full w-full">
-      <article className="group flex h-full flex-col rounded-xl border border-border/70 bg-card p-2 shadow-sm">
-        <Link href={ROUTES.COMBO(combo.slug)} className={LAYOUT.productMedia}>
+      <article className="@container group flex h-full flex-col overflow-hidden rounded-2xl border border-border/80 bg-card p-2 shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:border-primary/25 hover:shadow-[var(--shadow-lifted)] sm:p-2.5">
+        <Link
+          href={ROUTES.COMBO(combo.slug)}
+          className="relative block aspect-square shrink-0 overflow-hidden rounded-xl bg-cream"
+        >
           <Image
             src={imgSrc}
             alt={name}
@@ -86,55 +89,63 @@ export function ComboCard({ combo }: { combo: ComboOffer }) {
             className={LAYOUT.productImage}
           />
           {discount > 0 ? (
-            <Badge className="absolute left-2 top-2 bg-primary px-1.5 py-0 text-[10px] text-primary-foreground">
+            <Badge className="absolute left-1.5 top-1.5 border-transparent bg-primary px-1.5 py-0 text-[9px] font-semibold leading-4 text-primary-foreground shadow-sm @min-[13rem]:left-2 @min-[13rem]:top-2 @min-[13rem]:px-2 @min-[13rem]:text-[10px]">
               -{discount}
               {PRODUCT_COPY.offSuffix}
             </Badge>
           ) : null}
         </Link>
-        <Link href={ROUTES.COMBO(combo.slug)}>
-          <h3 className={cn(LAYOUT.productTitle, "font-display text-sm text-dark sm:text-base")}>
-            {name}
-          </h3>
-        </Link>
-        <p className={cn(LAYOUT.productDesc, "mt-0.5 text-xs text-muted")}>
-          {description || "\u00a0"}
-        </p>
-        <div className={cn(LAYOUT.productVariants, "mt-2 flex flex-wrap gap-1.5")}>
-          <span className="inline-flex h-6 items-center rounded-md border border-primary bg-primary px-2 text-[10px] leading-none text-primary-foreground">
-            {CATALOG_COPY.comboChip}
-          </span>
-        </div>
-        <div className={cn(LAYOUT.productPrice, "mt-2 flex items-baseline gap-1.5")}>
-          <span className="text-sm font-semibold text-dark sm:text-base">
-            {formatInr(combo.price)}
-          </span>
-          {combo.originalPrice > combo.price ? (
-            <span className="text-xs text-muted line-through">
-              {formatInr(combo.originalPrice)}
+
+        <div className="flex flex-1 flex-col px-0.5 pt-2.5 @min-[13rem]:px-1">
+          <Link href={ROUTES.COMBO(combo.slug)}>
+            <h3 className="line-clamp-2 min-h-[2.5em] break-words font-sans text-[13px] font-semibold leading-[1.25] text-dark transition-colors group-hover:text-primary @min-[13rem]:text-sm">
+              {name}
+            </h3>
+          </Link>
+          <p className="mt-0.5 hidden min-h-4 truncate text-xs text-muted @min-[13rem]:block">
+            {description || "\u00a0"}
+          </p>
+          <div className="mt-2 flex min-h-5 gap-1">
+            <span className="inline-flex h-5 items-center rounded-full border border-accent/40 bg-accent-soft px-2 text-[10px] font-semibold leading-none text-accent-strong @min-[13rem]:h-6 @min-[13rem]:px-2.5">
+              {CATALOG_COPY.comboChip}
             </span>
-          ) : null}
-        </div>
-        {combo.endsAt && comboIsLive(combo) ? (
-          <OfferCountdown endsAt={combo.endsAt} compact />
-        ) : null}
-        <div className="mt-auto pt-2 grid grid-cols-2 gap-1.5">
-          <Button
-            size="sm"
-            variant="outline"
-            className="w-full text-xs font-medium border-primary/30 text-primary hover:bg-primary hover:text-white px-1 sm:px-2 transition-colors"
-            onClick={handleAdd}
-          >
-            {CHECKOUT_COPY.ADD_TO_CART}
-          </Button>
-          <Button
-            size="sm"
-            variant="accent"
-            className="w-full text-xs font-semibold px-1 sm:px-2 shadow-xs transition-colors"
-            onClick={handleBuyNow}
-          >
-            {CHECKOUT_COPY.BUY_NOW}
-          </Button>
+          </div>
+          <div className="mt-2 flex min-h-5 flex-wrap items-baseline gap-x-1.5">
+            <span className="text-sm font-bold leading-tight text-primary @min-[13rem]:text-base">
+              {formatInr(combo.price)}
+            </span>
+            {combo.originalPrice > combo.price ? (
+              <span className="text-[11px] leading-tight text-muted line-through @min-[13rem]:text-xs">
+                {formatInr(combo.originalPrice)}
+              </span>
+            ) : null}
+          </div>
+          {/* Fixed-height slot so cards with and without a countdown stay aligned */}
+          <div className="min-h-4 overflow-hidden whitespace-nowrap">
+            {combo.endsAt && comboIsLive(combo) ? (
+              <OfferCountdown endsAt={combo.endsAt} compact />
+            ) : null}
+          </div>
+          <div className="mt-auto flex gap-1.5 pt-2.5">
+            <Button
+              size="sm"
+              variant="outline"
+              aria-label={CHECKOUT_COPY.ADD_TO_CART}
+              className="h-9 w-9 shrink-0 border-primary/30 p-0 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground @min-[13rem]:w-auto @min-[13rem]:flex-1 @min-[13rem]:gap-1.5 @min-[13rem]:px-2"
+              onClick={handleAdd}
+            >
+              <ShoppingCart className="h-4 w-4 shrink-0 @min-[13rem]:h-3.5 @min-[13rem]:w-3.5" />
+              <span className="hidden @min-[13rem]:inline">{CHECKOUT_COPY.ADD_TO_CART}</span>
+            </Button>
+            <Button
+              size="sm"
+              variant="accent"
+              className="h-9 min-w-0 flex-1 px-2 text-xs font-semibold transition-colors"
+              onClick={handleBuyNow}
+            >
+              <span className="truncate">{CHECKOUT_COPY.BUY_NOW}</span>
+            </Button>
+          </div>
         </div>
       </article>
     </ScaleOnHover>

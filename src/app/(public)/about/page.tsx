@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Leaf, HeartHandshake, ShieldCheck } from "lucide-react";
 import { PageContainer } from "@/components/layout/PageContainer";
+import { PageHero } from "@/components/shared/PageHero";
 import { SocialLinks } from "@/components/common/SocialLinks";
 import { LAYOUT } from "@/constants/layout";
 import { UI } from "@/constants/ui";
@@ -14,11 +16,11 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function AboutPage() {
   return (
-    <PageContainer className="py-12">
+    <>
+    <PageHero eyebrow="Our story" title={`About ${UI.brand}`} description={UI.since} />
+    <PageContainer className="py-12 md:py-16">
       <div className={LAYOUT.narrow}>
-        <h1 className="font-display text-4xl text-dark">About {UI.brand}</h1>
-        <p className="mt-4 text-lg text-muted">{UI.since}</p>
-        <div className="mt-8 space-y-4 leading-relaxed text-dark/80">
+        <div className="space-y-5 text-lg leading-relaxed text-dark/85">
           <p>
             {UI.brand} is built around a simple idea: everyday wellness should
             feel honest, approachable, and rooted in natural choices.
@@ -34,11 +36,27 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="mt-12 rounded-2xl border border-border bg-cream/60 p-6 sm:p-8">
-          <h2 className="font-display text-xl font-bold text-dark sm:text-2xl">
+        <div className="mt-12 grid gap-4 sm:grid-cols-3">
+          {[
+            { icon: Leaf, title: "Natural choices", body: "Products selected for everyday wellness." },
+            { icon: ShieldCheck, title: "Clear information", body: "Honest details so you can choose with confidence." },
+            { icon: HeartHandshake, title: "Personal support", body: "Real help by email and WhatsApp." },
+          ].map(({ icon: Icon, title, body }) => (
+            <div key={title} className="surface-card p-5">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-soft text-primary">
+                <Icon className="h-5 w-5" />
+              </span>
+              <h3 className="mt-4 font-display text-lg font-semibold">{title}</h3>
+              <p className="mt-1 text-sm text-muted">{body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="forest-gradient mt-12 rounded-3xl p-7 text-cream shadow-[var(--shadow-lifted)] sm:p-10">
+          <h2 className="font-display text-2xl text-white sm:text-3xl">
             Stay Connected
           </h2>
-          <p className="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
+          <p className="mt-2 text-sm leading-relaxed text-cream/80">
             Follow {UI.brand} across our official channels for product highlights,
             updates, and everyday wellness inspiration:
           </p>
@@ -48,5 +66,6 @@ export default function AboutPage() {
         </div>
       </div>
     </PageContainer>
+    </>
   );
 }

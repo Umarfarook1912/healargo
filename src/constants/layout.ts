@@ -1,16 +1,16 @@
 export const LAYOUT = {
   container: "page-container",
   narrow: "mx-auto w-full max-w-3xl",
-  sectionY: "py-12 md:py-16",
+  sectionY: "py-14 md:py-20",
   heroMin: "min-h-0 md:min-h-[78vh]",
   heroImage: "object-cover object-[70%_center]",
   heroOverlay:
-    "bg-gradient-to-r from-cream/90 via-cream/45 to-cream/10",
+    "bg-gradient-to-r from-background/95 via-background/60 to-transparent",
   heroContent: "relative z-10 w-full max-w-2xl",
   productGrid:
     "grid w-full grid-cols-2 items-stretch gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
   productMedia:
-    "relative mb-2 aspect-square shrink-0 overflow-hidden rounded-lg bg-cream-dark",
+    "relative mb-2 aspect-square shrink-0 overflow-hidden rounded-xl bg-cream",
   productImage:
     "object-cover transition-transform duration-700 ease-out group-hover:scale-110",
   categoryGrid:

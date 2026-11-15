@@ -111,7 +111,7 @@ export function ProductReviews({
           onSubmit={submit}
           className="h-fit space-y-4 rounded-2xl border border-border bg-cream/40 p-4 lg:sticky lg:top-24 lg:p-5"
         >
-          <h3 className="font-display text-lg text-dark">{CATALOG_COPY.reviewWrite}</h3>
+          <h3 className="font-display text-lg text-dark font-semibold">{CATALOG_COPY.reviewWrite}</h3>
           <div>
             <Label htmlFor="authorName">{CATALOG_COPY.reviewName}</Label>
             <Input id="authorName" className="mt-1.5 bg-card" value={authorName} onChange={(e) => setAuthorName(e.target.value)} required />

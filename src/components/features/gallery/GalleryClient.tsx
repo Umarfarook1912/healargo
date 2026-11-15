@@ -291,10 +291,10 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                   isActive
                     ? "bg-primary text-white shadow-md ring-2 ring-primary/25 scale-[1.02]"
                     : cat.id === "whitelabel"
-                    ? "bg-indigo-500/10 text-indigo-900 hover:bg-indigo-500/20 border border-indigo-400/40"
+                    ? "bg-primary/10 text-primary-strong hover:bg-primary/20 border border-primary/30"
                     : isHighlightTab
-                    ? "bg-amber-500/10 text-amber-900 hover:bg-amber-500/20 border border-amber-400/40"
-                    : "bg-card text-stone-600 hover:bg-stone-100 hover:text-dark border border-border/60"
+                    ? "bg-warning/10 text-warning hover:bg-accent/20 border border-accent/40"
+                    : "bg-card text-muted hover:bg-cream hover:text-dark border border-border/60"
                 )}
               >
                 {cat.label}
@@ -317,13 +317,13 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                   </>
                 ) : activeCategory === "selling" ? (
                   <>
-                    <ShoppingBag className="h-4 w-4 text-amber-600" />
-                    <span className="text-amber-800">Direct Selling Announcements & Special Booking Offers</span>
+                    <ShoppingBag className="h-4 w-4 text-warning" />
+                    <span className="text-warning">Direct Selling Announcements & Special Booking Offers</span>
                   </>
                 ) : activeCategory === "whitelabel" ? (
                   <>
-                    <Tag className="h-4 w-4 text-indigo-600" />
-                    <span className="text-indigo-700">White Label & Private Brand Supply</span>
+                    <Tag className="h-4 w-4 text-primary" />
+                    <span className="text-primary">White Label & Private Brand Supply</span>
                   </>
                 ) : activeCategory === "extraction" ? (
                   <>
@@ -339,7 +339,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
               </div>
               <h2
                 id="mill-videos-heading"
-                className="font-display text-2xl sm:text-3xl font-bold text-dark"
+                className="font-display text-2xl sm:text-3xl text-dark"
               >
                 {activeCategory === "packing"
                   ? "Customer Orders Packing & Dispatch Logs"
@@ -368,9 +368,9 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
           {/* Dedicated White Label B2B Feature Highlights & Direct Inquiry */}
           {activeCategory === "whitelabel" && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 bg-indigo-50/50 border border-indigo-200/70 rounded-2xl p-4 sm:p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 bg-primary-soft/50 border border-primary/20 rounded-2xl p-4 sm:p-5">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-600/10 text-indigo-700 mt-0.5">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary mt-0.5">
                     <Layers className="h-5 w-5" />
                   </div>
                   <div>
@@ -382,7 +382,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-600/10 text-purple-700 mt-0.5">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent-strong mt-0.5">
                     <Tag className="h-5 w-5" />
                   </div>
                   <div>
@@ -406,7 +406,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-600/10 text-blue-700 mt-0.5">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-info-soft text-info mt-0.5">
                     <Truck className="h-5 w-5" />
                   </div>
                   <div>
@@ -419,16 +419,16 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
               </div>
 
               {/* White Label CTA Box */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-indigo-950 via-stone-900 to-indigo-900 p-4 sm:p-6 text-white shadow-md border border-indigo-800/60">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-dark via-primary-strong to-primary p-4 sm:p-6 text-white shadow-md border border-black/10">
                 <div className="space-y-1 max-w-xl">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-[11px] font-semibold text-indigo-300 border border-indigo-400/30">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-indigo-400" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/20 px-2.5 py-0.5 text-[11px] font-semibold text-accent border border-accent/30">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
                     <span>Zero Factory Setup Investment Required</span>
                   </span>
-                  <h3 className="font-display text-base sm:text-lg font-bold text-white">
+                  <h3 className="font-display text-base sm:text-lg text-white font-semibold">
                     Start Your Own Cold-Pressed Oil Brand Today
                   </h3>
-                  <p className="text-xs text-stone-300 leading-relaxed">
+                  <p className="text-xs text-cream/80 leading-relaxed">
                     Connect with the Healargo team for white-label pricing, minimum order quantities, and packaging customization.
                   </p>
                 </div>
@@ -482,7 +482,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 </div>
               </div>
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-info-soft text-info">
                   <Truck className="h-5 w-5" />
                 </div>
                 <div>
@@ -491,7 +491,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 </div>
               </div>
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-500/10 text-purple-700">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent-strong">
                   <CheckCircle2 className="h-5 w-5" />
                 </div>
                 <div>
@@ -504,9 +504,9 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
 
           {/* Dedicated Selling Advantage Highlights */}
           {activeCategory === "selling" && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-amber-500/5 border border-amber-500/20 rounded-2xl p-4 sm:p-5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-warning/5 border border-accent/20 rounded-2xl p-4 sm:p-5">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500/15 text-amber-800">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-warning/15 text-warning">
                   <Tag className="h-5 w-5" />
                 </div>
                 <div>
@@ -547,7 +547,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
           {/* Video Sub-Category Filters (Only when viewing "all" or "videos") */}
           {(activeCategory === "all" || activeCategory === "videos") && (
             <div className="flex flex-wrap items-center gap-2 pt-1">
-              <span className="text-xs font-semibold text-stone-500 mr-1">Filter Videos:</span>
+              <span className="text-xs font-semibold text-muted mr-1">Filter Videos:</span>
               {videoSubCategories.map((subCat) => {
                 const isSubActive = videoFilter === subCat.id;
                 return (
@@ -557,8 +557,8 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                     className={cn(
                       "rounded-lg px-3 py-1.5 text-xs font-medium transition-all cursor-pointer",
                       isSubActive
-                        ? "bg-stone-900 text-white shadow-xs ring-2 ring-stone-900/20"
-                        : "bg-stone-100 text-stone-700 hover:bg-stone-200 border border-border/40"
+                        ? "bg-primary-strong text-white shadow-xs ring-2 ring-dark/20"
+                        : "bg-cream text-dark/80 hover:bg-cream-dark border border-border/40"
                     )}
                   >
                     {subCat.label}
@@ -605,7 +605,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
               </div>
               <h2
                 id="visual-showcase-heading"
-                className="font-display text-2xl sm:text-3xl font-bold text-dark"
+                className="font-display text-2xl sm:text-3xl text-dark"
               >
                 {activeCategory === "selling"
                   ? "Wood-Pressed Oils & Combos Ready to Order"
@@ -630,11 +630,11 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
             {filteredImages.map((image, index) => (
               <div
                 key={image.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                className="group relative flex flex-col justify-between overflow-hidden surface-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
               >
                 {/* Image Container with Hover Overlay */}
                 <div
-                  className="relative aspect-square w-full cursor-pointer overflow-hidden bg-stone-100"
+                  className="relative aspect-square w-full cursor-pointer overflow-hidden bg-cream"
                   onClick={() => openLightbox(index)}
                 >
                   <Image
@@ -663,7 +663,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                       <p className="text-xs font-semibold leading-snug line-clamp-2">
                         {image.title}
                       </p>
-                      <p className="text-[11px] text-stone-200 flex items-center gap-1">
+                      <p className="text-[11px] text-cream flex items-center gap-1">
                         <Eye className="h-3 w-3" />
                         <span>Click to preview full size</span>
                       </p>
@@ -683,11 +683,11 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 {/* Details Footer - Reduced & Streamlined */}
                 <div className="flex flex-1 flex-col justify-between p-3 sm:p-3.5 space-y-2 bg-card">
                   <div className="space-y-0.5">
-                    <span className="text-[10px] font-semibold text-stone-500 uppercase tracking-wide">
+                    <span className="text-[10px] font-semibold text-muted uppercase tracking-wide">
                       {image.tag}
                     </span>
                     <h3
-                      className="font-display text-xs sm:text-sm font-bold text-dark leading-snug line-clamp-1"
+                      className="font-display text-xs sm:text-sm text-dark leading-snug line-clamp-1 font-semibold"
                       title={image.title}
                     >
                       {image.title}
@@ -702,7 +702,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                     <button
                       type="button"
                       onClick={() => openLightbox(index)}
-                      className="font-medium text-stone-600 hover:text-primary transition-colors flex items-center gap-1 cursor-pointer"
+                      className="font-medium text-muted hover:text-primary transition-colors flex items-center gap-1 cursor-pointer"
                     >
                       <Eye className="h-3 w-3" />
                       <span>Preview</span>
@@ -734,23 +734,23 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
           onClick={() => setActiveVideoModal(null)}
         >
           <div
-            className="relative flex flex-col max-w-4xl w-full max-h-[92vh] bg-stone-950 rounded-2xl overflow-hidden shadow-2xl border border-stone-800"
+            className="relative flex flex-col max-w-4xl w-full max-h-[92vh] bg-dark rounded-2xl overflow-hidden shadow-2xl border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-3.5 sm:p-4 border-b border-stone-800 bg-stone-950 text-white">
+            <div className="flex items-center justify-between p-3.5 sm:p-4 border-b border-white/10 bg-dark text-white">
               <div className="flex items-center gap-2">
                 <span className="rounded-full bg-primary/20 px-2.5 py-0.5 text-xs font-semibold text-primary-light border border-primary/30">
                   {activeVideoModal.badge}
                 </span>
-                <span className="text-xs text-stone-400 hidden sm:inline">
+                <span className="text-xs text-muted hidden sm:inline">
                   {activeVideoModal.tag}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveVideoModal(null)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-800 text-stone-300 hover:bg-stone-700 hover:text-white transition-colors cursor-pointer"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-cream/80 hover:bg-white/15 hover:text-white transition-colors cursor-pointer"
                 aria-label="Close video player"
               >
                 <X className="h-5 w-5" />
@@ -790,12 +790,12 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
             </div>
 
             {/* Bottom Caption & Action */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 bg-stone-950 border-t border-stone-800 text-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 bg-dark border-t border-white/10 text-white">
               <div className="space-y-0.5 max-w-xl">
-                <h4 className="font-display text-sm sm:text-base font-bold text-white">
+                <h4 className="font-display text-sm sm:text-base text-white font-semibold">
                   {activeVideoModal.title}
                 </h4>
-                <p className="text-xs text-stone-300">
+                <p className="text-xs text-cream/80">
                   {activeVideoModal.description}
                 </p>
               </div>
@@ -838,13 +838,13 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
         >
           {/* Modal Container */}
           <div
-            className="relative flex flex-col max-w-4xl w-full max-h-[90vh] bg-stone-900 rounded-2xl overflow-hidden shadow-2xl border border-stone-800"
+            className="relative flex flex-col max-w-4xl w-full max-h-[90vh] bg-primary-strong rounded-2xl overflow-hidden shadow-2xl border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Bar */}
-            <div className="flex items-center justify-between p-4 border-b border-stone-800 bg-stone-950/80 text-white">
+            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-dark/80 text-white">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-medium text-stone-400">
+                <span className="text-xs font-medium text-muted">
                   {lightboxIndex! + 1} of {filteredImages.length}
                 </span>
                 {currentLightboxItem.badge && (
@@ -857,7 +857,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
               <button
                 type="button"
                 onClick={closeLightbox}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-800 text-stone-300 hover:bg-stone-700 hover:text-white transition-colors cursor-pointer"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-cream/80 hover:bg-white/15 hover:text-white transition-colors cursor-pointer"
                 aria-label="Close image preview"
               >
                 <X className="h-5 w-5" />
@@ -897,12 +897,12 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
             </div>
 
             {/* Bottom Caption & Action */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 bg-stone-950/90 border-t border-stone-800 text-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 bg-dark/90 border-t border-white/10 text-white">
               <div className="space-y-1 max-w-xl">
-                <h4 className="font-display text-base sm:text-lg font-bold text-white">
+                <h4 className="font-display text-base sm:text-lg text-white font-semibold">
                   {currentLightboxItem.title}
                 </h4>
-                <p className="text-xs sm:text-sm text-stone-300">
+                <p className="text-xs sm:text-sm text-cream/80">
                   {currentLightboxItem.description}
                 </p>
               </div>
@@ -923,13 +923,13 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
       )}
 
       {/* Bottom CTA Banner */}
-      <div className="rounded-3xl border border-primary/20 bg-gradient-to-r from-amber-500/10 via-primary/10 to-amber-600/10 p-6 sm:p-10 text-center space-y-4">
+      <div className="rounded-3xl border border-primary/20 bg-gradient-to-r from-accent/10 via-primary/10 to-accent/10 p-6 sm:p-10 text-center space-y-4">
         <span className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">
           <CheckCircle2 className="h-4 w-4" />
           <span>Traditional Quality, Thoughtfully Made</span>
         </span>
 
-        <h3 className="font-display text-2xl sm:text-3xl font-bold text-dark max-w-xl mx-auto">
+        <h3 className="font-display text-2xl sm:text-3xl text-dark max-w-xl mx-auto">
           Taste the Rich Difference of Traditional Cold-Pressed Oils
         </h3>
 
@@ -946,7 +946,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
           </Link>
           <Link
             href={ROUTES.FAQS}
-            className="rounded-xl border border-border bg-card px-6 py-2.5 text-sm font-semibold text-dark hover:bg-stone-50 transition-colors shadow-2xs"
+            className="rounded-xl border border-border bg-card px-6 py-2.5 text-sm font-semibold text-dark hover:bg-cream transition-colors shadow-2xs"
           >
             Check FAQs with Video Answers
           </Link>
@@ -984,7 +984,7 @@ function GalleryVideoCard({
   return (
     <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-primary/20 bg-card shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5">
       {/* Video Player - Enhanced Size (aspect-[4/3] provides commanding video presence) */}
-      <div className="relative aspect-[4/3] sm:aspect-[16/10] md:aspect-[4/3] w-full overflow-hidden bg-stone-950 flex items-center justify-center">
+      <div className="relative aspect-[4/3] sm:aspect-[16/10] md:aspect-[4/3] w-full overflow-hidden bg-dark flex items-center justify-center">
         {isYouTube && ytId ? (
           isPlaying ? (
             <iframe
@@ -1018,7 +1018,7 @@ function GalleryVideoCard({
                   className="object-cover transition-transform duration-500 group-hover/thumb:scale-105"
                 />
               ) : (
-                <div className="h-full w-full bg-stone-900" />
+                <div className="h-full w-full bg-primary-strong" />
               )}
 
               {/* Dark Gradient Overlay */}
@@ -1039,7 +1039,7 @@ function GalleryVideoCard({
             </div>
           )
         ) : (
-          <div className="relative h-full w-full flex items-center justify-center bg-stone-950">
+          <div className="relative h-full w-full flex items-center justify-center bg-dark">
             <video
               controls
               playsInline
@@ -1059,9 +1059,9 @@ function GalleryVideoCard({
               className={cn(
                 "rounded-full px-2.5 py-0.5 text-[10px] font-semibold border shadow-xs backdrop-blur-md",
                 video.subCategory === "selling"
-                  ? "bg-amber-600/90 text-white border-amber-400/40"
+                  ? "bg-accent-strong/90 text-white border-accent/40"
                   : video.subCategory === "whitelabel"
-                  ? "bg-indigo-700/90 text-white border-indigo-400/40"
+                  ? "bg-primary/90 text-white border-primary/30"
                   : video.subCategory === "packing"
                   ? "bg-emerald-700/90 text-white border-emerald-400/40"
                   : "bg-dark/85 text-cream border-white/10"
@@ -1094,19 +1094,19 @@ function GalleryVideoCard({
       <div className="flex flex-col justify-between p-3 sm:p-3.5 space-y-2 bg-card">
         <div className="space-y-0.5">
           <div className="flex items-center justify-between gap-2">
-            <span className="rounded-md bg-stone-100 px-2 py-0.5 text-[10px] font-semibold text-stone-600 uppercase tracking-wide">
+            <span className="rounded-md bg-cream px-2 py-0.5 text-[10px] font-semibold text-muted uppercase tracking-wide">
               {video.tag}
             </span>
             {video.date && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-amber-50 px-1.5 py-0.5 text-[10px] font-medium text-amber-800 border border-amber-200/50">
-                <Calendar className="h-2.5 w-2.5 text-amber-600" />
+              <span className="inline-flex items-center gap-1 rounded-md bg-warning-soft px-1.5 py-0.5 text-[10px] font-medium text-warning border border-warning/25">
+                <Calendar className="h-2.5 w-2.5 text-warning" />
                 <span>{video.date}</span>
               </span>
             )}
           </div>
 
           <h3
-            className="font-display text-xs sm:text-sm font-bold text-dark leading-snug line-clamp-1 hover:text-primary transition-colors cursor-pointer"
+            className="font-display text-xs sm:text-sm text-dark leading-snug line-clamp-1 hover:text-primary transition-colors cursor-pointer font-semibold"
             onClick={() => onOpenModal(video)}
             title={video.title}
           >
@@ -1183,7 +1183,7 @@ function GalleryVideoCard({
             <button
               type="button"
               onClick={() => onShare(video.title, video.videoUrl)}
-              className="inline-flex items-center gap-1 text-stone-500 hover:text-dark transition-colors font-medium cursor-pointer"
+              className="inline-flex items-center gap-1 text-muted hover:text-dark transition-colors font-medium cursor-pointer"
               title="Share video"
             >
               <Share2 className="h-3 w-3" />

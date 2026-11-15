@@ -1,7 +1,7 @@
 "use client";
 
 const SELECT_CLASS =
-  "h-9 w-full min-w-[9.5rem] rounded-md border border-border bg-card px-2.5 text-sm text-dark";
+  "h-9 w-full min-w-[9.5rem] rounded-lg border border-input bg-card px-2.5 text-sm text-dark transition-colors hover:border-primary/30 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/12";
 
 export function AdminOrderFieldSelect({
   label,

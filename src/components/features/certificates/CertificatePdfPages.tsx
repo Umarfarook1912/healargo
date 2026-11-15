@@ -53,18 +53,18 @@ export function CertificatePdfPages({ url, title }: CertificatePdfPagesProps) {
   }, [url]);
 
   if (failed) {
-    return <p className="px-4 text-sm text-stone-300">{CERTIFICATE_VIEWER.failed}</p>;
+    return <p className="px-4 text-sm text-cream/80">{CERTIFICATE_VIEWER.failed}</p>;
   }
 
   if (pages.length === 0) {
-    return <p className="px-4 text-sm text-stone-300">{CERTIFICATE_VIEWER.loading}</p>;
+    return <p className="px-4 text-sm text-cream/80">{CERTIFICATE_VIEWER.loading}</p>;
   }
 
   return (
     <div className="flex w-full max-w-3xl flex-col gap-4">
       {pages.map((page) => (
         <figure key={page.page} className="overflow-hidden rounded-lg bg-white shadow-2xl">
-          <figcaption className="bg-stone-100 px-3 py-1.5 text-center text-xs font-medium text-stone-600">
+          <figcaption className="bg-cream px-3 py-1.5 text-center text-xs font-medium text-muted">
             {CERTIFICATE_VIEWER.pageOf(page.page, pages.length)}
           </figcaption>
           {/* eslint-disable-next-line @next/next/no-img-element */}
