@@ -8,17 +8,16 @@ import { ROUTES } from "@/constants/routes";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "FAQs & Video Explanations — Wooden Pressed Oils & Ghee",
+  title: "FAQs & Video Explanations — Natural Oils & Agro Goodness",
   description:
-    "Get clear video answers and detailed explanations about Healargo products, sourcing, pricing, shipping, and quality.",
+    "Get clear video answers and detailed explanations about HEALARGO natural products, sourcing, pricing, shipping, and quality.",
   path: "/faqs",
   keywords: [
-    "Healargo FAQs",
-    "wooden pressed oil questions",
+    "HEALARGO FAQs",
+    "cold pressed oil questions",
     "why wood pressed oil is special",
     "cold pressed oil price explanation",
-    "wood pressed oil taste",
-    "Uthukuli cow ghee bilona FAQs",
+    "HEALARGO natural products",
     "edible oil shipping across India",
   ],
 });

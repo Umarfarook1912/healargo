@@ -82,10 +82,10 @@ export function FaqsClient() {
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
               className={cn(
-                "rounded-full px-4 py-1.5 text-xs font-medium transition-all",
+                "rounded-full px-4 py-1.5 text-xs font-bold transition-all",
                 isActive
-                  ? "bg-primary text-white shadow-xs"
-                  : "bg-cream text-muted hover:bg-cream-dark/80 hover:text-dark"
+                  ? "bg-[#4F8A45] text-white shadow-xs"
+                  : "border border-border/80 bg-white/90 text-[#72776A] hover:border-[#4F8A45]/40 hover:bg-[#DDECCF]/40 hover:text-[#263D2E]"
               )}
             >
               {cat.label}

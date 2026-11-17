@@ -7,9 +7,9 @@ import { getProducts } from "@/lib/products/queries";
 import type { Product } from "@/types/product";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Shop All Oils & Ghee",
+  title: "Shop All Natural Oils & Foods",
   description:
-    "Browse Healargo products including wood-pressed oils, ghee, and wellness essentials delivered across India.",
+    "Browse HEALARGO products including cold-pressed oils, pure cow ghee, and natural wellness essentials delivered across India.",
   path: "/shop",
 });
 
@@ -19,7 +19,10 @@ export const revalidate = 0;
 export default async function ShopPage() {
   let products: Product[] = [];
   try {
-    products = await getProducts();
+    const raw = await getProducts();
+    products = raw.filter(
+      (p) => !p.slug.includes("cleaning") && !p.name.toLowerCase().includes("cleaning")
+    );
   } catch {
     products = [];
   }
@@ -27,9 +30,9 @@ export default async function ShopPage() {
   return (
     <>
       <PageHero
-        eyebrow="Healargo Store"
-        title="Shop"
-        description="Explore thoughtfully sourced products and order online with ease."
+        eyebrow="HEALARGO Store"
+        title="Shop Natural Products"
+        description="Explore thoughtfully sourced cold-pressed edible oils and pure agro essentials."
       />
       <PageContainer className="py-10 md:py-14">
         <ProductGrid products={products} />

@@ -141,7 +141,7 @@ export function HomeHeroCarousel({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={slide.imageUrl}
-                alt={slide.altText || slide.headline || "Healargo banner"}
+                alt={slide.altText || slide.headline || "HEALARGO banner"}
                 className="h-full w-full object-cover object-center"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
@@ -168,7 +168,7 @@ export function HomeHeroCarousel({
               className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-dark/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-md"
             >
               <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Healargo
+              HEALARGO
             </motion.span>
 
             {slide.headline ? (

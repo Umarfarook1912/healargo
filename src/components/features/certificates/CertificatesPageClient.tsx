@@ -67,28 +67,28 @@ export function CertificatesPageClient() {
           <span>Quality Assurance & Statutory Compliance</span>
         </div>
 
-        <h1 className="mt-4 font-display text-4xl leading-[1.08] tracking-tight text-dark md:text-6xl">
-          Certificates & Quality Standards
+        <h1 className="mt-4 font-display text-4xl font-normal leading-[1.08] tracking-tight text-[#263D2E] md:text-6xl">
+          Certificates &amp; Quality Standards
         </h1>
 
-        <p className="mt-4 text-sm leading-relaxed text-muted sm:text-lg sm:leading-relaxed">
+        <p className="mt-4 text-sm leading-relaxed text-[#72776A] sm:text-lg sm:leading-relaxed">
           We are committed to maintaining food safety, product quality, and transparency
           throughout our edible oil production and supply process. Explore our applicable
           licenses, registrations, and verified quality documents.
         </p>
 
         {/* Quick Highlights Pill Bar */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-medium text-dark/80">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-cream-dark/60 px-3.5 py-1.5">
-            🌿 Traditional Low-Heat Method
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-bold text-[#263D2E]">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#DDECCF]/70 px-3.5 py-1.5 text-[#4F8A45]">
+            🌿 Traditional Cold-Pressed
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-cream-dark/60 px-3.5 py-1.5">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF0B8]/70 px-3.5 py-1.5 text-[#263D2E]">
             🚫 Zero Chemical Solvents
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-cream-dark/60 px-3.5 py-1.5">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#D8F3EC]/70 px-3.5 py-1.5 text-[#4F8A45]">
             🔬 Independent Laboratory Testing
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-cream-dark/60 px-3.5 py-1.5">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFE0D4]/70 px-3.5 py-1.5 text-[#FF8066]">
             ⚖️ Credential Integrity
           </span>
         </div>
@@ -115,18 +115,18 @@ export function CertificatesPageClient() {
                   key={category.id}
                   type="button"
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition-all ${
+                  className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-all ${
                     isSelected
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "border border-border/80 bg-card text-dark hover:bg-cream-dark/50"
+                      ? "bg-[#4F8A45] text-white shadow-xs"
+                      : "border border-border/80 bg-white text-[#29352B] hover:border-[#4F8A45]/40 hover:bg-[#DDECCF]/30"
                   }`}
                 >
                   <span>{category.label}</span>
                   <span
                     className={`rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
                       isSelected
-                        ? "bg-primary-foreground/20 text-primary-foreground"
-                        : "bg-cream text-muted"
+                        ? "bg-white/20 text-white"
+                        : "bg-cream text-[#72776A]"
                     }`}
                   >
                     {count}

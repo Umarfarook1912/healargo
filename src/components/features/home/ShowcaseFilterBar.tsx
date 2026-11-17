@@ -12,23 +12,22 @@ const TAB_STYLES: Record<
   { active: string; idle: string; badgeActive: string; badgeIdle: string }
 > = {
   all: {
-    active: "border-primary bg-primary text-white shadow-md shadow-primary/20",
-    idle: "border-border/80 bg-card text-dark hover:border-primary/50 hover:bg-primary-soft",
+    active: "border-[#4F8A45] bg-[#4F8A45] text-white shadow-md shadow-[#4F8A45]/25",
+    idle: "border-border/80 bg-white text-[#29352B] hover:border-[#4F8A45]/50 hover:bg-[#DDECCF]/50",
     badgeActive: "bg-white/20 text-white",
-    badgeIdle: "bg-primary/10 text-primary",
+    badgeIdle: "bg-[#DDECCF] text-[#4F8A45]",
   },
   bestsellers: {
-    active: "border-accent-strong bg-accent-strong text-white shadow-md shadow-accent/20",
-    idle: "border-border/80 bg-card text-dark hover:border-accent hover:bg-primary-soft",
-    badgeActive: "bg-white/20 text-white",
-    badgeIdle: "bg-accent-strong/10 text-warning",
+    active: "border-[#4F8A45] bg-[#4F8A45] text-white shadow-md shadow-[#4F8A45]/25",
+    idle: "border-border/80 bg-white text-[#29352B] hover:border-[#4F8A45]/50 hover:bg-[#FFF0B8]/50",
+    badgeActive: "bg-[#FFD45A] text-[#263D2E] font-extrabold",
+    badgeIdle: "bg-[#FFF0B8] text-[#263D2E]",
   },
   newarrivals: {
-    active:
-      "border-emerald-600 bg-emerald-600 text-white shadow-md shadow-emerald-600/20",
-    idle: "border-border/80 bg-card text-dark hover:border-emerald-500 hover:bg-primary-soft",
-    badgeActive: "bg-white/20 text-white",
-    badgeIdle: "bg-emerald-600/10 text-emerald-700",
+    active: "border-[#4F8A45] bg-[#4F8A45] text-white shadow-md shadow-[#4F8A45]/25",
+    idle: "border-border/80 bg-white text-[#29352B] hover:border-[#4F8A45]/50 hover:bg-[#FFE0D4]/50",
+    badgeActive: "bg-[#FF8066] text-white font-extrabold",
+    badgeIdle: "bg-[#FFE0D4] text-[#FF8066]",
   },
 };
 
@@ -40,6 +39,9 @@ export function ShowcaseFilterBar({
   onTabSelect,
   onCategorySelect,
 }: ShowcaseFilterBarProps) {
+  const displayCategories = categories.filter(
+    (c) => c.slug !== "home-cleaning" && !c.slug.includes("cleaning")
+  );
   const bestSellerCount = products.filter((p) => p.isBestSeller).length;
   const newArrivalCount = products.filter((p) => p.isNewArrival).length;
 
@@ -84,7 +86,7 @@ export function ShowcaseFilterBar({
         })}
       </div>
 
-      {categories.length > 0 ? (
+      {displayCategories.length > 0 ? (
         <div className="-mx-5 mb-8 flex items-center gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0">
           <button
             type="button"
@@ -99,9 +101,9 @@ export function ShowcaseFilterBar({
             <span>{HOME_COPY.allCategories}</span>
             <span className="text-[10px] opacity-75">({products.length})</span>
           </button>
-          {categories.map((cat) => {
+          {displayCategories.map((cat) => {
             const count = products.filter((p) =>
-              matchesProductCategory(p, cat.slug, categories),
+              matchesProductCategory(p, cat.slug, displayCategories),
             ).length;
             const isSelected =
               selectedCategorySlug.toLowerCase() === cat.slug.toLowerCase();

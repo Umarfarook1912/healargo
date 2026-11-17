@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +12,7 @@ import {
 import { CheckoutButton } from "@/components/features/cart/CheckoutButton";
 import { EstimatedDeliveryBadge } from "@/components/features/shipping/EstimatedDeliveryBadge";
 import { Button } from "@/components/ui/button";
+import { ASSETS } from "@/constants/assets";
 import { ROUTES } from "@/constants/routes";
 import { CHECKOUT_COPY } from "@/constants/checkout";
 import { useCartStore } from "@/hooks/useCartStore";
@@ -46,12 +47,18 @@ export function CartDrawer({
 
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
-            <span className="mb-2 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-soft text-primary ring-1 ring-primary/10">
-              <ShoppingBag className="h-7 w-7" />
-            </span>
+            <div className="mb-2 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#DDECCF]/50 p-3 shadow-xs">
+              <Image
+                src={ASSETS.EMBLEM}
+                alt="HEALARGO"
+                width={80}
+                height={80}
+                className="h-full w-full object-contain"
+              />
+            </div>
             <p className="font-display text-xl text-dark">{CHECKOUT_COPY.EMPTY_CART}</p>
             <p className="text-sm text-muted">
-              Add pure oils & ghee to get started
+              Discover HEALARGO natural products and add favourites here
             </p>
             <Button asChild onClick={() => onOpenChange(false)}>
               <Link href={ROUTES.SHOP}>Shop Now</Link>

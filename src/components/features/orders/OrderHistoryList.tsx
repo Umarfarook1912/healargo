@@ -40,7 +40,7 @@ export function OrderHistoryList() {
         </div>
         <h3 className="mt-4 font-display text-xl text-dark font-semibold">No orders yet</h3>
         <p className="mt-1 text-sm text-muted max-w-sm mx-auto">
-          You haven&apos;t placed any orders with Healargo yet. Explore our products and wellness essentials today.
+          You haven&apos;t placed any orders with HEALARGO yet. Explore our natural edible oils and essentials today.
         </p>
         <Button className="mt-6 gap-2" asChild>
           <Link href={ROUTES.SHOP}>

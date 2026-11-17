@@ -6,7 +6,6 @@ import {
   variantDisplayImage,
 } from "@/lib/products/commerce";
 import type { ComboLineDetail, ComboOffer } from "@/types/combo";
-import type { Product } from "@/types/product";
 
 export async function getComboBySlug(slug: string): Promise<{
   combo: ComboOffer;

@@ -12,7 +12,7 @@ export const metadata: Metadata = buildPageMetadata({
     "Explore applicable food safety licenses, business registrations, product testing reports, and quality documentation for our edible oils.",
   path: "/certificates",
   keywords: [
-    "Healargo certificates",
+    "HEALARGO certificates",
     "edible oil food safety",
     "cold pressed oil lab test",
     "wood pressed oil quality standards",

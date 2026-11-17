@@ -68,7 +68,7 @@ export function AdminUsersClient({ users }: { users: AdminUser[] }) {
       const a = document.createElement("a");
       a.href = url;
       const dateStamp = new Date().toISOString().split("T")[0];
-      a.download = `Healargo_Users_${dateStamp}.xlsx`;
+      a.download = `HEALARGO_Users_${dateStamp}.xlsx`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);

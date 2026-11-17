@@ -1,7 +1,7 @@
-export const SITE_NAME = "Healargo";
-export const SITE_TAGLINE = "Natural Wellness, Thoughtfully Sourced";
+export const SITE_NAME = "HEALARGO";
+export const SITE_TAGLINE = "Goodness, Naturally.";
 export const SITE_DESCRIPTION =
-  "Healargo brings carefully sourced natural products for everyday wellness — pure, honest, and delivered with care.";
+  "Thoughtfully sourced natural products that bring a little more goodness into your everyday life. Pure edible oils and naturally crafted agro essentials.";
 
 export const SEO_DEFAULTS = {
   titleTemplate: `%s | ${SITE_NAME}`,

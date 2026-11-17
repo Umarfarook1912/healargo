@@ -37,7 +37,7 @@ export default async function OrderDetailPage({ params }: Props) {
     (await isAdminSession(session));
   if (!isOwner) notFound();
 
-  const shortId = `VSO-${data._id.slice(-6).toUpperCase()}`;
+  const shortId = `HLG-${data._id.slice(-6).toUpperCase()}`;
   const formattedDate = data.createdAt
     ? new Date(data.createdAt).toLocaleDateString("en-IN", {
       timeZone: "Asia/Kolkata",

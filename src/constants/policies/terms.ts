@@ -1,11 +1,11 @@
 export const TERMS_POLICY = {
   title: "Terms of Service",
   intro:
-    "By using the Healargo website and placing orders, you agree to the following terms.",
+    "By using the HEALARGO website and placing orders, you agree to the following terms.",
   sections: [
     {
       title: "Products",
-      body: "All oils are traditionally wooden-pressed unless otherwise stated. Product images are illustrative; natural variation in color and aroma is expected.",
+      body: "All edible oils are traditionally wood-pressed or cold-pressed unless otherwise stated. Product images are illustrative; natural variation in color and aroma is expected.",
     },
     {
       title: "Orders and Payment",
@@ -17,7 +17,7 @@ export const TERMS_POLICY = {
     },
     {
       title: "Limitation of Liability",
-      body: "Healargo is not liable for indirect damages arising from delayed delivery due to courier or force majeure events beyond our control.",
+      body: "HEALARGO is not liable for indirect damages arising from delayed delivery due to courier or force majeure events beyond our control.",
     },
   ],
 };

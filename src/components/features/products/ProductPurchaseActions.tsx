@@ -45,21 +45,25 @@ export function ProductPurchaseActions({
         <QuantityStepper quantity={quantity} available={available} onQuantity={onQuantity} compact />
         <Button
           variant="outline"
-          className="h-11 flex-1 gap-2 border-primary/40 text-sm text-primary hover:bg-primary hover:text-primary-foreground"
+          className="h-11 flex-1 gap-2 border-primary/30 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
           onClick={onAdd}
           disabled={!available}
         >
           <ShoppingCart className="h-4 w-4" />
           {available ? CHECKOUT_COPY.ADD_TO_CART : CATALOG_COPY.outOfStock}
         </Button>
-        <Button variant="accent" className="h-11 flex-1 gap-2 text-sm" onClick={onBuy} disabled={!available}>
+        <Button
+          className="h-11 flex-1 gap-2 text-sm font-bold bg-primary text-primary-foreground hover:bg-primary-strong shadow-sm"
+          onClick={onBuy}
+          disabled={!available}
+        >
           <Zap className="h-4 w-4" />
           {CHECKOUT_COPY.BUY_NOW}
         </Button>
       </div>
 
       {/* Mobile / tablet: sticky bottom action bar (the page adds bottom padding so it never covers content) */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-8px_24px_rgba(16,38,27,0.08)] backdrop-blur-lg lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-8px_24px_rgba(48,53,43,0.08)] backdrop-blur-lg lg:hidden">
         <div className="mx-auto flex max-w-2xl items-center gap-2.5">
           <div className="min-w-0 shrink-0 pr-1">
             <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
@@ -72,7 +76,7 @@ export function ProductPurchaseActions({
           <Button
             variant="outline"
             aria-label={available ? CHECKOUT_COPY.ADD_TO_CART : CATALOG_COPY.outOfStock}
-            className="h-11 flex-1 gap-1.5 border-primary/40 px-3 text-primary max-[379px]:w-11 max-[379px]:flex-none max-[379px]:px-0"
+            className="h-11 flex-1 gap-1.5 border-primary/30 px-3 text-primary max-[379px]:w-11 max-[379px]:flex-none max-[379px]:px-0"
             onClick={onAdd}
             disabled={!available}
           >
@@ -81,7 +85,11 @@ export function ProductPurchaseActions({
               {available ? CHECKOUT_COPY.ADD_TO_CART : CATALOG_COPY.outOfStock}
             </span>
           </Button>
-          <Button variant="accent" className="h-11 flex-1 gap-1.5 px-3" onClick={onBuy} disabled={!available}>
+          <Button
+            className="h-11 flex-1 gap-1.5 px-3 bg-primary text-primary-foreground hover:bg-primary-strong font-bold"
+            onClick={onBuy}
+            disabled={!available}
+          >
             <Zap className="h-4 w-4" />
             <span className="truncate">{CHECKOUT_COPY.BUY_NOW}</span>
           </Button>

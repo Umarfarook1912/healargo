@@ -1,7 +1,7 @@
 export const SHIPPING_POLICY = {
   title: "Shipping Policy",
   intro:
-    "We deliver Healargo orders across India with care. Free shipping may apply on eligible orders as shown at checkout.",
+    "We deliver HEALARGO orders across India with care. Free shipping may apply on eligible orders as shown at checkout.",
   sections: [
     {
       title: "Delivery Timeline",

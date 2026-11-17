@@ -9,7 +9,7 @@ import type { Product } from "@/types/product";
 export const metadata: Metadata = buildPageMetadata({
   title: "Bestsellers",
   description:
-    "Shop Healargo bestsellers including wooden-pressed oils, ghee, and customer favorites.",
+    "Shop HEALARGO bestsellers including cold-pressed edible oils, natural ghee, and customer favourites.",
   path: "/bestsellers",
 });
 
@@ -27,9 +27,9 @@ export default async function BestsellersPage() {
   return (
     <>
       <PageHero
-        eyebrow="Customer favourites"
+        eyebrow="Customer Favourites"
         title="Bestsellers"
-        description="Our most loved products."
+        description="Our most loved cold-pressed oils and natural everyday essentials."
       />
       <PageContainer className="py-10 md:py-14">
         <ProductGrid products={products} />

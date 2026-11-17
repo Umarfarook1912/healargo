@@ -9,13 +9,13 @@ import { ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { OfferCountdown } from "@/components/features/catalog/OfferCountdown";
+import { ProductCardMascot } from "@/components/features/mascots/ProductCardMascot";
 import { ScaleOnHover } from "@/components/shared/motion";
 import { CATALOG_COPY } from "@/constants/catalog";
 import { CHECKOUT_COPY } from "@/constants/checkout";
 import { PRODUCT_COPY } from "@/constants/home";
 import { ROUTES } from "@/constants/routes";
 import { ASSETS } from "@/constants/assets";
-import { LAYOUT } from "@/constants/layout";
 import { useCartStore } from "@/hooks/useCartStore";
 import { useRequireLogin } from "@/hooks/useRequireLogin";
 import { cn } from "@/lib/utils/cn";
@@ -53,6 +53,25 @@ export function ProductCard({ product }: ProductCardProps) {
     strikePrice > unitPrice
       ? Math.round(((strikePrice - unitPrice) / strikePrice) * 100)
       : 0;
+
+  // Vibrant Playful Nature 2.0 image background per oil type
+  const nameLower = product.name.toLowerCase();
+  const isCoconut = nameLower.includes("coconut") || nameLower.includes("thengai");
+  const isSesame = nameLower.includes("sesame") || nameLower.includes("gingelly") || nameLower.includes("til");
+  const isGroundnut = nameLower.includes("groundnut") || nameLower.includes("peanut") || nameLower.includes("kadalai");
+
+  const imageBgClass = isCoconut
+    ? "bg-[#D8F3EC] border-[#8EDBD0]/40"
+    : isSesame
+    ? "bg-[#FFF0B8] border-[#FFD45A]/50"
+    : isGroundnut
+    ? "bg-[#FFE0D4] border-[#FF8066]/40"
+    : "bg-[#DDECCF] border-[#4F8A45]/30";
+
+  // Display clean HEALARGO brand name without legacy prefixes
+  const displayName = product.name
+    .replace(/^VS\s+/i, "HEALARGO ")
+    .replace(/wooden pressed/i, "Cold Pressed");
 
   function handleAdd(e?: React.MouseEvent) {
     if (e) {
@@ -105,53 +124,59 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <ScaleOnHover className="h-full w-full">
-      <article className="@container group flex h-full flex-col overflow-hidden rounded-2xl border border-border/80 bg-card p-2 shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:border-primary/25 hover:shadow-[var(--shadow-lifted)] sm:p-2.5">
-        <Link
-          href={ROUTES.PRODUCT(product.slug)}
-          className="relative block aspect-square shrink-0 overflow-hidden rounded-xl bg-cream"
-        >
+      <article className="@container group flex h-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-border/70 bg-card p-2.5 shadow-[var(--shadow-soft)] transition-all duration-300 hover:border-[#4F8A45]/40 hover:shadow-[var(--shadow-lifted)] hover:-translate-y-1 sm:p-3">
+        <div className="relative">
+          <ProductCardMascot productName={product.name} />
+          <Link
+            href={ROUTES.PRODUCT(product.slug)}
+            className={cn(
+              "relative block aspect-square shrink-0 overflow-hidden rounded-xl sm:rounded-2xl border transition-transform duration-500",
+              imageBgClass,
+            )}
+          >
           <Image
             src={imgSrc}
-            alt={product.name}
+            alt={displayName}
             fill
             unoptimized
             onError={() => setImgSrc(ASSETS.PLACEHOLDER_PRODUCT)}
-            className={LAYOUT.productImage}
+            className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
           {discount > 0 ? (
-            <Badge className="absolute left-1.5 top-1.5 border-transparent bg-primary px-1.5 py-0 text-[9px] font-semibold leading-4 text-primary-foreground shadow-sm @min-[13rem]:left-2 @min-[13rem]:top-2 @min-[13rem]:px-2 @min-[13rem]:text-[10px]">
+            <Badge className="absolute left-2.5 top-2.5 border-transparent bg-[#FF8066] px-2.5 py-1 text-[11px] font-extrabold leading-none text-white shadow-sm">
               -{discount}
               {PRODUCT_COPY.offSuffix}
             </Badge>
           ) : null}
           {product.isBestSeller ? (
-            <Badge className="absolute right-1.5 top-1.5 border-transparent bg-accent px-1.5 py-0 text-[9px] font-semibold leading-4 text-accent-foreground shadow-sm @min-[13rem]:right-2 @min-[13rem]:top-2 @min-[13rem]:px-2 @min-[13rem]:text-[10px]">
+            <Badge className="absolute right-2.5 top-2.5 border-transparent bg-[#FFD45A] px-2.5 py-1 text-[11px] font-extrabold leading-none text-[#263D2E] shadow-sm">
               {PRODUCT_COPY.bestSeller}
             </Badge>
           ) : null}
         </Link>
+        </div>
 
-        <div className="flex flex-1 flex-col px-0.5 pt-2.5 @min-[13rem]:px-1">
+        <div className="flex flex-1 flex-col px-0.5 pt-3 @min-[13rem]:px-1">
           <Link href={ROUTES.PRODUCT(product.slug)}>
-            <h3 className="line-clamp-2 min-h-[2.5em] break-words font-sans text-[13px] font-semibold leading-[1.25] text-dark transition-colors group-hover:text-primary @min-[13rem]:text-sm">
-              {product.name}
+            <h3 className="line-clamp-2 min-h-[2.5em] break-words font-display text-[13px] font-bold leading-[1.25] text-dark transition-colors group-hover:text-primary @min-[13rem]:text-sm">
+              {displayName}
             </h3>
           </Link>
           <p className="mt-0.5 hidden min-h-4 truncate text-xs text-muted @min-[13rem]:block">
             {product.shortDescription || "\u00a0"}
           </p>
 
-          <div className="mt-2 flex min-h-5 gap-1 overflow-x-auto [scrollbar-width:none] @min-[13rem]:flex-wrap @min-[13rem]:overflow-visible">
+          <div className="mt-2 flex min-h-5 gap-1.5 overflow-x-auto [scrollbar-width:none] @min-[13rem]:flex-wrap @min-[13rem]:overflow-visible">
             {product.variants.map((v, index) => (
               <button
                 key={v.sku}
                 type="button"
                 onClick={() => setVariantIndex(index)}
                 className={cn(
-                  "h-5 shrink-0 rounded-full border px-2 text-[10px] font-medium leading-none transition-colors @min-[13rem]:h-6 @min-[13rem]:px-2.5",
+                  "h-5 shrink-0 rounded-full border px-2 text-[10px] font-semibold leading-none transition-colors @min-[13rem]:h-6 @min-[13rem]:px-2.5",
                   index === variantIndex
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-cream/60 text-dark hover:border-primary/50 hover:bg-primary-soft",
+                    ? "border-primary bg-primary text-primary-foreground shadow-xs"
+                    : "border-border bg-cream/70 text-dark hover:border-primary/50 hover:bg-primary-soft",
                 )}
               >
                 {v.label}
@@ -159,7 +184,7 @@ export function ProductCard({ product }: ProductCardProps) {
             ))}
           </div>
 
-          <div className="mt-2 flex min-h-5 flex-wrap items-baseline gap-x-1.5">
+          <div className="mt-2.5 flex min-h-5 flex-wrap items-baseline gap-x-2">
             {variant ? (
               <>
                 <span className="text-sm font-bold leading-tight text-primary @min-[13rem]:text-base">
@@ -180,7 +205,7 @@ export function ProductCard({ product }: ProductCardProps) {
             ) : null}
           </div>
 
-          <div className="mt-auto flex gap-1.5 pt-2.5">
+          <div className="mt-auto flex gap-2 pt-3">
             <Button
               size="sm"
               variant="outline"
@@ -194,8 +219,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </Button>
             <Button
               size="sm"
-              variant="accent"
-              className="h-9 min-w-0 flex-1 px-2 text-xs font-semibold transition-colors"
+              className="h-9 min-w-0 flex-1 bg-primary px-2 text-xs font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary-strong"
               onClick={handleBuyNow}
               disabled={!variant || !available}
             >

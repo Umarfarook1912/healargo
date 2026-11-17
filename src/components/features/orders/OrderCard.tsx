@@ -12,7 +12,7 @@ import { formatInr } from "@/lib/utils/format";
 import type { Order } from "@/types/order";
 
 export function OrderCard({ order }: { order: Order }) {
-  const shortId = `VSO-${order._id.slice(-6).toUpperCase()}`;
+  const shortId = `HLG-${order._id.slice(-6).toUpperCase()}`;
   const formattedDate = order.createdAt
     ? new Date(order.createdAt).toLocaleDateString("en-IN", {
         timeZone: "Asia/Kolkata",

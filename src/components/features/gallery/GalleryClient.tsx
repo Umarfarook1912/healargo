@@ -349,7 +349,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                   ? "White Label Oil Supply — Sell Under Your Own Brand"
                   : activeCategory === "extraction"
                   ? "Oil Machine & Extraction Live Footage"
-                  : "Watch Healargo in Action"}
+                  : "Watch HEALARGO in Action"}
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-muted max-w-md">
@@ -358,7 +358,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 : activeCategory === "selling"
                 ? "Direct mill prices: ₹220/L groundnut oil, ₹350/L coconut oil, ₹700/L cow ghee weekend deal, and festive combo savings."
                 : activeCategory === "whitelabel"
-                ? "Healargo supplies pure wood-pressed oils in unlabeled bottles and cans, making it easy to launch or extend your own brand."
+                ? "HEALARGO supplies pure wood-pressed oils in unlabeled bottles and cans, making it easy to launch or extend your own brand."
                 : activeCategory === "extraction"
                 ? "Watch copra, peanuts, and sesame seeds slowly cold pressed with traditional low-heat methods."
                 : "Real video footage showing product preparation, safe order packing, selling highlights, and brand stories."}
@@ -429,7 +429,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                     Start Your Own Cold-Pressed Oil Brand Today
                   </h3>
                   <p className="text-xs text-cream/80 leading-relaxed">
-                    Connect with the Healargo team for white-label pricing, minimum order quantities, and packaging customization.
+                    Connect with the HEALARGO team for white-label pricing, minimum order quantities, and packaging customization.
                   </p>
                 </div>
 

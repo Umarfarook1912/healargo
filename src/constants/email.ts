@@ -1,33 +1,35 @@
 import { ASSETS } from "@/constants/assets";
 import { UI } from "@/constants/ui";
 
-/** Matches Healargo theme from globals.css (inline for email clients). */
-export const EMAIL_THEME = {
-  primary: "#1f5138",
-  primaryForeground: "#ffffff",
-  accent: "#c9a246",
-  cream: "#eef4ef",
-  creamDark: "#dde8e0",
-  dark: "#10261b",
-  muted: "#56645c",
-  border: "#dbe3dd",
-  card: "#ffffff",
-  fontSans: "Georgia, 'Times New Roman', serif",
-  fontBody: "Arial, Helvetica, sans-serif",
-  logoUrl: ASSETS.LOGO_SOLID,
-} as const;
-
-export type EmailSocialLink = {
-  label: string;
-  href: string;
-};
-
 function siteBase(): string {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(
     /\/$/,
     "",
   );
 }
+
+/** Matches HEALARGO VIBRANT PLAYFUL NATURE 2.0 theme from globals.css (inline for email clients). */
+export const EMAIL_THEME = {
+  primary: "#4F8A45",
+  primaryForeground: "#FFFFFF",
+  accent: "#FFD45A",
+  sage: "#4F8A45",
+  peach: "#FF8066",
+  cream: "#FFF8E9",
+  creamDark: "#DDECCF",
+  dark: "#263D2E",
+  muted: "#72776A",
+  border: "#EFE7D8",
+  card: "#FFFFFF",
+  fontSans: "'Fraunces', Georgia, 'Times New Roman', serif",
+  fontBody: "'Nunito Sans', Arial, Helvetica, sans-serif",
+  logoUrl: `${siteBase()}${ASSETS.LOGO_PNG}`,
+} as const;
+
+export type EmailSocialLink = {
+  label: string;
+  href: string;
+};
 
 function whatsappHref(): string {
   const n = UI.whatsappNumber.replace(/\D/g, "");

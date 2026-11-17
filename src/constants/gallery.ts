@@ -236,7 +236,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     id: "white-label-unlabeled-supply-video",
     title: "White Label & Private Brand Supply — Unlabeled Oils for Your Own Brand",
     description:
-      "Healargo supplies pure wood-pressed oils in unlabeled bottles and cans. Resellers and brand owners can add their own labels and sell under their own brand with zero factory setup cost.",
+      "HEALARGO supplies pure wood-pressed oils in unlabeled bottles and cans. Resellers and brand owners can add their own labels and sell under their own brand with zero factory setup cost.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/whitelabel/whitelabel.mp4?tr=orig-true",
     category: "videos",
@@ -278,7 +278,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
   },
   {
     id: "special-and-taste",
-    title: "What Makes Healargo Special & The Pure Taste of Wood-Pressed Oil",
+    title: "What Makes HEALARGO Special & The Pure Taste of Wood-Pressed Oil",
     description:
       "Watch how traditional low-heat wood pressing helps preserve natural aroma, character, and taste without harsh refining.",
     videoUrl:
@@ -292,7 +292,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
   },
   {
     id: "low-price-part-1",
-    title: "How Healargo Offers Fair Pricing with High Quality — Part 1: Direct Sourcing",
+    title: "How HEALARGO Offers Fair Pricing with High Quality — Part 1: Direct Sourcing",
     description:
       "See how direct bulk sourcing helps reduce middleman commissions and keeps quality products affordable for everyday families.",
     videoUrl:
@@ -306,7 +306,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
   },
   {
     id: "low-price-part-2",
-    title: "How Healargo Offers Fair Pricing with High Quality — Part 2: In-House Efficiency",
+    title: "How HEALARGO Offers Fair Pricing with High Quality — Part 2: In-House Efficiency",
     description:
       "Explore our in-house extraction and natural settling process that supports reliable quality without expensive markups.",
     videoUrl:
@@ -320,9 +320,9 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
   },
   {
     id: "why-choose-healargo",
-    title: "Why You Should Choose Healargo for Your Family",
+    title: "Why You Should Choose HEALARGO for Your Family",
     description:
-      "Discover why conscious households trust Healargo for wood-pressed oils, tested quality, and doorstep delivery.",
+      "Discover why conscious households trust HEALARGO for wood-pressed oils, tested quality, and doorstep delivery.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/whyvsoil/1.mp4?tr=orig-true",
     category: "videos",

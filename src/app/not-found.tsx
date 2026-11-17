@@ -9,8 +9,8 @@ import { getCategories } from "@/lib/products/queries";
 import type { Category } from "@/types/product";
 
 export const metadata: Metadata = {
-  title: "404 - Page Not Found | Healargo",
-  description: "The requested page was not found. Explore Healargo products, wellness essentials, and curated bundles.",
+  title: "404 - Page Not Found | HEALARGO",
+  description: "The requested page was not found. Explore HEALARGO natural oils and agro-wellness essentials.",
 };
 
 export default async function RootNotFound() {

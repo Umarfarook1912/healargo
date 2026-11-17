@@ -15,7 +15,7 @@ export function buildPageMetadata(input: {
 }): Metadata {
   const description = input.description ?? SEO_DEFAULTS.description;
   const url = input.path ? `${siteUrl}${input.path}` : siteUrl;
-  const image = input.image ?? `${siteUrl}${ASSETS.LOGO}`;
+  const image = input.image ?? `${siteUrl}${ASSETS.LOGO_PNG}`;
 
   return {
     title: input.title,
@@ -50,7 +50,7 @@ export function buildProductMetadata(product: Product): Metadata {
       160,
     );
   const image =
-    product.seo?.ogImage ?? product.images[0] ?? `${siteUrl}${ASSETS.LOGO}`;
+    product.seo?.ogImage ?? product.images[0] ?? `${siteUrl}${ASSETS.LOGO_PNG}`;
   const canonical =
     product.seo?.canonicalUrl ?? `${siteUrl}/products/${product.slug}`;
 

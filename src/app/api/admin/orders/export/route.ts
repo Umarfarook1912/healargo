@@ -362,7 +362,7 @@ export async function POST(request: Request) {
 
     const buffer = await workbook.xlsx.writeBuffer();
     const dateStamp = new Date().toISOString().split("T")[0];
-    const filename = `Healargo_Orders_${dateStamp}.xlsx`;
+    const filename = `HEALARGO_Orders_${dateStamp}.xlsx`;
 
     return new NextResponse(new Uint8Array(buffer as ArrayBuffer), {
       status: 200,

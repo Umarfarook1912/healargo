@@ -17,7 +17,7 @@ export function PolicyPage({
 }) {
   return (
     <>
-      <PageHero eyebrow="Healargo policies" title={title} description={intro} />
+      <PageHero eyebrow="HEALARGO policies" title={title} description={intro} />
       <PageContainer className="py-12 md:py-16">
         <div className={LAYOUT.narrow}>
           <div className="space-y-5">

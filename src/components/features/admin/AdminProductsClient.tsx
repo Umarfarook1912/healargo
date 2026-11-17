@@ -72,7 +72,7 @@ export function AdminProductsClient({ products }: { products: AdminProductRow[] 
       const a = document.createElement("a");
       a.href = url;
       const dateStamp = new Date().toISOString().split("T")[0];
-      a.download = `Healargo_Products_${dateStamp}.xlsx`;
+      a.download = `HEALARGO_Products_${dateStamp}.xlsx`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);

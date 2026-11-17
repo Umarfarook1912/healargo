@@ -10,10 +10,14 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary-strong hover:shadow-md hover:shadow-primary/25",
+        secondary:
+          "bg-[#A8B58A] text-[#30352B] shadow-sm hover:bg-[#98A679] hover:shadow-md",
         accent:
-          "bg-accent text-accent-foreground shadow-sm shadow-accent/30 hover:bg-accent/90 hover:shadow-md",
+          "bg-accent text-accent-foreground shadow-sm shadow-accent/30 hover:bg-[#dedd9a] hover:shadow-md",
+        peach:
+          "bg-[#F2B9A5] text-[#30352B] shadow-sm hover:bg-[#e8aa94] hover:shadow-md",
         outline:
-          "border border-input bg-card text-dark hover:border-primary/40 hover:bg-primary-soft hover:text-primary",
+          "border border-primary/30 bg-transparent text-primary hover:border-primary hover:bg-primary-soft/60",
         ghost: "text-dark hover:bg-primary-soft hover:text-primary",
         whatsapp:
           "bg-[#25D366] text-white shadow-sm hover:bg-[#1ebe57] hover:shadow-md",

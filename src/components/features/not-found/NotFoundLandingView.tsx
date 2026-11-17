@@ -17,7 +17,6 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { ROUTES } from "@/constants/routes";
 import { UI } from "@/constants/ui";
@@ -38,7 +37,7 @@ const POPULAR_CATEGORIES = [
   },
   {
     name: "Combo Offers",
-    description: "Handcrafted kitchen bundles at mill prices",
+    description: "Handcrafted kitchen bundles with natural savings",
     href: ROUTES.COMBOS,
     image: "https://ik.imagekit.io/mnm0iz0ng2/category/combo.jpg",
   },
@@ -108,12 +107,12 @@ export function NotFoundLandingView() {
 
           {/* Heading */}
           <h1 className="mt-5 font-display text-3xl tracking-tight text-dark sm:text-5xl">
-            Looking for Healargo products?
+            Looking for HEALARGO products?
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
             The page you requested doesn&apos;t exist or has moved. Explore
-            natural pantry and wellness products, customer favorites, and fresh
-            offers from Healargo on the home page.
+            natural edible oils, agro-wellness essentials, customer favorites, and fresh
+            offers from HEALARGO on the home page.
           </p>
 
           {/* Countdown & Auto-Redirect Bar */}

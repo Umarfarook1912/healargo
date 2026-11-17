@@ -3,59 +3,106 @@
 @plugin "@tailwindcss/typography";
 
 /*
- * Healargo — Herbal Green + Gold palette
- * Deep forest green primary, refined sesame-gold accent, ivory surfaces.
- * Token names are kept stable (primary, accent, dark, cream, muted…) so every
- * component picks up the new theme. "cream" is now a soft sage tint and "dark"
- * is a deep green-ink, so no brown remains anywhere in the UI.
- * All text/background pairs below meet WCAG AA (4.5:1) or better.
+ * HEALARGO — VIBRANT PLAYFUL NATURE 2.0
+ * 
+ * PRIMARY COLOURS:
+ * - Fresh Leaf Green: #4F8A45
+ * - Mango Yellow:     #FFD45A
+ * - Coral Peach:      #FF8066
+ * - Fresh Aqua:       #8EDBD0
+ * - Vanilla Cream:    #FFF8E9
+ * - Deep Forest:      #263D2E
+ * 
+ * SUPPORTING COLOURS:
+ * - Light Leaf:       #DDECCF
+ * - Soft Peach:       #FFE0D4
+ * - Pale Yellow:      #FFF0B8
+ * - Light Aqua:       #D8F3EC
+ * - Pure White:       #FFFFFF
+ * - Dark Text:        #29352B
+ * - Muted Text:       #72776A
+ *
+ * COLOUR APPLICATION & RATIO:
+ * - 45% Vanilla Cream (#FFF8E9) & Pure White (#FFFFFF)
+ * - 20% Fresh Leaf (#4F8A45) & Light Leaf (#DDECCF)
+ * - 15% Mango Yellow (#FFD45A) & Pale Yellow (#FFF0B8)
+ * - 10% Coral Peach (#FF8066) & Soft Peach (#FFE0D4)
+ * - 10% Aqua (#8EDBD0, #D8F3EC) & supporting accents
  */
 @theme inline {
   /* Brand */
-  --color-primary: #1f5138; /* forest green — 9.2:1 on white */
-  --color-primary-foreground: #ffffff;
-  --color-primary-strong: #163d2a;
-  --color-primary-soft: #e7f1ea;
-  --color-accent: #c9a246; /* sesame gold */
-  --color-accent-foreground: #10261b; /* 6.6:1 on gold */
-  --color-accent-strong: #8a6a1c; /* gold for text on light — 4.9:1 on white */
-  --color-accent-soft: #f8f1dc;
+  --color-primary: #4F8A45; /* Fresh Leaf Green */
+  --color-primary-foreground: #FFFFFF; /* Pure White */
+  --color-primary-strong: #263D2E; /* Deep Forest */
+  --color-primary-soft: #DDECCF; /* Light Leaf */
+
+  --color-accent: #FFD45A; /* Mango Yellow */
+  --color-accent-foreground: #263D2E;
+  --color-accent-strong: #FF8066; /* Coral Peach */
+  --color-accent-soft: #FFF0B8; /* Pale Yellow */
+
+  /* Vibrant Playful Nature 2.0 Named Tokens */
+  --color-leaf: #4F8A45;
+  --color-leaf-light: #DDECCF;
+  --color-mango: #FFD45A;
+  --color-mango-light: #FFF0B8;
+  --color-coral: #FF8066;
+  --color-coral-light: #FFE0D4;
+  --color-aqua: #8EDBD0;
+  --color-aqua-light: #D8F3EC;
+  --color-cream: #FFF8E9;
+  --color-forest: #263D2E;
+  --color-dark: #29352B;
+  --color-muted-text: #72776A;
+
+  /* Legacy aliases for backward-compatible Tailwind classes */
+  --color-butter: #FFD45A;
+  --color-butter-light: #FFF0B8;
+  --color-sage: #4F8A45;
+  --color-sage-light: #DDECCF;
+  --color-peach: #FF8066;
+  --color-peach-light: #FFE0D4;
+  --color-olive: #4F8A45;
+  --color-olive-dark: #263D2E;
+  --color-soft-white: #FFFFFF;
 
   /* Surfaces */
-  --color-background: #fbfaf6; /* ivory */
-  --color-foreground: #14231b;
-  --color-card: #ffffff;
-  --color-card-foreground: #14231b;
-  --color-cream: #eef4ef; /* soft sage tint (replaces cream) */
-  --color-cream-dark: #dde8e0;
-  --color-dark: #10261b; /* deep green-ink (replaces brown) — 15:1 on ivory */
+  --color-background: #FFF8E9; /* Vanilla Cream */
+  --color-foreground: #29352B; /* Dark Text */
+  --color-card: #FFFFFF; /* Pure White */
+  --color-card-foreground: #29352B;
 
   /* Neutrals */
-  --color-muted: #56645c; /* 5.9:1 on ivory */
-  --color-muted-foreground: #56645c;
-  --color-border: #dbe3dd;
-  --color-input: #cfd9d2;
-  --color-ring: #2f7a53;
+  --color-muted: #72776A; /* Muted Text */
+  --color-muted-foreground: #72776A;
+  --color-border: #EFE7D8;
+  --color-input: #E4DAC9;
+  --color-ring: #4F8A45;
 
   /* Status */
-  --color-success: #177245;
-  --color-success-soft: #e3f4ea;
-  --color-warning: #a35a07;
-  --color-warning-soft: #fdf1dc;
-  --color-destructive: #b42318;
-  --color-destructive-soft: #fdecea;
-  --color-info: #1d5f8a;
-  --color-info-soft: #e6f0f7;
+  --color-success: #4F8A45;
+  --color-success-soft: #DDECCF;
+  --color-warning: #FFD45A;
+  --color-warning-soft: #FFF0B8;
+  --color-destructive: #FF8066;
+  --color-destructive-soft: #FFE0D4;
+  --color-info: #8EDBD0;
+  --color-info-soft: #D8F3EC;
 
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  /* Typography */
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
   --radius-sm: 0.5rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 0.875rem;
-  --radius-xl: 1.125rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+  --radius-3xl: 2.25rem;
 
-  --shadow-soft: 0 1px 2px rgba(16, 38, 27, 0.04), 0 4px 16px rgba(16, 38, 27, 0.05);
-  --shadow-lifted: 0 2px 4px rgba(16, 38, 27, 0.05), 0 16px 40px rgba(16, 38, 27, 0.1);
+  --shadow-soft: 0 2px 6px rgba(41, 53, 43, 0.04), 0 6px 18px rgba(41, 53, 43, 0.06);
+  --shadow-lifted: 0 6px 12px rgba(41, 53, 43, 0.05), 0 20px 42px rgba(41, 53, 43, 0.10);
+  --shadow-playful: 0 6px 0px #263D2E;
 }
 
 @layer base {
@@ -65,24 +112,28 @@
 
   html {
     scroll-behavior: smooth;
+    background-color: var(--color-background);
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "ss01", "cv11";
+    background-color: #FFF8E9;
+    color: #29352B;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display text-dark;
+    @apply font-display;
+    color: #263D2E;
     letter-spacing: -0.015em;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
-    color: var(--color-dark);
+    background: #FFD45A;
+    color: #263D2E;
   }
 }
 
@@ -90,46 +141,197 @@
   font-family: var(--font-display);
 }
 
-/* Section eyebrow label — small uppercase gold label above headings */
+/* Section eyebrow label — vibrant badge above headings */
 @utility eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-accent-strong);
+  color: #4F8A45;
 }
 
-/* Elevated white surface used by cards across the store and admin */
+/* Elevated white surface used by cards across the store */
 @utility surface-card {
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
   border: 1px solid var(--color-border);
-  background-color: var(--color-card);
+  background-color: #FFFFFF;
   box-shadow: var(--shadow-soft);
 }
 
-/* Subtle herbal backdrop for hero and page-header bands */
+/* Vibrant Playful Nature 2.0 Pastel Surfaces */
+@utility leaf-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(79, 138, 69, 0.25);
+  background-color: #DDECCF;
+  color: #263D2E;
+}
+
+@utility mango-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 212, 90, 0.45);
+  background-color: #FFF0B8;
+  color: #263D2E;
+}
+
+@utility coral-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 128, 102, 0.35);
+  background-color: #FFE0D4;
+  color: #263D2E;
+}
+
+@utility aqua-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(142, 219, 208, 0.45);
+  background-color: #D8F3EC;
+  color: #263D2E;
+}
+
+/* Backward-compatible card aliases */
+@utility butter-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 212, 90, 0.45);
+  background-color: #FFF0B8;
+  color: #263D2E;
+}
+
+@utility sage-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(79, 138, 69, 0.25);
+  background-color: #DDECCF;
+  color: #263D2E;
+}
+
+@utility peach-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 128, 102, 0.35);
+  background-color: #FFE0D4;
+  color: #263D2E;
+}
+
+/* Vibrant sun-drenched backdrop for hero and major highlight bands */
+@utility vibrant-gradient {
+  background-color: #FFF8E9;
+  background-image:
+    radial-gradient(45rem 25rem at 85% -5%, rgba(255, 212, 90, 0.32), transparent 70%),
+    radial-gradient(40rem 25rem at -5% 105%, rgba(142, 219, 208, 0.35), transparent 70%),
+    radial-gradient(35rem 22rem at 50% 40%, rgba(221, 236, 207, 0.4), transparent 70%),
+    linear-gradient(180deg, #FFF8E9 0%, #FFF3DA 100%);
+}
+
 @utility herbal-gradient {
+  background-color: #FFF8E9;
   background-image:
-    radial-gradient(60rem 30rem at 85% -10%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%),
-    radial-gradient(50rem 30rem at -10% 110%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 60%),
-    linear-gradient(180deg, var(--color-cream) 0%, var(--color-background) 100%);
+    radial-gradient(45rem 25rem at 85% -5%, rgba(255, 212, 90, 0.30), transparent 70%),
+    radial-gradient(40rem 25rem at -5% 105%, rgba(142, 219, 208, 0.32), transparent 70%),
+    linear-gradient(180deg, #FFF8E9 0%, #FFF3DC 100%);
 }
 
-/* Soft top wash for long content pages (fades into the ivory background) */
+/* Soft top wash for content pages */
 @utility page-wash {
+  background-color: #FFF8E9;
   background-image:
-    radial-gradient(48rem 22rem at 90% -6rem, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 70%),
-    linear-gradient(180deg, var(--color-cream) 0, var(--color-background) 30rem);
+    radial-gradient(48rem 22rem at 90% -6rem, rgba(255, 212, 90, 0.22), transparent 70%),
+    radial-gradient(40rem 20rem at 10% -4rem, rgba(142, 219, 208, 0.25), transparent 70%),
+    linear-gradient(180deg, #FFF8E9 0, #FFF5E2 30rem);
 }
 
-/* Deep green band used for footers, admin sidebar and dark CTAs */
+/* Deep forest band used for footer and dark accents (#263D2E) */
 @utility forest-gradient {
+  background-color: #263D2E;
   background-image:
-    radial-gradient(40rem 24rem at 100% 0%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 60%),
-    linear-gradient(160deg, #163d2a 0%, #10261b 100%);
+    radial-gradient(38rem 24rem at 95% 5%, rgba(79, 138, 69, 0.25), transparent 60%),
+    radial-gradient(30rem 20rem at 5% 95%, rgba(255, 212, 90, 0.15), transparent 60%),
+    linear-gradient(165deg, #263D2E 0%, #1c2e22 100%);
+}
+
+/* Playful Keyframe Animations */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes float-drift {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-6px) translateX(4px) rotate(3deg);
+  }
+  66% {
+    transform: translateY(4px) translateX(-3px) rotate(-2deg);
+  }
+}
+
+@keyframes spin-super-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+.animate-float {
+  animation: float-gentle 4.5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-gentle 5s ease-in-out 1.5s infinite;
+}
+
+.animate-drift {
+  animation: float-drift 7s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-super-slow 24s linear infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delayed,
+  .animate-drift,
+  .animate-spin-slow,
+  .animate-bounce-subtle,
+  .animate-pulse-gentle {
+    animation: none !important;
+  }
 }
 
 @utility page-container {
@@ -156,7 +358,6 @@
 }
 
 @media print {
-  /* Strict Anti-Print & Anti-PDF Export Protection for Official Certificates */
   [data-radix-dialog-content],
   img[alt*="Official View Only"],
   img[alt*="Preview"] {
@@ -165,10 +366,10 @@
   }
 }
 
-/* Sleek admin sidebar scrollbar (on deep green) */
+/* Sleek admin / custom scrollbar */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(238, 244, 239, 0.22) transparent;
+  scrollbar-color: rgba(66, 81, 59, 0.3) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -180,10 +381,10 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(238, 244, 239, 0.18);
+  background: rgba(66, 81, 59, 0.25);
   border-radius: 9999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(238, 244, 239, 0.36);
+  background: rgba(66, 81, 59, 0.45);
 }

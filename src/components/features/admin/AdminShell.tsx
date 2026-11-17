@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ExternalLink, LogOut, Menu, X } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { ADMIN_COPY, ADMIN_NAV } from "@/constants/admin";
-import { ASSETS } from "@/constants/assets";
+import { BrandLogo } from "@/components/common/BrandLogo";
 import { LAYOUT } from "@/constants/layout";
 import { ROUTES } from "@/constants/routes";
 import { getPostLogoutRoute } from "@/lib/auth/post-login";
@@ -83,15 +82,8 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             className="flex shrink-0 flex-col items-center text-center group"
             aria-label="Admin Dashboard"
           >
-            <div className="overflow-hidden rounded-2xl border border-white/20 bg-white p-2.5 shadow-lg shadow-black/20 transition-transform duration-300 group-hover:scale-105">
-              <Image
-                src={ASSETS.LOGO}
-                alt={ADMIN_COPY.brand}
-                width={120}
-                height={110}
-                unoptimized
-                className="h-16 w-auto object-contain"
-              />
+            <div className="flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] p-3 shadow-lg shadow-black/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-105">
+              <BrandLogo variant="light" size="sm" href={null} imgClassName="h-14 w-auto" />
             </div>
             <p className="mt-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
               {ADMIN_COPY.panelLabel}
@@ -139,15 +131,8 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                   className="flex items-center gap-3"
                   onClick={() => setOpen(false)}
                 >
-                  <div className="overflow-hidden rounded-xl bg-white p-1.5 shadow-xs border border-white/20">
-                    <Image
-                      src={ASSETS.LOGO}
-                      alt={ADMIN_COPY.brand}
-                      width={60}
-                      height={55}
-                      unoptimized
-                      className="h-12 w-auto object-contain"
-                    />
+                  <div className="flex items-center justify-center rounded-xl bg-white/[0.08] p-2 border border-white/10">
+                    <BrandLogo variant="light" size="sm" href={null} imgClassName="h-9 w-auto" />
                   </div>
                   <p className="text-xs uppercase tracking-[0.18em] text-accent font-semibold">
                     {ADMIN_COPY.panelLabel}

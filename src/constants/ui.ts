@@ -17,22 +17,21 @@ export const CONTACT_PHONES = [
 ] as const;
 
 export const UI = {
-  brand: "Healargo",
-  brandTagline: "Natural Wellness",
+  brand: "HEALARGO",
+  brandTagline: "Goodness, Naturally.",
   /** Primary WhatsApp number (with country code, no +). */
   whatsappNumber: "917871694931",
   phones: CONTACT_PHONES,
-  address: "Healargo, Your Store Address Here",
+  address: "HEALARGO, Naturally Sourced Wellness",
   email: "healargo@gmail.com",
   mapUrl: "",
   mapDirectionsUrl: "",
   mapEmbedUrl: "",
   workingHours: "Mon – Sun: 9:00 AM – 7:00 PM",
-  announcement:
-    "Free delivery on eligible orders — shop natural wellness with Healargo",
-  since: "Healargo · Natural products for everyday wellness",
+  announcement: "Naturally good products. Delivered with care.",
+  since: "HEALARGO · Goodness, Naturally.",
   trustFamilies: "1,000+",
-  trustYears: "New",
+  trustYears: "Pure",
   trustRating: "5.0",
   close: "Close",
   follow: "Follow",
@@ -48,7 +47,7 @@ export const SOCIAL_LINKS = [
   {
     id: "whatsapp",
     name: "WhatsApp Channel",
-    label: "Healargo Channel",
+    label: "HEALARGO Channel",
     href: UI.social.whatsapp,
     handle: "healargo",
     description:
@@ -76,9 +75,9 @@ export const SOCIAL_LINKS = [
   {
     id: "facebook",
     name: "Facebook",
-    label: "Healargo",
+    label: "HEALARGO",
     href: UI.social.facebook,
-    handle: "Healargo",
+    handle: "healargo",
     description: "Follow our community for launches, updates & healthy living tips.",
     color: "#1877F2",
   },
@@ -87,8 +86,7 @@ export const SOCIAL_LINKS = [
 export const NAV_LINKS = [
   { label: "Shop", href: "/shop" },
   { label: "Bestsellers", href: "/bestsellers" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "About", href: "/about" },
+  { label: "Our Story", href: "/about" },
   { label: "Certificates", href: "/certificates" },
   { label: "Contact", href: "/contact" },
   { label: "FAQs", href: "/faqs" },

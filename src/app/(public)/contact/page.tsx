@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Mail,
@@ -17,6 +18,7 @@ import { ContactForm } from "@/components/features/contact/ContactForm";
 import { SocialLinks } from "@/components/common/SocialLinks";
 import { Button } from "@/components/ui/button";
 import { PageContainer } from "@/components/layout/PageContainer";
+import { ASSETS } from "@/constants/assets";
 import { UI } from "@/constants/ui";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/lib/utils/whatsapp";
@@ -40,6 +42,16 @@ export default function ContactPage() {
     <div className="page-wash py-8 sm:py-12 md:py-16">
       <PageContainer>
         <div className="mx-auto max-w-3xl text-center">
+          <div className="mb-5 flex justify-center">
+            <Image
+              src={ASSETS.LOGO}
+              alt={`${UI.brand} Logo`}
+              width={160}
+              height={110}
+              priority
+              className="h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
+            />
+          </div>
           <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/15 bg-card/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary shadow-[var(--shadow-soft)]">
             <Sparkles className="h-3.5 w-3.5" />
             <span>Connect & Visit</span>
@@ -55,22 +67,22 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
-          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
+          <div className="flex flex-col justify-between rounded-3xl border border-[#4F8A45]/25 bg-[#DDECCF]/35 p-6 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lifted)]">
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DDECCF] text-[#4F8A45] shadow-xs">
                 <MapPin className="h-5 w-5" />
               </div>
-              <h3 className="mt-3 font-display text-lg font-semibold text-dark">
+              <h3 className="mt-4 font-display text-lg font-bold text-[#263D2E]">
                 Visit Us
               </h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted sm:text-sm">
+              <p className="mt-1.5 text-xs leading-relaxed text-[#72776A] sm:text-sm">
                 {hasAddress ? UI.address : "Store address will appear here when configured."}
               </p>
             </div>
             {hasMapLinks ? (
-              <div className="mt-4 flex flex-col gap-2 pt-3 border-t border-border/60">
+              <div className="mt-5 flex flex-col gap-2 pt-4 border-t border-[#4F8A45]/20">
                 {hasDirections ? (
-                  <Button size="sm" asChild className="gap-1.5">
+                  <Button size="sm" asChild className="gap-1.5 bg-[#4F8A45] hover:bg-[#263D2E] text-white font-bold rounded-full">
                     <a
                       href={UI.mapDirectionsUrl}
                       target="_blank"
@@ -82,7 +94,7 @@ export default function ContactPage() {
                   </Button>
                 ) : null}
                 {hasMapUrl ? (
-                  <Button size="sm" variant="outline" asChild className="gap-1.5">
+                  <Button size="sm" variant="outline" asChild className="gap-1.5 rounded-full border-[#263D2E]/20 text-[#263D2E] bg-white hover:bg-white/90">
                     <a
                       href={UI.mapUrl}
                       target="_blank"
@@ -97,12 +109,12 @@ export default function ContactPage() {
             ) : null}
           </div>
 
-          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
+          <div className="flex flex-col justify-between rounded-3xl border border-[#FFD45A]/45 bg-[#FFF0B8]/40 p-6 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lifted)]">
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/20 text-accent-foreground">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FFF0B8] text-[#263D2E] shadow-xs">
                 <Phone className="h-5 w-5" />
               </div>
-              <h3 className="mt-3 font-display text-lg font-semibold text-dark">
+              <h3 className="mt-4 font-display text-lg font-bold text-[#263D2E]">
                 Call Us
               </h3>
               {hasPhones ? (
@@ -111,7 +123,7 @@ export default function ContactPage() {
                     <li key={phone.digits}>
                       <a
                         href={`tel:${phone.tel}`}
-                        className="text-sm font-semibold text-dark hover:text-primary hover:underline sm:text-base"
+                        className="text-sm font-bold text-[#263D2E] hover:text-[#4F8A45] hover:underline sm:text-base"
                       >
                         {phone.display}
                       </a>
@@ -119,13 +131,13 @@ export default function ContactPage() {
                   ))}
                 </ul>
               ) : null}
-              <p className="mt-2 text-xs text-muted">
+              <p className="mt-2 text-xs text-[#72776A]">
                 Available during working hours for orders and product support.
               </p>
             </div>
             {hasWhatsapp ? (
-              <div className="mt-4 flex flex-col gap-2 pt-3 border-t border-border/60">
-                <Button size="sm" variant="whatsapp" asChild className="gap-1.5">
+              <div className="mt-5 flex flex-col gap-2 pt-4 border-t border-[#FFD45A]/30">
+                <Button size="sm" variant="whatsapp" asChild className="gap-1.5 rounded-full shadow-xs">
                   <Link
                     href={buildWhatsAppUrl(
                       `Hi ${UI.brand}! I would like to enquire about your products.`,
@@ -141,26 +153,26 @@ export default function ContactPage() {
             ) : null}
           </div>
 
-          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
+          <div className="flex flex-col justify-between rounded-3xl border border-[#8EDBD0]/45 bg-[#D8F3EC]/35 p-6 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lifted)]">
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#D8F3EC] text-[#4F8A45] shadow-xs">
                 <Mail className="h-5 w-5" />
               </div>
-              <h3 className="mt-3 font-display text-lg font-semibold text-dark">
+              <h3 className="mt-4 font-display text-lg font-bold text-[#263D2E]">
                 Email Enquiries
               </h3>
               <a
                 href={`mailto:${UI.email}`}
-                className="mt-1.5 inline-block break-all text-sm font-semibold text-dark hover:text-primary hover:underline"
+                className="mt-2 inline-block break-all text-sm font-bold text-[#263D2E] hover:text-[#4F8A45] hover:underline"
               >
                 {UI.email}
               </a>
-              <p className="mt-1 text-xs text-muted">
+              <p className="mt-2 text-xs text-[#72776A]">
                 Drop us an email for bulk orders, partnerships, gifting, and support.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-border/60">
-              <Button size="sm" variant="outline" asChild className="w-full gap-1.5">
+            <div className="mt-5 pt-4 border-t border-[#8EDBD0]/30">
+              <Button size="sm" variant="outline" asChild className="w-full gap-1.5 rounded-full border-[#263D2E]/20 text-[#263D2E] bg-white hover:bg-white/90">
                 <a href={`mailto:${UI.email}`}>
                   <Mail className="h-3.5 w-3.5" />
                   Send an Email
@@ -170,25 +182,25 @@ export default function ContactPage() {
           </div>
 
           {/* Card 4: Working Hours */}
-          <div className="flex flex-col justify-between surface-card p-5 transition-shadow hover:shadow-[var(--shadow-lifted)]">
+          <div className="flex flex-col justify-between rounded-3xl border border-[#FF8066]/35 bg-[#FFE0D4]/35 p-6 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lifted)]">
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cream-dark text-dark">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FFE0D4] text-[#FF8066] shadow-xs">
                 <Clock className="h-5 w-5" />
               </div>
-              <h3 className="mt-3 font-display text-lg font-semibold text-dark">
+              <h3 className="mt-4 font-display text-lg font-bold text-[#263D2E]">
                 Working Hours
               </h3>
-              <p className="mt-1.5 text-sm font-semibold text-dark">
+              <p className="mt-2 text-sm font-bold text-[#263D2E]">
                 {UI.workingHours}
               </p>
-              <p className="mt-1 text-xs text-muted">
+              <p className="mt-1 text-xs text-[#72776A]">
                 Hours for support, pickups, and customer enquiries.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-border/60">
-              <div className="inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-cream/80 py-1.5 text-xs font-medium text-dark/80">
-                <Store className="h-3.5 w-3.5 text-primary" />
-                <span>Open Today</span>
+            <div className="mt-5 pt-4 border-t border-[#FF8066]/30">
+              <div className="inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-white/90 py-2 text-xs font-bold text-[#263D2E] shadow-2xs">
+                <Store className="h-3.5 w-3.5 text-[#4F8A45]" />
+                Customer Support Ready
               </div>
             </div>
           </div>

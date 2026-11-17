@@ -14,7 +14,6 @@ import { ASSETS } from "@/constants/assets";
 import { CATALOG_COPY } from "@/constants/catalog";
 import { CHECKOUT_COPY } from "@/constants/checkout";
 import { PRODUCT_COPY } from "@/constants/home";
-import { LAYOUT } from "@/constants/layout";
 import { ROUTES } from "@/constants/routes";
 import { useCartStore } from "@/hooks/useCartStore";
 import { useRequireLogin } from "@/hooks/useRequireLogin";
@@ -29,7 +28,10 @@ export function ComboCard({ combo }: { combo: ComboOffer }) {
   const buyNowItem = useCartStore((s) => s.buyNowItem);
   const name = stripHtml(combo.name);
   const description = truncate(stripHtml(combo.description ?? ""), 80);
-  const image = combo.images[0] || ASSETS.PLACEHOLDER_PRODUCT;
+  const image =
+    combo.images[0] && !combo.images[0].includes("vsoilmill")
+      ? combo.images[0]
+      : ASSETS.COLLECTION_BANNER;
   const [imgSrc, setImgSrc] = useState(image);
   const discount =
     combo.originalPrice > combo.price
@@ -75,21 +77,21 @@ export function ComboCard({ combo }: { combo: ComboOffer }) {
 
   return (
     <ScaleOnHover className="h-full w-full">
-      <article className="@container group flex h-full flex-col overflow-hidden rounded-2xl border border-border/80 bg-card p-2 shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:border-primary/25 hover:shadow-[var(--shadow-lifted)] sm:p-2.5">
+      <article className="@container group flex h-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-2.5 shadow-[var(--shadow-soft)] transition-all duration-300 hover:border-primary/30 hover:shadow-[var(--shadow-lifted)] sm:p-3">
         <Link
           href={ROUTES.COMBO(combo.slug)}
-          className="relative block aspect-square shrink-0 overflow-hidden rounded-xl bg-cream"
+          className="relative block aspect-square shrink-0 overflow-hidden rounded-xl sm:rounded-2xl bg-[#FFF0B8]/60 border border-[#FFD45A]/40"
         >
           <Image
             src={imgSrc}
             alt={name}
             fill
             unoptimized
-            onError={() => setImgSrc(ASSETS.PLACEHOLDER_PRODUCT)}
-            className={LAYOUT.productImage}
+            onError={() => setImgSrc(ASSETS.COLLECTION_BANNER)}
+            className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
           {discount > 0 ? (
-            <Badge className="absolute left-1.5 top-1.5 border-transparent bg-primary px-1.5 py-0 text-[9px] font-semibold leading-4 text-primary-foreground shadow-sm @min-[13rem]:left-2 @min-[13rem]:top-2 @min-[13rem]:px-2 @min-[13rem]:text-[10px]">
+            <Badge className="absolute left-2.5 top-2.5 border-transparent bg-[#FF8066] px-2.5 py-1 text-[11px] font-extrabold leading-none text-white shadow-sm">
               -{discount}
               {PRODUCT_COPY.offSuffix}
             </Badge>
@@ -98,7 +100,7 @@ export function ComboCard({ combo }: { combo: ComboOffer }) {
 
         <div className="flex flex-1 flex-col px-0.5 pt-2.5 @min-[13rem]:px-1">
           <Link href={ROUTES.COMBO(combo.slug)}>
-            <h3 className="line-clamp-2 min-h-[2.5em] break-words font-sans text-[13px] font-semibold leading-[1.25] text-dark transition-colors group-hover:text-primary @min-[13rem]:text-sm">
+            <h3 className="line-clamp-2 min-h-[2.5em] break-words font-display text-[13px] font-bold leading-[1.25] text-dark transition-colors group-hover:text-primary @min-[13rem]:text-sm">
               {name}
             </h3>
           </Link>

@@ -71,8 +71,8 @@ export const AUTH_COPY = {
   panelEyebrow: UI.since,
   panelHeadline: SITE_TAGLINE,
   panelBody:
-    "Discover thoughtfully sourced products for everyday natural wellness.",
-  yearsLabel: "Years milling",
+    "Discover thoughtfully sourced products for everyday goodness and natural living.",
+  yearsLabel: "Natural Quality",
   familiesLabel: "Families served",
   ratingLabel: "Rated by customers",
 } as const;

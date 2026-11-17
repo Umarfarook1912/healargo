@@ -9,7 +9,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "My Orders",
-  description: "Track your Healargo orders and payment status.",
+  description: "Track your HEALARGO orders and payment status.",
   path: "/orders",
 });
 

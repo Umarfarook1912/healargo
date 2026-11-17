@@ -300,6 +300,28 @@ export default function CheckoutPage() {
   return (
     <div className="page-wash py-8 sm:py-12">
       <PageContainer className="max-w-6xl">
+        {/* Brand Checkout Trust Bar */}
+        <div className="mb-6 flex items-center justify-between border-b border-border/70 pb-4">
+          <Link
+            href={ROUTES.HOME}
+            className="flex items-center gap-2.5 transition-transform duration-200 hover:scale-105"
+            aria-label="HEALARGO Home"
+          >
+            <Image
+              src={ASSETS.LOGO}
+              alt="HEALARGO"
+              width={160}
+              height={110}
+              priority
+              className="h-11 w-auto object-contain"
+            />
+          </Link>
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-[#4F8A45]/25 bg-[#DDECCF]/50 px-3.5 py-1 text-xs font-semibold text-[#263D2E] shadow-2xs">
+            <Lock className="h-3.5 w-3.5 text-[#4F8A45]" />
+            <span>256-bit Encrypted Checkout</span>
+          </div>
+        </div>
+
         {/* Header: Back button + Title */}
         <div className="flex items-center gap-3">
           <button

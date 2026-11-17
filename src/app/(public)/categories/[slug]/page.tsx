@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: category.name,
       description:
         stripHtml(category.description ?? "") ||
-        `Shop ${category.name} from Healargo.`,
+        `Shop ${category.name} from HEALARGO.`,
       path: `/categories/${slug}`,
     });
   } catch {
@@ -47,16 +47,19 @@ export default async function CategoryPage({ params }: Props) {
     ]);
 
     category = fetchedCategory;
-    allCategories = fetchedCategories;
+    allCategories = fetchedCategories.filter((c) => c.slug !== "home-cleaning" && !c.slug.includes("cleaning"));
 
     if (category) {
-      products = await getProducts({ categorySlug: slug });
+      const rawProducts = await getProducts({ categorySlug: slug });
+      products = rawProducts.filter(
+        (p) => !p.slug.includes("cleaning") && !p.name.toLowerCase().includes("cleaning")
+      );
     }
   } catch {
     category = null;
   }
 
-  if (!category) notFound();
+  if (!category || category.slug === "home-cleaning" || category.slug.includes("cleaning")) notFound();
 
   return (
     <PageContainer className="space-y-10 py-8 md:py-12">

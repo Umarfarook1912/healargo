@@ -26,13 +26,13 @@ export const FAQ_CATEGORIES = [
 export const FAQS: FaqItem[] = [
   {
     id: "special-and-taste",
-    q: "What makes Healargo oils special?",
-    a: "Healargo focuses on traditional low-heat, wood-pressed extraction that helps preserve natural aroma, character, and everyday cooking quality. We avoid harsh refining steps so the oils stay closer to their original profile.",
+    q: "What makes HEALARGO oils special?",
+    a: "HEALARGO focuses on traditional low-heat, wood-pressed extraction that helps preserve natural aroma, character, and everyday cooking quality. We avoid harsh chemical refining steps so the oils stay pure and true to their natural origins.",
     category: "videos",
     badge: "Featured Brand Video",
     videos: [
       {
-        title: "What makes Healargo special and why the taste stands out",
+        title: "What makes HEALARGO special and why the taste stands out",
         url: "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/special/1.mp4?tr=orig-true",
         label: "Watch Video Explanation",
         description: "A closer look at our traditional low-heat process, clean handling, and naturally rich flavor.",
@@ -41,8 +41,8 @@ export const FAQS: FaqItem[] = [
   },
   {
     id: "low-price-and-quality",
-    q: "How does Healargo keep quality high while pricing stays fair?",
-    a: "We keep things straightforward: thoughtful sourcing, careful production, and direct online delivery. That helps us focus spending on product quality instead of unnecessary overhead.",
+    q: "How does HEALARGO keep quality high while pricing stays fair?",
+    a: "We keep things straightforward: thoughtful farm-direct sourcing, careful production, and direct online delivery. That helps us focus resources on product purity and customer value.",
     category: "videos",
     badge: "2-Part Video Guide",
     videos: [
@@ -64,16 +64,16 @@ export const FAQS: FaqItem[] = [
   },
   {
     id: "why-choose-healargo",
-    q: "Why choose Healargo for everyday cooking and wellness essentials?",
-    a: "Healargo combines honest ingredients, careful processing, verified quality standards, and convenient delivery. We aim to make trusted everyday products easier to shop online.",
+    q: "Why choose HEALARGO for everyday cooking and natural wellness?",
+    a: "HEALARGO combines honest ingredients, careful extraction, verified quality standards, and convenient pan-India delivery. We aim to bring trusted natural products into modern homes.",
     category: "videos",
     badge: "Why Choose Us",
     videos: [
       {
-        title: "Why choose Healargo — quality, trust, and everyday wellness",
+        title: "Why choose HEALARGO — quality, trust, and everyday goodness",
         url: "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/whyvsoil/1.mp4?tr=orig-true",
         label: "Watch Video Tour",
-        description: "See how Healargo approaches product quality, trust, and customer care.",
+        description: "See how HEALARGO approaches product quality, trust, and customer care.",
       },
     ],
   },

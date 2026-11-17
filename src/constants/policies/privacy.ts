@@ -5,7 +5,7 @@ const phoneList = UI.phones.map((phone) => phone.display).join(" / ");
 export const PRIVACY_POLICY = {
   title: "Privacy Policy",
   intro:
-    "Healargo respects your privacy. This policy explains how we collect, use, and protect your personal information when you shop with us.",
+    "HEALARGO respects your privacy. This policy explains how we collect, use, and protect your personal information when you shop with us.",
   sections: [
     {
       title: "Information We Collect",

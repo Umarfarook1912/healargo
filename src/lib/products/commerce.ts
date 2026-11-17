@@ -55,10 +55,16 @@ export function variantDisplayImage(
   variant?: { image?: string } | null,
   fallback = "",
 ): string {
+  const isLegacy = (url?: string | null) =>
+    Boolean(url && (url.includes("vsoilmill") || url.includes("zxpphru8x")));
+
   const variantImage = variant?.image?.trim();
-  if (variantImage) return variantImage;
-  const productImage = productImages?.find((img) => img?.trim());
-  return productImage?.trim() || fallback;
+  if (variantImage && !isLegacy(variantImage)) return variantImage;
+
+  const productImage = productImages?.find((img) => img?.trim() && !isLegacy(img));
+  if (productImage) return productImage.trim();
+
+  return fallback;
 }
 
 export function toDatetimeLocalValue(value?: string | Date | null): string {

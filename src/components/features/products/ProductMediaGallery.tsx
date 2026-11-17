@@ -47,10 +47,26 @@ export function ProductMediaGallery({
     select(thumbs[(activeIndex + delta + thumbs.length) % thumbs.length]);
   }
 
+  const nameLower = alt.toLowerCase();
+  const isCoconut = nameLower.includes("coconut") || nameLower.includes("thengai");
+  const isSesame = nameLower.includes("sesame") || nameLower.includes("gingelly") || nameLower.includes("til");
+  const isGroundnut = nameLower.includes("groundnut") || nameLower.includes("peanut") || nameLower.includes("kadalai");
+
+  const frameBg = isCoconut
+    ? "bg-[#D8F3EC] border-[#8EDBD0]/60"
+    : isSesame
+    ? "bg-[#FFF0B8] border-[#FFD45A]/70"
+    : isGroundnut
+    ? "bg-[#FFE0D4] border-[#FF8066]/50"
+    : "bg-[#DDECCF] border-[#4F8A45]/35";
+
   return (
     <div className="flex flex-col gap-3 lg:flex-row-reverse lg:gap-3">
       <div
-        className="group/media relative aspect-square w-full overflow-hidden rounded-2xl border border-border bg-white lg:rounded-3xl"
+        className={cn(
+          "group/media relative aspect-square w-full overflow-hidden rounded-3xl border shadow-[var(--shadow-lifted)]",
+          frameBg
+        )}
         onTouchStart={(e) => {
           touchStartX.current = e.touches[0].clientX;
         }}
@@ -61,6 +77,12 @@ export function ProductMediaGallery({
           if (Math.abs(diff) > 40) step(diff > 0 ? 1 : -1);
         }}
       >
+        {/* Soft radial glow behind product bottle */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-8 -z-10 rounded-full bg-white/70 blur-2xl"
+        />
+
         {isVideo ? (
           <VideoFrame url={current} kind={kind} title={alt} />
         ) : (
@@ -72,7 +94,7 @@ export function ProductMediaGallery({
               unoptimized
               priority
               onError={() => setFailed(true)}
-              className="object-contain p-5 transition-transform duration-500 ease-out sm:p-7 lg:p-9 lg:group-hover/media:scale-[1.04]"
+              className="object-contain p-6 transition-transform duration-500 ease-out sm:p-8 lg:p-10 lg:group-hover/media:scale-[1.05]"
             />
             {videos.length > 0 ? (
               <button

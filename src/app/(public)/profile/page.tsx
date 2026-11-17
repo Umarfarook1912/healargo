@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "My Profile",
-  description: "Manage your Healargo account and order history.",
+  description: "Manage your HEALARGO account and order history.",
   path: "/profile",
 });
 

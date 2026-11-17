@@ -66,7 +66,7 @@ export function AdminCombosClient({ combos }: { combos: AdminComboRow[] }) {
       const a = document.createElement("a");
       a.href = url;
       const dateStamp = new Date().toISOString().split("T")[0];
-      a.download = `Healargo_Combos_${dateStamp}.xlsx`;
+      a.download = `HEALARGO_Combos_${dateStamp}.xlsx`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);

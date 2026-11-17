@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Images, PlayCircle, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Images, PlayCircle, ShieldCheck, Sparkles } from "lucide-react";
 import { FadeIn, Stagger, StaggerItem } from "@/components/shared/motion";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { SectionHeading } from "@/components/features/home/SectionHeading";
@@ -18,9 +18,14 @@ export function HomeProofSection() {
     <section className="bg-cream/50 py-16 md:py-24">
       <PageContainer>
         <SectionHeading
-          eyebrow="Inside Healargo"
-          title="See our products and process up close"
-          description={`Browse ${GALLERY_IMAGES.length} photos and ${GALLERY_VIDEOS.length} behind-the-scenes videos, or view our quality certificates.`}
+          eyebrow={
+            <span className="inline-flex items-center gap-1.5 font-extrabold text-[#4F8A45]">
+              <Sparkles className="h-4 w-4 text-[#FFD45A]" />
+              Inside HEALARGO
+            </span>
+          }
+          title="See Our Products & Sourcing Up Close"
+          description={`Browse ${GALLERY_IMAGES.length} photos and ${GALLERY_VIDEOS.length} behind-the-scenes videos, or view our verified quality certificates.`}
         />
 
         <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
@@ -42,7 +47,7 @@ export function HomeProofSection() {
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-dark/75 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
-                  <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-primary shadow sm:bottom-4 sm:left-4">
+                  <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-[11px] font-extrabold text-[#4F8A45] shadow-xs sm:bottom-4 sm:left-4">
                     {image.tag}
                   </span>
                 </Link>
@@ -54,19 +59,19 @@ export function HomeProofSection() {
             <FadeIn delay={0.1}>
               <Link
                 href={ROUTES.GALLERY}
-                className="group flex h-full flex-col justify-between gap-8 rounded-3xl border border-border bg-card p-7 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lifted)] sm:p-8"
+                className="group flex h-full flex-col justify-between gap-8 rounded-3xl border border-[#8EDBD0]/50 bg-[#D8F3EC]/40 p-7 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lifted)] sm:p-8"
               >
                 <div className="flex items-start justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8F3EC] text-[#4F8A45] shadow-2xs">
                     <Images className="h-5 w-5" />
                   </span>
-                  <ArrowUpRight className="h-5 w-5 text-muted transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                  <ArrowUpRight className="h-5 w-5 text-[#72776A] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#4F8A45]" />
                 </div>
                 <div>
-                  <h3 className="font-display text-2xl text-dark">Gallery</h3>
-                  <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
-                    <span className="inline-flex items-center gap-1.5"><Images className="h-4 w-4 text-accent-strong" />{GALLERY_IMAGES.length} photos</span>
-                    <span className="inline-flex items-center gap-1.5"><PlayCircle className="h-4 w-4 text-accent-strong" />{GALLERY_VIDEOS.length} videos</span>
+                  <h3 className="font-display text-2xl font-bold text-[#263D2E]">Visual Gallery</h3>
+                  <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#72776A]">
+                    <span className="inline-flex items-center gap-1.5"><Images className="h-3.5 w-3.5 text-[#4F8A45]" />{GALLERY_IMAGES.length} photos</span>
+                    <span className="inline-flex items-center gap-1.5"><PlayCircle className="h-3.5 w-3.5 text-[#4F8A45]" />{GALLERY_VIDEOS.length} videos</span>
                   </p>
                 </div>
               </Link>
@@ -74,17 +79,17 @@ export function HomeProofSection() {
             <FadeIn delay={0.18}>
               <Link
                 href={ROUTES.CERTIFICATES}
-                className="forest-gradient group flex h-full flex-col justify-between gap-8 rounded-3xl p-7 text-cream shadow-[var(--shadow-lifted)] transition-transform hover:-translate-y-1 sm:p-8"
+                className="group flex h-full flex-col justify-between gap-8 rounded-3xl border border-[#FFD45A]/50 bg-[#FFF0B8]/40 p-7 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lifted)] sm:p-8"
               >
                 <div className="flex items-start justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-accent-foreground">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFD45A] text-[#263D2E] shadow-2xs">
                     <ShieldCheck className="h-5 w-5" />
                   </span>
-                  <ArrowUpRight className="h-5 w-5 text-cream/60 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+                  <ArrowUpRight className="h-5 w-5 text-[#72776A] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#263D2E]" />
                 </div>
                 <div>
-                  <h3 className="font-display text-2xl text-white">Certificates</h3>
-                  <p className="mt-2 text-sm text-cream/75">View our official quality and compliance documents.</p>
+                  <h3 className="font-display text-2xl font-bold text-[#263D2E]">Certificates &amp; Lab Tests</h3>
+                  <p className="mt-2 text-xs text-[#72776A]">FSSAI licenses, NABL lab tests, and compliance documents.</p>
                 </div>
               </Link>
             </FadeIn>

@@ -22,8 +22,23 @@ export function HomeProductShowcase({
   const [activeTab, setActiveTab] = useState<ShowcaseTab>(FILTER_ALL);
   const [selectedCategorySlug, setSelectedCategorySlug] = useState(FILTER_ALL);
 
+  // Filter out any legacy non-HEALARGO products (e.g. home-cleaning)
+  const validProducts = useMemo(() => {
+    return products.filter((p) => {
+      const catSlug =
+        typeof p.categoryId === "object" && p.categoryId !== null
+          ? (p.categoryId as { slug?: string }).slug
+          : "";
+      return (
+        catSlug !== "home-cleaning" &&
+        !p.slug.includes("cleaning") &&
+        !p.name.toLowerCase().includes("cleaning")
+      );
+    });
+  }, [products]);
+
   const filteredProducts = useMemo(() => {
-    let result = products;
+    let result = validProducts;
 
     if (activeTab === "bestsellers") {
       result = result.filter((p) => p.isBestSeller);
@@ -38,7 +53,7 @@ export function HomeProductShowcase({
     }
 
     return result;
-  }, [products, activeTab, selectedCategorySlug, categories]);
+  }, [validProducts, activeTab, selectedCategorySlug, categories]);
 
   function handleCategorySelect(slug: string) {
     setSelectedCategorySlug(slug);
@@ -68,7 +83,7 @@ export function HomeProductShowcase({
         />
 
         <ShowcaseFilterBar
-          products={products}
+          products={validProducts}
           categories={categories}
           activeTab={activeTab}
           selectedCategorySlug={selectedCategorySlug}

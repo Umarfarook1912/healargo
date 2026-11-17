@@ -35,7 +35,7 @@ export default async function OrderTrackingPage({ params }: Props) {
   if (!isOwner) notFound();
 
   const orderId = order.id;
-  const shortId = `VSO-${orderId.slice(-6).toUpperCase()}`;
+  const shortId = `HLG-${orderId.slice(-6).toUpperCase()}`;
 
   return (
     <PageContainer className="py-10 md:py-14">

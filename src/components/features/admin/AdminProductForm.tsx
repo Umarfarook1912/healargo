@@ -680,7 +680,7 @@ export function AdminProductForm({
           <Input
             id="metaTitle"
             className="mt-1 text-xs"
-            placeholder="Buy Wooden Pressed Sesame Oil Online | Healargo"
+            placeholder="Buy Pure Cold Pressed Sesame Oil Online | HEALARGO"
             value={form.metaTitle}
             onChange={(e) =>
               setForm((f) => ({ ...f, metaTitle: e.target.value }))

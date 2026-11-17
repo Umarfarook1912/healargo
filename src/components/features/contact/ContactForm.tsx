@@ -135,7 +135,7 @@ export function ContactForm() {
                 WhatsApp
               </a>
             ) : null}
-            {!hasMaps && !hasWhatsapp && !UI.address && UI.phones.length === 0 ? (
+            {!hasMaps && !hasWhatsapp && !UI.address && (UI.phones as readonly unknown[]).length === 0 ? (
               <span className="text-muted">
                 We&apos;ll reply by email as soon as possible.
               </span>

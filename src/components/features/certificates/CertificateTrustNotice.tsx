@@ -20,7 +20,7 @@ export function CertificateTrustNotice() {
           </h2>
 
           <p className="mt-2 text-xs leading-relaxed text-dark/80 sm:text-sm">
-            At <strong>Healargo</strong>, consumer trust is our most valued ingredient.
+            At <strong>HEALARGO</strong>, consumer trust is our most valued ingredient.
             Every certificate, statutory license, enterprise registration, and laboratory report displayed
             on this page is an authentic, confirmed document issued by the Government of Tamil Nadu,
             the Government of India, or an ISO/IEC 17025 accredited laboratory:

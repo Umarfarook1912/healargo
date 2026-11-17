@@ -143,13 +143,21 @@ export function ProductDetailClient({ product }: { product: Product }) {
               {category ? (
                 <Link
                   href={ROUTES.CATEGORY(category.slug)}
-                  className="eyebrow text-[11px] transition-colors hover:text-primary"
+                  className="rounded-full bg-white/90 border border-border px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#263D2E] shadow-2xs transition-colors hover:text-[#4F8A45]"
                 >
                   {category.name}
                 </Link>
               ) : null}
-              {product.isBestSeller ? <Badge tone="warning" className="text-[10px]">Best Seller</Badge> : null}
-              {product.isNewArrival ? <Badge tone="primary" className="text-[10px]">New Arrival</Badge> : null}
+              {product.isBestSeller ? (
+                <span className="rounded-full bg-[#FFD45A] px-3 py-1 text-[11px] font-extrabold text-[#263D2E] shadow-2xs">
+                  Best Seller
+                </span>
+              ) : null}
+              {product.isNewArrival ? (
+                <span className="rounded-full bg-[#DDECCF] px-3 py-1 text-[11px] font-extrabold text-[#4F8A45] shadow-2xs">
+                  New Arrival
+                </span>
+              ) : null}
             </div>
           ) : null}
 
@@ -167,7 +175,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
                     key={n}
                     className={cn(
                       "h-3.5 w-3.5",
-                      n <= Math.round(averageRating) ? "fill-accent text-accent" : "text-border",
+                      n <= Math.round(averageRating) ? "fill-[#FF8066] text-[#FF8066]" : "text-border",
                     )}
                   />
                 ))}
@@ -184,14 +192,14 @@ export function ProductDetailClient({ product }: { product: Product }) {
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-                    <span className="font-display text-[1.65rem] font-semibold leading-none text-primary lg:text-[1.9rem]">
+                    <span className="font-display text-[1.75rem] font-bold leading-none text-[#4F8A45] lg:text-[2.1rem]">
                       {formatInr(unitPrice)}
                     </span>
                     {strikePrice > unitPrice ? (
-                      <span className="text-sm text-muted line-through">{formatInr(strikePrice)}</span>
+                      <span className="text-sm text-[#72776A] line-through font-normal">{formatInr(strikePrice)}</span>
                     ) : null}
                     {discount > 0 ? (
-                      <span className="rounded-md bg-success-soft px-1.5 py-0.5 text-xs font-bold text-success">
+                      <span className="rounded-full bg-[#FF8066] px-2.5 py-0.5 text-xs font-extrabold text-white shadow-2xs">
                         {discount}% OFF
                       </span>
                     ) : null}
@@ -199,7 +207,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
                   <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-muted">
                     {savings > 0 ? (
                       <span>
-                        You save <span className="font-semibold text-success">{formatInr(savings)}</span>
+                        You save <span className="font-bold text-[#4F8A45]">{formatInr(savings)}</span>
                       </span>
                     ) : null}
                     {!available ? <Badge tone="destructive">{CATALOG_COPY.outOfStock}</Badge> : null}
@@ -225,7 +233,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
           <div className="mt-4">
             <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               {CATALOG_COPY.selectSize}
-              {variant ? <span className="ml-1.5 normal-case tracking-normal text-dark">{"\u00b7"} {variant.label}</span> : null}
+              {variant ? <span className="ml-1.5 normal-case tracking-normal text-dark font-bold">{"\u00b7"} {variant.label}</span> : null}
             </p>
             <div className="flex flex-wrap gap-2">
               {product.variants.map((v, index) => (
@@ -238,10 +246,10 @@ export function ProductDetailClient({ product }: { product: Product }) {
                     setQuantity(1);
                   }}
                   className={cn(
-                    "rounded-lg border px-3.5 py-1.5 text-[13px] font-medium transition-colors",
+                    "rounded-full border px-4 py-2 text-xs font-bold transition-all duration-200",
                     index === variantIndex
-                      ? "border-primary bg-primary-soft text-primary ring-1 ring-primary"
-                      : "border-border bg-card text-dark hover:border-primary/40 hover:bg-primary-soft",
+                      ? "border-[#4F8A45] bg-[#4F8A45] text-white shadow-xs"
+                      : "border-border bg-white text-dark hover:border-[#4F8A45]/40 hover:bg-[#DDECCF]/30",
                   )}
                 >
                   {v.label}

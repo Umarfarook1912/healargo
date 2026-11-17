@@ -282,7 +282,7 @@ export function ProtectedDocumentViewer({
                 <div
                   className="pointer-events-none absolute inset-0 select-none overflow-hidden opacity-12"
                   style={{
-                    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='120'><text x='20' y='60' fill='%23000000' font-size='11' font-family='sans-serif' font-weight='bold' transform='rotate(-25 130 60)'>VS OIL MILL • VIEW ONLY</text></svg>")`,
+                    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='120'><text x='20' y='60' fill='%23000000' font-size='11' font-family='sans-serif' font-weight='bold' transform='rotate(-25 130 60)'>HEALARGO • VIEW ONLY</text></svg>")`,
                     backgroundRepeat: "repeat",
                   }}
                 />
@@ -314,7 +314,7 @@ export function ProtectedDocumentViewer({
         <div className="flex items-center gap-2">
           <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
           <span>
-            Verified Official Record • Registered to <strong>VS OIL MILL</strong>
+            Verified Official Record • Registered to <strong>HEALARGO</strong>
           </span>
         </div>
 

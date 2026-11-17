@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
-import { ASSETS } from "@/constants/assets";
+import { BrandLogo } from "@/components/common/BrandLogo";
 import { AUTH_COPY, AUTH_HIGHLIGHTS } from "@/constants/auth";
 import { LAYOUT } from "@/constants/layout";
 import { ROUTES } from "@/constants/routes";
@@ -10,20 +9,7 @@ import { cn } from "@/lib/utils/cn";
 export function AuthMobileBar() {
   return (
     <div className={cn(LAYOUT.container, "flex items-center justify-between border-b border-border bg-card/80 py-2.5 backdrop-blur lg:hidden")}>
-      <Link
-        href={ROUTES.HOME}
-        className="flex items-center transition-transform hover:scale-105"
-        aria-label="Home"
-      >
-        <Image
-          src={ASSETS.LOGO}
-          alt={AUTH_COPY.panelHeadline}
-          width={80}
-          height={73}
-          unoptimized
-          className="h-12 w-auto object-contain"
-        />
-      </Link>
+      <BrandLogo variant="default" size="md" />
       <Link
         href={ROUTES.HOME}
         className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-medium text-muted transition hover:border-primary/30 hover:text-primary"
@@ -49,20 +35,7 @@ export function AuthBrandPanel() {
 
       <div className="relative">
         <div className="flex items-center justify-between gap-4">
-          <Link
-            href={ROUTES.HOME}
-            className="group inline-flex shrink-0 items-center"
-            aria-label="Home"
-          >
-            <Image
-              src={ASSETS.LOGO_LIGHT}
-              alt={AUTH_COPY.panelHeadline}
-              width={160}
-              height={90}
-              unoptimized
-              className="h-16 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:scale-105 xl:h-20"
-            />
-          </Link>
+          <BrandLogo variant="light" size="xl" />
           <Link
             href={ROUTES.HOME}
             className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-1.5 text-sm font-medium text-cream/80 transition-colors hover:border-white/30 hover:text-white"

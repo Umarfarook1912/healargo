@@ -1,12 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { FOOTER_POLICY_LINKS, NAV_LINKS, SOCIAL_LINKS, UI } from "@/constants/ui";
-import { ASSETS } from "@/constants/assets";
 import { ROUTES } from "@/constants/routes";
 import { SITE_TAGLINE } from "@/constants/seo";
 import { SocialLinks, WhatsAppLogo } from "@/components/common/SocialLinks";
+import { BrandLogo } from "@/components/common/BrandLogo";
+import { FloatingMascot } from "@/components/features/mascots/FloatingMascot";
 import { buildWhatsAppUrl } from "@/lib/utils/whatsapp";
 
 const hasSocialLinks = SOCIAL_LINKS.some((link) => Boolean(link.href));
@@ -22,12 +22,12 @@ const SHOP_HREFS: readonly string[] = [ROUTES.SHOP, ROUTES.BESTSELLERS];
 const EXPLORE_LINKS = NAV_LINKS.filter((link) => !SHOP_HREFS.includes(link.href));
 
 const linkClass =
-  "group inline-flex items-center gap-1 text-cream/75 transition-colors hover:text-accent";
+  "group inline-flex items-center gap-1 text-[#FFF8E9]/80 transition-colors hover:text-[#FFD45A]";
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mb-5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
-      <span aria-hidden className="h-px w-4 bg-accent/60" />
+    <p className="mb-5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#FFD45A]">
+      <span aria-hidden className="h-px w-4 bg-[#FFD45A]/60" />
       {children}
     </p>
   );
@@ -35,57 +35,47 @@ function FooterHeading({ children }: { children: React.ReactNode }) {
 
 export function Footer() {
   return (
-    <footer className="forest-gradient relative isolate mt-16 overflow-hidden text-cream md:mt-24">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
-      <span aria-hidden className="pointer-events-none absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full border border-accent/15" />
+    <footer className="forest-gradient relative isolate mt-16 overflow-hidden text-[#FFF8E9] md:mt-24">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#FFD45A]/60 to-transparent" />
+      <span aria-hidden className="pointer-events-none absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full border border-[#FFD45A]/15" />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -bottom-[0.18em] -z-10 select-none text-center font-display text-[22vw] leading-none text-cream/[0.035] lg:text-[16rem]"
+        className="pointer-events-none absolute inset-x-0 -bottom-[0.18em] -z-10 select-none text-center font-display text-[20vw] leading-none text-[#FFF8E9]/[0.035] lg:text-[15rem]"
       >
         {UI.brand}
       </span>
 
       {/* Brand + contact CTA row */}
-      <PageContainer className="flex flex-col gap-8 border-b border-cream/10 py-12 md:flex-row md:items-center md:justify-between md:py-14">
+      <PageContainer className="flex flex-col gap-8 border-b border-[#FFF8E9]/10 py-12 md:flex-row md:items-center md:justify-between md:py-14">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
-          <Link
-            href={ROUTES.HOME}
-            className="inline-flex w-fit items-center transition-transform duration-300 hover:scale-[1.03]"
-            aria-label={`${UI.brand} Home`}
-          >
-            <Image
-              src={ASSETS.LOGO_LIGHT}
-              alt={`${UI.brand} Logo`}
-              width={160}
-              height={146}
-              unoptimized
-              className="h-20 w-auto object-contain sm:h-24"
-            />
-          </Link>
+          <BrandLogo variant="light" size="footer" />
           <div className="max-w-md">
             <p className="font-display text-2xl leading-snug text-white sm:text-3xl">
               {SITE_TAGLINE}
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-cream/70">{UI.since}</p>
+            <p className="mt-2 text-sm leading-relaxed text-[#FFF8E9]/75">{UI.since}</p>
           </div>
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
-            href={buildWhatsAppUrl(`Hi ${UI.brand}! I want to place an order.`)}
+            href={buildWhatsAppUrl(`Hi ${UI.brand}! I want to explore your natural products.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground shadow-lg shadow-black/20 transition-colors hover:bg-accent/90"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FFD45A] px-6 py-3 text-sm font-bold text-[#263D2E] shadow-lg shadow-black/20 transition-colors hover:bg-[#ffe17d]"
           >
             <WhatsAppLogo className="h-4 w-4" />
             Chat on WhatsApp
           </a>
           <a
             href={`mailto:${UI.email}`}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#FFF8E9]/25 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-[#FFD45A] hover:text-[#FFD45A]"
           >
             <Mail className="h-4 w-4" />
             Email us
           </a>
+          <div className="hidden lg:block ml-2">
+            <FloatingMascot mascot="leaf" size="xs" speechBubble="Stay natural!" />
+          </div>
         </div>
       </PageContainer>
 

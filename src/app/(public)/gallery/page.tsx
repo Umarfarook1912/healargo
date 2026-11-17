@@ -19,25 +19,16 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Visual Gallery — Live Extraction, Packing, Selling & White Label Supply",
+  title: "Visual Gallery — Natural Extraction & Sourcing Highlights",
   description:
-    "Explore Healargo product videos, packaging updates, white-label supply, and visual highlights from across the catalog.",
+    "Explore HEALARGO product videos, packaging updates, natural extraction, and visual highlights from across the catalog.",
   path: "/gallery",
   keywords: [
-    "Healargo gallery",
-    "white label wood pressed oil",
-    "unlabeled cold pressed oil supply",
-    "private brand oil manufacturer Madurai",
-    "wooden pressed oil machine running video",
-    "wood pressed oil extraction video",
-    "cold pressed groundnut oil extraction",
-    "customer order packing video",
-    "courier dispatch logs Madurai",
-    "direct mill selling rates",
-    "pure cold pressed oil photos",
-    "Uthukuli cow ghee images",
-    "traditional oil mill Madurai Tamil Nadu",
-    "Healargo banners and offers",
+    "HEALARGO gallery",
+    "cold pressed oil extraction video",
+    "pure wood pressed oil",
+    "natural edible oils",
+    "HEALARGO products",
   ],
 });
 
@@ -85,7 +76,7 @@ export default async function GalleryPage() {
       },
       {
         "@type": "ImageGallery",
-        name: "Healargo Visual Gallery",
+        name: "HEALARGO Visual Gallery",
         description:
           "Product videos, order packing footage, direct selling highlights, and pure cold-pressed oils.",
         url: `${siteUrl}${ROUTES.GALLERY}`,
@@ -141,12 +132,12 @@ export default async function GalleryPage() {
           </div>
 
           <h1 className="font-display text-4xl leading-[1.08] tracking-tight text-dark md:text-6xl">
-            Healargo Visual Gallery
+            HEALARGO Visual Gallery
           </h1>
 
           <p className="mt-3 text-base sm:text-lg text-muted leading-relaxed">
             Explore product highlights, process videos, customer packing footage,
-            and white-label supply visuals from the Healargo catalog.
+            and natural agro supply visuals from the HEALARGO catalog.
           </p>
         </div>
 

@@ -99,7 +99,7 @@ export function CertificatePreview({
           <div
             className="pointer-events-none absolute inset-0 select-none opacity-10"
             style={{
-              backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='100'><text x='15' y='50' fill='%23000000' font-size='10' font-family='sans-serif' font-weight='bold' transform='rotate(-25 110 50)'>VS OIL MILL • VIEW ONLY</text></svg>")`,
+              backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='100'><text x='15' y='50' fill='%23000000' font-size='10' font-family='sans-serif' font-weight='bold' transform='rotate(-25 110 50)'>HEALARGO • VIEW ONLY</text></svg>")`,
               backgroundRepeat: "repeat",
             }}
           />
