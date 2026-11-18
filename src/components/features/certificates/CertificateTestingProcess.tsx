@@ -7,14 +7,14 @@ const PROCESS_STEPS = [
     title: "Native Seed Sourcing",
     icon: Sprout,
     description:
-      "We source naturally grown groundnuts from Saurashtra & Tamil Nadu, heritage black sesame seeds, and sulfur-free dried coconut copra. Each batch is inspected for moisture and mold before pressing.",
+      "We source premium single-origin seeds: heritage black sesame seeds, sulfur-free dried coconut copra, and natural castor seeds. Each batch is inspected for moisture and quality before pressing.",
   },
   {
     step: "02",
-    title: "Slow Wood Pressing",
+    title: "Slow Cold Pressing",
     icon: Wind,
     description:
-      "Traditional Vaagai wood mortar and pestle rotate at a gentle 14–16 RPM. Extraction temperature stays strictly below 45°C, preserving heat-sensitive tocopherols, vitamin E, and natural polyphenols.",
+      "Traditional cold-press extraction rotates at a gentle low RPM. Extraction temperature stays strictly below 45°C, preserving heat-sensitive tocopherols, vitamin E, and natural polyphenols.",
   },
   {
     step: "03",

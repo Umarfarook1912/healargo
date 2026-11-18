@@ -18,16 +18,12 @@ import { ROUTES } from "@/constants/routes";
 import type { Category } from "@/types/product";
 
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  "cold-pressed-oils": Droplet,
+  "wood-pressed-oils": Droplet,
   "sesame-oil": Droplet,
-  "groundnut-oil": Nut,
   "coconut-oil": Citrus,
   "pure-cow-ghee": Sparkles,
   "castor-oil": Droplet,
-  "neem-oil": Leaf,
-  "mahua-oil": Flame,
-  "pongam-oil": Flame,
-  "jaggery-powder": Candy,
-  "honey-dry-nuts": Wheat,
 };
 
 function categoryMenuLabel(name: string) {

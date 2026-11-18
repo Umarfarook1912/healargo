@@ -61,7 +61,7 @@ export default function AboutPage() {
               At <strong className="font-bold text-[#263D2E]">HEALARGO</strong>, our journey began with a clear commitment: to strip away the industrial shortcuts, artificial adulterants, and confusing marketing claims that dominate modern supermarket shelves.
             </p>
             <p>
-              We focus on premium, cold-pressed edible oils—including virgin coconut oil, rich sesame (gingelly) oil, and pure groundnut oil—extracted with patient craftsmanship that preserves the vibrant aroma, golden clarity, and natural nourishment of the seeds.
+              We focus on premium, cold-pressed edible oils and pure ghee—including cold-pressed sesame oil, virgin coconut oil, pure castor oil, and pure desi cow ghee—extracted with patient craftsmanship that preserves the vibrant aroma, golden clarity, and natural nourishment.
             </p>
             <p>
               As we grow, HEALARGO expands naturally into other agro-based essentials: raw floral honey, sun-dried dry fruits, traditional pulses, and unrefined natural foods. All bound by the same timeless standard: pure ingredients, transparent sourcing, and honest care.
@@ -124,7 +124,7 @@ export default function AboutPage() {
               From Edible Oils to Wholesome Agro Goodness
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-[#72776A] sm:text-base">
-              While our cornerstone remains cold-pressed Coconut, Sesame, and Groundnut oils, we are thoughtfully bringing nature closer to your kitchen with upcoming releases in natural raw honey, premium dry fruits, and sustainably cultivated agro staples.
+              While our cornerstone remains cold-pressed Sesame, Coconut, and Castor oils alongside authentic pure Cow Ghee, we are thoughtfully bringing nature closer to your kitchen with upcoming releases in natural wellness essentials.
             </p>
             <div className="mt-6">
               <Link

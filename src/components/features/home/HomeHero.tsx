@@ -261,7 +261,7 @@ export function HomeHero() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] sm:rounded-[3rem] border-3 border-white bg-white shadow-[var(--shadow-lifted)] sm:aspect-[5/6]">
             <Image
               src={ASSETS.HERO_BANNER}
-              alt="HEALARGO Pure Cold-Pressed Oils: Coconut, Sesame and Groundnut"
+              alt="HEALARGO Pure Cold-Pressed Oils & Pure Cow Ghee"
               fill
               priority
               unoptimized
@@ -276,7 +276,7 @@ export function HomeHero() {
                   Cold Pressed & Unrefined
                 </p>
                 <p className="text-[11px] text-[#72776A]">
-                  Coconut • Sesame • Groundnut
+                  Sesame • Coconut • Castor • Ghee
                 </p>
               </div>
               <span className="rounded-full bg-[#FFD45A] px-3 py-1 text-[11px] font-extrabold text-[#263D2E]">

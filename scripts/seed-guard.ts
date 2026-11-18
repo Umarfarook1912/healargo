@@ -26,13 +26,13 @@ export function checkSeedAllowed(
         `against a database you really want to reset.`,
     };
   }
-  const adminPassword = env.SEED_ADMIN_PASSWORD ?? "";
+  const adminPassword = env.SEED_ADMIN_PASSWORD ?? env.ADMIN_PASSWORD ?? "";
   if (adminPassword.length < SEED_ADMIN_PASSWORD_MIN) {
     return {
       ok: false,
       error: `Set SEED_ADMIN_PASSWORD (at least ${SEED_ADMIN_PASSWORD_MIN} characters) for the starter admin.`,
     };
   }
-  const adminEmail = (env.SEED_ADMIN_EMAIL ?? "healargo@gmail.com").trim().toLowerCase();
+  const adminEmail = (env.SEED_ADMIN_EMAIL ?? env.ADMIN_EMAIL ?? "healargo@gmail.com").trim().toLowerCase();
   return { ok: true, config: { adminEmail, adminPassword } };
 }

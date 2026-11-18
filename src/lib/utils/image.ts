@@ -1,13 +1,13 @@
 import { ASSETS } from "@/constants/assets";
 
 export const DEFAULT_CATEGORY_IMAGES: Record<string, string> = {
+  "cold-pressed-oils": "/assets/healargo/banners/hero-desktop.webp",
   "wood-pressed-oils": "/assets/healargo/banners/hero-desktop.webp",
   "coconut-oil": "/assets/healargo/categories/coconut-category.webp",
   "sesame-oil": "/assets/healargo/categories/sesame-category.webp",
-  "groundnut-oil": "/assets/healargo/categories/groundnut-category.webp",
-  "pure-cow-ghee": "/assets/healargo/categories/sesame-category.webp",
+  "castor-oil": "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Castor%20Oil%201%20Litre/VS-Gold-Castor-Oil-1-Litre.jpg?updatedAt=1789281326730",
+  "pure-cow-ghee": "https://ik.imagekit.io/mnm0iz0ng2/category/pure_ghee.png",
   "traditional-oils": "/assets/healargo/categories/sesame-category.webp",
-  "oil-cakes": "/assets/healargo/categories/groundnut-category.webp",
   "combo-offers": "/assets/healargo/banners/collection-banner.webp",
 };
 
@@ -34,8 +34,11 @@ export function getHealargoProductAsset(product?: {
   if (text.includes("sesame") || text.includes("gingelly") || text.includes("nallenai") || text.includes("til")) {
     return ASSETS.PRODUCTS.SESAME_OIL;
   }
-  if (text.includes("groundnut") || text.includes("peanut") || text.includes("kadalai")) {
-    return ASSETS.PRODUCTS.GROUNDNUT_OIL;
+  if (text.includes("castor") || text.includes("amanakku")) {
+    return ASSETS.PRODUCTS.CASTOR_OIL;
+  }
+  if (text.includes("ghee") || text.includes("ney") || text.includes("uthukuli")) {
+    return ASSETS.PRODUCTS.GHEE;
   }
   return null;
 }
@@ -52,21 +55,12 @@ export function getProductImageUrl(
 ): string {
   if (!product) return ASSETS.PLACEHOLDER_PRODUCT;
 
-  // 1. If product matches a core HEALARGO oil type, use the verified HEALARGO studio photograph
-  const healargoAsset = getHealargoProductAsset(product);
-  if (healargoAsset) {
-    return healargoAsset;
-  }
-
-  // 2. Check if product has explicit images array with a valid non-placeholder, non-legacy image
+  // 1. Check if product has explicit images array with a valid non-placeholder image
   if (Array.isArray(product.images) && product.images.length > 0) {
     const validImage = product.images.find((img) => {
       const cleaned = cleanImageUrl(img);
-      // Filter out legacy promotional posters that have old brand watermark
-      const isLegacyPoster = cleaned.includes("vsoilmill") || cleaned.includes("zxpphru8x");
       return (
         cleaned.length > 0 &&
-        !isLegacyPoster &&
         cleaned !== ASSETS.PLACEHOLDER_PRODUCT &&
         cleaned !== "/images/product-placeholder.svg"
       );
@@ -75,6 +69,12 @@ export function getProductImageUrl(
     if (validImage) {
       return cleanImageUrl(validImage);
     }
+  }
+
+  // 2. If product matches a core HEALARGO oil type, use the verified HEALARGO studio photograph
+  const healargoAsset = getHealargoProductAsset(product);
+  if (healargoAsset) {
+    return healargoAsset;
   }
 
   // 3. Check if product.categoryId is an object with image or slug
@@ -87,7 +87,7 @@ export function getProductImageUrl(
     if (cat.slug && DEFAULT_CATEGORY_IMAGES[cat.slug]) {
       return DEFAULT_CATEGORY_IMAGES[cat.slug];
     }
-    if (cat.image && cleanImageUrl(cat.image) && !cat.image.endsWith(".svg") && !cat.image.includes("vsoilmill")) {
+    if (cat.image && cleanImageUrl(cat.image) && !cat.image.endsWith(".svg")) {
       return cleanImageUrl(cat.image);
     }
   }
@@ -100,8 +100,7 @@ export function getProductImageUrl(
     if (
       categoryFallback.image &&
       cleanImageUrl(categoryFallback.image) &&
-      !categoryFallback.image.endsWith(".svg") &&
-      !categoryFallback.image.includes("vsoilmill")
+      !categoryFallback.image.endsWith(".svg")
     ) {
       return cleanImageUrl(categoryFallback.image);
     }

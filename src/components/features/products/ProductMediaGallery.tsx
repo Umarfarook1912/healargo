@@ -50,15 +50,27 @@ export function ProductMediaGallery({
   const nameLower = alt.toLowerCase();
   const isCoconut = nameLower.includes("coconut") || nameLower.includes("thengai");
   const isSesame = nameLower.includes("sesame") || nameLower.includes("gingelly") || nameLower.includes("til");
-  const isGroundnut = nameLower.includes("groundnut") || nameLower.includes("peanut") || nameLower.includes("kadalai");
+  const isGroundnut = nameLower.includes("groundnut") || nameLower.includes("kadalai") || nameLower.includes("peanut");
+  const isCastor = nameLower.includes("castor") || nameLower.includes("amanakku");
+  const isPongam = nameLower.includes("ponga") || nameLower.includes("pungam");
+  const isNeem = nameLower.includes("neem") || nameLower.includes("veppam");
+  const isGhee = nameLower.includes("ghee") || nameLower.includes("ney");
 
   const frameBg = isCoconut
     ? "bg-[#D8F3EC] border-[#8EDBD0]/60"
     : isSesame
-    ? "bg-[#FFF0B8] border-[#FFD45A]/70"
-    : isGroundnut
-    ? "bg-[#FFE0D4] border-[#FF8066]/50"
-    : "bg-[#DDECCF] border-[#4F8A45]/35";
+      ? "bg-[#FFF0B8] border-[#FFD45A]/70"
+      : isGroundnut
+        ? "bg-[#FDEED9] border-[#F4A261]/60"
+        : isCastor
+          ? "bg-[#FFE0D4] border-[#FF8066]/50"
+          : isPongam
+            ? "bg-[#E2F0D9] border-[#70AD47]/50"
+            : isNeem
+              ? "bg-[#E6F4EA] border-[#34A853]/50"
+              : isGhee
+                ? "bg-[#FFF0B8] border-[#FFD45A]/60"
+                : "bg-[#DDECCF] border-[#4F8A45]/35";
 
   return (
     <div className="flex flex-col gap-3 lg:flex-row-reverse lg:gap-3">

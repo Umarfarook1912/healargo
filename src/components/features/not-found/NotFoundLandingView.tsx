@@ -24,13 +24,13 @@ import { buildWhatsAppUrl } from "@/lib/utils/whatsapp";
 
 const POPULAR_CATEGORIES = [
   {
-    name: "Wood-Pressed Oils",
-    description: "Groundnut, sesame, and coconut oils",
-    href: `${ROUTES.SHOP}?category=wood-pressed-oils`,
+    name: "Cold-Pressed Oils",
+    description: "Sesame, coconut, and castor oils",
+    href: `${ROUTES.SHOP}?category=cold-pressed-oils`,
     image: "https://ik.imagekit.io/mnm0iz0ng2/category/Wooden-Pressed.jpg",
   },
   {
-    name: "Pure Uthukuli Ghee",
+    name: "Pure Cow Ghee",
     description: "Traditional grass-fed desi cow bilona ghee",
     href: `${ROUTES.SHOP}?category=pure-cow-ghee`,
     image: "https://ik.imagekit.io/mnm0iz0ng2/category/pure_ghee.png",

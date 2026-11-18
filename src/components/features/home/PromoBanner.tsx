@@ -58,7 +58,7 @@ export function PromoBanner() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-xl text-base text-[#FFF8E9]/85 sm:text-lg">
-            Free doorstep delivery on qualifying orders across India — enjoy pure cold-pressed coconut, sesame, and groundnut oils for your family.
+            Free doorstep delivery on qualifying orders across India — enjoy pure cold-pressed sesame, coconut, castor oils and pure cow ghee for your family.
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">

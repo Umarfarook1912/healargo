@@ -39,7 +39,7 @@ export function CertificateTrustNotice() {
               <FileCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
               <div>
                 <strong className="block font-semibold text-dark">Accredited Laboratory Reports</strong>
-                <span>ISO/IEC 17025 certified analytical testing covering Sesame, Coconut, Groundnut oils, and pure Cow Ghee.</span>
+                <span>ISO/IEC 17025 certified analytical testing covering Sesame, Coconut, and Castor oils alongside pure Cow Ghee.</span>
               </div>
             </div>
 

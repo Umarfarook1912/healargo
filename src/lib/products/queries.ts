@@ -1,18 +1,33 @@
 import { prisma } from "@/lib/db/prisma";
-import { mapCategories, mapCategory, mapProduct, mapProducts } from "@/lib/db/catalog";
+import {
+  isAllowedProduct,
+  mapCategories,
+  mapCategory,
+  mapProduct,
+  mapProducts,
+} from "@/lib/db/catalog";
 import type { Product, Category } from "@/types/product";
 
 /**
  * Resolves a category URL slug. An exact slug wins, then a slug that differs
- * only in case or separators ("WOOD_PRESSED_OILS"). Only then a partial match
- * ("woodpressed"), choosing the closest one: a short slug such as "oils" must
- * not capture "/categories/wood-pressed-oils" just because it sorts first.
+ * only in case or separators ("COLD_PRESSED_OILS"). Only then a partial match
+ * ("coldpressed"), choosing the closest one: a short slug such as "oils" must
+ * not capture "/categories/cold-pressed-oils" just because it sorts first.
  */
 function findCategoryBySlug<T extends { slug: string }>(categories: T[], cleanSlug: string): T | undefined {
   const norm = (value: string) => value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
   const normTarget = norm(cleanSlug);
   const exact = categories.find((c) => c.slug.trim().toLowerCase() === cleanSlug);
   if (exact) return exact;
+
+  // Seamless alias between wood-pressed-oils and cold-pressed-oils
+  if (cleanSlug === "wood-pressed-oils" || cleanSlug === "cold-pressed-oils") {
+    const alias = categories.find(
+      (c) => c.slug === "cold-pressed-oils" || c.slug === "wood-pressed-oils"
+    );
+    if (alias) return alias;
+  }
+
   if (!normTarget) return undefined;
   const sameNorm = categories.find((c) => norm(c.slug) === normTarget);
   if (sameNorm) return sameNorm;
@@ -60,7 +75,7 @@ export async function getProducts(filters?: {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const cleanSlug = decodeURIComponent(slug).trim();
+  const cleanSlug = decodeURIComponent(slug).trim().toLowerCase();
   const product = await prisma.product.findFirst({
     where: {
       slug: { equals: cleanSlug, mode: "insensitive" },
@@ -68,10 +83,23 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     },
     include: { category: true },
   });
-  if (product) return mapProduct(product);
+  if (product && isAllowedProduct(product)) return mapProduct(product);
+
+  // Seamless alias between [name]-oil and cold-pressed-[name]-oil
+  const aliasSlug = cleanSlug.startsWith("cold-pressed-")
+    ? cleanSlug.replace(/^cold-pressed-/, "")
+    : `cold-pressed-${cleanSlug}`;
+  const aliasProduct = await prisma.product.findFirst({
+    where: {
+      slug: { equals: aliasSlug, mode: "insensitive" },
+      isActive: true,
+    },
+    include: { category: true },
+  });
+  if (aliasProduct && isAllowedProduct(aliasProduct)) return mapProduct(aliasProduct);
 
   // Fallback for legacy links that differ only in separators or case
-  // (e.g. "Groundnut_Oil" -> "groundnut-oil"). Never serve a different product
+  // (e.g. "Sesame_Oil" -> "sesame-oil"). Never serve a different product
   // just because one word matches.
   const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "");
   const target = normalize(cleanSlug);
@@ -80,7 +108,9 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     where: { isActive: true },
     include: { category: true },
   });
-  const matches = activeProducts.filter((p) => normalize(p.slug || "") === target);
+  const matches = activeProducts.filter(
+    (p) => normalize(p.slug || "") === target && isAllowedProduct(p),
+  );
   return matches.length === 1 ? mapProduct(matches[0]) : null;
 }
 

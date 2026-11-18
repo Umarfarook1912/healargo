@@ -26,7 +26,7 @@ export const metadata: Metadata = buildPageMetadata({
   keywords: [
     "HEALARGO gallery",
     "cold pressed oil extraction video",
-    "pure wood pressed oil",
+    "pure cold pressed oil",
     "natural edible oils",
     "HEALARGO products",
   ],

@@ -53,7 +53,7 @@ function getCategoryTheme(slug: string, index: number): CategoryTheme {
       mascot: MASCOTS.sesame.image,
     };
   }
-  if (s.includes("groundnut") || s.includes("peanut") || s.includes("oil-cakes")) {
+  if (s.includes("castor") || s.includes("amanakku")) {
     return {
       bg: "bg-[#FFE0D4]",
       border: "border-[#FF8066]/50",
@@ -62,8 +62,21 @@ function getCategoryTheme(slug: string, index: number): CategoryTheme {
       imageBg: "bg-[#FFFFFF]/70",
       arrowBg: "bg-[#FF8066]/30 group-hover:bg-[#4F8A45]",
       arrowText: "text-[#263D2E] group-hover:text-white",
-      defaultImage: ASSETS.CATEGORIES.GROUNDNUT,
-      mascot: MASCOTS.peanut.image,
+      defaultImage: ASSETS.CATEGORIES.CASTOR,
+      mascot: MASCOTS["oil-drop"].image,
+    };
+  }
+  if (s.includes("ghee") || s.includes("uthukuli") || s.includes("ney")) {
+    return {
+      bg: "bg-[#FFF0B8]",
+      border: "border-[#FFD45A]/80",
+      badgeBg: "bg-[#FFD45A]",
+      badgeText: "text-[#263D2E]",
+      imageBg: "bg-[#FFFFFF]/70",
+      arrowBg: "bg-[#FFD45A]/50 group-hover:bg-[#4F8A45]",
+      arrowText: "text-[#263D2E] group-hover:text-white",
+      defaultImage: ASSETS.CATEGORIES.GHEE,
+      mascot: MASCOTS["oil-drop"].image,
     };
   }
   // Light Leaf default
@@ -106,9 +119,14 @@ function getCategoryTheme(slug: string, index: number): CategoryTheme {
 }
 
 export function CategoryStrip({ categories }: { categories: Category[] }) {
-  // Filter out legacy non-HEALARGO categories (e.g. home-cleaning)
+  // Filter out legacy non-HEALARGO categories (e.g. home-cleaning, oil-cakes)
   const visibleCategories = categories.filter(
-    (c) => c.slug !== "home-cleaning" && !c.slug.includes("cleaning")
+    (c) =>
+      c.slug !== "home-cleaning" &&
+      c.slug !== "oil-cakes" &&
+      !c.slug.includes("cleaning") &&
+      !c.slug.includes("groundnut") &&
+      !c.slug.includes("peanut")
   );
 
   if (!visibleCategories.length) return null;

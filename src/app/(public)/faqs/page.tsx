@@ -15,7 +15,7 @@ export const metadata: Metadata = buildPageMetadata({
   keywords: [
     "HEALARGO FAQs",
     "cold pressed oil questions",
-    "why wood pressed oil is special",
+    "why cold pressed oil is special",
     "cold pressed oil price explanation",
     "HEALARGO natural products",
     "edible oil shipping across India",

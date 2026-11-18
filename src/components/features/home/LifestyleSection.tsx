@@ -126,7 +126,7 @@ export function LifestyleSection() {
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#FFF0B8] text-[#263D2E]">
                   ✓
                 </span>
-                <span>Traditional low-heat wood and mechanical cold pressing</span>
+                <span>Traditional low-heat cold pressing</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#FFE0D4] text-[#FF8066]">

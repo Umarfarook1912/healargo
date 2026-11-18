@@ -48,20 +48,22 @@ export function buildDynamicGalleryImages(
   );
 
   for (const product of availableProducts) {
-    const isWoodPressed =
-      product.slug === "groundnut-oil" ||
+    const isColdPressed =
       product.slug === "sesame-oil" ||
       product.slug === "coconut-oil" ||
-      (typeof product.categoryId === "object" && product.categoryId?.slug === "wood-pressed-oils");
+      product.slug === "castor-oil" ||
+      (typeof product.categoryId === "object" &&
+        (product.categoryId?.slug === "cold-pressed-oils" ||
+          product.categoryId?.slug === "wood-pressed-oils"));
 
-    const categoryType: "products" | "traditional" = isWoodPressed ? "products" : "traditional";
+    const categoryType: "products" | "traditional" = isColdPressed ? "products" : "traditional";
     const tag =
       typeof product.categoryId === "object" && product.categoryId?.name
         ? product.categoryId.name
-        : isWoodPressed
-        ? "Wood Pressed Oil"
+        : isColdPressed
+        ? "Cold Pressed Oil"
         : "Traditional Purity";
-    const badge = product.isBestSeller ? "Bestseller" : isWoodPressed ? "Wood Pressed" : "100% Pure";
+    const badge = product.isBestSeller ? "Bestseller" : isColdPressed ? "Cold Pressed" : "100% Pure";
     const cleanDesc =
       product.shortDescription ||
       stripHtml(product.description || "").slice(0, 110) ||

@@ -27,7 +27,7 @@ export const FAQS: FaqItem[] = [
   {
     id: "special-and-taste",
     q: "What makes HEALARGO oils special?",
-    a: "HEALARGO focuses on traditional low-heat, wood-pressed extraction that helps preserve natural aroma, character, and everyday cooking quality. We avoid harsh chemical refining steps so the oils stay pure and true to their natural origins.",
+    a: "HEALARGO focuses on traditional low-heat, cold-pressed extraction that helps preserve natural aroma, character, and everyday cooking quality. We avoid harsh chemical refining steps so the oils stay pure and true to their natural origins.",
     category: "videos",
     badge: "Featured Brand Video",
     videos: [
@@ -78,9 +78,9 @@ export const FAQS: FaqItem[] = [
     ],
   },
   {
-    id: "what-is-mara-chekku",
-    q: "What is wood-pressed oil?",
-    a: "Wood-pressed oil is extracted at low heat using traditional mechanical methods instead of heavy refining. This helps retain a more natural aroma and character.",
+    id: "what-is-cold-pressed-oil",
+    q: "What is cold-pressed oil?",
+    a: "Cold-pressed oil is extracted at low heat using traditional mechanical extraction methods instead of chemical solvents and high-heat refining. This preserves natural nutrients, authentic aroma, and wholesome cooking quality.",
     category: "products",
   },
   {
@@ -97,8 +97,8 @@ export const FAQS: FaqItem[] = [
   },
   {
     id: "ghee-bilona-process",
-    q: "How is your Uthukuli Cow Ghee prepared?",
-    a: "Our Uthukuli cow ghee is prepared using traditional bilona methods from grass-fed desi cows for authentic grainy texture, golden color, and divine aroma.",
+    q: "How is your Pure Cow Ghee prepared?",
+    a: "Our pure cow ghee is prepared using traditional bilona methods from grass-fed desi cows for authentic grainy texture, golden color, and divine aroma.",
     category: "products",
   },
   {
@@ -110,7 +110,7 @@ export const FAQS: FaqItem[] = [
   {
     id: "bulk-15kg-tins",
     q: "Can I order bulk 15 Kg tins?",
-    a: "Yes. 15 Kg tins are available for sesame, groundnut, coconut, castor, neem, mahua, and pongam oils. Contact us for restaurant/wholesale needs.",
+    a: "Yes. 15 Kg tins are available for sesame oil, coconut oil, castor oil, and pure cow ghee. Contact us for restaurant and wholesale needs.",
     category: "products",
   },
 ];

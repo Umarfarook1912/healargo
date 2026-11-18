@@ -260,7 +260,7 @@ export function AdminProductForm({
           <Input
             id="name"
             className="mt-1.5 font-medium"
-            placeholder="e.g. Wooden Pressed Sesame Oil"
+            placeholder="e.g. Cold Pressed Sesame Oil"
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
             required
@@ -317,7 +317,7 @@ export function AdminProductForm({
           <Input
             id="shortDescription"
             className="mt-1.5 text-xs sm:text-sm"
-            placeholder="e.g. Traditional wood pressed | Gingelly Oil"
+            placeholder="e.g. Traditional cold pressed | Gingelly Oil"
             value={form.shortDescription}
             onChange={(e) =>
               setForm((f) => ({ ...f, shortDescription: e.target.value }))
@@ -693,7 +693,7 @@ export function AdminProductForm({
             id="metaDescription"
             rows={2}
             className="mt-1 text-xs"
-            placeholder="Pure wooden-pressed sesame oil with natural aroma. Free shipping available."
+            placeholder="Pure cold-pressed sesame oil with natural aroma. Free shipping available."
             value={form.metaDescription}
             onChange={(e) =>
               setForm((f) => ({ ...f, metaDescription: e.target.value }))

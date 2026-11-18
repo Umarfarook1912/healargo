@@ -35,7 +35,7 @@ export const GALLERY_CATEGORIES = [
   { id: "extraction", label: "⚙️ Oil Extraction", count: 5 },
   { id: "videos", label: "🎥 Mill Videos (19)", count: 19 },
   { id: "banners", label: "✨ Banners & Promos", count: 4 },
-  { id: "products", label: "🧴 Wood Pressed Oils", count: 9 },
+  { id: "products", label: "🧴 Cold Pressed Oils", count: 9 },
   { id: "combos", label: "🎁 Combo Offers", count: 4 },
   { id: "traditional", label: "🏺 Heritage & Traditional", count: 11 },
 ] as const;
@@ -43,15 +43,15 @@ export const GALLERY_CATEGORIES = [
 export const GALLERY_VIDEOS: GalleryVideo[] = [
   // 1. Live machine running & oil extraction
   {
-    id: "groundnuts-live-extraction",
-    title: "Groundnut Oil Live Extraction & Premium Peanuts",
+    id: "cold-press-live-extraction",
+    title: "Cold-Pressed Oil Live Extraction",
     description:
-      "Live cold pressing of farm-fresh groundnuts using a traditional wood-pressed method, extracting unrefined, naturally nutrient-rich golden peanut oil.",
+      "Live cold pressing of farm-fresh natural seeds using a gentle low-heat extraction method, preserving unrefined, naturally nutrient-rich golden oil.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/videos-vsoilmill/groundnuts.mp4?tr=orig-true",
     category: "videos",
-    tag: "Groundnut Oil Machine",
-    badge: "Live Groundnut Extraction",
+    tag: "Oil Extraction Machine",
+    badge: "Live Oil Extraction",
     featured: true,
     type: "file",
     subCategory: "extraction",
@@ -60,7 +60,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     id: "coconut-oil-live-flow",
     title: "Coconut Oil Extraction & Pure Fresh Flow",
     description:
-      "Watch sulphur-free sun-dried copra being cold-pressed in our wooden expeller, releasing crystal-pure, deeply fragrant coconut oil.",
+      "Watch sulphur-free sun-dried copra being cold-pressed in our expeller, releasing crystal-pure, deeply fragrant coconut oil.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/videos-vsoilmill/coconut-oil.mp4?tr=orig-true",
     category: "videos",
@@ -71,10 +71,10 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     subCategory: "extraction",
   },
   {
-    id: "dry-process-sesame-coconut-groundnut",
-    title: "Natural Sun-Drying Process: Sesame Seeds, Copra & Groundnuts",
+    id: "dry-process-sesame-coconut",
+    title: "Natural Sun-Drying Process: Sesame Seeds & Copra",
     description:
-      "Traditional open-air sunlight drying of sesame seeds, premium coconut copra, and groundnuts to eliminate moisture before pressing.",
+      "Traditional open-air sunlight drying of sesame seeds and premium coconut copra to eliminate moisture before cold pressing.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/videos-vsoilmill/dry-process-sesame-coconut-groundnut.mp4?tr=orig-true",
     category: "videos",
@@ -85,10 +85,10 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     subCategory: "extraction",
   },
   {
-    id: "oil-machine-groundnut-extraction",
-    title: "Groundnut Oil Machine Running & Live Extraction",
+    id: "oil-machine-sesame-extraction",
+    title: "Sesame Oil Machine Running & Live Cold Extraction",
     description:
-      "Watch our traditional Vaagai wooden cold-press machine running at gentle speed, crushing sun-dried peanuts to extract fresh, aromatic unrefined groundnut oil.",
+      "Watch our traditional cold-press machine running at gentle speed, crushing dark sesame seeds to extract fresh, aromatic unrefined sesame oil.",
     videoUrl: "https://youtube.com/shorts/xJP29mjCkKc?si=iEq37ig2MWkyAJRe",
     category: "videos",
     tag: "Machine & Oil Extraction",
@@ -102,7 +102,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     id: "oil-machine-coconut-extraction",
     title: "Coconut Oil Machine Running & Live Extraction",
     description:
-      "Watch sulphur-free naturally sun-dried copra being cold-pressed in our traditional wooden mill to extract crystal-pure, fragrant coconut oil.",
+      "Watch sulphur-free naturally sun-dried copra being cold-pressed in our traditional cold-press mill to extract crystal-pure, fragrant coconut oil.",
     videoUrl: "https://youtube.com/shorts/_Wug05LRL4g?si=e_479Hi1QJJ_5v-u",
     category: "videos",
     tag: "Machine & Oil Extraction",
@@ -118,7 +118,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     id: "customer-packaging-dispatch-general",
     title: "Safe Packaging & Doorstep Delivery Dispatch to Customers",
     description:
-      "See how we safely pack pure wood-pressed oils and Uthukuli cow ghee with bubble cushioning, tamper-proof seals, and corrugated boxes for nationwide doorstep delivery.",
+      "See how we safely pack pure cold-pressed oils and Uthukuli cow ghee with bubble cushioning, tamper-proof seals, and corrugated boxes for nationwide doorstep delivery.",
     videoUrl: "https://www.youtube.com/shorts/Yz_iUykJBzc",
     category: "videos",
     tag: "Packaging & Dispatch",
@@ -175,14 +175,14 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
 
   // 3. Direct Mill Selling, Factory Rates & Exclusive Offers (SELLING)
   {
-    id: "selling-groundnut-oil-220",
-    title: "Wooden Pressed Groundnut Oil Direct Sale — ₹220/L with Door Delivery",
+    id: "selling-sesame-oil-350",
+    title: "Cold Pressed Sesame Oil Direct Sale — ₹350/L with Door Delivery",
     description:
-      "Direct selling highlight: fresh wood-pressed peanut oil at ₹220 per litre with door delivery available.",
+      "Direct selling highlight: fresh cold-pressed sesame oil at ₹350 per litre with door delivery available.",
     videoUrl: "https://youtube.com/shorts/xJP29mjCkKc?si=iEq37ig2MWkyAJRe",
     category: "videos",
     tag: "Direct Selling",
-    badge: "₹220/L Direct Sale",
+    badge: "₹350/L Direct Sale",
     featured: true,
     type: "youtube",
     subCategory: "selling",
@@ -190,7 +190,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
   },
   {
     id: "selling-coconut-oil-350",
-    title: "Wooden Pressed Coconut Oil Direct Sale — ₹350/L with Door Delivery",
+    title: "Cold Pressed Coconut Oil Direct Sale — ₹350/L with Door Delivery",
     description:
       "Direct selling highlight: 100% sulphur-free copra coconut oil at ₹350 per litre with prompt courier delivery.",
     videoUrl: "https://youtube.com/shorts/_Wug05LRL4g?si=e_479Hi1QJJ_5v-u",
@@ -236,7 +236,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     id: "white-label-unlabeled-supply-video",
     title: "White Label & Private Brand Supply — Unlabeled Oils for Your Own Brand",
     description:
-      "HEALARGO supplies pure wood-pressed oils in unlabeled bottles and cans. Resellers and brand owners can add their own labels and sell under their own brand with zero factory setup cost.",
+      "HEALARGO supplies pure cold-pressed oils in unlabeled bottles and cans. Resellers and brand owners can add their own labels and sell under their own brand with zero factory setup cost.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/whitelabel/whitelabel.mp4?tr=orig-true",
     category: "videos",
@@ -266,7 +266,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     id: "president-dignitary-mill-visit",
     title: "Dignitary Inspection Visit",
     description:
-      "A dignitary and association president visit, observing traditional wood-pressed operations and quality standards.",
+      "A dignitary and association president visit, observing traditional cold-pressed operations and quality standards.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/videos-vsoilmill/presdient-visit.mp4?tr=orig-true",
     category: "videos",
@@ -278,9 +278,9 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
   },
   {
     id: "special-and-taste",
-    title: "What Makes HEALARGO Special & The Pure Taste of Wood-Pressed Oil",
+    title: "What Makes HEALARGO Special & The Pure Taste of Cold-Pressed Oil",
     description:
-      "Watch how traditional low-heat wood pressing helps preserve natural aroma, character, and taste without harsh refining.",
+      "Watch how traditional low-heat cold pressing helps preserve natural aroma, character, and taste without harsh refining.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/special/1.mp4?tr=orig-true",
     category: "videos",
@@ -322,7 +322,7 @@ export const GALLERY_VIDEOS: GalleryVideo[] = [
     id: "why-choose-healargo",
     title: "Why You Should Choose HEALARGO for Your Family",
     description:
-      "Discover why conscious households trust HEALARGO for wood-pressed oils, tested quality, and doorstep delivery.",
+      "Discover why conscious households trust HEALARGO for cold-pressed oils, tested quality, and doorstep delivery.",
     videoUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/whyvsoil/1.mp4?tr=orig-true",
     category: "videos",
@@ -338,9 +338,9 @@ export const GALLERY_IMAGES: GalleryImage[] = [
   // Banners & Promos
   {
     id: "banner-oils",
-    title: "Pure, Traditional Wood-Pressed Oils Banner",
+    title: "Pure, Traditional Cold-Pressed Oils Banner",
     description:
-      "Cold-pressed with Vaagai wood to retain natural nutrients, aroma, and rich authentic taste.",
+      "Cold-pressed at low temperatures to retain natural nutrients, aroma, and rich authentic taste.",
     imageUrl: "https://ik.imagekit.io/mnm0iz0ng2/banner/1.png",
     category: "banners",
     tag: "Mill Banner",
@@ -386,25 +386,25 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     link: "/combos",
   },
 
-  // Wood Pressed Oils & Signature Products (All active in store)
+  // Cold Pressed Oils & Signature Products (All active in store)
   {
-    id: "prod-groundnut-5l",
-    title: "கடலை எண்ணெய் (Groundnut Oil) — 5 Litre Can",
+    id: "prod-castor-5l",
+    title: "ஆமணக்கு எண்ணெய் (Castor Oil) — 5 Litre Can",
     description:
-      "Farm-fresh unrefined groundnut oil extracted in traditional Vaagai wooden Chekku.",
+      "Pure cold-pressed castor oil in 5 Litre Can for traditional health and wellness.",
     imageUrl:
-      "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/update-groundnutoil/5liter.jpeg?updatedAt=1792836907732",
+      "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Castor%20Oil%205%20Litre%20Can/Castor-Oil-5-Litre-Can-1536x1229.jpg?updatedAt=1789281326444",
     category: "products",
-    tag: "Groundnut Oil",
-    badge: "Bestseller",
+    tag: "Castor Oil",
+    badge: "Pure & Natural",
     aspectRatio: "landscape",
-    link: "/products/groundnut-oil",
+    link: "/products/castor-oil",
   },
   {
     id: "prod-sesame-1l",
     title: "நல்லெண்ணெய் (Sesame Oil) — 1 Liter Bottle",
     description:
-      "Pure wood-pressed sesame oil with natural palm jaggery, unrefined and deeply aromatic.",
+      "Pure cold-pressed sesame oil with natural palm jaggery, unrefined and deeply aromatic.",
     imageUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/update-sesameOil/1liter.jpeg",
     category: "products",
@@ -453,36 +453,36 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     link: "/products/coconut-oil",
   },
   {
-    id: "prod-groundnut-1l",
-    title: "கடலை எண்ணெய் (Groundnut Oil) — 1 Liter Bottle",
+    id: "prod-castor-1l",
+    title: "ஆமணக்கு எண்ணெய் (Castor Oil) — 1 Liter Bottle",
     description:
-      "Everyday healthy cooking oil with high smoke point and natural nutty fragrance.",
+      "Pure cold-pressed castor oil in a convenient 1 Liter bottle.",
     imageUrl:
-      "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/update-groundnutoil/1liter.jpeg?updatedAt=1792836907685",
+      "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Castor%20Oil%201%20Litre/VS-Gold-Castor-Oil-1-Litre.jpg?updatedAt=1789281326730",
     category: "products",
-    tag: "Groundnut Oil",
+    tag: "Castor Oil",
     badge: "Daily Essential",
     aspectRatio: "square",
-    link: "/products/groundnut-oil",
+    link: "/products/castor-oil",
   },
   {
-    id: "prod-groundnut-15kg",
-    title: "கடலை எண்ணெய் (Groundnut Oil) — 15 Kg Tin",
+    id: "prod-castor-15kg",
+    title: "ஆமணக்கு எண்ணெய் (Castor Oil) — 15 Kg Tin",
     description:
-      "Bulk commercial food-grade tin for caterers, restaurants, and grand wedding functions.",
+      "Pure cold-pressed castor oil in 15 Kg commercial tin.",
     imageUrl:
-      "https://ik.imagekit.io/zxpphru8x/vsoilmill/Vs%20Wooden%20Pressed%20Groundnut%20Oil%2015%20Kg%20Tin/Wooden-Pressed-Groundnut-Oil-15-Kg-Tin.jpg?updatedAt=1789281326935",
+      "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Castor%20Oil%2015%20Kg%20Tin/Castor-Oil-15-Kg-Tin.jpg?updatedAt=1789281326960",
     category: "products",
-    tag: "Groundnut Oil",
+    tag: "Castor Oil",
     badge: "15 Kg Bulk",
     aspectRatio: "portrait",
-    link: "/products/groundnut-oil",
+    link: "/products/castor-oil",
   },
   {
     id: "prod-sesame-15kg",
     title: "நல்லெண்ணெய் (Sesame Oil) — 15 Kg Tin",
     description:
-      "Pure wood pressed sesame oil in traditional 15 Kg bulk tin for restaurants and events.",
+      "Pure cold pressed sesame oil in traditional 15 Kg bulk tin for restaurants and events.",
     imageUrl:
       "https://ik.imagekit.io/zxpphru8x/vsoilmill/Vs%20Wooden%20Pressed%20Sesame%20Oil%2015%20Kg%20Tin/Wooden-Pressed-Sesame-Oil-15-Kg-Tin.jpg?updatedAt=1789281326742",
     category: "products",
@@ -495,7 +495,7 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     id: "prod-coconut-15kg",
     title: "தேங்காய் எண்ணெய் (Coconut Oil) — 15 Kg Tin",
     description:
-      "Bulk wood-pressed coconut oil in 15 Kg commercial tin.",
+      "Bulk cold-pressed coconut oil in 15 Kg commercial tin.",
     imageUrl:
       "https://ik.imagekit.io/zxpphru8x/vsoilmill/Vs%20Wooden%20Pressed%20Coconut%20Oil%2015%20Kg%20Tin/Wooden-Pressed-Coconut-Oil-15-Kg-Tin.jpg?updatedAt=1789281326992",
     category: "products",
@@ -536,7 +536,7 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     id: "combo-diwali",
     title: "Diwali Special Combo Package",
     description:
-      "Celebration combo pack containing pure wood-pressed oils and aromatic Uthukuli cow ghee.",
+      "Celebration combo pack containing pure cold-pressed oils and aromatic Uthukuli cow ghee.",
     imageUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/diwali/1.jpeg",
     category: "combos",
@@ -549,7 +549,7 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     id: "combo-oil-mega",
     title: "Oil Mega Combo Package",
     description:
-      "The ultimate all-in-one family savings package with groundnut, sesame, and coconut oils.",
+      "The ultimate all-in-one family savings package with pure cold-pressed sesame, coconut, and castor oils.",
     imageUrl:
       "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/megacombo/1.jpeg",
     category: "combos",
@@ -613,79 +613,14 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     link: "/products/castor-oil",
   },
   {
-    id: "trad-neem-1l",
-    title: "வேப்பெண்ணெய் (Neem Oil) — 1 Litre",
+    id: "trad-cold-expeller",
+    title: "Traditional Cold-Press Churner",
     description:
-      "100% natural cold pressed neem oil for organic gardening and traditional skin care.",
-    imageUrl:
-      "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Neem%20Oil%201%20Litre/VS-Gold-Neem-Oil-1-Litre.jpg?updatedAt=1789281326615",
-    category: "traditional",
-    tag: "Neem Oil",
-    badge: "Natural Antiseptic",
-    aspectRatio: "portrait",
-    link: "/products/neem-oil",
-  },
-  {
-    id: "trad-mahua-1l",
-    title: "இலுப்பை எண்ணெய் (Mahua Oil) — 1 Litre",
-    description:
-      "Pure traditional Iluppai (Mahua) oil for temple deepam lighting and wellness remedies.",
-    imageUrl:
-      "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Mahua%20Oil%201%20Litre/VS-Gold-Mahua-Oil-1-Litre.jpg?updatedAt=1789281326599",
-    category: "traditional",
-    tag: "Mahua Oil",
-    badge: "Sacred Deepam",
-    aspectRatio: "portrait",
-    link: "/products/mahua-oil",
-  },
-  {
-    id: "trad-pongam-1l",
-    title: "புங்கம் எண்ணெய் (Pongam Oil) — 1 Litre",
-    description:
-      "Unrefined cold pressed Pongam (Ponga) oil for traditional lighting and herbal remedies.",
-    imageUrl:
-      "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Ponga%20Oil%201%20Litre/VS-Gold-Ponga-Oil-1-Litre.jpg?updatedAt=1789281326731",
-    category: "traditional",
-    tag: "Pongam Oil",
-    badge: "Traditional Oil",
-    aspectRatio: "portrait",
-    link: "/products/pongam-oil",
-  },
-  {
-    id: "trad-jaggery",
-    title: "Jaggery Powder (நாட்டு சர்க்கரை பொடி) — 1 KG",
-    description:
-      "Pure unrefined traditional country sugar (Nattu Sakkarai) full of natural minerals.",
-    imageUrl:
-      "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Brand%20Country%20sugar%20(%E0%AE%A8%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%81%20%E0%AE%9A%E0%AE%B0%E0%AF%8D%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AE%B0%E0%AF%88)%20-%201KG/195de44e-a962-46e8-99bf-08591029a45d-700x1050.png?updatedAt=1789281327226",
-    category: "traditional",
-    tag: "Country Sugar",
-    badge: "100% Organic",
-    aspectRatio: "portrait",
-    link: "/products/jaggery-powder",
-  },
-  {
-    id: "trad-honey-nuts",
-    title: "Honey with Dry Nuts Mixture (தேன் உலர் பருப்பு கலவை)",
-    description:
-      "Pure raw wild apiary honey enriched with roasted almonds, cashews, and dates.",
-    imageUrl:
-      "https://ik.imagekit.io/r33t79noj/vsoilmill/vsupdated/honey.jpeg",
-    category: "traditional",
-    tag: "Honey & Nuts",
-    badge: "Superfood",
-    aspectRatio: "square",
-    link: "/products/honey-with-dry-nuts-mixture",
-  },
-  {
-    id: "trad-wooden-expeller",
-    title: "Traditional Vaagai Wooden Churner",
-    description:
-      "Our authentic wooden churner in Madurai pressing cold oils at slow, gentle speeds.",
+      "Our authentic cold-press churner in Madurai pressing oils at slow, gentle speeds.",
     imageUrl: "https://ik.imagekit.io/mnm0iz0ng2/category/Wooden-Pressed.jpg",
     category: "traditional",
     tag: "Mill Heritage",
-    badge: "Vaagai Wood",
+    badge: "Traditional Cold-Press",
     aspectRatio: "landscape",
     link: "/about",
   },

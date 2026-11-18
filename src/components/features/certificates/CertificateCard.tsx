@@ -84,7 +84,7 @@ export function CertificateCard({ document, onSelect }: CertificateCardProps) {
           <div className="flex items-center justify-between text-muted border-t border-border/50 pt-1.5">
             <span className="font-medium">Product Scope:</span>
             <span className="font-semibold text-dark truncate max-w-[55%] text-right">
-              {document.productName || "Wood-Pressed Oils"}
+              {document.productName || "Cold-Pressed Oils"}
             </span>
           </div>
         </div>

@@ -5,7 +5,7 @@ export const TERMS_POLICY = {
   sections: [
     {
       title: "Products",
-      body: "All edible oils are traditionally wood-pressed or cold-pressed unless otherwise stated. Product images are illustrative; natural variation in color and aroma is expected.",
+      body: "All edible oils are traditionally cold-pressed unless otherwise stated. Product images are illustrative; natural variation in color and aroma is expected.",
     },
     {
       title: "Orders and Payment",

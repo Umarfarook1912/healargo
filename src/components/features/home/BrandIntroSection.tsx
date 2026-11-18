@@ -37,13 +37,6 @@ const BRAND_PILLARS = [
 
 const MINI_SHOWCASE = [
   {
-    name: "Coconut Oil",
-    image: ASSETS.PRODUCTS.COCONUT_OIL,
-    bg: "bg-[#D8F3EC]",
-    border: "border-[#8EDBD0]/50",
-    tag: "Fresh & Light",
-  },
-  {
     name: "Sesame Oil",
     image: ASSETS.PRODUCTS.SESAME_OIL,
     bg: "bg-[#FFF0B8]",
@@ -51,11 +44,25 @@ const MINI_SHOWCASE = [
     tag: "Rich & Nutty",
   },
   {
-    name: "Groundnut Oil",
-    image: ASSETS.PRODUCTS.GROUNDNUT_OIL,
+    name: "Coconut Oil",
+    image: ASSETS.PRODUCTS.COCONUT_OIL,
+    bg: "bg-[#D8F3EC]",
+    border: "border-[#8EDBD0]/50",
+    tag: "Fresh & Light",
+  },
+  {
+    name: "Castor Oil",
+    image: ASSETS.PRODUCTS.CASTOR_OIL,
     bg: "bg-[#FFE0D4]",
     border: "border-[#FF8066]/40",
-    tag: "Golden Aroma",
+    tag: "Pure & Cooling",
+  },
+  {
+    name: "Pure Cow Ghee",
+    image: ASSETS.PRODUCTS.GHEE,
+    bg: "bg-[#FFF0B8]",
+    border: "border-[#FFD45A]/70",
+    tag: "A2 Bilona Purity",
   },
 ] as const;
 
@@ -114,7 +121,7 @@ export function BrandIntroSection() {
           </FadeIn>
 
           {/* Photography Mini Showcase */}
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+          <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 sm:gap-6">
             {MINI_SHOWCASE.map((item) => (
               <div
                 key={item.name}

@@ -7,8 +7,11 @@ export function ProductDetailHeading({
   discount,
 }: ProductDetailHeadingProps) {
   const cleanName = name
-    .replace(/^VS\s+/i, "HEALARGO ")
-    .replace(/wooden pressed/i, "Cold Pressed");
+    .replace(/^VS(\s+Gold)?\s+/i, "")
+    .replace(/wood(?:en)?[\s-]pressed[\s-]oils?/gi, "Cold Pressed Oils")
+    .replace(/wood(?:en)?[\s-]press(?:ed)?/gi, "Cold Pressed")
+    .replace(/mara(?:k)?\s*chekku/gi, "Cold Pressed")
+    .replace(/marachekku/gi, "Cold Pressed");
 
   return (
     <div>

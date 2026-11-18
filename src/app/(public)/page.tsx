@@ -47,12 +47,12 @@ export default async function HomePage() {
       <HomeHero />
       {/* 2. Brand benefits & trust badges */}
       <TrustStrip />
-      {/* 3. Brand introduction section */}
-      <BrandIntroSection />
-      {/* 4. Category showcase */}
+      {/* 3. Category showcase */}
       <CategoryStrip categories={categories} />
-      {/* 5. Collection with bestseller / new arrival filters */}
+      {/* 4. Collection with bestseller / new arrival filters */}
       <HomeProductShowcase products={products} categories={categories} />
+      {/* 5. Brand philosophy section */}
+      <BrandIntroSection />
       {/* 6. Lifestyle / Editorial section */}
       <LifestyleSection />
       {/* 7. Combos (only when live combos exist) */}

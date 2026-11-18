@@ -15,10 +15,10 @@ export const metadata: Metadata = buildPageMetadata({
     "HEALARGO certificates",
     "edible oil food safety",
     "cold pressed oil lab test",
-    "wood pressed oil quality standards",
+    "cold pressed oil quality standards",
     "FSSAI license edible oil Madurai",
     "COA certificate of analysis edible oil",
-    "pure wood pressed oil Tamil Nadu",
+    "pure cold pressed oil Tamil Nadu",
   ],
 });
 

@@ -11,9 +11,8 @@ export function detectMascotFromProductName(name: string): MascotType {
   const s = name.toLowerCase();
   if (s.includes("coconut") || s.includes("thengai")) return "coconut";
   if (s.includes("sesame") || s.includes("gingelly") || s.includes("til")) return "sesame";
-  if (s.includes("groundnut") || s.includes("peanut") || s.includes("kadalai")) return "peanut";
-  if (s.includes("ghee") || s.includes("mustard") || s.includes("castor") || s.includes("honey")) return "oil-drop";
-  return "leaf";
+  if (s.includes("castor") || s.includes("amanakku") || s.includes("ghee") || s.includes("uthukuli")) return "oil-drop";
+  return "oil-drop";
 }
 
 export function ProductCardMascot({ productName }: ProductCardMascotProps) {

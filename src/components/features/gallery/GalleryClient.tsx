@@ -79,7 +79,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
     ];
 
     if (productsCount > 0) {
-      list.push({ id: "products", label: `🧴 Wood Pressed Oils (${productsCount})`, count: productsCount });
+      list.push({ id: "products", label: `🧴 Cold Pressed Oils (${productsCount})`, count: productsCount });
     }
     if (combosCount > 0) {
       list.push({ id: "combos", label: `🎁 Combo Offers (${combosCount})`, count: combosCount });
@@ -328,7 +328,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 ) : activeCategory === "extraction" ? (
                   <>
                     <Film className="h-4 w-4" />
-                    <span>Traditional Wood Pressing & Cold Extraction</span>
+                    <span>Traditional Cold Pressing & Extraction</span>
                   </>
                 ) : (
                   <>
@@ -356,11 +356,11 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
               {activeCategory === "packing"
                 ? "See how we safely wrap pure oils with 5-layer bubble cushioning, tamper seals, and dispatch parcels daily across Tamil Nadu & India."
                 : activeCategory === "selling"
-                ? "Direct mill prices: ₹220/L groundnut oil, ₹350/L coconut oil, ₹700/L cow ghee weekend deal, and festive combo savings."
+                ? "Direct mill prices: ₹250/L castor oil, ₹350/L coconut oil, ₹350/L sesame oil, ₹700/L cow ghee deal, and value savings."
                 : activeCategory === "whitelabel"
-                ? "HEALARGO supplies pure wood-pressed oils in unlabeled bottles and cans, making it easy to launch or extend your own brand."
+                ? "HEALARGO supplies pure cold-pressed oils in unlabeled bottles and cans, making it easy to launch or extend your own brand."
                 : activeCategory === "extraction"
-                ? "Watch copra, peanuts, and sesame seeds slowly cold pressed with traditional low-heat methods."
+                ? "Watch copra, castor, and sesame seeds slowly cold pressed with traditional low-heat methods."
                 : "Real video footage showing product preparation, safe order packing, selling highlights, and brand stories."}
             </p>
           </div>
@@ -376,7 +376,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                   <div>
                     <p className="text-xs font-bold text-dark">1. Unlabeled Pure Oils</p>
                     <p className="text-[11px] text-muted leading-tight">
-                      Pure wood-pressed oils supplied in clean, neutral 1L bottles, 5L cans, and 15Kg tins.
+                      Pure cold-pressed oils supplied in clean, neutral 1L bottles, 5L cans, and 15Kg tins.
                     </p>
                   </div>
                 </div>
@@ -591,11 +591,11 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 <Sparkles className="h-4 w-4" />
                 <span>
                   {activeCategory === "selling"
-                    ? "Available Wood-Pressed Oils & Special Combo Packs Ready to Order"
+                    ? "Available Cold-Pressed Oils & Special Combo Packs Ready to Order"
                     : activeCategory === "banners"
                     ? "Banners & Promotions"
                     : activeCategory === "products"
-                    ? "Available Wood-Pressed Oils"
+                    ? "Available Cold-Pressed Oils"
                     : activeCategory === "combos"
                     ? "Curated Value Combos"
                     : activeCategory === "traditional"
@@ -608,11 +608,11 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
                 className="font-display text-2xl sm:text-3xl text-dark"
               >
                 {activeCategory === "selling"
-                  ? "Wood-Pressed Oils & Combos Ready to Order"
+                  ? "Cold-Pressed Oils & Combos Ready to Order"
                   : activeCategory === "banners"
                   ? "Banners & Promos"
                   : activeCategory === "products"
-                  ? "Available Wood-Pressed Products"
+                  ? "Available Cold-Pressed Products"
                   : activeCategory === "combos"
                   ? "Available Value Combo Packs"
                   : activeCategory === "traditional"
@@ -934,7 +934,7 @@ export function GalleryClient({ initialImages, initialVideos }: GalleryClientPro
         </h3>
 
         <p className="text-sm text-muted max-w-lg mx-auto leading-relaxed">
-          From unrefined wooden-pressed groundnut, sesame, and coconut oils to authentic Uthukuli Desi Cow Ghee — freshly prepared and delivered to your doorstep.
+          From unrefined cold-pressed sesame, coconut, and castor oils to pure Desi Cow Ghee — freshly prepared and delivered to your doorstep.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">

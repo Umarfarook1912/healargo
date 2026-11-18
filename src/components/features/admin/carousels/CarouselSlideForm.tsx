@@ -239,11 +239,11 @@ export function CarouselSlideForm({
               onClick={() =>
                 setFormData((prev) => ({
                   ...prev,
-                  navigationLink: "/categories/wood-pressed-oils",
+                  navigationLink: "/categories/cold-pressed-oils",
                 }))
               }
             >
-              /wood-pressed-oils
+              /cold-pressed-oils
             </button>
           </div>
         </div>

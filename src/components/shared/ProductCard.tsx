@@ -58,20 +58,35 @@ export function ProductCard({ product }: ProductCardProps) {
   const nameLower = product.name.toLowerCase();
   const isCoconut = nameLower.includes("coconut") || nameLower.includes("thengai");
   const isSesame = nameLower.includes("sesame") || nameLower.includes("gingelly") || nameLower.includes("til");
-  const isGroundnut = nameLower.includes("groundnut") || nameLower.includes("peanut") || nameLower.includes("kadalai");
+  const isGroundnut = nameLower.includes("groundnut") || nameLower.includes("kadalai") || nameLower.includes("peanut");
+  const isCastor = nameLower.includes("castor") || nameLower.includes("amanakku");
+  const isPongam = nameLower.includes("ponga") || nameLower.includes("pungam");
+  const isNeem = nameLower.includes("neem") || nameLower.includes("veppam");
+  const isGhee = nameLower.includes("ghee") || nameLower.includes("ney");
 
   const imageBgClass = isCoconut
     ? "bg-[#D8F3EC] border-[#8EDBD0]/40"
     : isSesame
     ? "bg-[#FFF0B8] border-[#FFD45A]/50"
     : isGroundnut
+    ? "bg-[#FDEED9] border-[#F4A261]/40"
+    : isCastor
     ? "bg-[#FFE0D4] border-[#FF8066]/40"
+    : isPongam
+    ? "bg-[#E2F0D9] border-[#70AD47]/40"
+    : isNeem
+    ? "bg-[#E6F4EA] border-[#34A853]/40"
+    : isGhee
+    ? "bg-[#FFF0B8] border-[#FFD45A]/60"
     : "bg-[#DDECCF] border-[#4F8A45]/30";
 
-  // Display clean HEALARGO brand name without legacy prefixes
+  // Display clean product name without legacy prefixes
   const displayName = product.name
-    .replace(/^VS\s+/i, "HEALARGO ")
-    .replace(/wooden pressed/i, "Cold Pressed");
+    .replace(/^VS(\s+Gold)?\s+/i, "")
+    .replace(/wood(?:en)?[\s-]pressed[\s-]oils?/gi, "Cold Pressed Oils")
+    .replace(/wood(?:en)?[\s-]press(?:ed)?/gi, "Cold Pressed")
+    .replace(/mara(?:k)?\s*chekku/gi, "Cold Pressed")
+    .replace(/marachekku/gi, "Cold Pressed");
 
   function handleAdd(e?: React.MouseEvent) {
     if (e) {

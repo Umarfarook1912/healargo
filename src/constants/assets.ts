@@ -18,12 +18,14 @@ export const ASSETS = {
   PRODUCTS: {
     COCONUT_OIL: "/assets/healargo/products/coconut-oil.webp",
     SESAME_OIL: "/assets/healargo/products/sesame-oil.webp",
-    GROUNDNUT_OIL: "/assets/healargo/products/groundnut-oil.webp",
+    CASTOR_OIL: "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Castor%20Oil%201%20Litre/VS-Gold-Castor-Oil-1-Litre.jpg?updatedAt=1789281326730",
+    GHEE: "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Uthukuli%20Ghee%201%20Litre/20250925_222958_0000%20(1).png?updatedAt=1789281326869",
   },
   CATEGORIES: {
     COCONUT: "/assets/healargo/categories/coconut-category.webp",
     SESAME: "/assets/healargo/categories/sesame-category.webp",
-    GROUNDNUT: "/assets/healargo/categories/groundnut-category.webp",
+    CASTOR: "https://ik.imagekit.io/zxpphru8x/vsoilmill/VS%20Gold%20Castor%20Oil%201%20Litre/VS-Gold-Castor-Oil-1-Litre.jpg?updatedAt=1789281326730",
+    GHEE: "https://ik.imagekit.io/mnm0iz0ng2/category/pure_ghee.png",
   },
   ILLUSTRATIONS: {
     LEAF: "/assets/healargo/illustrations/leaf-float.svg",
